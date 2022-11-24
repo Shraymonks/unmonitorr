@@ -1,11 +1,13 @@
 import type { PlexPayload } from './types/plex';
 
-// gets the matching id from Plex Metadata.Guid payload
-// getGuid([{id: 'tvdb://1234'}], 'tvdb') => '1234'
-export function getId(
+// gets the matching ids from Plex Metadata.Guid payload
+// note Metadata.Guid can contain multiple ids of the same type.
+// getGuid([{id: 'tvdb://1234'}], 'tvdb') => ['1234']
+export function getIds(
   guid: PlexPayload['Metadata']['Guid'],
   type: 'imdb' | 'tmdb' | 'tvdb'
-): string | undefined {
-  const match = guid.map(({ id }) => id).find((id) => id.startsWith(type));
-  return match && match.replace(`${type}://`, '');
+): string[] {
+  return guid
+    .filter(({ id }) => id.startsWith(type))
+    .map(({ id }) => id.replace(`${type}://`, ''));
 }
