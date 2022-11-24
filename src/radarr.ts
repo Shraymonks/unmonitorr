@@ -2,7 +2,7 @@ import type { Response } from 'express';
 import type { PlexPayload } from './types/plex';
 import type { components } from './types/radarr';
 
-import { getId } from './utils.js';
+import { getIds } from './utils.js';
 
 export const DEFAULT_RADARR_HOST = 'http://127.0.0.1:7878';
 
@@ -17,25 +17,32 @@ export async function unmonitorMovie(
   }
 
   const titleYear = `${title} (${year})`;
-  const tmdbId = getId(Guid, 'tmdb');
-  if (!tmdbId) {
+  const tmdbIds = getIds(Guid, 'tmdb');
+  if (tmdbIds.length === 0) {
     console.log(`No tmdbId for ${titleYear}`);
     return res.end();
   }
 
   let movies;
-  try {
-    const moviesResponse = await fetch(
-      `${RADARR_HOST}/api/v3/movie?tmdbId=${tmdbId}&apikey=${RADARR_API_KEY}`
-    );
-    movies =
-      (await moviesResponse.json()) as components['schemas']['MovieResource'][];
-  } catch (error) {
-    console.log(`Failed to get movie information from radarr for ${titleYear}`);
-    console.log(error);
+  for (const tmdbId of tmdbIds) {
+    try {
+      const moviesResponse = await fetch(
+        `${RADARR_HOST}/api/v3/movie?tmdbId=${tmdbId}&apikey=${RADARR_API_KEY}`
+      );
+      movies =
+        (await moviesResponse.json()) as components['schemas']['MovieResource'][];
+      break;
+    } catch (error) {
+      console.log(
+        `Failed to get movie information from radarr for tmdbId: ${tmdbId} ${titleYear}`
+      );
+      console.log(error);
+    }
+  }
+  if (!movies) {
+    console.log(`Failed to find ${titleYear} in radarr library`);
     return res.end();
   }
-
   const [movie] = movies;
   if (movie == null) {
     console.log(`${titleYear} not found in radarr library`);

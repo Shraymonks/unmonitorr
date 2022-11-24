@@ -2,7 +2,7 @@ import type { Response } from 'express';
 import type { PlexPayload } from './types/plex';
 import type { components } from './types/sonarr';
 
-import { getId } from './utils.js';
+import { getIds } from './utils.js';
 
 export const DEFAULT_SONARR_HOST = 'http://127.0.0.1:8989';
 
@@ -22,8 +22,8 @@ export async function unmonitorEpisode(
 
   let titleYear = `${plexSeriesTitle} (${plexYear})`;
   // tvdbId is of the episode not the series.
-  const episodeTvdbId = getId(Guid, 'tvdb');
-  if (!episodeTvdbId) {
+  const episodeTvdbIds = getIds(Guid, 'tvdb');
+  if (episodeTvdbIds.length === 0) {
     console.log(`No tvdbId for ${titleYear}`);
     return res.end();
   }
@@ -74,11 +74,11 @@ export async function unmonitorEpisode(
   }
 
   const episode = episodeList.find(
-    ({ tvdbId }) => tvdbId === Number(episodeTvdbId)
+    ({ tvdbId }) => tvdbId && episodeTvdbIds.includes(tvdbId.toString())
   );
   if (!episode) {
     console.log(
-      `Could not find episode tvdbId: ${episodeTvdbId} for ${titleYear}`
+      `Could not find episode tvdbIds: ${episodeTvdbIds} for ${titleYear}`
     );
     return res.end();
   }
