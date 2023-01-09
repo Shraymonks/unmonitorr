@@ -13,7 +13,7 @@ Unmonitor media in Radarr and Sonarr from Plex webhook events.
 
 Set up using [shraymonks/unmonitorr](https://hub.docker.com/r/shraymonks/unmonitorr):
 
-```
+```yaml
 unmonitorr:
   image: shraymonks/unmonitorr:latest
   container_name: unmonitorr
