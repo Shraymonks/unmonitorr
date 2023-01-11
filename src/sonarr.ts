@@ -20,7 +20,7 @@ export async function unmonitorEpisode(
     return res.end();
   }
 
-  let titleYear = `${plexSeriesTitle} (${plexYear})`;
+  let titleYear = plexSeriesTitle + (plexYear ? ` (${plexYear})` : '');
   // tvdbId is of the episode not the series.
   const episodeTvdbIds = getIds(Guid, 'tvdb');
   if (episodeTvdbIds.length === 0) {
@@ -49,10 +49,11 @@ export async function unmonitorEpisode(
     return res.end();
   }
 
-  const series = seriesList.find(
-    ({ title, year }) =>
-      title === plexSeriesTitle && (!plexYear || plexYear === year)
-  );
+  const series = seriesList.find(({ title, year }) => {
+    // tvdb appends the year to some titles; remove it for matching
+    const cleanTitle = title?.match(/^(.+?)(?: \(\d+\))?$/)?.[1];
+    return cleanTitle === plexSeriesTitle && (!plexYear || plexYear === year);
+  });
   if (!series) {
     console.log(`Could not find ${titleYear} in sonarr library`);
     return res.end();
