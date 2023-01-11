@@ -2,11 +2,12 @@ import type { Response } from 'express';
 import type { PlexPayload } from './types/plex';
 import type { components } from './types/sonarr';
 
-import { getIds } from './utils.js';
+import { Api, getIds } from './utils.js';
 
 export const DEFAULT_SONARR_HOST = 'http://127.0.0.1:8989';
 
 const { SONARR_API_KEY, SONARR_HOST = DEFAULT_SONARR_HOST } = process.env;
+const api = new Api(`${SONARR_HOST}/api/v3/`, SONARR_API_KEY);
 
 export async function unmonitorEpisode(
   {
@@ -38,9 +39,7 @@ export async function unmonitorEpisode(
   // 3. Get episode list
   // 4. Match episode on tvdbId
   try {
-    const seriesResponse = await fetch(
-      `${SONARR_HOST}/api/v3/series?apikey=${SONARR_API_KEY}`
-    );
+    const seriesResponse = await fetch(api.getUrl('series'));
     seriesList =
       (await seriesResponse.json()) as components['schemas']['SeriesResource'][];
   } catch (error) {
@@ -54,7 +53,7 @@ export async function unmonitorEpisode(
     const cleanTitle = title?.match(/^(.+?)(?: \(\d+\))?$/)?.[1];
     return cleanTitle === plexSeriesTitle && (!plexYear || plexYear === year);
   });
-  if (!series) {
+  if (!series || !series.id) {
     console.warn(`Could not find ${titleYear} in sonarr library`);
     return res.end();
   }
@@ -64,7 +63,9 @@ export async function unmonitorEpisode(
 
   try {
     const episodeListResponse = await fetch(
-      `${SONARR_HOST}/api/v3/episode?seriesId=${series.id}&apikey=${SONARR_API_KEY}`
+      api.getUrl('episode', {
+        seriesId: series.id.toString(),
+      })
     );
     episodeList =
       (await episodeListResponse.json()) as components['schemas']['EpisodeResource'][];
@@ -88,7 +89,7 @@ export async function unmonitorEpisode(
 
   if (episode.monitored) {
     try {
-      fetch(`${SONARR_HOST}/api/v3/episode/monitor?apikey=${SONARR_API_KEY}`, {
+      fetch(api.getUrl('episode/monitor'), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
