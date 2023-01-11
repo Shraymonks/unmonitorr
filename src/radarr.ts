@@ -2,11 +2,12 @@ import type { Response } from 'express';
 import type { PlexPayload } from './types/plex';
 import type { components } from './types/radarr';
 
-import { getIds } from './utils.js';
+import { Api, getIds } from './utils.js';
 
 export const DEFAULT_RADARR_HOST = 'http://127.0.0.1:7878';
 
 const { RADARR_API_KEY, RADARR_HOST = DEFAULT_RADARR_HOST } = process.env;
+const api = new Api(`${RADARR_HOST}/api/v3/`, RADARR_API_KEY);
 
 export async function unmonitorMovie(
   { Guid, title, year }: PlexPayload['Metadata'],
@@ -26,9 +27,7 @@ export async function unmonitorMovie(
   let movies;
   for (const tmdbId of tmdbIds) {
     try {
-      const moviesResponse = await fetch(
-        `${RADARR_HOST}/api/v3/movie?tmdbId=${tmdbId}&apikey=${RADARR_API_KEY}`
-      );
+      const moviesResponse = await fetch(api.getUrl('movie', { tmdbId }));
       movies =
         (await moviesResponse.json()) as components['schemas']['MovieResource'][];
       break;
@@ -51,14 +50,11 @@ export async function unmonitorMovie(
   if (movie.monitored) {
     movie.monitored = false;
     try {
-      fetch(
-        `${RADARR_HOST}/api/v3/movie/${movie.id}?apikey=${RADARR_API_KEY}`,
-        {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(movie),
-        }
-      );
+      fetch(api.getUrl(`movie/${movie.id}`), {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(movie),
+      });
     } catch (error) {
       console.error(`Failed to unmonitor ${titleYear}`);
       console.error(error);
