@@ -19,7 +19,7 @@ export async function unmonitorMovie(
   const titleYear = `${title} (${year})`;
   const tmdbIds = getIds(Guid, 'tmdb');
   if (tmdbIds.length === 0) {
-    console.log(`No tmdbId for ${titleYear}`);
+    console.warn(`No tmdbId for ${titleYear}`);
     return res.end();
   }
 
@@ -33,19 +33,19 @@ export async function unmonitorMovie(
         (await moviesResponse.json()) as components['schemas']['MovieResource'][];
       break;
     } catch (error) {
-      console.log(
+      console.error(
         `Failed to get movie information from radarr for tmdbId: ${tmdbId} ${titleYear}`
       );
-      console.log(error);
+      console.error(error);
     }
   }
   if (!movies) {
-    console.log(`Failed to find ${titleYear} in radarr library`);
+    console.warn(`Failed to find ${titleYear} in radarr library`);
     return res.end();
   }
   const [movie] = movies;
   if (movie == null) {
-    console.log(`${titleYear} not found in radarr library`);
+    console.warn(`${titleYear} not found in radarr library`);
     return res.end();
   }
   if (movie.monitored) {
@@ -60,8 +60,8 @@ export async function unmonitorMovie(
         }
       );
     } catch (error) {
-      console.log(`Failed to unmonitor ${titleYear}`);
-      console.log(error);
+      console.error(`Failed to unmonitor ${titleYear}`);
+      console.error(error);
       return res.end();
     }
 

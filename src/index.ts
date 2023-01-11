@@ -15,11 +15,14 @@ const {
   SONARR_HOST = DEFAULT_SONARR_HOST,
 } = process.env;
 
+// Suppress fetch experimental warning
+process.removeAllListeners('warning');
+
 if (PLEX_EVENTS == null) {
-  console.log('Set PLEX_EVENTS to trigger unmonitoring');
+  console.error('Set PLEX_EVENTS to trigger unmonitoring');
   process.exitCode = 1;
 } else if (RADARR_API_KEY == null && SONARR_API_KEY == null) {
-  console.log('Set RADARR_API_KEY and/or SONARR_API_KEY to unmonitor');
+  console.error('Set RADARR_API_KEY and/or SONARR_API_KEY to unmonitor');
   process.exitCode = 1;
 } else {
   const triggerEvents = new Set(PLEX_EVENTS.split(/\s*,\s*/));

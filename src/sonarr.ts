@@ -24,7 +24,7 @@ export async function unmonitorEpisode(
   // tvdbId is of the episode not the series.
   const episodeTvdbIds = getIds(Guid, 'tvdb');
   if (episodeTvdbIds.length === 0) {
-    console.log(`No tvdbId for ${titleYear}`);
+    console.warn(`No tvdbId for ${titleYear}`);
     return res.end();
   }
 
@@ -44,8 +44,8 @@ export async function unmonitorEpisode(
     seriesList =
       (await seriesResponse.json()) as components['schemas']['SeriesResource'][];
   } catch (error) {
-    console.log('Failed to get series list from sonarr:');
-    console.log(error);
+    console.error('Failed to get series list from sonarr:');
+    console.error(error);
     return res.end();
   }
 
@@ -55,7 +55,7 @@ export async function unmonitorEpisode(
     return cleanTitle === plexSeriesTitle && (!plexYear || plexYear === year);
   });
   if (!series) {
-    console.log(`Could not find ${titleYear} in sonarr library`);
+    console.warn(`Could not find ${titleYear} in sonarr library`);
     return res.end();
   }
 
@@ -69,8 +69,8 @@ export async function unmonitorEpisode(
     episodeList =
       (await episodeListResponse.json()) as components['schemas']['EpisodeResource'][];
   } catch (error) {
-    console.log(`Failed to get episode list for ${titleYear}:`);
-    console.log(error);
+    console.error(`Failed to get episode list for ${titleYear}:`);
+    console.error(error);
     return res.end();
   }
 
@@ -78,7 +78,7 @@ export async function unmonitorEpisode(
     ({ tvdbId }) => tvdbId && episodeTvdbIds.includes(tvdbId.toString())
   );
   if (!episode) {
-    console.log(
+    console.warn(
       `Could not find episode tvdbIds: ${episodeTvdbIds} for ${titleYear}`
     );
     return res.end();
@@ -97,8 +97,8 @@ export async function unmonitorEpisode(
         }),
       });
     } catch (error) {
-      console.log(`Failed to unmonitor ${episodeString}:`);
-      console.log(error);
+      console.error(`Failed to unmonitor ${episodeString}:`);
+      console.error(error);
       return res.end();
     }
 
