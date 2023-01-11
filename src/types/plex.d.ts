@@ -62,6 +62,6 @@ export interface PlexPayload {
     addedAt: number;
     updatedAt: number;
     year?: number;
-    Guid: { id: string }[];
+    Guid?: { id: string }[];
   };
 }
