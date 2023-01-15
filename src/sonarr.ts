@@ -10,82 +10,85 @@ const { SONARR_API_KEY, SONARR_HOST = DEFAULT_SONARR_HOST } = process.env;
 const api = new Api(`${SONARR_HOST}/api/v3/`, SONARR_API_KEY);
 
 export async function unmonitorEpisode(
-  {
-    Guid,
-    grandparentTitle: plexSeriesTitle,
-    year: plexYear,
-  }: PlexPayload['Metadata'],
+  { Guid, grandparentTitle: seriesTitle }: PlexPayload['Metadata'],
   res: Response
 ): Promise<Response> {
   if (!SONARR_API_KEY) {
     return res.end();
   }
 
-  let titleYear = plexSeriesTitle + (plexYear ? ` (${plexYear})` : '');
   // tvdbId is of the episode not the series.
   const episodeTvdbIds = getIds(Guid, 'tvdb');
   if (episodeTvdbIds.length === 0) {
-    console.warn(`No tvdbId for ${titleYear}`);
+    console.warn(`No tvdbId for ${seriesTitle}`);
     return res.end();
   }
 
   let seriesList;
-  let episodeList;
 
   // Sonarr has no api for getting an episode by episode tvdbId
   // Go through the following steps to get the matching episode:
   // 1. Get series list
-  // 2. Match series on title and year if available
-  // 3. Get episode list
+  // 2. Match potential series on title
+  // 3. Get episode lists
   // 4. Match episode on tvdbId
   try {
     const seriesResponse = await fetch(api.getUrl('series'));
     seriesList =
       (await seriesResponse.json()) as components['schemas']['SeriesResource'][];
   } catch (error) {
-    console.error('Failed to get series list from sonarr:');
+    console.error('Failed to get series lists from sonarr:');
     console.error(error);
     return res.end();
   }
 
-  const series = seriesList.find(({ title, year }) => {
-    // tvdb appends the year to some titles; remove it for matching
-    const cleanTitle = title?.match(/^(.+?)(?: \(\d+\))?$/)?.[1];
-    return cleanTitle === plexSeriesTitle && (!plexYear || plexYear === year);
-  });
-  if (!series || !series.id) {
-    console.warn(`Could not find ${titleYear} in sonarr library`);
-    return res.end();
-  }
-
-  // Use sonarr data for log; Plex sometimes doesn't include the year.
-  titleYear = `${series.title} (${series.year})`;
-
-  try {
-    const episodeListResponse = await fetch(
-      api.getUrl('episode', {
-        seriesId: series.id.toString(),
-      })
-    );
-    episodeList =
-      (await episodeListResponse.json()) as components['schemas']['EpisodeResource'][];
-  } catch (error) {
-    console.error(`Failed to get episode list for ${titleYear}:`);
-    console.error(error);
-    return res.end();
-  }
-
-  const episode = episodeList.find(
-    ({ tvdbId }) => tvdbId && episodeTvdbIds.includes(tvdbId.toString())
+  // Match potential series on title. Year metadata from Plex is for the episode
+  // so cannot be used for series filtering.
+  const seriesMatches = seriesList.filter(
+    ({ title }) =>
+      // tvdb appends the year to some titles; remove it for matching
+      title?.match(/^(.+?)(?: \(\d+\))?$/)?.[1] === seriesTitle
   );
+  if (seriesMatches.length === 0) {
+    console.warn(`Could not find ${seriesTitle} in sonarr library`);
+    return res.end();
+  }
+
+  let episodeList;
+  let episode;
+  for (const series of seriesMatches) {
+    if (!series.id) {
+      continue;
+    }
+    try {
+      const episodeListResponse = await fetch(
+        api.getUrl('episode', {
+          seriesId: series.id.toString(),
+        })
+      );
+      episodeList =
+        (await episodeListResponse.json()) as components['schemas']['EpisodeResource'][];
+    } catch (error) {
+      console.error(`Failed to get episode list for ${seriesTitle}:`);
+      console.error(error);
+      continue;
+    }
+
+    episode = episodeList.find(
+      ({ tvdbId }) => tvdbId && episodeTvdbIds.includes(tvdbId.toString())
+    );
+    if (episode) {
+      break;
+    }
+  }
   if (!episode) {
     console.warn(
-      `Could not find episode tvdbIds: ${episodeTvdbIds} for ${titleYear}`
+      `Could not find episode tvdbIds: ${episodeTvdbIds} for ${seriesTitle}`
     );
     return res.end();
   }
 
-  const episodeString = `${titleYear} - S${episode.seasonNumber}E${episode.episodeNumber}`;
+  const episodeString = `${seriesTitle} - S${episode.seasonNumber}E${episode.episodeNumber}`;
 
   if (episode.monitored) {
     try {
