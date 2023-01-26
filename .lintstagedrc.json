@@ -1,0 +1,5 @@
+{
+  "*.cjs": ["eslint --fix", "prettier --write"],
+  "*.ts": ["tsc --noEmit", "eslint --fix", "prettier --write"],
+  "*.{json,md}": "prettier --write"
+}
