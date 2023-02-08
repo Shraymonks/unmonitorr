@@ -15,9 +15,6 @@ const {
   SONARR_HOST = DEFAULT_SONARR_HOST,
 } = process.env;
 
-// Suppress fetch experimental warning
-process.removeAllListeners('warning');
-
 if (PLEX_EVENTS == null) {
   console.error('Set PLEX_EVENTS to trigger unmonitoring');
   process.exitCode = 1;
