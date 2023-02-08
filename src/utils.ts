@@ -3,7 +3,7 @@ import type { PlexPayload } from './types/plex';
 export class Api {
   #apiKey: string;
   base: string;
-  constructor(base: string, apiKey: string = '') {
+  constructor(base: string, apiKey = '') {
     this.#apiKey = apiKey;
     this.base = base;
   }
