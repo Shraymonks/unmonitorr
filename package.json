@@ -11,6 +11,7 @@
     "build:sonarr-types": "openapi-typescript https://raw.githubusercontent.com/Sonarr/Sonarr/develop/src/Sonarr.Api.V3/openapi.json --output src/types/sonarr.d.ts",
     "deploy": "docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t shraymonks/unmonitorr:latest -t shraymonks/unmonitorr:v$npm_package_version . --push",
     "prepare": "husky install",
+    "release": "changeset publish",
     "start": "pnpm build && node --require dotenv/config dist/index.js"
   },
   "keywords": [
