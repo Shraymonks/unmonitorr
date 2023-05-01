@@ -1,5 +1,6 @@
 .DS_Store
 .env
+.envrc
 .git
 dist
 node_modules
