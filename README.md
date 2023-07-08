@@ -14,18 +14,18 @@ Unmonitor media in Radarr and Sonarr from Plex webhook events.
 Set up using [shraymonks/unmonitorr](https://hub.docker.com/r/shraymonks/unmonitorr):
 
 ```yaml
-unmonitorr:
-  image: shraymonks/unmonitorr:latest
-  container_name: unmonitorr
-  environment:
-    - PLEX_EVENTS: media.play
-    - RADARR_HOST: http://127.0.0.1:7878
-    - RADARR_API_KEY: <RADARR_API_KEY>
-    - SONARR_HOST: http://127.0.0.1:8989
-    - SONARR_API_KEY: <SONARR_API_KEY>
-  ports:
-    - 9797:9797
-  restart: unless-stopped
+services:
+  unmonitorr:
+    image: shraymonks/unmonitorr:latest
+    environment:
+      PLEX_EVENTS: media.play
+      RADARR_HOST: http://127.0.0.1:7878
+      RADARR_API_KEY: $RADARR_API_KEY
+      SONARR_HOST: http://127.0.0.1:8989
+      SONARR_API_KEY: $SONARR_API_KEY
+    ports:
+      - 9797:9797
+    restart: unless-stopped
 ```
 
 #### Environment variables
