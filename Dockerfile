@@ -14,7 +14,7 @@ RUN npm install -g pnpm
 USER node
 WORKDIR /usr/src/app/
 COPY --chown=node:node package.json pnpm-lock.yaml .
-RUN pnpm install
+RUN pnpm install --ignore-scripts
 
 FROM node:18.14.0-alpine
 ENV NODE_ENV=production
