@@ -3,10 +3,12 @@ import multer from 'multer';
 
 import { DEFAULT_SONARR_HOST, unmonitorEpisode } from './sonarr.js';
 import { DEFAULT_RADARR_HOST, unmonitorMovie } from './radarr.js';
+import { parseList } from './utils.js';
 
 import type { PlexPayload } from './types/plex';
 
 const {
+  PLEX_ACCOUNTS,
   PLEX_EVENTS = 'media.play',
   PORT = '9797',
   RADARR_API_KEY,
@@ -22,8 +24,15 @@ if (PLEX_EVENTS == null) {
   console.error('Set RADARR_API_KEY and/or SONARR_API_KEY to unmonitor');
   process.exitCode = 1;
 } else {
-  const triggerEvents = new Set(PLEX_EVENTS.split(/\s*,\s*/));
-  console.log(`unmonitoring for ${[...triggerEvents]} on port: ${PORT}`);
+  const triggerEvents = new Set(parseList(PLEX_EVENTS));
+  const plexAccounts = new Set(PLEX_ACCOUNTS ? parseList(PLEX_ACCOUNTS) : []);
+  console.log(
+    `unmonitoring for ${[...triggerEvents]}${
+      plexAccounts.size > 0
+        ? ` by account${plexAccounts.size > 1 ? 's' : ''}(${[...plexAccounts]})`
+        : ''
+    } on port: ${PORT}`
+  );
   if (RADARR_API_KEY) {
     console.log(`Radarr: ${RADARR_HOST}`);
   }
@@ -35,9 +44,19 @@ if (PLEX_EVENTS == null) {
   const app = express();
 
   app.post('/', upload.single('thumb'), (req, res) => {
-    const { Metadata, event }: PlexPayload = JSON.parse(req.body.payload);
+    const { Account, Metadata, event }: PlexPayload = JSON.parse(
+      req.body.payload
+    );
 
     if (!triggerEvents.has(event)) {
+      return res.end();
+    }
+
+    if (
+      plexAccounts.size > 0 &&
+      !plexAccounts.has(Account.id.toString()) &&
+      !plexAccounts.has(Account.title)
+    ) {
       return res.end();
     }
 

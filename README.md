@@ -32,7 +32,8 @@ services:
 
 | variable | description | default |
 | --- | --- | --- |
-| `PLEX_EVENTS` | Comma separated list of plex webhook events: <ul><li>`library.on.deck`</li><li>`library.new`</li><li>`media.pause`</li><li>`media.play`</li><li>`media.rate`</li><li>`media.resume`</li><li>`media.scrobble`</li><li>`media.stop`</li><li>`playback.started`</li></ul> Must only use events that provide movie or episode metadata. See [Plex Webhooks](https://support.plex.tv/articles/115002267687-webhooks/#toc-1) for more info. | `media.play` |
+| `PLEX_ACCOUNTS` | Comma separated list of Plex account IDs or usernames for events in `PLEX_EVENTS` to unmonitor for. Will unmonitor for `PLEX_EVENTS` triggered by any account if not set. | `undefined` |
+| `PLEX_EVENTS` | Comma separated list of Plex webhook events to unmonitor on: <ul><li>`library.on.deck`</li><li>`library.new`</li><li>`media.pause`</li><li>`media.play`</li><li>`media.rate`</li><li>`media.resume`</li><li>`media.scrobble`</li><li>`media.stop`</li><li>`playback.started`</li></ul> Must only use events that provide movie or episode metadata. See [Plex Webhooks](https://support.plex.tv/articles/115002267687-webhooks/#toc-1) for more info. | `media.play` |
 | `PORT` | Internal port to listen on | `9797` |
 | `RADARR_API_KEY` | API key for Radarr | `undefined` |
 | `RADARR_HOST` | Host for Radarr | `http://127.0.0.1:7878` |
