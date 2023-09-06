@@ -28,3 +28,8 @@ export function getIds(
     .filter(({ id }) => id.startsWith(type))
     .map(({ id }) => id.replace(`${type}://`, ''));
 }
+
+// Create an array from a comma separated string.
+export function parseList(list: string): string[] {
+  return list.split(/\s*,\s*/);
+}
