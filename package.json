@@ -1,6 +1,6 @@
 {
   "name": "unmonitorr",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Unmonitor media in Radarr and Sonarr from Plex webhook events",
   "private": true,
   "type": "module",
