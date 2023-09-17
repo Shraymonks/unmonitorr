@@ -2,7 +2,7 @@ import type { Response } from 'express';
 import type { PlexPayload } from './types/plex';
 import type { components } from './types/sonarr';
 
-import { Api, getIds } from './utils.js';
+import { Api, cleanTitle, getIds } from './utils.js';
 
 export const DEFAULT_SONARR_HOST = 'http://127.0.0.1:8989';
 
@@ -48,12 +48,12 @@ export async function unmonitorEpisode(
   const seriesList =
     (await seriesResponse.json()) as components['schemas']['SeriesResource'][];
 
+  const cleanedTitle = cleanTitle(seriesTitle);
   // Match potential series on title. Year metadata from Plex is for the episode
   // so cannot be used for series filtering.
   const seriesMatches = seriesList.filter(
     ({ title }) =>
-      // tvdb appends the year to some titles; remove it for matching
-      title?.match(/^(.+?)(?: \(\d+\))?$/)?.[1] === seriesTitle
+      typeof title === 'string' && cleanTitle(title) === cleanedTitle
   );
   if (seriesMatches.length === 0) {
     console.warn(`Could not find ${seriesTitle} in sonarr library`);
