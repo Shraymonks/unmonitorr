@@ -1,4 +1,4 @@
-FROM node:18.16.1-alpine AS build
+FROM node:18.17.1-alpine AS build
 RUN npm install -g pnpm
 USER node
 WORKDIR /usr/src/app/
@@ -8,7 +8,7 @@ RUN pnpm install
 COPY --chown=node:node src/ src/
 RUN pnpm build
 
-FROM node:18.16.1-alpine AS deps
+FROM node:18.17.1-alpine AS deps
 ENV NODE_ENV=production
 RUN npm install -g pnpm
 USER node
@@ -16,7 +16,7 @@ WORKDIR /usr/src/app/
 COPY --chown=node:node package.json pnpm-lock.yaml .
 RUN pnpm install --ignore-scripts
 
-FROM node:18.16.1-alpine
+FROM node:18.17.1-alpine
 ENV NODE_ENV=production
 ENV PORT=9797
 RUN apk add --update dumb-init
