@@ -17,6 +17,12 @@ export class Api {
   }
 }
 
+// Removes year from title. Media with duplicate titles may sometimes have the
+// year appended to the end of the title.
+export function cleanTitle(title: string): string {
+  return title.replace(/ \(\d{4}\)$/, '');
+}
+
 // gets the matching ids from Plex Metadata.Guid payload
 // note Metadata.Guid can contain multiple ids of the same type.
 // getGuid([{id: 'tvdb://1234'}], 'tvdb') => ['1234']
