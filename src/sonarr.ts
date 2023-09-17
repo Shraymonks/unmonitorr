@@ -24,7 +24,7 @@ export async function unmonitorEpisode(
     return res.end();
   }
 
-  let seriesList;
+  let seriesResponse;
 
   // Sonarr has no api for getting an episode by episode tvdbId
   // Go through the following steps to get the matching episode:
@@ -33,14 +33,20 @@ export async function unmonitorEpisode(
   // 3. Get episode lists
   // 4. Match episode on tvdbId
   try {
-    const seriesResponse = await fetch(api.getUrl('series'));
-    seriesList =
-      (await seriesResponse.json()) as components['schemas']['SeriesResource'][];
+    seriesResponse = await fetch(api.getUrl('series'));
   } catch (error) {
     console.error('Failed to get series lists from sonarr:');
     console.error(error);
     return res.end();
   }
+  if (!seriesResponse.ok) {
+    console.error(
+      `Error getting series information: ${seriesResponse?.status} ${seriesResponse?.statusText}`
+    );
+    return res.end();
+  }
+  const seriesList =
+    (await seriesResponse.json()) as components['schemas']['SeriesResource'][];
 
   // Match potential series on title. Year metadata from Plex is for the episode
   // so cannot be used for series filtering.
@@ -54,25 +60,31 @@ export async function unmonitorEpisode(
     return res.end();
   }
 
-  let episodeList;
   let episode;
   for (const series of seriesMatches) {
     if (!series.id) {
       continue;
     }
+    let episodeListResponse;
     try {
-      const episodeListResponse = await fetch(
+      episodeListResponse = await fetch(
         api.getUrl('episode', {
           seriesId: series.id.toString(),
         })
       );
-      episodeList =
-        (await episodeListResponse.json()) as components['schemas']['EpisodeResource'][];
     } catch (error) {
       console.error(`Failed to get episode list for ${seriesTitle}:`);
       console.error(error);
       continue;
     }
+    if (!episodeListResponse.ok) {
+      console.error(
+        `Error getting episode list for ${seriesTitle}: ${seriesResponse?.status} ${seriesResponse?.statusText}`
+      );
+      continue;
+    }
+    const episodeList =
+      (await episodeListResponse.json()) as components['schemas']['EpisodeResource'][];
 
     episode = episodeList.find(
       ({ tvdbId }) => tvdbId && episodeTvdbIds.includes(tvdbId.toString())
@@ -91,8 +103,9 @@ export async function unmonitorEpisode(
   const episodeString = `${seriesTitle} - S${episode.seasonNumber}E${episode.episodeNumber}`;
 
   if (episode.monitored) {
+    let response;
     try {
-      fetch(api.getUrl('episode/monitor'), {
+      response = await fetch(api.getUrl('episode/monitor'), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -106,8 +119,14 @@ export async function unmonitorEpisode(
       return res.end();
     }
 
-    console.log(`${episodeString} unmonitored!`);
-    return res.end();
+    if (response.ok) {
+      console.log(`${episodeString} unmonitored!`);
+      return res.end();
+    }
+
+    console.error(
+      `Error unmonitoring ${episodeString}: ${response.status} ${response.statusText}`
+    );
   }
   return res.end();
 }

@@ -26,17 +26,23 @@ export async function unmonitorMovie(
 
   let movies;
   for (const tmdbId of tmdbIds) {
+    let moviesResponse;
     try {
-      const moviesResponse = await fetch(api.getUrl('movie', { tmdbId }));
-      movies =
-        (await moviesResponse.json()) as components['schemas']['MovieResource'][];
-      break;
+      moviesResponse = await fetch(api.getUrl('movie', { tmdbId }));
     } catch (error) {
       console.error(
         `Failed to get movie information from radarr for tmdbId: ${tmdbId} ${titleYear}`
       );
       console.error(error);
     }
+    if (moviesResponse?.ok) {
+      movies =
+        (await moviesResponse.json()) as components['schemas']['MovieResource'][];
+      break;
+    }
+    console.error(
+      `Error getting movie information: ${moviesResponse?.status} ${moviesResponse?.statusText}`
+    );
   }
   if (!movies) {
     console.warn(`Failed to find ${titleYear} in radarr library`);
@@ -49,8 +55,9 @@ export async function unmonitorMovie(
   }
   if (movie.monitored) {
     movie.monitored = false;
+    let response;
     try {
-      fetch(api.getUrl(`movie/${movie.id}`), {
+      response = await fetch(api.getUrl(`movie/${movie.id}`), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(movie),
@@ -61,8 +68,14 @@ export async function unmonitorMovie(
       return res.end();
     }
 
-    console.log(`${titleYear} unmonitored!`);
-    return res.end();
+    if (response.ok) {
+      console.log(`${titleYear} unmonitored!`);
+      return res.end();
+    }
+
+    console.error(
+      `Error unmonitoring ${titleYear}: ${response.status} ${response.statusText}`
+    );
   }
   return res.end();
 }
