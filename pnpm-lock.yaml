@@ -55,9 +55,9 @@ devDependencies:
   typescript:
     specifier: ^4.9.3
     version: 4.9.3
-  undici:
-    specifier: ^5.19.1
-    version: 5.19.1
+  undici-types:
+    specifier: ^5.26.3
+    version: 5.26.3
 
 packages:
 
@@ -3125,6 +3125,10 @@ packages:
       has-bigints: 1.0.2
       has-symbols: 1.0.3
       which-boxed-primitive: 1.0.2
+    dev: true
+
+  /undici-types@5.26.3:
+    resolution: {integrity: sha512-sD45goX3K5aoPnrxgiHFK1XFuU6UpckJfoRoZ2mFrLJs1tdqX0yFtuOgHU24Y6kbPy4hM5nENcrtNyI+GZVOOQ==}
     dev: true
 
   /undici@5.19.1:
