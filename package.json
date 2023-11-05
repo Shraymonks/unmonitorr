@@ -45,8 +45,7 @@
     "lint-staged": "^15.0.2",
     "openapi-typescript": "^6.7.0",
     "prettier": "^3.0.3",
-    "typescript": "^5.2.2",
-    "undici-types": "^5.27.2"
+    "typescript": "^5.2.2"
   },
   "engines": {
     "node": ">=20.9.0"
