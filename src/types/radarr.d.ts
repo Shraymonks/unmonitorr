@@ -3,16 +3,10 @@
  * Do not make direct changes to the file.
  */
 
-
-/** Type helpers */
-type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
-type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
-type OneOf<T extends any[]> = T extends [infer Only] ? Only : T extends [infer A, infer B, ...infer Rest] ? OneOf<[XOR<A, B>, ...Rest]> : never;
-
 export interface paths {
-  "/api/v3/alttitle": {
+  '/api/v3/alttitle': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           movieId?: number;
           movieMetadataId?: number;
@@ -22,15 +16,15 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["AlternativeTitleResource"])[];
-            "application/json": (components["schemas"]["AlternativeTitleResource"])[];
-            "text/json": (components["schemas"]["AlternativeTitleResource"])[];
+            'text/plain': components['schemas']['AlternativeTitleResource'][];
+            'application/json': components['schemas']['AlternativeTitleResource'][];
+            'text/json': components['schemas']['AlternativeTitleResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/alttitle/{id}": {
+  '/api/v3/alttitle/{id}': {
     get: {
       parameters: {
         path: {
@@ -41,77 +35,137 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["AlternativeTitleResource"];
-            "application/json": components["schemas"]["AlternativeTitleResource"];
-            "text/json": components["schemas"]["AlternativeTitleResource"];
+            'text/plain': components['schemas']['AlternativeTitleResource'];
+            'application/json': components['schemas']['AlternativeTitleResource'];
+            'text/json': components['schemas']['AlternativeTitleResource'];
           };
         };
       };
     };
   };
-  "/api": {
+  '/api': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["ApiInfoResource"];
+            'application/json': components['schemas']['ApiInfoResource'];
           };
         };
       };
     };
   };
-  "/login": {
+  '/login': {
     get: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
     post: {
-      parameters?: {
+      parameters: {
         query?: {
           returnUrl?: string;
         };
       };
       requestBody?: {
         content: {
-          "multipart/form-data": {
-            Username?: string;
-            Password?: string;
-            RememberMe?: string;
+          'multipart/form-data': {
+            username?: string;
+            password?: string;
+            rememberMe?: string;
           };
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/logout": {
+  '/logout': {
     get: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/system/backup": {
+  '/api/v3/autotagging': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["BackupResource"])[];
-            "application/json": (components["schemas"]["BackupResource"])[];
-            "text/json": (components["schemas"]["BackupResource"])[];
+            'application/json': components['schemas']['AutoTaggingResource'][];
+          };
+        };
+      };
+    };
+    post: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['AutoTaggingResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['AutoTaggingResource'];
+            'application/json': components['schemas']['AutoTaggingResource'];
+            'text/json': components['schemas']['AutoTaggingResource'];
           };
         };
       };
     };
   };
-  "/api/v3/system/backup/{id}": {
+  '/api/v3/autotagging/{id}': {
+    get: {
+      parameters: {
+        path: {
+          id: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['AutoTaggingResource'];
+            'application/json': components['schemas']['AutoTaggingResource'];
+            'text/json': components['schemas']['AutoTaggingResource'];
+          };
+        };
+      };
+    };
+    put: {
+      parameters: {
+        path: {
+          id: string;
+        };
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['AutoTaggingResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['AutoTaggingResource'];
+            'application/json': components['schemas']['AutoTaggingResource'];
+            'text/json': components['schemas']['AutoTaggingResource'];
+          };
+        };
+      };
+    };
     delete: {
       parameters: {
         path: {
@@ -120,11 +174,52 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/system/backup/restore/{id}": {
+  '/api/v3/autotagging/schema': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/system/backup': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['BackupResource'][];
+            'application/json': components['schemas']['BackupResource'][];
+            'text/json': components['schemas']['BackupResource'][];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/system/backup/{id}': {
+    delete: {
+      parameters: {
+        path: {
+          id: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/system/backup/restore/{id}': {
     post: {
       parameters: {
         path: {
@@ -133,35 +228,45 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/system/backup/restore/upload": {
+  '/api/v3/system/backup/restore/upload': {
     post: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/blocklist": {
+  '/api/v3/blocklist': {
     get: {
+      parameters: {
+        query?: {
+          page?: number;
+          pageSize?: number;
+          sortKey?: string;
+          sortDirection?: components['schemas']['SortDirection'];
+        };
+      };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["BlocklistResourcePagingResource"];
-            "application/json": components["schemas"]["BlocklistResourcePagingResource"];
-            "text/json": components["schemas"]["BlocklistResourcePagingResource"];
+            'application/json': components['schemas']['BlocklistResourcePagingResource'];
           };
         };
       };
     };
   };
-  "/api/v3/blocklist/movie": {
+  '/api/v3/blocklist/movie': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           movieId?: number;
         };
@@ -170,15 +275,15 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["BlocklistResource"])[];
-            "application/json": (components["schemas"]["BlocklistResource"])[];
-            "text/json": (components["schemas"]["BlocklistResource"])[];
+            'text/plain': components['schemas']['BlocklistResource'][];
+            'application/json': components['schemas']['BlocklistResource'][];
+            'text/json': components['schemas']['BlocklistResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/blocklist/{id}": {
+  '/api/v3/blocklist/{id}': {
     delete: {
       parameters: {
         path: {
@@ -187,47 +292,50 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/blocklist/bulk": {
+  '/api/v3/blocklist/bulk': {
     delete: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["BlocklistBulkResource"];
-          "text/json": components["schemas"]["BlocklistBulkResource"];
-          "application/*+json": components["schemas"]["BlocklistBulkResource"];
+          'application/json': components['schemas']['BlocklistBulkResource'];
+          'text/json': components['schemas']['BlocklistBulkResource'];
+          'application/*+json': components['schemas']['BlocklistBulkResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/calendar": {
+  '/api/v3/calendar': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           start?: string;
           end?: string;
           unmonitored?: boolean;
+          tags?: string;
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["MovieResource"])[];
-            "application/json": (components["schemas"]["MovieResource"])[];
-            "text/json": (components["schemas"]["MovieResource"])[];
+            'application/json': components['schemas']['MovieResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/calendar/{id}": {
+  '/api/v3/calendar/{id}': {
     get: {
       parameters: {
         path: {
@@ -238,33 +346,35 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MovieResource"];
-            "application/json": components["schemas"]["MovieResource"];
-            "text/json": components["schemas"]["MovieResource"];
+            'text/plain': components['schemas']['MovieResource'];
+            'application/json': components['schemas']['MovieResource'];
+            'text/json': components['schemas']['MovieResource'];
           };
         };
       };
     };
   };
-  "/feed/v3/calendar/radarr.ics": {
+  '/feed/v3/calendar/radarr.ics': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           pastDays?: number;
           futureDays?: number;
-          tagList?: string;
+          tags?: string;
           unmonitored?: boolean;
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/collection": {
+  '/api/v3/collection': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           tmdbId?: number;
         };
@@ -273,9 +383,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["CollectionResource"])[];
-            "application/json": (components["schemas"]["CollectionResource"])[];
-            "text/json": (components["schemas"]["CollectionResource"])[];
+            'text/plain': components['schemas']['CollectionResource'][];
+            'application/json': components['schemas']['CollectionResource'][];
+            'text/json': components['schemas']['CollectionResource'][];
           };
         };
       };
@@ -283,18 +393,20 @@ export interface paths {
     put: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["CollectionUpdateResource"];
-          "text/json": components["schemas"]["CollectionUpdateResource"];
-          "application/*+json": components["schemas"]["CollectionUpdateResource"];
+          'application/json': components['schemas']['CollectionUpdateResource'];
+          'text/json': components['schemas']['CollectionUpdateResource'];
+          'application/*+json': components['schemas']['CollectionUpdateResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/collection/{id}": {
+  '/api/v3/collection/{id}': {
     get: {
       parameters: {
         path: {
@@ -305,9 +417,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CollectionResource"];
-            "application/json": components["schemas"]["CollectionResource"];
-            "text/json": components["schemas"]["CollectionResource"];
+            'text/plain': components['schemas']['CollectionResource'];
+            'application/json': components['schemas']['CollectionResource'];
+            'text/json': components['schemas']['CollectionResource'];
           };
         };
       };
@@ -320,32 +432,32 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["CollectionResource"];
-          "text/json": components["schemas"]["CollectionResource"];
-          "application/*+json": components["schemas"]["CollectionResource"];
+          'application/json': components['schemas']['CollectionResource'];
+          'text/json': components['schemas']['CollectionResource'];
+          'application/*+json': components['schemas']['CollectionResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CollectionResource"];
-            "application/json": components["schemas"]["CollectionResource"];
-            "text/json": components["schemas"]["CollectionResource"];
+            'text/plain': components['schemas']['CollectionResource'];
+            'application/json': components['schemas']['CollectionResource'];
+            'text/json': components['schemas']['CollectionResource'];
           };
         };
       };
     };
   };
-  "/api/v3/command": {
+  '/api/v3/command': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["CommandResource"])[];
-            "application/json": (components["schemas"]["CommandResource"])[];
-            "text/json": (components["schemas"]["CommandResource"])[];
+            'text/plain': components['schemas']['CommandResource'][];
+            'application/json': components['schemas']['CommandResource'][];
+            'text/json': components['schemas']['CommandResource'][];
           };
         };
       };
@@ -353,24 +465,24 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["CommandResource"];
-          "text/json": components["schemas"]["CommandResource"];
-          "application/*+json": components["schemas"]["CommandResource"];
+          'application/json': components['schemas']['CommandResource'];
+          'text/json': components['schemas']['CommandResource'];
+          'application/*+json': components['schemas']['CommandResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CommandResource"];
-            "application/json": components["schemas"]["CommandResource"];
-            "text/json": components["schemas"]["CommandResource"];
+            'text/plain': components['schemas']['CommandResource'];
+            'application/json': components['schemas']['CommandResource'];
+            'text/json': components['schemas']['CommandResource'];
           };
         };
       };
     };
   };
-  "/api/v3/command/{id}": {
+  '/api/v3/command/{id}': {
     get: {
       parameters: {
         path: {
@@ -381,9 +493,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CommandResource"];
-            "application/json": components["schemas"]["CommandResource"];
-            "text/json": components["schemas"]["CommandResource"];
+            'text/plain': components['schemas']['CommandResource'];
+            'application/json': components['schemas']['CommandResource'];
+            'text/json': components['schemas']['CommandResource'];
           };
         };
       };
@@ -396,13 +508,15 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/credit": {
+  '/api/v3/credit': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           movieId?: number;
           movieMetadataId?: number;
@@ -411,16 +525,12 @@ export interface paths {
       responses: {
         /** @description Success */
         200: {
-          content: {
-            "text/plain": (components["schemas"]["CreditResource"])[];
-            "application/json": (components["schemas"]["CreditResource"])[];
-            "text/json": (components["schemas"]["CreditResource"])[];
-          };
+          content: never;
         };
       };
     };
   };
-  "/api/v3/credit/{id}": {
+  '/api/v3/credit/{id}': {
     get: {
       parameters: {
         path: {
@@ -431,23 +541,23 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CreditResource"];
-            "application/json": components["schemas"]["CreditResource"];
-            "text/json": components["schemas"]["CreditResource"];
+            'text/plain': components['schemas']['CreditResource'];
+            'application/json': components['schemas']['CreditResource'];
+            'text/json': components['schemas']['CreditResource'];
           };
         };
       };
     };
   };
-  "/api/v3/customfilter": {
+  '/api/v3/customfilter': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["CustomFilterResource"])[];
-            "application/json": (components["schemas"]["CustomFilterResource"])[];
-            "text/json": (components["schemas"]["CustomFilterResource"])[];
+            'text/plain': components['schemas']['CustomFilterResource'][];
+            'application/json': components['schemas']['CustomFilterResource'][];
+            'text/json': components['schemas']['CustomFilterResource'][];
           };
         };
       };
@@ -455,24 +565,24 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["CustomFilterResource"];
-          "text/json": components["schemas"]["CustomFilterResource"];
-          "application/*+json": components["schemas"]["CustomFilterResource"];
+          'application/json': components['schemas']['CustomFilterResource'];
+          'text/json': components['schemas']['CustomFilterResource'];
+          'application/*+json': components['schemas']['CustomFilterResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CustomFilterResource"];
-            "application/json": components["schemas"]["CustomFilterResource"];
-            "text/json": components["schemas"]["CustomFilterResource"];
+            'text/plain': components['schemas']['CustomFilterResource'];
+            'application/json': components['schemas']['CustomFilterResource'];
+            'text/json': components['schemas']['CustomFilterResource'];
           };
         };
       };
     };
   };
-  "/api/v3/customfilter/{id}": {
+  '/api/v3/customfilter/{id}': {
     get: {
       parameters: {
         path: {
@@ -483,9 +593,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CustomFilterResource"];
-            "application/json": components["schemas"]["CustomFilterResource"];
-            "text/json": components["schemas"]["CustomFilterResource"];
+            'text/plain': components['schemas']['CustomFilterResource'];
+            'application/json': components['schemas']['CustomFilterResource'];
+            'text/json': components['schemas']['CustomFilterResource'];
           };
         };
       };
@@ -498,18 +608,18 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["CustomFilterResource"];
-          "text/json": components["schemas"]["CustomFilterResource"];
-          "application/*+json": components["schemas"]["CustomFilterResource"];
+          'application/json': components['schemas']['CustomFilterResource'];
+          'text/json': components['schemas']['CustomFilterResource'];
+          'application/*+json': components['schemas']['CustomFilterResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CustomFilterResource"];
-            "application/json": components["schemas"]["CustomFilterResource"];
-            "text/json": components["schemas"]["CustomFilterResource"];
+            'text/plain': components['schemas']['CustomFilterResource'];
+            'application/json': components['schemas']['CustomFilterResource'];
+            'text/json': components['schemas']['CustomFilterResource'];
           };
         };
       };
@@ -522,19 +632,19 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/customformat": {
+  '/api/v3/customformat': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["CustomFormatResource"])[];
-            "application/json": (components["schemas"]["CustomFormatResource"])[];
-            "text/json": (components["schemas"]["CustomFormatResource"])[];
+            'application/json': components['schemas']['CustomFormatResource'][];
           };
         };
       };
@@ -542,24 +652,22 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["CustomFormatResource"];
-          "text/json": components["schemas"]["CustomFormatResource"];
-          "application/*+json": components["schemas"]["CustomFormatResource"];
+          'application/json': components['schemas']['CustomFormatResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CustomFormatResource"];
-            "application/json": components["schemas"]["CustomFormatResource"];
-            "text/json": components["schemas"]["CustomFormatResource"];
+            'text/plain': components['schemas']['CustomFormatResource'];
+            'application/json': components['schemas']['CustomFormatResource'];
+            'text/json': components['schemas']['CustomFormatResource'];
           };
         };
       };
     };
   };
-  "/api/v3/customformat/{id}": {
+  '/api/v3/customformat/{id}': {
     get: {
       parameters: {
         path: {
@@ -570,9 +678,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CustomFormatResource"];
-            "application/json": components["schemas"]["CustomFormatResource"];
-            "text/json": components["schemas"]["CustomFormatResource"];
+            'text/plain': components['schemas']['CustomFormatResource'];
+            'application/json': components['schemas']['CustomFormatResource'];
+            'text/json': components['schemas']['CustomFormatResource'];
           };
         };
       };
@@ -585,18 +693,16 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["CustomFormatResource"];
-          "text/json": components["schemas"]["CustomFormatResource"];
-          "application/*+json": components["schemas"]["CustomFormatResource"];
+          'application/json': components['schemas']['CustomFormatResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CustomFormatResource"];
-            "application/json": components["schemas"]["CustomFormatResource"];
-            "text/json": components["schemas"]["CustomFormatResource"];
+            'text/plain': components['schemas']['CustomFormatResource'];
+            'application/json': components['schemas']['CustomFormatResource'];
+            'text/json': components['schemas']['CustomFormatResource'];
           };
         };
       };
@@ -609,27 +715,31 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/customformat/schema": {
+  '/api/v3/customformat/schema': {
     get: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/delayprofile": {
+  '/api/v3/delayprofile': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["DelayProfileResource"])[];
-            "application/json": (components["schemas"]["DelayProfileResource"])[];
-            "text/json": (components["schemas"]["DelayProfileResource"])[];
+            'text/plain': components['schemas']['DelayProfileResource'][];
+            'application/json': components['schemas']['DelayProfileResource'][];
+            'text/json': components['schemas']['DelayProfileResource'][];
           };
         };
       };
@@ -637,24 +747,24 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DelayProfileResource"];
-          "text/json": components["schemas"]["DelayProfileResource"];
-          "application/*+json": components["schemas"]["DelayProfileResource"];
+          'application/json': components['schemas']['DelayProfileResource'];
+          'text/json': components['schemas']['DelayProfileResource'];
+          'application/*+json': components['schemas']['DelayProfileResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DelayProfileResource"];
-            "application/json": components["schemas"]["DelayProfileResource"];
-            "text/json": components["schemas"]["DelayProfileResource"];
+            'text/plain': components['schemas']['DelayProfileResource'];
+            'application/json': components['schemas']['DelayProfileResource'];
+            'text/json': components['schemas']['DelayProfileResource'];
           };
         };
       };
     };
   };
-  "/api/v3/delayprofile/{id}": {
+  '/api/v3/delayprofile/{id}': {
     get: {
       parameters: {
         path: {
@@ -665,9 +775,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DelayProfileResource"];
-            "application/json": components["schemas"]["DelayProfileResource"];
-            "text/json": components["schemas"]["DelayProfileResource"];
+            'text/plain': components['schemas']['DelayProfileResource'];
+            'application/json': components['schemas']['DelayProfileResource'];
+            'text/json': components['schemas']['DelayProfileResource'];
           };
         };
       };
@@ -680,18 +790,18 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DelayProfileResource"];
-          "text/json": components["schemas"]["DelayProfileResource"];
-          "application/*+json": components["schemas"]["DelayProfileResource"];
+          'application/json': components['schemas']['DelayProfileResource'];
+          'text/json': components['schemas']['DelayProfileResource'];
+          'application/*+json': components['schemas']['DelayProfileResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DelayProfileResource"];
-            "application/json": components["schemas"]["DelayProfileResource"];
-            "text/json": components["schemas"]["DelayProfileResource"];
+            'text/plain': components['schemas']['DelayProfileResource'];
+            'application/json': components['schemas']['DelayProfileResource'];
+            'text/json': components['schemas']['DelayProfileResource'];
           };
         };
       };
@@ -704,58 +814,61 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/diskspace": {
+  '/api/v3/diskspace': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["DiskSpaceResource"])[];
-            "application/json": (components["schemas"]["DiskSpaceResource"])[];
-            "text/json": (components["schemas"]["DiskSpaceResource"])[];
+            'text/plain': components['schemas']['DiskSpaceResource'][];
+            'application/json': components['schemas']['DiskSpaceResource'][];
+            'text/json': components['schemas']['DiskSpaceResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/downloadclient": {
+  '/api/v3/downloadclient': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["DownloadClientResource"])[];
-            "application/json": (components["schemas"]["DownloadClientResource"])[];
-            "text/json": (components["schemas"]["DownloadClientResource"])[];
+            'text/plain': components['schemas']['DownloadClientResource'][];
+            'application/json': components['schemas']['DownloadClientResource'][];
+            'text/json': components['schemas']['DownloadClientResource'][];
           };
         };
       };
     };
     post: {
+      parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
+      };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DownloadClientResource"];
-          "text/json": components["schemas"]["DownloadClientResource"];
-          "application/*+json": components["schemas"]["DownloadClientResource"];
+          'application/json': components['schemas']['DownloadClientResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DownloadClientResource"];
-            "application/json": components["schemas"]["DownloadClientResource"];
-            "text/json": components["schemas"]["DownloadClientResource"];
+            'application/json': components['schemas']['DownloadClientResource'];
           };
         };
       };
     };
   };
-  "/api/v3/downloadclient/{id}": {
+  '/api/v3/downloadclient/{id}': {
     get: {
       parameters: {
         path: {
@@ -766,33 +879,32 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DownloadClientResource"];
-            "application/json": components["schemas"]["DownloadClientResource"];
-            "text/json": components["schemas"]["DownloadClientResource"];
+            'text/plain': components['schemas']['DownloadClientResource'];
+            'application/json': components['schemas']['DownloadClientResource'];
+            'text/json': components['schemas']['DownloadClientResource'];
           };
         };
       };
     };
     put: {
       parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
         path: {
           id: string;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DownloadClientResource"];
-          "text/json": components["schemas"]["DownloadClientResource"];
-          "application/*+json": components["schemas"]["DownloadClientResource"];
+          'application/json': components['schemas']['DownloadClientResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DownloadClientResource"];
-            "application/json": components["schemas"]["DownloadClientResource"];
-            "text/json": components["schemas"]["DownloadClientResource"];
+            'application/json': components['schemas']['DownloadClientResource'];
           };
         };
       };
@@ -805,48 +917,84 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/downloadclient/schema": {
+  '/api/v3/downloadclient/bulk': {
+    put: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['DownloadClientBulkResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['DownloadClientResource'];
+          };
+        };
+      };
+    };
+    delete: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['DownloadClientBulkResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/downloadclient/schema': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["DownloadClientResource"])[];
-            "application/json": (components["schemas"]["DownloadClientResource"])[];
-            "text/json": (components["schemas"]["DownloadClientResource"])[];
+            'text/plain': components['schemas']['DownloadClientResource'][];
+            'application/json': components['schemas']['DownloadClientResource'][];
+            'text/json': components['schemas']['DownloadClientResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/downloadclient/test": {
+  '/api/v3/downloadclient/test': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DownloadClientResource"];
-          "text/json": components["schemas"]["DownloadClientResource"];
-          "application/*+json": components["schemas"]["DownloadClientResource"];
+          'application/json': components['schemas']['DownloadClientResource'];
+          'text/json': components['schemas']['DownloadClientResource'];
+          'application/*+json': components['schemas']['DownloadClientResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/downloadclient/testall": {
+  '/api/v3/downloadclient/testall': {
     post: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/downloadclient/action/{name}": {
+  '/api/v3/downloadclient/action/{name}': {
     post: {
       parameters: {
         path: {
@@ -855,32 +1003,30 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DownloadClientResource"];
-          "text/json": components["schemas"]["DownloadClientResource"];
-          "application/*+json": components["schemas"]["DownloadClientResource"];
+          'application/json': components['schemas']['DownloadClientResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/config/downloadclient": {
+  '/api/v3/config/downloadclient': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DownloadClientConfigResource"];
-            "application/json": components["schemas"]["DownloadClientConfigResource"];
-            "text/json": components["schemas"]["DownloadClientConfigResource"];
+            'application/json': components['schemas']['DownloadClientConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/downloadclient/{id}": {
+  '/api/v3/config/downloadclient/{id}': {
     get: {
       parameters: {
         path: {
@@ -891,9 +1037,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DownloadClientConfigResource"];
-            "application/json": components["schemas"]["DownloadClientConfigResource"];
-            "text/json": components["schemas"]["DownloadClientConfigResource"];
+            'text/plain': components['schemas']['DownloadClientConfigResource'];
+            'application/json': components['schemas']['DownloadClientConfigResource'];
+            'text/json': components['schemas']['DownloadClientConfigResource'];
           };
         };
       };
@@ -906,26 +1052,24 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DownloadClientConfigResource"];
-          "text/json": components["schemas"]["DownloadClientConfigResource"];
-          "application/*+json": components["schemas"]["DownloadClientConfigResource"];
+          'application/json': components['schemas']['DownloadClientConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DownloadClientConfigResource"];
-            "application/json": components["schemas"]["DownloadClientConfigResource"];
-            "text/json": components["schemas"]["DownloadClientConfigResource"];
+            'text/plain': components['schemas']['DownloadClientConfigResource'];
+            'application/json': components['schemas']['DownloadClientConfigResource'];
+            'text/json': components['schemas']['DownloadClientConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/extrafile": {
+  '/api/v3/extrafile': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           movieId?: number;
         };
@@ -934,17 +1078,17 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["ExtraFileResource"])[];
-            "application/json": (components["schemas"]["ExtraFileResource"])[];
-            "text/json": (components["schemas"]["ExtraFileResource"])[];
+            'text/plain': components['schemas']['ExtraFileResource'][];
+            'application/json': components['schemas']['ExtraFileResource'][];
+            'text/json': components['schemas']['ExtraFileResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/filesystem": {
+  '/api/v3/filesystem': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           path?: string;
           includeFiles?: boolean;
@@ -953,51 +1097,57 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/filesystem/type": {
+  '/api/v3/filesystem/type': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           path?: string;
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/filesystem/mediafiles": {
+  '/api/v3/filesystem/mediafiles': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           path?: string;
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/health": {
+  '/api/v3/health': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["HealthResource"])[];
-            "application/json": (components["schemas"]["HealthResource"])[];
-            "text/json": (components["schemas"]["HealthResource"])[];
+            'text/plain': components['schemas']['HealthResource'][];
+            'application/json': components['schemas']['HealthResource'][];
+            'text/json': components['schemas']['HealthResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/health/{id}": {
+  '/api/v3/health/{id}': {
     get: {
       parameters: {
         path: {
@@ -1008,39 +1158,46 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["HealthResource"];
-            "application/json": components["schemas"]["HealthResource"];
-            "text/json": components["schemas"]["HealthResource"];
+            'text/plain': components['schemas']['HealthResource'];
+            'application/json': components['schemas']['HealthResource'];
+            'text/json': components['schemas']['HealthResource'];
           };
         };
       };
     };
   };
-  "/api/v3/history": {
+  '/api/v3/history': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
+          page?: number;
+          pageSize?: number;
+          sortKey?: string;
+          sortDirection?: components['schemas']['SortDirection'];
           includeMovie?: boolean;
+          eventType?: number;
+          downloadId?: string;
+          movieIds?: number[];
+          languages?: number[];
+          quality?: number[];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["HistoryResourcePagingResource"];
-            "application/json": components["schemas"]["HistoryResourcePagingResource"];
-            "text/json": components["schemas"]["HistoryResourcePagingResource"];
+            'application/json': components['schemas']['HistoryResourcePagingResource'];
           };
         };
       };
     };
   };
-  "/api/v3/history/since": {
+  '/api/v3/history/since': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           date?: string;
-          eventType?: components["schemas"]["MovieHistoryEventType"];
+          eventType?: components['schemas']['MovieHistoryEventType'];
           includeMovie?: boolean;
         };
       };
@@ -1048,20 +1205,18 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["HistoryResource"])[];
-            "application/json": (components["schemas"]["HistoryResource"])[];
-            "text/json": (components["schemas"]["HistoryResource"])[];
+            'application/json': components['schemas']['HistoryResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/history/movie": {
+  '/api/v3/history/movie': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           movieId?: number;
-          eventType?: components["schemas"]["MovieHistoryEventType"];
+          eventType?: components['schemas']['MovieHistoryEventType'];
           includeMovie?: boolean;
         };
       };
@@ -1069,15 +1224,13 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["HistoryResource"])[];
-            "application/json": (components["schemas"]["HistoryResource"])[];
-            "text/json": (components["schemas"]["HistoryResource"])[];
+            'application/json': components['schemas']['HistoryResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/history/failed/{id}": {
+  '/api/v3/history/failed/{id}': {
     post: {
       parameters: {
         path: {
@@ -1086,25 +1239,27 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/config/host": {
+  '/api/v3/config/host': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["HostConfigResource"];
-            "application/json": components["schemas"]["HostConfigResource"];
-            "text/json": components["schemas"]["HostConfigResource"];
+            'text/plain': components['schemas']['HostConfigResource'];
+            'application/json': components['schemas']['HostConfigResource'];
+            'text/json': components['schemas']['HostConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/host/{id}": {
+  '/api/v3/config/host/{id}': {
     get: {
       parameters: {
         path: {
@@ -1115,9 +1270,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["HostConfigResource"];
-            "application/json": components["schemas"]["HostConfigResource"];
-            "text/json": components["schemas"]["HostConfigResource"];
+            'text/plain': components['schemas']['HostConfigResource'];
+            'application/json': components['schemas']['HostConfigResource'];
+            'text/json': components['schemas']['HostConfigResource'];
           };
         };
       };
@@ -1130,32 +1285,32 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["HostConfigResource"];
-          "text/json": components["schemas"]["HostConfigResource"];
-          "application/*+json": components["schemas"]["HostConfigResource"];
+          'application/json': components['schemas']['HostConfigResource'];
+          'text/json': components['schemas']['HostConfigResource'];
+          'application/*+json': components['schemas']['HostConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["HostConfigResource"];
-            "application/json": components["schemas"]["HostConfigResource"];
-            "text/json": components["schemas"]["HostConfigResource"];
+            'text/plain': components['schemas']['HostConfigResource'];
+            'application/json': components['schemas']['HostConfigResource'];
+            'text/json': components['schemas']['HostConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/exclusions": {
+  '/api/v3/exclusions': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["ImportExclusionsResource"])[];
-            "application/json": (components["schemas"]["ImportExclusionsResource"])[];
-            "text/json": (components["schemas"]["ImportExclusionsResource"])[];
+            'text/plain': components['schemas']['ImportExclusionsResource'][];
+            'application/json': components['schemas']['ImportExclusionsResource'][];
+            'text/json': components['schemas']['ImportExclusionsResource'][];
           };
         };
       };
@@ -1163,24 +1318,24 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ImportExclusionsResource"];
-          "text/json": components["schemas"]["ImportExclusionsResource"];
-          "application/*+json": components["schemas"]["ImportExclusionsResource"];
+          'application/json': components['schemas']['ImportExclusionsResource'];
+          'text/json': components['schemas']['ImportExclusionsResource'];
+          'application/*+json': components['schemas']['ImportExclusionsResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ImportExclusionsResource"];
-            "application/json": components["schemas"]["ImportExclusionsResource"];
-            "text/json": components["schemas"]["ImportExclusionsResource"];
+            'text/plain': components['schemas']['ImportExclusionsResource'];
+            'application/json': components['schemas']['ImportExclusionsResource'];
+            'text/json': components['schemas']['ImportExclusionsResource'];
           };
         };
       };
     };
   };
-  "/api/v3/exclusions/{id}": {
+  '/api/v3/exclusions/{id}': {
     get: {
       parameters: {
         path: {
@@ -1191,9 +1346,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ImportExclusionsResource"];
-            "application/json": components["schemas"]["ImportExclusionsResource"];
-            "text/json": components["schemas"]["ImportExclusionsResource"];
+            'text/plain': components['schemas']['ImportExclusionsResource'];
+            'application/json': components['schemas']['ImportExclusionsResource'];
+            'text/json': components['schemas']['ImportExclusionsResource'];
           };
         };
       };
@@ -1206,18 +1361,18 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ImportExclusionsResource"];
-          "text/json": components["schemas"]["ImportExclusionsResource"];
-          "application/*+json": components["schemas"]["ImportExclusionsResource"];
+          'application/json': components['schemas']['ImportExclusionsResource'];
+          'text/json': components['schemas']['ImportExclusionsResource'];
+          'application/*+json': components['schemas']['ImportExclusionsResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ImportExclusionsResource"];
-            "application/json": components["schemas"]["ImportExclusionsResource"];
-            "text/json": components["schemas"]["ImportExclusionsResource"];
+            'text/plain': components['schemas']['ImportExclusionsResource'];
+            'application/json': components['schemas']['ImportExclusionsResource'];
+            'text/json': components['schemas']['ImportExclusionsResource'];
           };
         };
       };
@@ -1230,59 +1385,64 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/exclusions/bulk": {
+  '/api/v3/exclusions/bulk': {
     post: {
       requestBody?: {
         content: {
-          "application/json": (components["schemas"]["ImportExclusionsResource"])[];
-          "text/json": (components["schemas"]["ImportExclusionsResource"])[];
-          "application/*+json": (components["schemas"]["ImportExclusionsResource"])[];
+          'application/json': components['schemas']['ImportExclusionsResource'][];
+          'text/json': components['schemas']['ImportExclusionsResource'][];
+          'application/*+json': components['schemas']['ImportExclusionsResource'][];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/importlist": {
+  '/api/v3/importlist': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["ImportListResource"])[];
-            "application/json": (components["schemas"]["ImportListResource"])[];
-            "text/json": (components["schemas"]["ImportListResource"])[];
+            'text/plain': components['schemas']['ImportListResource'][];
+            'application/json': components['schemas']['ImportListResource'][];
+            'text/json': components['schemas']['ImportListResource'][];
           };
         };
       };
     };
     post: {
+      parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
+      };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ImportListResource"];
-          "text/json": components["schemas"]["ImportListResource"];
-          "application/*+json": components["schemas"]["ImportListResource"];
+          'application/json': components['schemas']['ImportListResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ImportListResource"];
-            "application/json": components["schemas"]["ImportListResource"];
-            "text/json": components["schemas"]["ImportListResource"];
+            'application/json': components['schemas']['ImportListResource'];
           };
         };
       };
     };
   };
-  "/api/v3/importlist/{id}": {
+  '/api/v3/importlist/{id}': {
     get: {
       parameters: {
         path: {
@@ -1293,33 +1453,32 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ImportListResource"];
-            "application/json": components["schemas"]["ImportListResource"];
-            "text/json": components["schemas"]["ImportListResource"];
+            'text/plain': components['schemas']['ImportListResource'];
+            'application/json': components['schemas']['ImportListResource'];
+            'text/json': components['schemas']['ImportListResource'];
           };
         };
       };
     };
     put: {
       parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
         path: {
           id: string;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ImportListResource"];
-          "text/json": components["schemas"]["ImportListResource"];
-          "application/*+json": components["schemas"]["ImportListResource"];
+          'application/json': components['schemas']['ImportListResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ImportListResource"];
-            "application/json": components["schemas"]["ImportListResource"];
-            "text/json": components["schemas"]["ImportListResource"];
+            'application/json': components['schemas']['ImportListResource'];
           };
         };
       };
@@ -1332,48 +1491,84 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/importlist/schema": {
+  '/api/v3/importlist/bulk': {
+    put: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['ImportListBulkResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['ImportListResource'];
+          };
+        };
+      };
+    };
+    delete: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['ImportListBulkResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/importlist/schema': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["ImportListResource"])[];
-            "application/json": (components["schemas"]["ImportListResource"])[];
-            "text/json": (components["schemas"]["ImportListResource"])[];
+            'text/plain': components['schemas']['ImportListResource'][];
+            'application/json': components['schemas']['ImportListResource'][];
+            'text/json': components['schemas']['ImportListResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/importlist/test": {
+  '/api/v3/importlist/test': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ImportListResource"];
-          "text/json": components["schemas"]["ImportListResource"];
-          "application/*+json": components["schemas"]["ImportListResource"];
+          'application/json': components['schemas']['ImportListResource'];
+          'text/json': components['schemas']['ImportListResource'];
+          'application/*+json': components['schemas']['ImportListResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/importlist/testall": {
+  '/api/v3/importlist/testall': {
     post: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/importlist/action/{name}": {
+  '/api/v3/importlist/action/{name}': {
     post: {
       parameters: {
         path: {
@@ -1382,32 +1577,30 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ImportListResource"];
-          "text/json": components["schemas"]["ImportListResource"];
-          "application/*+json": components["schemas"]["ImportListResource"];
+          'application/json': components['schemas']['ImportListResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/config/importlist": {
+  '/api/v3/config/importlist': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ImportListConfigResource"];
-            "application/json": components["schemas"]["ImportListConfigResource"];
-            "text/json": components["schemas"]["ImportListConfigResource"];
+            'application/json': components['schemas']['ImportListConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/importlist/{id}": {
+  '/api/v3/config/importlist/{id}': {
     get: {
       parameters: {
         path: {
@@ -1418,9 +1611,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ImportListConfigResource"];
-            "application/json": components["schemas"]["ImportListConfigResource"];
-            "text/json": components["schemas"]["ImportListConfigResource"];
+            'text/plain': components['schemas']['ImportListConfigResource'];
+            'application/json': components['schemas']['ImportListConfigResource'];
+            'text/json': components['schemas']['ImportListConfigResource'];
           };
         };
       };
@@ -1433,83 +1626,86 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ImportListConfigResource"];
-          "text/json": components["schemas"]["ImportListConfigResource"];
-          "application/*+json": components["schemas"]["ImportListConfigResource"];
+          'application/json': components['schemas']['ImportListConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ImportListConfigResource"];
-            "application/json": components["schemas"]["ImportListConfigResource"];
-            "text/json": components["schemas"]["ImportListConfigResource"];
+            'text/plain': components['schemas']['ImportListConfigResource'];
+            'application/json': components['schemas']['ImportListConfigResource'];
+            'text/json': components['schemas']['ImportListConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/importlist/movie": {
+  '/api/v3/importlist/movie': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           includeRecommendations?: boolean;
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
     post: {
       requestBody?: {
         content: {
-          "application/json": (components["schemas"]["MovieResource"])[];
-          "text/json": (components["schemas"]["MovieResource"])[];
-          "application/*+json": (components["schemas"]["MovieResource"])[];
+          'application/json': components['schemas']['MovieResource'][];
+          'text/json': components['schemas']['MovieResource'][];
+          'application/*+json': components['schemas']['MovieResource'][];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/indexer": {
+  '/api/v3/indexer': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["IndexerResource"])[];
-            "application/json": (components["schemas"]["IndexerResource"])[];
-            "text/json": (components["schemas"]["IndexerResource"])[];
+            'text/plain': components['schemas']['IndexerResource'][];
+            'application/json': components['schemas']['IndexerResource'][];
+            'text/json': components['schemas']['IndexerResource'][];
           };
         };
       };
     };
     post: {
+      parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
+      };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["IndexerResource"];
-          "text/json": components["schemas"]["IndexerResource"];
-          "application/*+json": components["schemas"]["IndexerResource"];
+          'application/json': components['schemas']['IndexerResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["IndexerResource"];
-            "application/json": components["schemas"]["IndexerResource"];
-            "text/json": components["schemas"]["IndexerResource"];
+            'application/json': components['schemas']['IndexerResource'];
           };
         };
       };
     };
   };
-  "/api/v3/indexer/{id}": {
+  '/api/v3/indexer/{id}': {
     get: {
       parameters: {
         path: {
@@ -1520,33 +1716,32 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["IndexerResource"];
-            "application/json": components["schemas"]["IndexerResource"];
-            "text/json": components["schemas"]["IndexerResource"];
+            'text/plain': components['schemas']['IndexerResource'];
+            'application/json': components['schemas']['IndexerResource'];
+            'text/json': components['schemas']['IndexerResource'];
           };
         };
       };
     };
     put: {
       parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
         path: {
           id: string;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["IndexerResource"];
-          "text/json": components["schemas"]["IndexerResource"];
-          "application/*+json": components["schemas"]["IndexerResource"];
+          'application/json': components['schemas']['IndexerResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["IndexerResource"];
-            "application/json": components["schemas"]["IndexerResource"];
-            "text/json": components["schemas"]["IndexerResource"];
+            'application/json': components['schemas']['IndexerResource'];
           };
         };
       };
@@ -1559,48 +1754,84 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/indexer/schema": {
+  '/api/v3/indexer/bulk': {
+    put: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['IndexerBulkResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['IndexerResource'];
+          };
+        };
+      };
+    };
+    delete: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['IndexerBulkResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/indexer/schema': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["IndexerResource"])[];
-            "application/json": (components["schemas"]["IndexerResource"])[];
-            "text/json": (components["schemas"]["IndexerResource"])[];
+            'text/plain': components['schemas']['IndexerResource'][];
+            'application/json': components['schemas']['IndexerResource'][];
+            'text/json': components['schemas']['IndexerResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/indexer/test": {
+  '/api/v3/indexer/test': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["IndexerResource"];
-          "text/json": components["schemas"]["IndexerResource"];
-          "application/*+json": components["schemas"]["IndexerResource"];
+          'application/json': components['schemas']['IndexerResource'];
+          'text/json': components['schemas']['IndexerResource'];
+          'application/*+json': components['schemas']['IndexerResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/indexer/testall": {
+  '/api/v3/indexer/testall': {
     post: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/indexer/action/{name}": {
+  '/api/v3/indexer/action/{name}': {
     post: {
       parameters: {
         path: {
@@ -1609,32 +1840,30 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["IndexerResource"];
-          "text/json": components["schemas"]["IndexerResource"];
-          "application/*+json": components["schemas"]["IndexerResource"];
+          'application/json': components['schemas']['IndexerResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/config/indexer": {
+  '/api/v3/config/indexer': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["IndexerConfigResource"];
-            "application/json": components["schemas"]["IndexerConfigResource"];
-            "text/json": components["schemas"]["IndexerConfigResource"];
+            'application/json': components['schemas']['IndexerConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/indexer/{id}": {
+  '/api/v3/config/indexer/{id}': {
     get: {
       parameters: {
         path: {
@@ -1645,9 +1874,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["IndexerConfigResource"];
-            "application/json": components["schemas"]["IndexerConfigResource"];
-            "text/json": components["schemas"]["IndexerConfigResource"];
+            'text/plain': components['schemas']['IndexerConfigResource'];
+            'application/json': components['schemas']['IndexerConfigResource'];
+            'text/json': components['schemas']['IndexerConfigResource'];
           };
         };
       };
@@ -1660,60 +1889,50 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["IndexerConfigResource"];
-          "text/json": components["schemas"]["IndexerConfigResource"];
-          "application/*+json": components["schemas"]["IndexerConfigResource"];
+          'application/json': components['schemas']['IndexerConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["IndexerConfigResource"];
-            "application/json": components["schemas"]["IndexerConfigResource"];
-            "text/json": components["schemas"]["IndexerConfigResource"];
+            'text/plain': components['schemas']['IndexerConfigResource'];
+            'application/json': components['schemas']['IndexerConfigResource'];
+            'text/json': components['schemas']['IndexerConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/indexerflag": {
+  '/api/v3/indexerflag': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["IndexerFlagResource"])[];
-            "application/json": (components["schemas"]["IndexerFlagResource"])[];
-            "text/json": (components["schemas"]["IndexerFlagResource"])[];
+            'text/plain': components['schemas']['IndexerFlagResource'][];
+            'application/json': components['schemas']['IndexerFlagResource'][];
+            'text/json': components['schemas']['IndexerFlagResource'][];
           };
         };
       };
     };
   };
-  "/initialize.js": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/language": {
+  '/api/v3/language': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["LanguageResource"])[];
-            "application/json": (components["schemas"]["LanguageResource"])[];
-            "text/json": (components["schemas"]["LanguageResource"])[];
+            'text/plain': components['schemas']['LanguageResource'][];
+            'application/json': components['schemas']['LanguageResource'][];
+            'text/json': components['schemas']['LanguageResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/language/{id}": {
+  '/api/v3/language/{id}': {
     get: {
       parameters: {
         path: {
@@ -1724,57 +1943,76 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["LanguageResource"];
-            "application/json": components["schemas"]["LanguageResource"];
-            "text/json": components["schemas"]["LanguageResource"];
+            'text/plain': components['schemas']['LanguageResource'];
+            'application/json': components['schemas']['LanguageResource'];
+            'text/json': components['schemas']['LanguageResource'];
           };
         };
       };
     };
   };
-  "/api/v3/localization": {
+  '/api/v3/localization': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": string;
-            "application/json": string;
-            "text/json": string;
+            'text/plain': string;
+            'application/json': string;
+            'text/json': string;
           };
         };
       };
     };
   };
-  "/api/v3/log": {
+  '/api/v3/localization/language': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["LogResourcePagingResource"];
-            "application/json": components["schemas"]["LogResourcePagingResource"];
-            "text/json": components["schemas"]["LogResourcePagingResource"];
+            'application/json': components['schemas']['LocalizationLanguageResource'];
           };
         };
       };
     };
   };
-  "/api/v3/log/file": {
+  '/api/v3/log': {
+    get: {
+      parameters: {
+        query?: {
+          page?: number;
+          pageSize?: number;
+          sortKey?: string;
+          sortDirection?: components['schemas']['SortDirection'];
+          level?: string;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['LogResourcePagingResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/log/file': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["LogFileResource"])[];
-            "application/json": (components["schemas"]["LogFileResource"])[];
-            "text/json": (components["schemas"]["LogFileResource"])[];
+            'text/plain': components['schemas']['LogFileResource'][];
+            'application/json': components['schemas']['LogFileResource'][];
+            'text/json': components['schemas']['LogFileResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/log/file/{filename}": {
+  '/api/v3/log/file/{filename}': {
     get: {
       parameters: {
         path: {
@@ -1783,13 +2021,15 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/manualimport": {
+  '/api/v3/manualimport': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           folder?: string;
           downloadId?: string;
@@ -1801,9 +2041,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["ManualImportResource"])[];
-            "application/json": (components["schemas"]["ManualImportResource"])[];
-            "text/json": (components["schemas"]["ManualImportResource"])[];
+            'text/plain': components['schemas']['ManualImportResource'][];
+            'application/json': components['schemas']['ManualImportResource'][];
+            'text/json': components['schemas']['ManualImportResource'][];
           };
         };
       };
@@ -1811,18 +2051,20 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": (components["schemas"]["ManualImportReprocessResource"])[];
-          "text/json": (components["schemas"]["ManualImportReprocessResource"])[];
-          "application/*+json": (components["schemas"]["ManualImportReprocessResource"])[];
+          'application/json': components['schemas']['ManualImportReprocessResource'][];
+          'text/json': components['schemas']['ManualImportReprocessResource'][];
+          'application/*+json': components['schemas']['ManualImportReprocessResource'][];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/mediacover/{movieId}/{filename}": {
+  '/api/v3/mediacover/{movieId}/{filename}': {
     get: {
       parameters: {
         path: {
@@ -1832,25 +2074,25 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/config/mediamanagement": {
+  '/api/v3/config/mediamanagement': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MediaManagementConfigResource"];
-            "application/json": components["schemas"]["MediaManagementConfigResource"];
-            "text/json": components["schemas"]["MediaManagementConfigResource"];
+            'application/json': components['schemas']['MediaManagementConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/mediamanagement/{id}": {
+  '/api/v3/config/mediamanagement/{id}': {
     get: {
       parameters: {
         path: {
@@ -1861,9 +2103,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MediaManagementConfigResource"];
-            "application/json": components["schemas"]["MediaManagementConfigResource"];
-            "text/json": components["schemas"]["MediaManagementConfigResource"];
+            'text/plain': components['schemas']['MediaManagementConfigResource'];
+            'application/json': components['schemas']['MediaManagementConfigResource'];
+            'text/json': components['schemas']['MediaManagementConfigResource'];
           };
         };
       };
@@ -1876,57 +2118,56 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MediaManagementConfigResource"];
-          "text/json": components["schemas"]["MediaManagementConfigResource"];
-          "application/*+json": components["schemas"]["MediaManagementConfigResource"];
+          'application/json': components['schemas']['MediaManagementConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MediaManagementConfigResource"];
-            "application/json": components["schemas"]["MediaManagementConfigResource"];
-            "text/json": components["schemas"]["MediaManagementConfigResource"];
+            'text/plain': components['schemas']['MediaManagementConfigResource'];
+            'application/json': components['schemas']['MediaManagementConfigResource'];
+            'text/json': components['schemas']['MediaManagementConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/metadata": {
+  '/api/v3/metadata': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["MetadataResource"])[];
-            "application/json": (components["schemas"]["MetadataResource"])[];
-            "text/json": (components["schemas"]["MetadataResource"])[];
+            'text/plain': components['schemas']['MetadataResource'][];
+            'application/json': components['schemas']['MetadataResource'][];
+            'text/json': components['schemas']['MetadataResource'][];
           };
         };
       };
     };
     post: {
+      parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
+      };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MetadataResource"];
-          "text/json": components["schemas"]["MetadataResource"];
-          "application/*+json": components["schemas"]["MetadataResource"];
+          'application/json': components['schemas']['MetadataResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MetadataResource"];
-            "application/json": components["schemas"]["MetadataResource"];
-            "text/json": components["schemas"]["MetadataResource"];
+            'application/json': components['schemas']['MetadataResource'];
           };
         };
       };
     };
   };
-  "/api/v3/metadata/{id}": {
+  '/api/v3/metadata/{id}': {
     get: {
       parameters: {
         path: {
@@ -1937,33 +2178,32 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MetadataResource"];
-            "application/json": components["schemas"]["MetadataResource"];
-            "text/json": components["schemas"]["MetadataResource"];
+            'text/plain': components['schemas']['MetadataResource'];
+            'application/json': components['schemas']['MetadataResource'];
+            'text/json': components['schemas']['MetadataResource'];
           };
         };
       };
     };
     put: {
       parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
         path: {
           id: string;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MetadataResource"];
-          "text/json": components["schemas"]["MetadataResource"];
-          "application/*+json": components["schemas"]["MetadataResource"];
+          'application/json': components['schemas']['MetadataResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MetadataResource"];
-            "application/json": components["schemas"]["MetadataResource"];
-            "text/json": components["schemas"]["MetadataResource"];
+            'application/json': components['schemas']['MetadataResource'];
           };
         };
       };
@@ -1976,48 +2216,54 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/metadata/schema": {
+  '/api/v3/metadata/schema': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["MetadataResource"])[];
-            "application/json": (components["schemas"]["MetadataResource"])[];
-            "text/json": (components["schemas"]["MetadataResource"])[];
+            'text/plain': components['schemas']['MetadataResource'][];
+            'application/json': components['schemas']['MetadataResource'][];
+            'text/json': components['schemas']['MetadataResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/metadata/test": {
+  '/api/v3/metadata/test': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MetadataResource"];
-          "text/json": components["schemas"]["MetadataResource"];
-          "application/*+json": components["schemas"]["MetadataResource"];
+          'application/json': components['schemas']['MetadataResource'];
+          'text/json': components['schemas']['MetadataResource'];
+          'application/*+json': components['schemas']['MetadataResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/metadata/testall": {
+  '/api/v3/metadata/testall': {
     post: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/metadata/action/{name}": {
+  '/api/v3/metadata/action/{name}': {
     post: {
       parameters: {
         path: {
@@ -2026,32 +2272,30 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MetadataResource"];
-          "text/json": components["schemas"]["MetadataResource"];
-          "application/*+json": components["schemas"]["MetadataResource"];
+          'application/json': components['schemas']['MetadataResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/config/metadata": {
+  '/api/v3/config/metadata': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MetadataConfigResource"];
-            "application/json": components["schemas"]["MetadataConfigResource"];
-            "text/json": components["schemas"]["MetadataConfigResource"];
+            'application/json': components['schemas']['MetadataConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/metadata/{id}": {
+  '/api/v3/config/metadata/{id}': {
     get: {
       parameters: {
         path: {
@@ -2062,9 +2306,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MetadataConfigResource"];
-            "application/json": components["schemas"]["MetadataConfigResource"];
-            "text/json": components["schemas"]["MetadataConfigResource"];
+            'text/plain': components['schemas']['MetadataConfigResource'];
+            'application/json': components['schemas']['MetadataConfigResource'];
+            'text/json': components['schemas']['MetadataConfigResource'];
           };
         };
       };
@@ -2077,37 +2321,36 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MetadataConfigResource"];
-          "text/json": components["schemas"]["MetadataConfigResource"];
-          "application/*+json": components["schemas"]["MetadataConfigResource"];
+          'application/json': components['schemas']['MetadataConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MetadataConfigResource"];
-            "application/json": components["schemas"]["MetadataConfigResource"];
-            "text/json": components["schemas"]["MetadataConfigResource"];
+            'text/plain': components['schemas']['MetadataConfigResource'];
+            'application/json': components['schemas']['MetadataConfigResource'];
+            'text/json': components['schemas']['MetadataConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/movie": {
+  '/api/v3/movie': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           tmdbId?: number;
+          excludeLocalCovers?: boolean;
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["MovieResource"])[];
-            "application/json": (components["schemas"]["MovieResource"])[];
-            "text/json": (components["schemas"]["MovieResource"])[];
+            'text/plain': components['schemas']['MovieResource'][];
+            'application/json': components['schemas']['MovieResource'][];
+            'text/json': components['schemas']['MovieResource'][];
           };
         };
       };
@@ -2115,24 +2358,24 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MovieResource"];
-          "text/json": components["schemas"]["MovieResource"];
-          "application/*+json": components["schemas"]["MovieResource"];
+          'application/json': components['schemas']['MovieResource'];
+          'text/json': components['schemas']['MovieResource'];
+          'application/*+json': components['schemas']['MovieResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MovieResource"];
-            "application/json": components["schemas"]["MovieResource"];
-            "text/json": components["schemas"]["MovieResource"];
+            'text/plain': components['schemas']['MovieResource'];
+            'application/json': components['schemas']['MovieResource'];
+            'text/json': components['schemas']['MovieResource'];
           };
         };
       };
     };
   };
-  "/api/v3/movie/{id}": {
+  '/api/v3/movie/{id}': {
     get: {
       parameters: {
         path: {
@@ -2143,98 +2386,109 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MovieResource"];
-            "application/json": components["schemas"]["MovieResource"];
-            "text/json": components["schemas"]["MovieResource"];
+            'text/plain': components['schemas']['MovieResource'];
+            'application/json': components['schemas']['MovieResource'];
+            'text/json': components['schemas']['MovieResource'];
           };
         };
       };
     };
     put: {
       parameters: {
+        query?: {
+          moveFiles?: boolean;
+        };
         path: {
           id: string;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MovieResource"];
-          "text/json": components["schemas"]["MovieResource"];
-          "application/*+json": components["schemas"]["MovieResource"];
+          'application/json': components['schemas']['MovieResource'];
+          'text/json': components['schemas']['MovieResource'];
+          'application/*+json': components['schemas']['MovieResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MovieResource"];
-            "application/json": components["schemas"]["MovieResource"];
-            "text/json": components["schemas"]["MovieResource"];
+            'text/plain': components['schemas']['MovieResource'];
+            'application/json': components['schemas']['MovieResource'];
+            'text/json': components['schemas']['MovieResource'];
           };
         };
       };
     };
     delete: {
       parameters: {
+        query?: {
+          deleteFiles?: boolean;
+          addImportExclusion?: boolean;
+        };
         path: {
           id: number;
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/movie/editor": {
+  '/api/v3/movie/editor': {
     put: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MovieEditorResource"];
-          "text/json": components["schemas"]["MovieEditorResource"];
-          "application/*+json": components["schemas"]["MovieEditorResource"];
+          'application/json': components['schemas']['MovieEditorResource'];
+          'text/json': components['schemas']['MovieEditorResource'];
+          'application/*+json': components['schemas']['MovieEditorResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
     delete: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MovieEditorResource"];
-          "text/json": components["schemas"]["MovieEditorResource"];
-          "application/*+json": components["schemas"]["MovieEditorResource"];
+          'application/json': components['schemas']['MovieEditorResource'];
+          'text/json': components['schemas']['MovieEditorResource'];
+          'application/*+json': components['schemas']['MovieEditorResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/moviefile": {
+  '/api/v3/moviefile': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           movieId?: number;
-          movieFileIds?: (number)[];
+          movieFileIds?: number[];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["MovieFileResource"])[];
-            "application/json": (components["schemas"]["MovieFileResource"])[];
-            "text/json": (components["schemas"]["MovieFileResource"])[];
+            'application/json': components['schemas']['MovieFileResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/moviefile/{id}": {
+  '/api/v3/moviefile/{id}': {
     get: {
       parameters: {
         path: {
@@ -2245,9 +2499,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MovieFileResource"];
-            "application/json": components["schemas"]["MovieFileResource"];
-            "text/json": components["schemas"]["MovieFileResource"];
+            'text/plain': components['schemas']['MovieFileResource'];
+            'application/json': components['schemas']['MovieFileResource'];
+            'text/json': components['schemas']['MovieFileResource'];
           };
         };
       };
@@ -2260,18 +2514,16 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MovieFileResource"];
-          "text/json": components["schemas"]["MovieFileResource"];
-          "application/*+json": components["schemas"]["MovieFileResource"];
+          'application/json': components['schemas']['MovieFileResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MovieFileResource"];
-            "application/json": components["schemas"]["MovieFileResource"];
-            "text/json": components["schemas"]["MovieFileResource"];
+            'text/plain': components['schemas']['MovieFileResource'];
+            'application/json': components['schemas']['MovieFileResource'];
+            'text/json': components['schemas']['MovieFileResource'];
           };
         };
       };
@@ -2284,56 +2536,60 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/moviefile/editor": {
+  '/api/v3/moviefile/editor': {
     put: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MovieFileListResource"];
-          "text/json": components["schemas"]["MovieFileListResource"];
-          "application/*+json": components["schemas"]["MovieFileListResource"];
+          'application/json': components['schemas']['MovieFileListResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/moviefile/bulk": {
+  '/api/v3/moviefile/bulk': {
     delete: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MovieFileListResource"];
-          "text/json": components["schemas"]["MovieFileListResource"];
-          "application/*+json": components["schemas"]["MovieFileListResource"];
+          'application/json': components['schemas']['MovieFileListResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/movie/import": {
+  '/api/v3/movie/import': {
     post: {
       requestBody?: {
         content: {
-          "application/json": (components["schemas"]["MovieResource"])[];
-          "text/json": (components["schemas"]["MovieResource"])[];
-          "application/*+json": (components["schemas"]["MovieResource"])[];
+          'application/json': components['schemas']['MovieResource'][];
+          'text/json': components['schemas']['MovieResource'][];
+          'application/*+json': components['schemas']['MovieResource'][];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/movie/import/{id}": {
+  '/api/v3/movie/import/{id}': {
     get: {
       parameters: {
         path: {
@@ -2344,54 +2600,60 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MovieResource"];
-            "application/json": components["schemas"]["MovieResource"];
-            "text/json": components["schemas"]["MovieResource"];
+            'text/plain': components['schemas']['MovieResource'];
+            'application/json': components['schemas']['MovieResource'];
+            'text/json': components['schemas']['MovieResource'];
           };
         };
       };
     };
   };
-  "/api/v3/movie/lookup/tmdb": {
+  '/api/v3/movie/lookup/tmdb': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           tmdbId?: number;
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/movie/lookup/imdb": {
+  '/api/v3/movie/lookup/imdb': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           imdbId?: string;
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/movie/lookup": {
+  '/api/v3/movie/lookup': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           term?: string;
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/movie/lookup/{id}": {
+  '/api/v3/movie/lookup/{id}': {
     get: {
       parameters: {
         path: {
@@ -2402,29 +2664,29 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MovieResource"];
-            "application/json": components["schemas"]["MovieResource"];
-            "text/json": components["schemas"]["MovieResource"];
+            'text/plain': components['schemas']['MovieResource'];
+            'application/json': components['schemas']['MovieResource'];
+            'text/json': components['schemas']['MovieResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/naming": {
+  '/api/v3/config/naming': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["NamingConfigResource"];
-            "application/json": components["schemas"]["NamingConfigResource"];
-            "text/json": components["schemas"]["NamingConfigResource"];
+            'text/plain': components['schemas']['NamingConfigResource'];
+            'application/json': components['schemas']['NamingConfigResource'];
+            'text/json': components['schemas']['NamingConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/naming/{id}": {
+  '/api/v3/config/naming/{id}': {
     get: {
       parameters: {
         path: {
@@ -2435,9 +2697,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["NamingConfigResource"];
-            "application/json": components["schemas"]["NamingConfigResource"];
-            "text/json": components["schemas"]["NamingConfigResource"];
+            'text/plain': components['schemas']['NamingConfigResource'];
+            'application/json': components['schemas']['NamingConfigResource'];
+            'text/json': components['schemas']['NamingConfigResource'];
           };
         };
       };
@@ -2450,80 +2712,83 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["NamingConfigResource"];
-          "text/json": components["schemas"]["NamingConfigResource"];
-          "application/*+json": components["schemas"]["NamingConfigResource"];
+          'application/json': components['schemas']['NamingConfigResource'];
+          'text/json': components['schemas']['NamingConfigResource'];
+          'application/*+json': components['schemas']['NamingConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["NamingConfigResource"];
-            "application/json": components["schemas"]["NamingConfigResource"];
-            "text/json": components["schemas"]["NamingConfigResource"];
+            'text/plain': components['schemas']['NamingConfigResource'];
+            'application/json': components['schemas']['NamingConfigResource'];
+            'text/json': components['schemas']['NamingConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/naming/examples": {
+  '/api/v3/config/naming/examples': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
-          RenameMovies?: boolean;
-          ReplaceIllegalCharacters?: boolean;
-          ColonReplacementFormat?: components["schemas"]["ColonReplacementFormat"];
-          StandardMovieFormat?: string;
-          MovieFolderFormat?: string;
-          IncludeQuality?: boolean;
-          ReplaceSpaces?: boolean;
-          Separator?: string;
-          NumberStyle?: string;
-          Id?: number;
-          ResourceName?: string;
+          renameMovies?: boolean;
+          replaceIllegalCharacters?: boolean;
+          colonReplacementFormat?: components['schemas']['ColonReplacementFormat'];
+          standardMovieFormat?: string;
+          movieFolderFormat?: string;
+          includeQuality?: boolean;
+          replaceSpaces?: boolean;
+          separator?: string;
+          numberStyle?: string;
+          id?: number;
+          resourceName?: string;
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/notification": {
+  '/api/v3/notification': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["NotificationResource"])[];
-            "application/json": (components["schemas"]["NotificationResource"])[];
-            "text/json": (components["schemas"]["NotificationResource"])[];
+            'text/plain': components['schemas']['NotificationResource'][];
+            'application/json': components['schemas']['NotificationResource'][];
+            'text/json': components['schemas']['NotificationResource'][];
           };
         };
       };
     };
     post: {
+      parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
+      };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["NotificationResource"];
-          "text/json": components["schemas"]["NotificationResource"];
-          "application/*+json": components["schemas"]["NotificationResource"];
+          'application/json': components['schemas']['NotificationResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["NotificationResource"];
-            "application/json": components["schemas"]["NotificationResource"];
-            "text/json": components["schemas"]["NotificationResource"];
+            'application/json': components['schemas']['NotificationResource'];
           };
         };
       };
     };
   };
-  "/api/v3/notification/{id}": {
+  '/api/v3/notification/{id}': {
     get: {
       parameters: {
         path: {
@@ -2534,33 +2799,32 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["NotificationResource"];
-            "application/json": components["schemas"]["NotificationResource"];
-            "text/json": components["schemas"]["NotificationResource"];
+            'text/plain': components['schemas']['NotificationResource'];
+            'application/json': components['schemas']['NotificationResource'];
+            'text/json': components['schemas']['NotificationResource'];
           };
         };
       };
     };
     put: {
       parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
         path: {
           id: string;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["NotificationResource"];
-          "text/json": components["schemas"]["NotificationResource"];
-          "application/*+json": components["schemas"]["NotificationResource"];
+          'application/json': components['schemas']['NotificationResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["NotificationResource"];
-            "application/json": components["schemas"]["NotificationResource"];
-            "text/json": components["schemas"]["NotificationResource"];
+            'application/json': components['schemas']['NotificationResource'];
           };
         };
       };
@@ -2573,48 +2837,54 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/notification/schema": {
+  '/api/v3/notification/schema': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["NotificationResource"])[];
-            "application/json": (components["schemas"]["NotificationResource"])[];
-            "text/json": (components["schemas"]["NotificationResource"])[];
+            'text/plain': components['schemas']['NotificationResource'][];
+            'application/json': components['schemas']['NotificationResource'][];
+            'text/json': components['schemas']['NotificationResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/notification/test": {
+  '/api/v3/notification/test': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["NotificationResource"];
-          "text/json": components["schemas"]["NotificationResource"];
-          "application/*+json": components["schemas"]["NotificationResource"];
+          'application/json': components['schemas']['NotificationResource'];
+          'text/json': components['schemas']['NotificationResource'];
+          'application/*+json': components['schemas']['NotificationResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/notification/testall": {
+  '/api/v3/notification/testall': {
     post: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/notification/action/{name}": {
+  '/api/v3/notification/action/{name}': {
     post: {
       parameters: {
         path: {
@@ -2623,20 +2893,20 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["NotificationResource"];
-          "text/json": components["schemas"]["NotificationResource"];
-          "application/*+json": components["schemas"]["NotificationResource"];
+          'application/json': components['schemas']['NotificationResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/parse": {
+  '/api/v3/parse': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           title?: string;
         };
@@ -2645,15 +2915,27 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ParseResource"];
-            "application/json": components["schemas"]["ParseResource"];
-            "text/json": components["schemas"]["ParseResource"];
+            'text/plain': components['schemas']['ParseResource'];
+            'application/json': components['schemas']['ParseResource'];
+            'text/json': components['schemas']['ParseResource'];
           };
         };
       };
     };
   };
-  "/api/v3/qualitydefinition/{id}": {
+  '/ping': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['PingResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/qualitydefinition/{id}': {
     get: {
       parameters: {
         path: {
@@ -2664,9 +2946,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QualityDefinitionResource"];
-            "application/json": components["schemas"]["QualityDefinitionResource"];
-            "text/json": components["schemas"]["QualityDefinitionResource"];
+            'text/plain': components['schemas']['QualityDefinitionResource'];
+            'application/json': components['schemas']['QualityDefinitionResource'];
+            'text/json': components['schemas']['QualityDefinitionResource'];
           };
         };
       };
@@ -2679,61 +2961,63 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["QualityDefinitionResource"];
-          "text/json": components["schemas"]["QualityDefinitionResource"];
-          "application/*+json": components["schemas"]["QualityDefinitionResource"];
+          'application/json': components['schemas']['QualityDefinitionResource'];
+          'text/json': components['schemas']['QualityDefinitionResource'];
+          'application/*+json': components['schemas']['QualityDefinitionResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QualityDefinitionResource"];
-            "application/json": components["schemas"]["QualityDefinitionResource"];
-            "text/json": components["schemas"]["QualityDefinitionResource"];
+            'text/plain': components['schemas']['QualityDefinitionResource'];
+            'application/json': components['schemas']['QualityDefinitionResource'];
+            'text/json': components['schemas']['QualityDefinitionResource'];
           };
         };
       };
     };
   };
-  "/api/v3/qualitydefinition": {
+  '/api/v3/qualitydefinition': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["QualityDefinitionResource"])[];
-            "application/json": (components["schemas"]["QualityDefinitionResource"])[];
-            "text/json": (components["schemas"]["QualityDefinitionResource"])[];
+            'text/plain': components['schemas']['QualityDefinitionResource'][];
+            'application/json': components['schemas']['QualityDefinitionResource'][];
+            'text/json': components['schemas']['QualityDefinitionResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/qualitydefinition/update": {
+  '/api/v3/qualitydefinition/update': {
     put: {
       requestBody?: {
         content: {
-          "application/json": (components["schemas"]["QualityDefinitionResource"])[];
-          "text/json": (components["schemas"]["QualityDefinitionResource"])[];
-          "application/*+json": (components["schemas"]["QualityDefinitionResource"])[];
+          'application/json': components['schemas']['QualityDefinitionResource'][];
+          'text/json': components['schemas']['QualityDefinitionResource'][];
+          'application/*+json': components['schemas']['QualityDefinitionResource'][];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/qualityprofile": {
+  '/api/v3/qualityprofile': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["QualityProfileResource"])[];
-            "application/json": (components["schemas"]["QualityProfileResource"])[];
-            "text/json": (components["schemas"]["QualityProfileResource"])[];
+            'text/plain': components['schemas']['QualityProfileResource'][];
+            'application/json': components['schemas']['QualityProfileResource'][];
+            'text/json': components['schemas']['QualityProfileResource'][];
           };
         };
       };
@@ -2741,24 +3025,24 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["QualityProfileResource"];
-          "text/json": components["schemas"]["QualityProfileResource"];
-          "application/*+json": components["schemas"]["QualityProfileResource"];
+          'application/json': components['schemas']['QualityProfileResource'];
+          'text/json': components['schemas']['QualityProfileResource'];
+          'application/*+json': components['schemas']['QualityProfileResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QualityProfileResource"];
-            "application/json": components["schemas"]["QualityProfileResource"];
-            "text/json": components["schemas"]["QualityProfileResource"];
+            'text/plain': components['schemas']['QualityProfileResource'];
+            'application/json': components['schemas']['QualityProfileResource'];
+            'text/json': components['schemas']['QualityProfileResource'];
           };
         };
       };
     };
   };
-  "/api/v3/qualityprofile/{id}": {
+  '/api/v3/qualityprofile/{id}': {
     get: {
       parameters: {
         path: {
@@ -2769,9 +3053,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QualityProfileResource"];
-            "application/json": components["schemas"]["QualityProfileResource"];
-            "text/json": components["schemas"]["QualityProfileResource"];
+            'text/plain': components['schemas']['QualityProfileResource'];
+            'application/json': components['schemas']['QualityProfileResource'];
+            'text/json': components['schemas']['QualityProfileResource'];
           };
         };
       };
@@ -2784,18 +3068,18 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["QualityProfileResource"];
-          "text/json": components["schemas"]["QualityProfileResource"];
-          "application/*+json": components["schemas"]["QualityProfileResource"];
+          'application/json': components['schemas']['QualityProfileResource'];
+          'text/json': components['schemas']['QualityProfileResource'];
+          'application/*+json': components['schemas']['QualityProfileResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QualityProfileResource"];
-            "application/json": components["schemas"]["QualityProfileResource"];
-            "text/json": components["schemas"]["QualityProfileResource"];
+            'text/plain': components['schemas']['QualityProfileResource'];
+            'application/json': components['schemas']['QualityProfileResource'];
+            'text/json': components['schemas']['QualityProfileResource'];
           };
         };
       };
@@ -2808,25 +3092,27 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/qualityprofile/schema": {
+  '/api/v3/qualityprofile/schema': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QualityProfileResource"];
-            "application/json": components["schemas"]["QualityProfileResource"];
-            "text/json": components["schemas"]["QualityProfileResource"];
+            'text/plain': components['schemas']['QualityProfileResource'];
+            'application/json': components['schemas']['QualityProfileResource'];
+            'text/json': components['schemas']['QualityProfileResource'];
           };
         };
       };
     };
   };
-  "/api/v3/queue/{id}": {
+  '/api/v3/queue/{id}': {
     get: {
       parameters: {
         path: {
@@ -2837,9 +3123,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QueueResource"];
-            "application/json": components["schemas"]["QueueResource"];
-            "text/json": components["schemas"]["QueueResource"];
+            'text/plain': components['schemas']['QueueResource'];
+            'application/json': components['schemas']['QueueResource'];
+            'text/json': components['schemas']['QueueResource'];
           };
         };
       };
@@ -2849,6 +3135,7 @@ export interface paths {
         query?: {
           removeFromClient?: boolean;
           blocklist?: boolean;
+          skipRedownload?: boolean;
         };
         path: {
           id: number;
@@ -2856,52 +3143,63 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/queue/bulk": {
+  '/api/v3/queue/bulk': {
     delete: {
-      parameters?: {
+      parameters: {
         query?: {
           removeFromClient?: boolean;
           blocklist?: boolean;
+          skipRedownload?: boolean;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["QueueBulkResource"];
-          "text/json": components["schemas"]["QueueBulkResource"];
-          "application/*+json": components["schemas"]["QueueBulkResource"];
+          'application/json': components['schemas']['QueueBulkResource'];
+          'text/json': components['schemas']['QueueBulkResource'];
+          'application/*+json': components['schemas']['QueueBulkResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/queue": {
+  '/api/v3/queue': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
+          page?: number;
+          pageSize?: number;
+          sortKey?: string;
+          sortDirection?: components['schemas']['SortDirection'];
           includeUnknownMovieItems?: boolean;
           includeMovie?: boolean;
+          movieIds?: number[];
+          protocol?: components['schemas']['DownloadProtocol'];
+          languages?: number[];
+          quality?: number;
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QueueResourcePagingResource"];
-            "application/json": components["schemas"]["QueueResourcePagingResource"];
-            "text/json": components["schemas"]["QueueResourcePagingResource"];
+            'application/json': components['schemas']['QueueResourcePagingResource'];
           };
         };
       };
     };
   };
-  "/api/v3/queue/grab/{id}": {
+  '/api/v3/queue/grab/{id}': {
     post: {
       parameters: {
         path: {
@@ -2910,28 +3208,30 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/queue/grab/bulk": {
+  '/api/v3/queue/grab/bulk': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["QueueBulkResource"];
-          "text/json": components["schemas"]["QueueBulkResource"];
-          "application/*+json": components["schemas"]["QueueBulkResource"];
+          'application/json': components['schemas']['QueueBulkResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/queue/details": {
+  '/api/v3/queue/details': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           movieId?: number;
           includeMovie?: boolean;
@@ -2941,15 +3241,15 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["QueueResource"])[];
-            "application/json": (components["schemas"]["QueueResource"])[];
-            "text/json": (components["schemas"]["QueueResource"])[];
+            'text/plain': components['schemas']['QueueResource'][];
+            'application/json': components['schemas']['QueueResource'][];
+            'text/json': components['schemas']['QueueResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/queue/details/{id}": {
+  '/api/v3/queue/details/{id}': {
     get: {
       parameters: {
         path: {
@@ -2960,29 +3260,29 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QueueResource"];
-            "application/json": components["schemas"]["QueueResource"];
-            "text/json": components["schemas"]["QueueResource"];
+            'text/plain': components['schemas']['QueueResource'];
+            'application/json': components['schemas']['QueueResource'];
+            'text/json': components['schemas']['QueueResource'];
           };
         };
       };
     };
   };
-  "/api/v3/queue/status": {
+  '/api/v3/queue/status': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QueueStatusResource"];
-            "application/json": components["schemas"]["QueueStatusResource"];
-            "text/json": components["schemas"]["QueueStatusResource"];
+            'text/plain': components['schemas']['QueueStatusResource'];
+            'application/json': components['schemas']['QueueStatusResource'];
+            'text/json': components['schemas']['QueueStatusResource'];
           };
         };
       };
     };
   };
-  "/api/v3/queue/status/{id}": {
+  '/api/v3/queue/status/{id}': {
     get: {
       parameters: {
         path: {
@@ -2993,17 +3293,17 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QueueStatusResource"];
-            "application/json": components["schemas"]["QueueStatusResource"];
-            "text/json": components["schemas"]["QueueStatusResource"];
+            'text/plain': components['schemas']['QueueStatusResource'];
+            'application/json': components['schemas']['QueueStatusResource'];
+            'text/json': components['schemas']['QueueStatusResource'];
           };
         };
       };
     };
   };
-  "/api/v3/release": {
+  '/api/v3/release': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           movieId?: number;
         };
@@ -3012,9 +3312,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["ReleaseResource"])[];
-            "application/json": (components["schemas"]["ReleaseResource"])[];
-            "text/json": (components["schemas"]["ReleaseResource"])[];
+            'application/json': components['schemas']['ReleaseResource'][];
           };
         };
       };
@@ -3022,18 +3320,18 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ReleaseResource"];
-          "text/json": components["schemas"]["ReleaseResource"];
-          "application/*+json": components["schemas"]["ReleaseResource"];
+          'application/json': components['schemas']['ReleaseResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/release/{id}": {
+  '/api/v3/release/{id}': {
     get: {
       parameters: {
         path: {
@@ -3044,36 +3342,48 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ReleaseResource"];
-            "application/json": components["schemas"]["ReleaseResource"];
-            "text/json": components["schemas"]["ReleaseResource"];
+            'text/plain': components['schemas']['ReleaseResource'];
+            'application/json': components['schemas']['ReleaseResource'];
+            'text/json': components['schemas']['ReleaseResource'];
           };
         };
       };
     };
   };
-  "/api/v3/release/push": {
+  '/api/v3/releaseprofile': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['ReleaseProfileResource'][];
+            'application/json': components['schemas']['ReleaseProfileResource'][];
+            'text/json': components['schemas']['ReleaseProfileResource'][];
+          };
+        };
+      };
+    };
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ReleaseResource"];
-          "text/json": components["schemas"]["ReleaseResource"];
-          "application/*+json": components["schemas"]["ReleaseResource"];
+          'application/json': components['schemas']['ReleaseProfileResource'];
+          'text/json': components['schemas']['ReleaseProfileResource'];
+          'application/*+json': components['schemas']['ReleaseProfileResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["ReleaseResource"])[];
-            "application/json": (components["schemas"]["ReleaseResource"])[];
-            "text/json": (components["schemas"]["ReleaseResource"])[];
+            'text/plain': components['schemas']['ReleaseProfileResource'];
+            'application/json': components['schemas']['ReleaseProfileResource'];
+            'text/json': components['schemas']['ReleaseProfileResource'];
           };
         };
       };
     };
   };
-  "/api/v3/release/push/{id}": {
+  '/api/v3/releaseprofile/{id}': {
     get: {
       parameters: {
         path: {
@@ -3084,61 +3394,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ReleaseResource"];
-            "application/json": components["schemas"]["ReleaseResource"];
-            "text/json": components["schemas"]["ReleaseResource"];
-          };
-        };
-      };
-    };
-  };
-  "/api/v3/remotepathmapping": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "text/plain": (components["schemas"]["RemotePathMappingResource"])[];
-            "application/json": (components["schemas"]["RemotePathMappingResource"])[];
-            "text/json": (components["schemas"]["RemotePathMappingResource"])[];
-          };
-        };
-      };
-    };
-    post: {
-      requestBody?: {
-        content: {
-          "application/json": components["schemas"]["RemotePathMappingResource"];
-          "text/json": components["schemas"]["RemotePathMappingResource"];
-          "application/*+json": components["schemas"]["RemotePathMappingResource"];
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "text/plain": components["schemas"]["RemotePathMappingResource"];
-            "application/json": components["schemas"]["RemotePathMappingResource"];
-            "text/json": components["schemas"]["RemotePathMappingResource"];
-          };
-        };
-      };
-    };
-  };
-  "/api/v3/remotepathmapping/{id}": {
-    get: {
-      parameters: {
-        path: {
-          id: number;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "text/plain": components["schemas"]["RemotePathMappingResource"];
-            "application/json": components["schemas"]["RemotePathMappingResource"];
-            "text/json": components["schemas"]["RemotePathMappingResource"];
+            'text/plain': components['schemas']['ReleaseProfileResource'];
+            'application/json': components['schemas']['ReleaseProfileResource'];
+            'text/json': components['schemas']['ReleaseProfileResource'];
           };
         };
       };
@@ -3151,18 +3409,18 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["RemotePathMappingResource"];
-          "text/json": components["schemas"]["RemotePathMappingResource"];
-          "application/*+json": components["schemas"]["RemotePathMappingResource"];
+          'application/json': components['schemas']['ReleaseProfileResource'];
+          'text/json': components['schemas']['ReleaseProfileResource'];
+          'application/*+json': components['schemas']['ReleaseProfileResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["RemotePathMappingResource"];
-            "application/json": components["schemas"]["RemotePathMappingResource"];
-            "text/json": components["schemas"]["RemotePathMappingResource"];
+            'text/plain': components['schemas']['ReleaseProfileResource'];
+            'application/json': components['schemas']['ReleaseProfileResource'];
+            'text/json': components['schemas']['ReleaseProfileResource'];
           };
         };
       };
@@ -3175,13 +3433,142 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/rename": {
+  '/api/v3/release/push': {
+    post: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['ReleaseResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['ReleaseResource'][];
+            'application/json': components['schemas']['ReleaseResource'][];
+            'text/json': components['schemas']['ReleaseResource'][];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/release/push/{id}': {
     get: {
-      parameters?: {
+      parameters: {
+        path: {
+          id: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['ReleaseResource'];
+            'application/json': components['schemas']['ReleaseResource'];
+            'text/json': components['schemas']['ReleaseResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/remotepathmapping': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['RemotePathMappingResource'][];
+            'application/json': components['schemas']['RemotePathMappingResource'][];
+            'text/json': components['schemas']['RemotePathMappingResource'][];
+          };
+        };
+      };
+    };
+    post: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['RemotePathMappingResource'];
+          'text/json': components['schemas']['RemotePathMappingResource'];
+          'application/*+json': components['schemas']['RemotePathMappingResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['RemotePathMappingResource'];
+            'application/json': components['schemas']['RemotePathMappingResource'];
+            'text/json': components['schemas']['RemotePathMappingResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/remotepathmapping/{id}': {
+    get: {
+      parameters: {
+        path: {
+          id: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['RemotePathMappingResource'];
+            'application/json': components['schemas']['RemotePathMappingResource'];
+            'text/json': components['schemas']['RemotePathMappingResource'];
+          };
+        };
+      };
+    };
+    put: {
+      parameters: {
+        path: {
+          id: string;
+        };
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['RemotePathMappingResource'];
+          'text/json': components['schemas']['RemotePathMappingResource'];
+          'application/*+json': components['schemas']['RemotePathMappingResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['RemotePathMappingResource'];
+            'application/json': components['schemas']['RemotePathMappingResource'];
+            'text/json': components['schemas']['RemotePathMappingResource'];
+          };
+        };
+      };
+    };
+    delete: {
+      parameters: {
+        path: {
+          id: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/rename': {
+    get: {
+      parameters: {
         query?: {
           movieId?: number;
         };
@@ -3190,23 +3577,23 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["RenameMovieResource"])[];
-            "application/json": (components["schemas"]["RenameMovieResource"])[];
-            "text/json": (components["schemas"]["RenameMovieResource"])[];
+            'text/plain': components['schemas']['RenameMovieResource'][];
+            'application/json': components['schemas']['RenameMovieResource'][];
+            'text/json': components['schemas']['RenameMovieResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/restriction": {
+  '/api/v3/rootfolder': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["RestrictionResource"])[];
-            "application/json": (components["schemas"]["RestrictionResource"])[];
-            "text/json": (components["schemas"]["RestrictionResource"])[];
+            'text/plain': components['schemas']['RootFolderResource'][];
+            'application/json': components['schemas']['RootFolderResource'][];
+            'text/json': components['schemas']['RootFolderResource'][];
           };
         };
       };
@@ -3214,24 +3601,24 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["RestrictionResource"];
-          "text/json": components["schemas"]["RestrictionResource"];
-          "application/*+json": components["schemas"]["RestrictionResource"];
+          'application/json': components['schemas']['RootFolderResource'];
+          'text/json': components['schemas']['RootFolderResource'];
+          'application/*+json': components['schemas']['RootFolderResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["RestrictionResource"];
-            "application/json": components["schemas"]["RestrictionResource"];
-            "text/json": components["schemas"]["RestrictionResource"];
+            'text/plain': components['schemas']['RootFolderResource'];
+            'application/json': components['schemas']['RootFolderResource'];
+            'text/json': components['schemas']['RootFolderResource'];
           };
         };
       };
     };
   };
-  "/api/v3/restriction/{id}": {
+  '/api/v3/rootfolder/{id}': {
     get: {
       parameters: {
         path: {
@@ -3242,33 +3629,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["RestrictionResource"];
-            "application/json": components["schemas"]["RestrictionResource"];
-            "text/json": components["schemas"]["RestrictionResource"];
-          };
-        };
-      };
-    };
-    put: {
-      parameters: {
-        path: {
-          id: string;
-        };
-      };
-      requestBody?: {
-        content: {
-          "application/json": components["schemas"]["RestrictionResource"];
-          "text/json": components["schemas"]["RestrictionResource"];
-          "application/*+json": components["schemas"]["RestrictionResource"];
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "text/plain": components["schemas"]["RestrictionResource"];
-            "application/json": components["schemas"]["RestrictionResource"];
-            "text/json": components["schemas"]["RestrictionResource"];
+            'text/plain': components['schemas']['RootFolderResource'];
+            'application/json': components['schemas']['RootFolderResource'];
+            'text/json': components['schemas']['RootFolderResource'];
           };
         };
       };
@@ -3281,19 +3644,120 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/rootfolder": {
+  '/content/{path}': {
+    get: {
+      parameters: {
+        path: {
+          path: string;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/': {
+    get: {
+      parameters: {
+        path: {
+          path: string;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/{path}': {
+    get: {
+      parameters: {
+        path: {
+          path: string;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/system/status': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["RootFolderResource"])[];
-            "application/json": (components["schemas"]["RootFolderResource"])[];
-            "text/json": (components["schemas"]["RootFolderResource"])[];
+            'text/plain': components['schemas']['SystemResource'];
+            'application/json': components['schemas']['SystemResource'];
+            'text/json': components['schemas']['SystemResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/system/routes': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/system/routes/duplicate': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/system/shutdown': {
+    post: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/system/restart': {
+    post: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/tag': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['TagResource'][];
+            'application/json': components['schemas']['TagResource'][];
+            'text/json': components['schemas']['TagResource'][];
           };
         };
       };
@@ -3301,24 +3765,24 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["RootFolderResource"];
-          "text/json": components["schemas"]["RootFolderResource"];
-          "application/*+json": components["schemas"]["RootFolderResource"];
+          'application/json': components['schemas']['TagResource'];
+          'text/json': components['schemas']['TagResource'];
+          'application/*+json': components['schemas']['TagResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["RootFolderResource"];
-            "application/json": components["schemas"]["RootFolderResource"];
-            "text/json": components["schemas"]["RootFolderResource"];
+            'text/plain': components['schemas']['TagResource'];
+            'application/json': components['schemas']['TagResource'];
+            'text/json': components['schemas']['TagResource'];
           };
         };
       };
     };
   };
-  "/api/v3/rootfolder/{id}": {
+  '/api/v3/tag/{id}': {
     get: {
       parameters: {
         path: {
@@ -3329,151 +3793,9 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["RootFolderResource"];
-            "application/json": components["schemas"]["RootFolderResource"];
-            "text/json": components["schemas"]["RootFolderResource"];
-          };
-        };
-      };
-    };
-    delete: {
-      parameters: {
-        path: {
-          id: number;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/content/{path}": {
-    get: {
-      parameters: {
-        path: {
-          path: string;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/": {
-    get: {
-      parameters: {
-        path: {
-          path: string;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/{path}": {
-    get: {
-      parameters: {
-        path: {
-          path: string;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/system/status": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/system/routes": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/system/routes/duplicate": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/system/shutdown": {
-    post: {
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/system/restart": {
-    post: {
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/tag": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "text/plain": (components["schemas"]["TagResource"])[];
-            "application/json": (components["schemas"]["TagResource"])[];
-            "text/json": (components["schemas"]["TagResource"])[];
-          };
-        };
-      };
-    };
-    post: {
-      requestBody?: {
-        content: {
-          "application/json": components["schemas"]["TagResource"];
-          "text/json": components["schemas"]["TagResource"];
-          "application/*+json": components["schemas"]["TagResource"];
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "text/plain": components["schemas"]["TagResource"];
-            "application/json": components["schemas"]["TagResource"];
-            "text/json": components["schemas"]["TagResource"];
-          };
-        };
-      };
-    };
-  };
-  "/api/v3/tag/{id}": {
-    get: {
-      parameters: {
-        path: {
-          id: number;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "text/plain": components["schemas"]["TagResource"];
-            "application/json": components["schemas"]["TagResource"];
-            "text/json": components["schemas"]["TagResource"];
+            'text/plain': components['schemas']['TagResource'];
+            'application/json': components['schemas']['TagResource'];
+            'text/json': components['schemas']['TagResource'];
           };
         };
       };
@@ -3486,18 +3808,18 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["TagResource"];
-          "text/json": components["schemas"]["TagResource"];
-          "application/*+json": components["schemas"]["TagResource"];
+          'application/json': components['schemas']['TagResource'];
+          'text/json': components['schemas']['TagResource'];
+          'application/*+json': components['schemas']['TagResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["TagResource"];
-            "application/json": components["schemas"]["TagResource"];
-            "text/json": components["schemas"]["TagResource"];
+            'text/plain': components['schemas']['TagResource'];
+            'application/json': components['schemas']['TagResource'];
+            'text/json': components['schemas']['TagResource'];
           };
         };
       };
@@ -3510,25 +3832,27 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/tag/detail": {
+  '/api/v3/tag/detail': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["TagDetailsResource"])[];
-            "application/json": (components["schemas"]["TagDetailsResource"])[];
-            "text/json": (components["schemas"]["TagDetailsResource"])[];
+            'text/plain': components['schemas']['TagDetailsResource'][];
+            'application/json': components['schemas']['TagDetailsResource'][];
+            'text/json': components['schemas']['TagDetailsResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/tag/detail/{id}": {
+  '/api/v3/tag/detail/{id}': {
     get: {
       parameters: {
         path: {
@@ -3539,62 +3863,29 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["TagDetailsResource"];
-            "application/json": components["schemas"]["TagDetailsResource"];
-            "text/json": components["schemas"]["TagDetailsResource"];
+            'text/plain': components['schemas']['TagDetailsResource'];
+            'application/json': components['schemas']['TagDetailsResource'];
+            'text/json': components['schemas']['TagDetailsResource'];
           };
         };
       };
     };
   };
-  "/api/v3/system/task": {
+  '/api/v3/system/task': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["TaskResource"])[];
-            "application/json": (components["schemas"]["TaskResource"])[];
-            "text/json": (components["schemas"]["TaskResource"])[];
+            'text/plain': components['schemas']['TaskResource'][];
+            'application/json': components['schemas']['TaskResource'][];
+            'text/json': components['schemas']['TaskResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/system/task/{id}": {
-    get: {
-      parameters: {
-        path: {
-          id: number;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "text/plain": components["schemas"]["TaskResource"];
-            "application/json": components["schemas"]["TaskResource"];
-            "text/json": components["schemas"]["TaskResource"];
-          };
-        };
-      };
-    };
-  };
-  "/api/v3/config/ui": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "text/plain": components["schemas"]["UiConfigResource"];
-            "application/json": components["schemas"]["UiConfigResource"];
-            "text/json": components["schemas"]["UiConfigResource"];
-          };
-        };
-      };
-    };
-  };
-  "/api/v3/config/ui/{id}": {
+  '/api/v3/system/task/{id}': {
     get: {
       parameters: {
         path: {
@@ -3605,9 +3896,28 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["UiConfigResource"];
-            "application/json": components["schemas"]["UiConfigResource"];
-            "text/json": components["schemas"]["UiConfigResource"];
+            'text/plain': components['schemas']['TaskResource'];
+            'application/json': components['schemas']['TaskResource'];
+            'text/json': components['schemas']['TaskResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/config/ui/{id}': {
+    get: {
+      parameters: {
+        path: {
+          id: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['UiConfigResource'];
+            'application/json': components['schemas']['UiConfigResource'];
+            'text/json': components['schemas']['UiConfigResource'];
           };
         };
       };
@@ -3620,52 +3930,62 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["UiConfigResource"];
-          "text/json": components["schemas"]["UiConfigResource"];
-          "application/*+json": components["schemas"]["UiConfigResource"];
+          'application/json': components['schemas']['UiConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["UiConfigResource"];
-            "application/json": components["schemas"]["UiConfigResource"];
-            "text/json": components["schemas"]["UiConfigResource"];
+            'text/plain': components['schemas']['UiConfigResource'];
+            'application/json': components['schemas']['UiConfigResource'];
+            'text/json': components['schemas']['UiConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/update": {
+  '/api/v3/config/ui': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["UpdateResource"])[];
-            "application/json": (components["schemas"]["UpdateResource"])[];
-            "text/json": (components["schemas"]["UpdateResource"])[];
+            'application/json': components['schemas']['UiConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/log/file/update": {
+  '/api/v3/update': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["LogFileResource"])[];
-            "application/json": (components["schemas"]["LogFileResource"])[];
-            "text/json": (components["schemas"]["LogFileResource"])[];
+            'text/plain': components['schemas']['UpdateResource'][];
+            'application/json': components['schemas']['UpdateResource'][];
+            'text/json': components['schemas']['UpdateResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/log/file/update/{filename}": {
+  '/api/v3/log/file/update': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['LogFileResource'][];
+            'application/json': components['schemas']['LogFileResource'][];
+            'text/json': components['schemas']['LogFileResource'][];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/log/file/update/{filename}': {
     get: {
       parameters: {
         path: {
@@ -3674,78 +3994,90 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
 }
 
+export type webhooks = Record<string, never>;
+
 export interface components {
   schemas: {
     /** @enum {string} */
-    AddMovieMethod: "manual" | "list" | "collection";
+    AddMovieMethod: 'manual' | 'list' | 'collection';
     AddMovieOptions: {
       ignoreEpisodesWithFiles?: boolean;
       ignoreEpisodesWithoutFiles?: boolean;
-      monitor?: components["schemas"]["MonitorTypes"];
+      monitor?: components['schemas']['MonitorTypes'];
       searchForMovie?: boolean;
-      addMethod?: components["schemas"]["AddMovieMethod"];
+      addMethod?: components['schemas']['AddMovieMethod'];
     };
     AlternativeTitle: {
       /** Format: int32 */
       id?: number;
-      sourceType?: components["schemas"]["SourceType"];
+      sourceType?: components['schemas']['SourceType'];
       /** Format: int32 */
       movieMetadataId?: number;
       title?: string | null;
       cleanTitle?: string | null;
-      /** Format: int32 */
-      sourceId?: number;
-      /** Format: int32 */
-      votes?: number;
-      /** Format: int32 */
-      voteCount?: number;
-      language?: components["schemas"]["Language"];
     };
     AlternativeTitleResource: {
       /** Format: int32 */
       id?: number;
-      sourceType?: components["schemas"]["SourceType"];
+      sourceType?: components['schemas']['SourceType'];
       /** Format: int32 */
       movieMetadataId?: number;
       title?: string | null;
       cleanTitle?: string | null;
-      /** Format: int32 */
-      sourceId?: number;
-      /** Format: int32 */
-      votes?: number;
-      /** Format: int32 */
-      voteCount?: number;
-      language?: components["schemas"]["Language"];
     };
     ApiInfoResource: {
       current?: string | null;
-      deprecated?: (string)[] | null;
+      deprecated?: string[] | null;
     };
     /** @enum {string} */
-    ApplyTags: "add" | "remove" | "replace";
+    ApplyTags: 'add' | 'remove' | 'replace';
     /** @enum {string} */
-    AuthenticationType: "none" | "basic" | "forms";
+    AuthenticationRequiredType: 'enabled' | 'disabledForLocalAddresses';
+    /** @enum {string} */
+    AuthenticationType: 'none' | 'basic' | 'forms' | 'external';
+    AutoTaggingResource: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      removeTagsAutomatically?: boolean;
+      tags?: number[] | null;
+      specifications?:
+        | components['schemas']['AutoTaggingSpecificationSchema'][]
+        | null;
+    };
+    AutoTaggingSpecificationSchema: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      implementation?: string | null;
+      implementationName?: string | null;
+      negate?: boolean;
+      required?: boolean;
+      fields?: components['schemas']['Field'][] | null;
+    };
     BackupResource: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
       path?: string | null;
-      type?: components["schemas"]["BackupType"];
+      type?: components['schemas']['BackupType'];
       /** Format: int64 */
       size?: number;
       /** Format: date-time */
       time?: string;
     };
     /** @enum {string} */
-    BackupType: "scheduled" | "manual" | "update";
+    BackupType: 'scheduled' | 'manual' | 'update';
     BlocklistBulkResource: {
-      ids?: (number)[] | null;
+      ids?: number[] | null;
     };
     BlocklistResource: {
       /** Format: int32 */
@@ -3753,15 +4085,15 @@ export interface components {
       /** Format: int32 */
       movieId?: number;
       sourceTitle?: string | null;
-      languages?: (components["schemas"]["Language"])[] | null;
-      quality?: components["schemas"]["QualityModel"];
-      customFormats?: (components["schemas"]["CustomFormatResource"])[] | null;
+      languages?: components['schemas']['Language'][] | null;
+      quality?: components['schemas']['QualityModel'];
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
       /** Format: date-time */
       date?: string;
-      protocol?: components["schemas"]["DownloadProtocol"];
+      protocol?: components['schemas']['DownloadProtocol'];
       indexer?: string | null;
       message?: string | null;
-      movie?: components["schemas"]["MovieResource"];
+      movie?: components['schemas']['MovieResource'];
     };
     BlocklistResourcePagingResource: {
       /** Format: int32 */
@@ -3769,14 +4101,16 @@ export interface components {
       /** Format: int32 */
       pageSize?: number;
       sortKey?: string | null;
-      sortDirection?: components["schemas"]["SortDirection"];
-      filters?: (components["schemas"]["PagingResourceFilter"])[] | null;
+      sortDirection?: components['schemas']['SortDirection'];
       /** Format: int32 */
       totalRecords?: number;
-      records?: (components["schemas"]["BlocklistResource"])[] | null;
+      records?: components['schemas']['BlocklistResource'][] | null;
     };
     /** @enum {string} */
-    CertificateValidationType: "enabled" | "disabledForLocalAddresses" | "disabled";
+    CertificateValidationType:
+      | 'enabled'
+      | 'disabledForLocalAddresses'
+      | 'disabled';
     CollectionMovieResource: {
       /** Format: int32 */
       tmdbId?: number;
@@ -3784,14 +4118,15 @@ export interface components {
       title?: string | null;
       cleanTitle?: string | null;
       sortTitle?: string | null;
+      status?: components['schemas']['MovieStatusType'];
       overview?: string | null;
       /** Format: int32 */
       runtime?: number;
-      images?: (components["schemas"]["MediaCover"])[] | null;
+      images?: components['schemas']['MediaCover'][] | null;
       /** Format: int32 */
       year?: number;
-      ratings?: components["schemas"]["Ratings"];
-      genres?: (string)[] | null;
+      ratings?: components['schemas']['Ratings'];
+      genres?: string[] | null;
       folder?: string | null;
     };
     CollectionResource: {
@@ -3801,27 +4136,30 @@ export interface components {
       sortTitle?: string | null;
       /** Format: int32 */
       tmdbId?: number;
-      images?: (components["schemas"]["MediaCover"])[] | null;
+      images?: components['schemas']['MediaCover'][] | null;
       overview?: string | null;
       monitored?: boolean;
       rootFolderPath?: string | null;
       /** Format: int32 */
       qualityProfileId?: number;
       searchOnAdd?: boolean;
-      minimumAvailability?: components["schemas"]["MovieStatusType"];
-      movies?: (components["schemas"]["CollectionMovieResource"])[] | null;
+      minimumAvailability?: components['schemas']['MovieStatusType'];
+      movies?: components['schemas']['CollectionMovieResource'][] | null;
+      /** Format: int32 */
+      missingMovies?: number;
+      tags?: number[] | null;
     };
     CollectionUpdateResource: {
-      collectionIds?: (number)[] | null;
+      collectionIds?: number[] | null;
       monitored?: boolean | null;
       monitorMovies?: boolean | null;
       /** Format: int32 */
       qualityProfileId?: number | null;
       rootFolderPath?: string | null;
-      minimumAvailability?: components["schemas"]["MovieStatusType"];
+      minimumAvailability?: components['schemas']['MovieStatusType'];
     };
     /** @enum {string} */
-    ColonReplacementFormat: "delete" | "dash" | "spaceDash" | "spaceDashSpace";
+    ColonReplacementFormat: 'delete' | 'dash' | 'spaceDash' | 'spaceDashSpace';
     Command: {
       sendUpdatesToClient?: boolean;
       updateScheduledTask?: boolean;
@@ -3829,35 +4167,37 @@ export interface components {
       requiresDiskAccess?: boolean;
       isExclusive?: boolean;
       isTypeExclusive?: boolean;
+      isLongRunning?: boolean;
       name?: string | null;
       /** Format: date-time */
       lastExecutionTime?: string | null;
       /** Format: date-time */
       lastStartTime?: string | null;
-      trigger?: components["schemas"]["CommandTrigger"];
+      trigger?: components['schemas']['CommandTrigger'];
       suppressMessages?: boolean;
       clientUserAgent?: string | null;
     };
     /** @enum {string} */
-    CommandPriority: "normal" | "high" | "low";
+    CommandPriority: 'normal' | 'high' | 'low';
     CommandResource: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
       commandName?: string | null;
       message?: string | null;
-      body?: components["schemas"]["Command"];
-      priority?: components["schemas"]["CommandPriority"];
-      status?: components["schemas"]["CommandStatus"];
+      body?: components['schemas']['Command'];
+      priority?: components['schemas']['CommandPriority'];
+      status?: components['schemas']['CommandStatus'];
+      result?: components['schemas']['CommandResult'];
       /** Format: date-time */
       queued?: string;
       /** Format: date-time */
       started?: string | null;
       /** Format: date-time */
       ended?: string | null;
-      duration?: components["schemas"]["TimeSpan"];
+      duration?: components['schemas']['TimeSpan'];
       exception?: string | null;
-      trigger?: components["schemas"]["CommandTrigger"];
+      trigger?: components['schemas']['CommandTrigger'];
       clientUserAgent?: string | null;
       /** Format: date-time */
       stateChangeTime?: string | null;
@@ -3867,9 +4207,18 @@ export interface components {
       lastExecutionTime?: string | null;
     };
     /** @enum {string} */
-    CommandStatus: "queued" | "started" | "completed" | "failed" | "aborted" | "cancelled" | "orphaned";
+    CommandResult: 'unknown' | 'successful' | 'unsuccessful';
     /** @enum {string} */
-    CommandTrigger: "unspecified" | "manual" | "scheduled";
+    CommandStatus:
+      | 'queued'
+      | 'started'
+      | 'completed'
+      | 'failed'
+      | 'aborted'
+      | 'cancelled'
+      | 'orphaned';
+    /** @enum {string} */
+    CommandTrigger: 'unspecified' | 'manual' | 'scheduled';
     CreditResource: {
       /** Format: int32 */
       id?: number;
@@ -3879,31 +4228,35 @@ export interface components {
       personTmdbId?: number;
       /** Format: int32 */
       movieMetadataId?: number;
-      images?: (components["schemas"]["MediaCover"])[] | null;
+      images?: components['schemas']['MediaCover'][] | null;
       department?: string | null;
       job?: string | null;
       character?: string | null;
       /** Format: int32 */
       order?: number;
-      type?: components["schemas"]["CreditType"];
+      type?: components['schemas']['CreditType'];
     };
     /** @enum {string} */
-    CreditType: "cast" | "crew";
+    CreditType: 'cast' | 'crew';
     CustomFilterResource: {
       /** Format: int32 */
       id?: number;
       type?: string | null;
       label?: string | null;
-      filters?: (({
-          [key: string]: unknown | undefined;
-        })[]) | null;
+      filters?:
+        | {
+            [key: string]: unknown;
+          }[]
+        | null;
     };
     CustomFormatResource: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      includeCustomFormatWhenRenaming?: boolean;
-      specifications?: (components["schemas"]["CustomFormatSpecificationSchema"])[] | null;
+      includeCustomFormatWhenRenaming?: boolean | null;
+      specifications?:
+        | components['schemas']['CustomFormatSpecificationSchema'][]
+        | null;
     };
     CustomFormatSpecificationSchema: {
       /** Format: int32 */
@@ -3914,23 +4267,30 @@ export interface components {
       infoLink?: string | null;
       negate?: boolean;
       required?: boolean;
-      fields?: (components["schemas"]["Field"])[] | null;
-      presets?: (components["schemas"]["CustomFormatSpecificationSchema"])[] | null;
+      fields?: components['schemas']['Field'][] | null;
+      presets?:
+        | components['schemas']['CustomFormatSpecificationSchema'][]
+        | null;
     };
+    /** @enum {string} */
+    DatabaseType: 'sqLite' | 'postgreSQL';
     DelayProfileResource: {
       /** Format: int32 */
       id?: number;
       enableUsenet?: boolean;
       enableTorrent?: boolean;
-      preferredProtocol?: components["schemas"]["DownloadProtocol"];
+      preferredProtocol?: components['schemas']['DownloadProtocol'];
       /** Format: int32 */
       usenetDelay?: number;
       /** Format: int32 */
       torrentDelay?: number;
       bypassIfHighestQuality?: boolean;
+      bypassIfAboveCustomFormatScore?: boolean;
+      /** Format: int32 */
+      minimumCustomFormatScore?: number;
       /** Format: int32 */
       order?: number;
-      tags?: (number)[] | null;
+      tags?: number[] | null;
     };
     DiskSpaceResource: {
       /** Format: int32 */
@@ -3942,6 +4302,16 @@ export interface components {
       /** Format: int64 */
       totalSpace?: number;
     };
+    DownloadClientBulkResource: {
+      ids?: number[] | null;
+      tags?: number[] | null;
+      applyTags?: components['schemas']['ApplyTags'];
+      enable?: boolean | null;
+      /** Format: int32 */
+      priority?: number | null;
+      removeCompletedDownloads?: boolean | null;
+      removeFailedDownloads?: boolean | null;
+    };
     DownloadClientConfigResource: {
       /** Format: int32 */
       id?: number;
@@ -3950,28 +4320,29 @@ export interface components {
       /** Format: int32 */
       checkForFinishedDownloadInterval?: number;
       autoRedownloadFailed?: boolean;
+      autoRedownloadFailedFromInteractiveSearch?: boolean;
     };
     DownloadClientResource: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      fields?: (components["schemas"]["Field"])[] | null;
+      fields?: components['schemas']['Field'][] | null;
       implementationName?: string | null;
       implementation?: string | null;
       configContract?: string | null;
       infoLink?: string | null;
-      message?: components["schemas"]["ProviderMessage"];
-      tags?: (number)[] | null;
-      presets?: (components["schemas"]["DownloadClientResource"])[] | null;
+      message?: components['schemas']['ProviderMessage'];
+      tags?: number[] | null;
+      presets?: components['schemas']['DownloadClientResource'][] | null;
       enable?: boolean;
-      protocol?: components["schemas"]["DownloadProtocol"];
+      protocol?: components['schemas']['DownloadProtocol'];
       /** Format: int32 */
       priority?: number;
       removeCompletedDownloads?: boolean;
       removeFailedDownloads?: boolean;
     };
     /** @enum {string} */
-    DownloadProtocol: "unknown" | "usenet" | "torrent";
+    DownloadProtocol: 'unknown' | 'usenet' | 'torrent';
     ExtraFileResource: {
       /** Format: int32 */
       id?: number;
@@ -3981,10 +4352,10 @@ export interface components {
       movieFileId?: number | null;
       relativePath?: string | null;
       extension?: string | null;
-      type?: components["schemas"]["ExtraFileType"];
+      type?: components['schemas']['ExtraFileType'];
     };
     /** @enum {string} */
-    ExtraFileType: "subtitle" | "metadata" | "other";
+    ExtraFileType: 'subtitle' | 'metadata' | 'other';
     Field: {
       /** Format: int32 */
       order?: number;
@@ -3992,27 +4363,30 @@ export interface components {
       label?: string | null;
       unit?: string | null;
       helpText?: string | null;
+      helpTextWarning?: string | null;
       helpLink?: string | null;
       value?: Record<string, unknown> | null;
       type?: string | null;
       advanced?: boolean;
-      selectOptions?: (components["schemas"]["SelectOption"])[] | null;
+      selectOptions?: components['schemas']['SelectOption'][] | null;
       selectOptionsProviderAction?: string | null;
       section?: string | null;
       hidden?: string | null;
+      privacy?: components['schemas']['PrivacyLevel'];
       placeholder?: string | null;
+      isFloat?: boolean;
     };
     /** @enum {string} */
-    FileDateType: "none" | "cinemas" | "release";
+    FileDateType: 'none' | 'cinemas' | 'release';
     /** @enum {string} */
-    HealthCheckResult: "ok" | "notice" | "warning" | "error";
+    HealthCheckResult: 'ok' | 'notice' | 'warning' | 'error';
     HealthResource: {
       /** Format: int32 */
       id?: number;
       source?: string | null;
-      type?: components["schemas"]["HealthCheckResult"];
+      type?: components['schemas']['HealthCheckResult'];
       message?: string | null;
-      wikiUrl?: components["schemas"]["HttpUri"];
+      wikiUrl?: components['schemas']['HttpUri'];
     };
     HistoryResource: {
       /** Format: int32 */
@@ -4020,18 +4394,20 @@ export interface components {
       /** Format: int32 */
       movieId?: number;
       sourceTitle?: string | null;
-      languages?: (components["schemas"]["Language"])[] | null;
-      quality?: components["schemas"]["QualityModel"];
-      customFormats?: (components["schemas"]["CustomFormatResource"])[] | null;
+      languages?: components['schemas']['Language'][] | null;
+      quality?: components['schemas']['QualityModel'];
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
+      /** Format: int32 */
+      customFormatScore?: number;
       qualityCutoffNotMet?: boolean;
       /** Format: date-time */
       date?: string;
       downloadId?: string | null;
-      eventType?: components["schemas"]["MovieHistoryEventType"];
-      data?: ({
-        [key: string]: (string | null) | undefined;
-      }) | null;
-      movie?: components["schemas"]["MovieResource"];
+      eventType?: components['schemas']['MovieHistoryEventType'];
+      data?: {
+        [key: string]: string | null;
+      } | null;
+      movie?: components['schemas']['MovieResource'];
     };
     HistoryResourcePagingResource: {
       /** Format: int32 */
@@ -4039,11 +4415,10 @@ export interface components {
       /** Format: int32 */
       pageSize?: number;
       sortKey?: string | null;
-      sortDirection?: components["schemas"]["SortDirection"];
-      filters?: (components["schemas"]["PagingResourceFilter"])[] | null;
+      sortDirection?: components['schemas']['SortDirection'];
       /** Format: int32 */
       totalRecords?: number;
-      records?: (components["schemas"]["HistoryResource"])[] | null;
+      records?: components['schemas']['HistoryResource'][] | null;
     };
     HostConfigResource: {
       /** Format: int32 */
@@ -4055,7 +4430,8 @@ export interface components {
       sslPort?: number;
       enableSsl?: boolean;
       launchBrowser?: boolean;
-      authenticationMethod?: components["schemas"]["AuthenticationType"];
+      authenticationMethod?: components['schemas']['AuthenticationType'];
+      authenticationRequired?: components['schemas']['AuthenticationRequiredType'];
       analyticsEnabled?: boolean;
       username?: string | null;
       password?: string | null;
@@ -4069,10 +4445,10 @@ export interface components {
       instanceName?: string | null;
       applicationUrl?: string | null;
       updateAutomatically?: boolean;
-      updateMechanism?: components["schemas"]["UpdateMechanism"];
+      updateMechanism?: components['schemas']['UpdateMechanism'];
       updateScriptPath?: string | null;
       proxyEnabled?: boolean;
-      proxyType?: components["schemas"]["ProxyType"];
+      proxyType?: components['schemas']['ProxyType'];
       proxyHostname?: string | null;
       /** Format: int32 */
       proxyPort?: number;
@@ -4080,7 +4456,7 @@ export interface components {
       proxyPassword?: string | null;
       proxyBypassFilter?: string | null;
       proxyBypassLocalAddresses?: boolean;
-      certificateValidation?: components["schemas"]["CertificateValidationType"];
+      certificateValidation?: components['schemas']['CertificateValidationType'];
       backupFolder?: string | null;
       /** Format: int32 */
       backupInterval?: number;
@@ -4101,25 +4477,32 @@ export interface components {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      fields?: (components["schemas"]["Field"])[] | null;
+      fields?: components['schemas']['Field'][] | null;
       implementationName?: string | null;
       implementation?: string | null;
       configContract?: string | null;
       infoLink?: string | null;
-      message?: components["schemas"]["ProviderMessage"];
-      tags?: (number)[] | null;
-      presets?: (components["schemas"]["ImportExclusionsResource"])[] | null;
+      message?: components['schemas']['ProviderMessage'];
+      tags?: number[] | null;
+      presets?: components['schemas']['ImportExclusionsResource'][] | null;
       /** Format: int32 */
       tmdbId?: number;
       movieTitle?: string | null;
       /** Format: int32 */
       movieYear?: number;
     };
+    ImportListBulkResource: {
+      ids?: number[] | null;
+      tags?: number[] | null;
+      applyTags?: components['schemas']['ApplyTags'];
+      enableAuto?: boolean | null;
+      rootFolderPath?: string | null;
+      /** Format: int32 */
+      qualityProfileId?: number | null;
+    };
     ImportListConfigResource: {
       /** Format: int32 */
       id?: number;
-      /** Format: int32 */
-      importListSyncInterval?: number;
       listSyncLevel?: string | null;
       importExclusions?: string | null;
     };
@@ -4127,28 +4510,46 @@ export interface components {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      fields?: (components["schemas"]["Field"])[] | null;
+      fields?: components['schemas']['Field'][] | null;
       implementationName?: string | null;
       implementation?: string | null;
       configContract?: string | null;
       infoLink?: string | null;
-      message?: components["schemas"]["ProviderMessage"];
-      tags?: (number)[] | null;
-      presets?: (components["schemas"]["ImportListResource"])[] | null;
+      message?: components['schemas']['ProviderMessage'];
+      tags?: number[] | null;
+      presets?: components['schemas']['ImportListResource'][] | null;
       enabled?: boolean;
       enableAuto?: boolean;
-      monitor?: components["schemas"]["MonitorTypes"];
+      monitor?: components['schemas']['MonitorTypes'];
       rootFolderPath?: string | null;
       /** Format: int32 */
       qualityProfileId?: number;
       searchOnAdd?: boolean;
-      minimumAvailability?: components["schemas"]["MovieStatusType"];
-      listType?: components["schemas"]["ImportListType"];
+      minimumAvailability?: components['schemas']['MovieStatusType'];
+      listType?: components['schemas']['ImportListType'];
       /** Format: int32 */
       listOrder?: number;
+      minRefreshInterval?: components['schemas']['TimeSpan'];
     };
     /** @enum {string} */
-    ImportListType: "program" | "tmdb" | "trakt" | "plex" | "other" | "advanced";
+    ImportListType:
+      | 'program'
+      | 'tmdb'
+      | 'trakt'
+      | 'plex'
+      | 'simkl'
+      | 'other'
+      | 'advanced';
+    IndexerBulkResource: {
+      ids?: number[] | null;
+      tags?: number[] | null;
+      applyTags?: components['schemas']['ApplyTags'];
+      enableRss?: boolean | null;
+      enableAutomaticSearch?: boolean | null;
+      enableInteractiveSearch?: boolean | null;
+      /** Format: int32 */
+      priority?: number | null;
+    };
     IndexerConfigResource: {
       /** Format: int32 */
       id?: number;
@@ -4176,20 +4577,20 @@ export interface components {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      fields?: (components["schemas"]["Field"])[] | null;
+      fields?: components['schemas']['Field'][] | null;
       implementationName?: string | null;
       implementation?: string | null;
       configContract?: string | null;
       infoLink?: string | null;
-      message?: components["schemas"]["ProviderMessage"];
-      tags?: (number)[] | null;
-      presets?: (components["schemas"]["IndexerResource"])[] | null;
+      message?: components['schemas']['ProviderMessage'];
+      tags?: number[] | null;
+      presets?: components['schemas']['IndexerResource'][] | null;
       enableRss?: boolean;
       enableAutomaticSearch?: boolean;
       enableInteractiveSearch?: boolean;
       supportsRss?: boolean;
       supportsSearch?: boolean;
-      protocol?: components["schemas"]["DownloadProtocol"];
+      protocol?: components['schemas']['DownloadProtocol'];
       /** Format: int32 */
       priority?: number;
       /** Format: int32 */
@@ -4205,6 +4606,9 @@ export interface components {
       id?: number;
       name?: string | null;
       nameLower?: string | null;
+    };
+    LocalizationLanguageResource: {
+      identifier?: string | null;
     };
     LogFileResource: {
       /** Format: int32 */
@@ -4233,11 +4637,10 @@ export interface components {
       /** Format: int32 */
       pageSize?: number;
       sortKey?: string | null;
-      sortDirection?: components["schemas"]["SortDirection"];
-      filters?: (components["schemas"]["PagingResourceFilter"])[] | null;
+      sortDirection?: components['schemas']['SortDirection'];
       /** Format: int32 */
       totalRecords?: number;
-      records?: (components["schemas"]["LogResource"])[] | null;
+      records?: components['schemas']['LogResource'][] | null;
     };
     ManualImportReprocessResource: {
       /** Format: int32 */
@@ -4245,12 +4648,15 @@ export interface components {
       path?: string | null;
       /** Format: int32 */
       movieId?: number;
-      movie?: components["schemas"]["MovieResource"];
-      quality?: components["schemas"]["QualityModel"];
-      languages?: (components["schemas"]["Language"])[] | null;
+      movie?: components['schemas']['MovieResource'];
+      quality?: components['schemas']['QualityModel'];
+      languages?: components['schemas']['Language'][] | null;
       releaseGroup?: string | null;
       downloadId?: string | null;
-      rejections?: (components["schemas"]["Rejection"])[] | null;
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
+      /** Format: int32 */
+      customFormatScore?: number;
+      rejections?: components['schemas']['Rejection'][] | null;
     };
     ManualImportResource: {
       /** Format: int32 */
@@ -4261,22 +4667,32 @@ export interface components {
       name?: string | null;
       /** Format: int64 */
       size?: number;
-      movie?: components["schemas"]["MovieResource"];
-      quality?: components["schemas"]["QualityModel"];
-      languages?: (components["schemas"]["Language"])[] | null;
+      movie?: components['schemas']['MovieResource'];
+      quality?: components['schemas']['QualityModel'];
+      languages?: components['schemas']['Language'][] | null;
       releaseGroup?: string | null;
       /** Format: int32 */
       qualityWeight?: number;
       downloadId?: string | null;
-      rejections?: (components["schemas"]["Rejection"])[] | null;
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
+      /** Format: int32 */
+      customFormatScore?: number;
+      rejections?: components['schemas']['Rejection'][] | null;
     };
     MediaCover: {
-      coverType?: components["schemas"]["MediaCoverTypes"];
+      coverType?: components['schemas']['MediaCoverTypes'];
       url?: string | null;
       remoteUrl?: string | null;
     };
     /** @enum {string} */
-    MediaCoverTypes: "unknown" | "poster" | "banner" | "fanart" | "screenshot" | "headshot";
+    MediaCoverTypes:
+      | 'unknown'
+      | 'poster'
+      | 'banner'
+      | 'fanart'
+      | 'screenshot'
+      | 'headshot'
+      | 'clearlogo';
     MediaInfoResource: {
       /** Format: int32 */
       id?: number;
@@ -4293,9 +4709,10 @@ export interface components {
       /** Format: int64 */
       videoBitrate?: number;
       videoCodec?: string | null;
-      videoDynamicRangeType?: string | null;
       /** Format: double */
       videoFps?: number;
+      videoDynamicRange?: string | null;
+      videoDynamicRangeType?: string | null;
       resolution?: string | null;
       runTime?: string | null;
       scanType?: string | null;
@@ -4308,11 +4725,11 @@ export interface components {
       recycleBin?: string | null;
       /** Format: int32 */
       recycleBinCleanupDays?: number;
-      downloadPropersAndRepacks?: components["schemas"]["ProperDownloadTypes"];
+      downloadPropersAndRepacks?: components['schemas']['ProperDownloadTypes'];
       createEmptyMovieFolders?: boolean;
       deleteEmptyFolders?: boolean;
-      fileDate?: components["schemas"]["FileDateType"];
-      rescanAfterRefresh?: components["schemas"]["RescanAfterRefreshType"];
+      fileDate?: components['schemas']['FileDateType'];
+      rescanAfterRefresh?: components['schemas']['RescanAfterRefreshType'];
       autoRenameFolders?: boolean;
       pathsDefaultStatic?: boolean;
       setPermissionsLinux?: boolean;
@@ -4322,6 +4739,8 @@ export interface components {
       /** Format: int32 */
       minimumFreeSpaceWhenImporting?: number;
       copyUsingHardlinks?: boolean;
+      useScriptImport?: boolean;
+      scriptImportPath?: string | null;
       importExtraFiles?: boolean;
       extraFileExtensions?: string | null;
       enableMediaInfo?: boolean;
@@ -4329,26 +4748,26 @@ export interface components {
     MetadataConfigResource: {
       /** Format: int32 */
       id?: number;
-      certificationCountry?: components["schemas"]["TMDbCountryCode"];
+      certificationCountry?: components['schemas']['TMDbCountryCode'];
     };
     MetadataResource: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      fields?: (components["schemas"]["Field"])[] | null;
+      fields?: components['schemas']['Field'][] | null;
       implementationName?: string | null;
       implementation?: string | null;
       configContract?: string | null;
       infoLink?: string | null;
-      message?: components["schemas"]["ProviderMessage"];
-      tags?: (number)[] | null;
-      presets?: (components["schemas"]["MetadataResource"])[] | null;
+      message?: components['schemas']['ProviderMessage'];
+      tags?: number[] | null;
+      presets?: components['schemas']['MetadataResource'][] | null;
       enable?: boolean;
     };
     /** @enum {string} */
-    Modifier: "none" | "regional" | "screener" | "rawhd" | "brdisk" | "remux";
+    Modifier: 'none' | 'regional' | 'screener' | 'rawhd' | 'brdisk' | 'remux';
     /** @enum {string} */
-    MonitorTypes: "movieOnly" | "movieAndCollection" | "none";
+    MonitorTypes: 'movieOnly' | 'movieAndCollection' | 'none';
     MovieCollection: {
       /** Format: int32 */
       id?: number;
@@ -4363,31 +4782,32 @@ export interface components {
       qualityProfileId?: number;
       rootFolderPath?: string | null;
       searchOnAdd?: boolean;
-      minimumAvailability?: components["schemas"]["MovieStatusType"];
+      minimumAvailability?: components['schemas']['MovieStatusType'];
       /** Format: date-time */
       lastInfoSync?: string | null;
-      images?: (components["schemas"]["MediaCover"])[] | null;
+      images?: components['schemas']['MediaCover'][] | null;
       /** Format: date-time */
       added?: string;
-      movies?: (components["schemas"]["MovieMetadata"])[] | null;
+      movies?: components['schemas']['MovieMetadata'][] | null;
+      tags?: number[] | null;
     };
     MovieEditorResource: {
-      movieIds?: (number)[] | null;
+      movieIds?: number[] | null;
       monitored?: boolean | null;
       /** Format: int32 */
       qualityProfileId?: number | null;
-      minimumAvailability?: components["schemas"]["MovieStatusType"];
+      minimumAvailability?: components['schemas']['MovieStatusType'];
       rootFolderPath?: string | null;
-      tags?: (number)[] | null;
-      applyTags?: components["schemas"]["ApplyTags"];
+      tags?: number[] | null;
+      applyTags?: components['schemas']['ApplyTags'];
       moveFiles?: boolean;
       deleteFiles?: boolean;
       addImportExclusion?: boolean;
     };
     MovieFileListResource: {
-      movieFileIds?: (number)[] | null;
-      languages?: (components["schemas"]["Language"])[] | null;
-      quality?: components["schemas"]["QualityModel"];
+      movieFileIds?: number[] | null;
+      languages?: components['schemas']['Language'][] | null;
+      quality?: components['schemas']['QualityModel'];
       edition?: string | null;
       releaseGroup?: string | null;
       sceneName?: string | null;
@@ -4408,24 +4828,34 @@ export interface components {
       sceneName?: string | null;
       /** Format: int32 */
       indexerFlags?: number;
-      quality?: components["schemas"]["QualityModel"];
-      customFormats?: (components["schemas"]["CustomFormatResource"])[] | null;
-      mediaInfo?: components["schemas"]["MediaInfoResource"];
+      quality?: components['schemas']['QualityModel'];
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
+      /** Format: int32 */
+      customFormatScore?: number;
+      mediaInfo?: components['schemas']['MediaInfoResource'];
       originalFilePath?: string | null;
       qualityCutoffNotMet?: boolean;
-      languages?: (components["schemas"]["Language"])[] | null;
+      languages?: components['schemas']['Language'][] | null;
       releaseGroup?: string | null;
       edition?: string | null;
     };
     /** @enum {string} */
-    MovieHistoryEventType: "unknown" | "grabbed" | "downloadFolderImported" | "downloadFailed" | "movieFileDeleted" | "movieFolderImported" | "movieFileRenamed" | "downloadIgnored";
+    MovieHistoryEventType:
+      | 'unknown'
+      | 'grabbed'
+      | 'downloadFolderImported'
+      | 'downloadFailed'
+      | 'movieFileDeleted'
+      | 'movieFolderImported'
+      | 'movieFileRenamed'
+      | 'downloadIgnored';
     MovieMetadata: {
       /** Format: int32 */
       id?: number;
       /** Format: int32 */
       tmdbId?: number;
-      images?: (components["schemas"]["MediaCover"])[] | null;
-      genres?: (string)[] | null;
+      images?: components['schemas']['MediaCover'][] | null;
+      genres?: string[] | null;
       /** Format: date-time */
       inCinemas?: string | null;
       /** Format: date-time */
@@ -4435,7 +4865,7 @@ export interface components {
       certification?: string | null;
       /** Format: int32 */
       year?: number;
-      ratings?: components["schemas"]["Ratings"];
+      ratings?: components['schemas']['Ratings'];
       /** Format: int32 */
       collectionTmdbId?: number;
       collectionTitle?: string | null;
@@ -4448,18 +4878,18 @@ export interface components {
       title?: string | null;
       cleanTitle?: string | null;
       sortTitle?: string | null;
-      status?: components["schemas"]["MovieStatusType"];
+      status?: components['schemas']['MovieStatusType'];
       overview?: string | null;
-      alternativeTitles?: (components["schemas"]["AlternativeTitle"])[] | null;
-      translations?: (components["schemas"]["MovieTranslation"])[] | null;
+      alternativeTitles?: components['schemas']['AlternativeTitle'][] | null;
+      translations?: components['schemas']['MovieTranslation'][] | null;
       /** Format: int32 */
       secondaryYear?: number | null;
       youTubeTrailerId?: string | null;
       studio?: string | null;
       originalTitle?: string | null;
       cleanOriginalTitle?: string | null;
-      originalLanguage?: components["schemas"]["Language"];
-      recommendations?: (number)[] | null;
+      originalLanguage?: components['schemas']['Language'];
+      recommendations?: number[] | null;
       /** Format: float */
       popularity?: number;
       isRecentMovie?: boolean;
@@ -4469,8 +4899,10 @@ export interface components {
       id?: number;
       title?: string | null;
       originalTitle?: string | null;
-      originalLanguage?: components["schemas"]["Language"];
-      alternateTitles?: (components["schemas"]["AlternativeTitleResource"])[] | null;
+      originalLanguage?: components['schemas']['Language'];
+      alternateTitles?:
+        | components['schemas']['AlternativeTitleResource'][]
+        | null;
       /** Format: int32 */
       secondaryYear?: number | null;
       /** Format: int32 */
@@ -4478,7 +4910,7 @@ export interface components {
       sortTitle?: string | null;
       /** Format: int64 */
       sizeOnDisk?: number | null;
-      status?: components["schemas"]["MovieStatusType"];
+      status?: components['schemas']['MovieStatusType'];
       overview?: string | null;
       /** Format: date-time */
       inCinemas?: string | null;
@@ -4487,7 +4919,7 @@ export interface components {
       /** Format: date-time */
       digitalRelease?: string | null;
       physicalReleaseNote?: string | null;
-      images?: (components["schemas"]["MediaCover"])[] | null;
+      images?: components['schemas']['MediaCover'][] | null;
       website?: string | null;
       remotePoster?: string | null;
       /** Format: int32 */
@@ -4499,7 +4931,7 @@ export interface components {
       /** Format: int32 */
       qualityProfileId?: number;
       monitored?: boolean;
-      minimumAvailability?: components["schemas"]["MovieStatusType"];
+      minimumAvailability?: components['schemas']['MovieStatusType'];
       isAvailable?: boolean;
       folderName?: string | null;
       /** Format: int32 */
@@ -4512,21 +4944,21 @@ export interface components {
       rootFolderPath?: string | null;
       folder?: string | null;
       certification?: string | null;
-      genres?: (string)[] | null;
-      tags?: (number)[] | null;
+      genres?: string[] | null;
+      tags?: number[] | null;
       /** Format: date-time */
       added?: string;
-      addOptions?: components["schemas"]["AddMovieOptions"];
-      ratings?: components["schemas"]["Ratings"];
-      movieFile?: components["schemas"]["MovieFileResource"];
-      collection?: components["schemas"]["MovieCollection"];
+      addOptions?: components['schemas']['AddMovieOptions'];
+      ratings?: components['schemas']['Ratings'];
+      movieFile?: components['schemas']['MovieFileResource'];
+      collection?: components['schemas']['MovieCollection'];
       /** Format: float */
       popularity?: number;
     };
     /** @enum {string} */
-    MovieRuntimeFormatType: "hoursMinutes" | "minutes";
+    MovieRuntimeFormatType: 'hoursMinutes' | 'minutes';
     /** @enum {string} */
-    MovieStatusType: "tba" | "announced" | "inCinemas" | "released" | "deleted";
+    MovieStatusType: 'tba' | 'announced' | 'inCinemas' | 'released' | 'deleted';
     MovieTranslation: {
       /** Format: int32 */
       id?: number;
@@ -4535,14 +4967,14 @@ export interface components {
       title?: string | null;
       cleanTitle?: string | null;
       overview?: string | null;
-      language?: components["schemas"]["Language"];
+      language?: components['schemas']['Language'];
     };
     NamingConfigResource: {
       /** Format: int32 */
       id?: number;
       renameMovies?: boolean;
       replaceIllegalCharacters?: boolean;
-      colonReplacementFormat?: components["schemas"]["ColonReplacementFormat"];
+      colonReplacementFormat?: components['schemas']['ColonReplacementFormat'];
       standardMovieFormat?: string | null;
       movieFolderFormat?: string | null;
       includeQuality?: boolean;
@@ -4554,14 +4986,14 @@ export interface components {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      fields?: (components["schemas"]["Field"])[] | null;
+      fields?: components['schemas']['Field'][] | null;
       implementationName?: string | null;
       implementation?: string | null;
       configContract?: string | null;
       infoLink?: string | null;
-      message?: components["schemas"]["ProviderMessage"];
-      tags?: (number)[] | null;
-      presets?: (components["schemas"]["NotificationResource"])[] | null;
+      message?: components['schemas']['ProviderMessage'];
+      tags?: number[] | null;
+      presets?: components['schemas']['NotificationResource'][] | null;
       link?: string | null;
       onGrab?: boolean;
       onDownload?: boolean;
@@ -4572,7 +5004,9 @@ export interface components {
       onMovieFileDelete?: boolean;
       onMovieFileDeleteForUpgrade?: boolean;
       onHealthIssue?: boolean;
+      onHealthRestored?: boolean;
       onApplicationUpdate?: boolean;
+      onManualInteractionRequired?: boolean;
       supportsOnGrab?: boolean;
       supportsOnDownload?: boolean;
       supportsOnUpgrade?: boolean;
@@ -4582,28 +5016,30 @@ export interface components {
       supportsOnMovieFileDelete?: boolean;
       supportsOnMovieFileDeleteForUpgrade?: boolean;
       supportsOnHealthIssue?: boolean;
+      supportsOnHealthRestored?: boolean;
       supportsOnApplicationUpdate?: boolean;
+      supportsOnManualInteractionRequired?: boolean;
       includeHealthWarnings?: boolean;
       testCommand?: string | null;
-    };
-    PagingResourceFilter: {
-      key?: string | null;
-      value?: string | null;
     };
     ParseResource: {
       /** Format: int32 */
       id?: number;
       title?: string | null;
-      parsedMovieInfo?: components["schemas"]["ParsedMovieInfo"];
-      movie?: components["schemas"]["MovieResource"];
+      parsedMovieInfo?: components['schemas']['ParsedMovieInfo'];
+      movie?: components['schemas']['MovieResource'];
+      languages?: components['schemas']['Language'][] | null;
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
+      /** Format: int32 */
+      customFormatScore?: number;
     };
     ParsedMovieInfo: {
-      movieTitles?: (string)[] | null;
+      movieTitles?: string[] | null;
       originalTitle?: string | null;
       releaseTitle?: string | null;
       simpleReleaseTitle?: string | null;
-      quality?: components["schemas"]["QualityModel"];
-      languages?: (components["schemas"]["Language"])[] | null;
+      quality?: components['schemas']['QualityModel'];
+      languages?: components['schemas']['Language'][] | null;
       releaseGroup?: string | null;
       releaseHash?: string | null;
       edition?: string | null;
@@ -4612,12 +5048,15 @@ export interface components {
       imdbId?: string | null;
       /** Format: int32 */
       tmdbId?: number;
-      extraInfo?: ({
-        [key: string]: (Record<string, unknown> | null) | undefined;
-      }) | null;
+      hardcodedSubs?: string | null;
       movieTitle?: string | null;
       primaryMovieTitle?: string | null;
     };
+    PingResource: {
+      status?: string | null;
+    };
+    /** @enum {string} */
+    PrivacyLevel: 'normal' | 'password' | 'apiKey' | 'userName';
     ProfileFormatItemResource: {
       /** Format: int32 */
       id?: number;
@@ -4628,28 +5067,28 @@ export interface components {
       score?: number;
     };
     /** @enum {string} */
-    ProperDownloadTypes: "preferAndUpgrade" | "doNotUpgrade" | "doNotPrefer";
+    ProperDownloadTypes: 'preferAndUpgrade' | 'doNotUpgrade' | 'doNotPrefer';
     ProviderMessage: {
       message?: string | null;
-      type?: components["schemas"]["ProviderMessageType"];
+      type?: components['schemas']['ProviderMessageType'];
     };
     /** @enum {string} */
-    ProviderMessageType: "info" | "warning" | "error";
+    ProviderMessageType: 'info' | 'warning' | 'error';
     /** @enum {string} */
-    ProxyType: "http" | "socks4" | "socks5";
+    ProxyType: 'http' | 'socks4' | 'socks5';
     Quality: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      source?: components["schemas"]["Source"];
+      source?: components['schemas']['QualitySource'];
       /** Format: int32 */
       resolution?: number;
-      modifier?: components["schemas"]["Modifier"];
+      modifier?: components['schemas']['Modifier'];
     };
     QualityDefinitionResource: {
       /** Format: int32 */
       id?: number;
-      quality?: components["schemas"]["Quality"];
+      quality?: components['schemas']['Quality'];
       title?: string | null;
       /** Format: int32 */
       weight?: number;
@@ -4661,16 +5100,17 @@ export interface components {
       preferredSize?: number | null;
     };
     QualityModel: {
-      quality?: components["schemas"]["Quality"];
-      revision?: components["schemas"]["Revision"];
-      hardcodedSubs?: string | null;
+      quality?: components['schemas']['Quality'];
+      revision?: components['schemas']['Revision'];
     };
     QualityProfileQualityItemResource: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      quality?: components["schemas"]["Quality"];
-      items?: (components["schemas"]["QualityProfileQualityItemResource"])[] | null;
+      quality?: components['schemas']['Quality'];
+      items?:
+        | components['schemas']['QualityProfileQualityItemResource'][]
+        | null;
       allowed?: boolean;
     };
     QualityProfileResource: {
@@ -4680,41 +5120,59 @@ export interface components {
       upgradeAllowed?: boolean;
       /** Format: int32 */
       cutoff?: number;
-      items?: (components["schemas"]["QualityProfileQualityItemResource"])[] | null;
+      items?:
+        | components['schemas']['QualityProfileQualityItemResource'][]
+        | null;
       /** Format: int32 */
       minFormatScore?: number;
       /** Format: int32 */
       cutoffFormatScore?: number;
-      formatItems?: (components["schemas"]["ProfileFormatItemResource"])[] | null;
-      language?: components["schemas"]["Language"];
+      formatItems?: components['schemas']['ProfileFormatItemResource'][] | null;
+      language?: components['schemas']['Language'];
     };
+    /** @enum {string} */
+    QualitySource:
+      | 'unknown'
+      | 'cam'
+      | 'telesync'
+      | 'telecine'
+      | 'workprint'
+      | 'dvd'
+      | 'tv'
+      | 'webdl'
+      | 'webrip'
+      | 'bluray';
     QueueBulkResource: {
-      ids?: (number)[] | null;
+      ids?: number[] | null;
     };
     QueueResource: {
       /** Format: int32 */
       id?: number;
       /** Format: int32 */
       movieId?: number | null;
-      movie?: components["schemas"]["MovieResource"];
-      languages?: (components["schemas"]["Language"])[] | null;
-      quality?: components["schemas"]["QualityModel"];
-      customFormats?: (components["schemas"]["CustomFormatResource"])[] | null;
+      movie?: components['schemas']['MovieResource'];
+      languages?: components['schemas']['Language'][] | null;
+      quality?: components['schemas']['QualityModel'];
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
+      /** Format: int32 */
+      customFormatScore?: number;
       /** Format: double */
       size?: number;
       title?: string | null;
       /** Format: double */
       sizeleft?: number;
-      timeleft?: components["schemas"]["TimeSpan"];
+      timeleft?: components['schemas']['TimeSpan'];
       /** Format: date-time */
       estimatedCompletionTime?: string | null;
       status?: string | null;
-      trackedDownloadStatus?: components["schemas"]["TrackedDownloadStatus"];
-      trackedDownloadState?: components["schemas"]["TrackedDownloadState"];
-      statusMessages?: (components["schemas"]["TrackedDownloadStatusMessage"])[] | null;
+      trackedDownloadStatus?: components['schemas']['TrackedDownloadStatus'];
+      trackedDownloadState?: components['schemas']['TrackedDownloadState'];
+      statusMessages?:
+        | components['schemas']['TrackedDownloadStatusMessage'][]
+        | null;
       errorMessage?: string | null;
       downloadId?: string | null;
-      protocol?: components["schemas"]["DownloadProtocol"];
+      protocol?: components['schemas']['DownloadProtocol'];
       downloadClient?: string | null;
       indexer?: string | null;
       outputPath?: string | null;
@@ -4725,11 +5183,10 @@ export interface components {
       /** Format: int32 */
       pageSize?: number;
       sortKey?: string | null;
-      sortDirection?: components["schemas"]["SortDirection"];
-      filters?: (components["schemas"]["PagingResourceFilter"])[] | null;
+      sortDirection?: components['schemas']['SortDirection'];
       /** Format: int32 */
       totalRecords?: number;
-      records?: (components["schemas"]["QueueResource"])[] | null;
+      records?: components['schemas']['QueueResource'][] | null;
     };
     QueueStatusResource: {
       /** Format: int32 */
@@ -4750,28 +5207,39 @@ export interface components {
       votes?: number;
       /** Format: double */
       value?: number;
-      type?: components["schemas"]["RatingType"];
+      type?: components['schemas']['RatingType'];
     };
     /** @enum {string} */
-    RatingType: "user" | "critic";
+    RatingType: 'user' | 'critic';
     Ratings: {
-      imdb?: components["schemas"]["RatingChild"];
-      tmdb?: components["schemas"]["RatingChild"];
-      metacritic?: components["schemas"]["RatingChild"];
-      rottenTomatoes?: components["schemas"]["RatingChild"];
+      imdb?: components['schemas']['RatingChild'];
+      tmdb?: components['schemas']['RatingChild'];
+      metacritic?: components['schemas']['RatingChild'];
+      rottenTomatoes?: components['schemas']['RatingChild'];
     };
     Rejection: {
       reason?: string | null;
-      type?: components["schemas"]["RejectionType"];
+      type?: components['schemas']['RejectionType'];
     };
     /** @enum {string} */
-    RejectionType: "permanent" | "temporary";
+    RejectionType: 'permanent' | 'temporary';
+    ReleaseProfileResource: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      enabled?: boolean;
+      required?: Record<string, unknown> | null;
+      ignored?: Record<string, unknown> | null;
+      /** Format: int32 */
+      indexerId?: number;
+      tags?: number[] | null;
+    };
     ReleaseResource: {
       /** Format: int32 */
       id?: number;
       guid?: string | null;
-      quality?: components["schemas"]["QualityModel"];
-      customFormats?: (components["schemas"]["CustomFormatResource"])[] | null;
+      quality?: components['schemas']['QualityModel'];
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
       /** Format: int32 */
       customFormatScore?: number;
       /** Format: int32 */
@@ -4792,8 +5260,10 @@ export interface components {
       releaseHash?: string | null;
       title?: string | null;
       sceneSource?: boolean;
-      movieTitles?: (string)[] | null;
-      languages?: (components["schemas"]["Language"])[] | null;
+      movieTitles?: string[] | null;
+      languages?: components['schemas']['Language'][] | null;
+      /** Format: int32 */
+      mappedMovieId?: number | null;
       approved?: boolean;
       temporarilyRejected?: boolean;
       rejected?: boolean;
@@ -4801,7 +5271,7 @@ export interface components {
       tmdbId?: number;
       /** Format: int32 */
       imdbId?: number;
-      rejections?: (string)[] | null;
+      rejections?: string[] | null;
       /** Format: date-time */
       publishDate?: string;
       commentUrl?: string | null;
@@ -4810,7 +5280,7 @@ export interface components {
       downloadAllowed?: boolean;
       /** Format: int32 */
       releaseWeight?: number;
-      indexerFlags?: (string)[] | null;
+      indexerFlags?: string[] | null;
       edition?: string | null;
       magnetUrl?: string | null;
       infoHash?: string | null;
@@ -4818,9 +5288,12 @@ export interface components {
       seeders?: number | null;
       /** Format: int32 */
       leechers?: number | null;
-      protocol?: components["schemas"]["DownloadProtocol"];
+      protocol?: components['schemas']['DownloadProtocol'];
       /** Format: int32 */
       movieId?: number | null;
+      /** Format: int32 */
+      downloadClientId?: number | null;
+      shouldOverride?: boolean | null;
     };
     RemotePathMappingResource: {
       /** Format: int32 */
@@ -4840,15 +5313,7 @@ export interface components {
       newPath?: string | null;
     };
     /** @enum {string} */
-    RescanAfterRefreshType: "always" | "afterManual" | "never";
-    RestrictionResource: {
-      /** Format: int32 */
-      id?: number;
-      required?: string | null;
-      preferred?: string | null;
-      ignored?: string | null;
-      tags?: (number)[] | null;
-    };
+    RescanAfterRefreshType: 'always' | 'afterManual' | 'never';
     Revision: {
       /** Format: int32 */
       version?: number;
@@ -4863,8 +5328,10 @@ export interface components {
       accessible?: boolean;
       /** Format: int64 */
       freeSpace?: number | null;
-      unmappedFolders?: (components["schemas"]["UnmappedFolder"])[] | null;
+      unmappedFolders?: components['schemas']['UnmappedFolder'][] | null;
     };
+    /** @enum {string} */
+    RuntimeMode: 'console' | 'service' | 'tray';
     SelectOption: {
       /** Format: int32 */
       value?: number;
@@ -4875,23 +5342,70 @@ export interface components {
       dividerAfter?: boolean;
     };
     /** @enum {string} */
-    SortDirection: "default" | "ascending" | "descending";
+    SortDirection: 'default' | 'ascending' | 'descending';
     /** @enum {string} */
-    Source: "unknown" | "cam" | "telesync" | "telecine" | "workprint" | "dvd" | "tv" | "webdl" | "webrip" | "bluray";
+    SourceType: 'tmdb' | 'mappings' | 'user' | 'indexer';
+    SystemResource: {
+      appName?: string | null;
+      instanceName?: string | null;
+      version?: string | null;
+      /** Format: date-time */
+      buildTime?: string;
+      isDebug?: boolean;
+      isProduction?: boolean;
+      isAdmin?: boolean;
+      isUserInteractive?: boolean;
+      startupPath?: string | null;
+      appData?: string | null;
+      osName?: string | null;
+      osVersion?: string | null;
+      isNetCore?: boolean;
+      isLinux?: boolean;
+      isOsx?: boolean;
+      isWindows?: boolean;
+      isDocker?: boolean;
+      mode?: components['schemas']['RuntimeMode'];
+      branch?: string | null;
+      databaseType?: components['schemas']['DatabaseType'];
+      databaseVersion?: components['schemas']['Version'];
+      authentication?: components['schemas']['AuthenticationType'];
+      /** Format: int32 */
+      migrationVersion?: number;
+      urlBase?: string | null;
+      runtimeVersion?: components['schemas']['Version'];
+      runtimeName?: string | null;
+      /** Format: date-time */
+      startTime?: string;
+      packageVersion?: string | null;
+      packageAuthor?: string | null;
+      packageUpdateMechanism?: components['schemas']['UpdateMechanism'];
+      packageUpdateMechanismMessage?: string | null;
+    };
     /** @enum {string} */
-    SourceType: "tmdb" | "mappings" | "user" | "indexer";
-    /** @enum {string} */
-    TMDbCountryCode: "au" | "br" | "ca" | "fr" | "de" | "gb" | "it" | "es" | "us" | "nz";
+    TMDbCountryCode:
+      | 'au'
+      | 'br'
+      | 'ca'
+      | 'fr'
+      | 'de'
+      | 'gb'
+      | 'ie'
+      | 'it'
+      | 'es'
+      | 'us'
+      | 'nz';
     TagDetailsResource: {
       /** Format: int32 */
       id?: number;
       label?: string | null;
-      delayProfileIds?: (number)[] | null;
-      notificationIds?: (number)[] | null;
-      restrictionIds?: (number)[] | null;
-      importListIds?: (number)[] | null;
-      movieIds?: (number)[] | null;
-      indexerIds?: (number)[] | null;
+      delayProfileIds?: number[] | null;
+      importListIds?: number[] | null;
+      notificationIds?: number[] | null;
+      releaseProfileIds?: number[] | null;
+      indexerIds?: number[] | null;
+      downloadClientIds?: number[] | null;
+      autoTagIds?: number[] | null;
+      movieIds?: number[] | null;
     };
     TagResource: {
       /** Format: int32 */
@@ -4911,7 +5425,7 @@ export interface components {
       lastStartTime?: string;
       /** Format: date-time */
       nextExecution?: string;
-      lastDuration?: components["schemas"]["TimeSpan"];
+      lastDuration?: components['schemas']['TimeSpan'];
     };
     TimeSpan: {
       /** Format: int64 */
@@ -4938,12 +5452,19 @@ export interface components {
       totalSeconds?: number;
     };
     /** @enum {string} */
-    TrackedDownloadState: "downloading" | "importPending" | "importing" | "imported" | "failedPending" | "failed" | "ignored";
+    TrackedDownloadState:
+      | 'downloading'
+      | 'importPending'
+      | 'importing'
+      | 'imported'
+      | 'failedPending'
+      | 'failed'
+      | 'ignored';
     /** @enum {string} */
-    TrackedDownloadStatus: "ok" | "warning" | "error";
+    TrackedDownloadStatus: 'ok' | 'warning' | 'error';
     TrackedDownloadStatusMessage: {
       title?: string | null;
-      messages?: (string)[] | null;
+      messages?: string[] | null;
     };
     UiConfigResource: {
       /** Format: int32 */
@@ -4951,7 +5472,7 @@ export interface components {
       /** Format: int32 */
       firstDayOfWeek?: number;
       calendarWeekColumnHeader?: string | null;
-      movieRuntimeFormat?: components["schemas"]["MovieRuntimeFormatType"];
+      movieRuntimeFormat?: components['schemas']['MovieRuntimeFormatType'];
       shortDateFormat?: string | null;
       longDateFormat?: string | null;
       timeFormat?: string | null;
@@ -4961,21 +5482,22 @@ export interface components {
       movieInfoLanguage?: number;
       /** Format: int32 */
       uiLanguage?: number;
+      theme?: string | null;
     };
     UnmappedFolder: {
       name?: string | null;
       path?: string | null;
     };
     UpdateChanges: {
-      new?: (string)[] | null;
-      fixed?: (string)[] | null;
+      new?: string[] | null;
+      fixed?: string[] | null;
     };
     /** @enum {string} */
-    UpdateMechanism: "builtIn" | "script" | "external" | "apt" | "docker";
+    UpdateMechanism: 'builtIn' | 'script' | 'external' | 'apt' | 'docker';
     UpdateResource: {
       /** Format: int32 */
       id?: number;
-      version?: components["schemas"]["Version"];
+      version?: components['schemas']['Version'];
       branch?: string | null;
       /** Format: date-time */
       releaseDate?: string;
@@ -4986,7 +5508,7 @@ export interface components {
       installedOn?: string | null;
       installable?: boolean;
       latest?: boolean;
-      changes?: components["schemas"]["UpdateChanges"];
+      changes?: components['schemas']['UpdateChanges'];
       hash?: string | null;
     };
     Version: {
@@ -5010,6 +5532,8 @@ export interface components {
   headers: never;
   pathItems: never;
 }
+
+export type $defs = Record<string, never>;
 
 export type external = Record<string, never>;
 

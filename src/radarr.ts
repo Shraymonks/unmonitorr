@@ -1,6 +1,6 @@
 import type { Response } from 'express';
-import type { PlexPayload } from './types/plex';
-import type { components } from './types/radarr';
+import type { PlexPayload } from './types/plex.js';
+import type { components } from './types/radarr.js';
 
 import { Api, getIds } from './utils.js';
 
@@ -11,7 +11,7 @@ const api = new Api(`${RADARR_HOST}/api/v3/`, RADARR_API_KEY);
 
 export async function unmonitorMovie(
   { Guid, title, year }: PlexPayload['Metadata'],
-  res: Response
+  res: Response,
 ): Promise<Response> {
   if (!RADARR_API_KEY) {
     return res.end();
@@ -31,7 +31,7 @@ export async function unmonitorMovie(
       moviesResponse = await fetch(api.getUrl('movie', { tmdbId }));
     } catch (error) {
       console.error(
-        `Failed to get movie information from radarr for tmdbId: ${tmdbId} ${titleYear}`
+        `Failed to get movie information from radarr for tmdbId: ${tmdbId} ${titleYear}`,
       );
       console.error(error);
     }
@@ -41,7 +41,7 @@ export async function unmonitorMovie(
       break;
     }
     console.error(
-      `Error getting movie information: ${moviesResponse?.status} ${moviesResponse?.statusText}`
+      `Error getting movie information: ${moviesResponse?.status} ${moviesResponse?.statusText}`,
     );
   }
   if (!movies) {
@@ -74,7 +74,7 @@ export async function unmonitorMovie(
     }
 
     console.error(
-      `Error unmonitoring ${titleYear}: ${response.status} ${response.statusText}`
+      `Error unmonitoring ${titleYear}: ${response.status} ${response.statusText}`,
     );
   }
   return res.end();

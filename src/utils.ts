@@ -1,4 +1,4 @@
-import type { PlexPayload } from './types/plex';
+import type { PlexPayload } from './types/plex.js';
 
 export class Api {
   #apiKey: string;
@@ -28,7 +28,7 @@ export function cleanTitle(title: string): string {
 // getGuid([{id: 'tvdb://1234'}], 'tvdb') => ['1234']
 export function getIds(
   guid: PlexPayload['Metadata']['Guid'] = [],
-  type: 'imdb' | 'tmdb' | 'tvdb'
+  type: 'imdb' | 'tmdb' | 'tvdb',
 ): string[] {
   return guid
     .filter(({ id }) => id.startsWith(type))
