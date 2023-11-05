@@ -1,6 +1,6 @@
 import type { Response } from 'express';
-import type { PlexPayload } from './types/plex';
-import type { components } from './types/sonarr';
+import type { PlexPayload } from './types/plex.js';
+import type { components } from './types/sonarr.js';
 
 import { Api, cleanTitle, getIds } from './utils.js';
 
@@ -11,7 +11,7 @@ const api = new Api(`${SONARR_HOST}/api/v3/`, SONARR_API_KEY);
 
 export async function unmonitorEpisode(
   { Guid, grandparentTitle: seriesTitle }: PlexPayload['Metadata'],
-  res: Response
+  res: Response,
 ): Promise<Response> {
   if (!SONARR_API_KEY) {
     return res.end();
@@ -41,7 +41,7 @@ export async function unmonitorEpisode(
   }
   if (!seriesResponse.ok) {
     console.error(
-      `Error getting series information: ${seriesResponse?.status} ${seriesResponse?.statusText}`
+      `Error getting series information: ${seriesResponse?.status} ${seriesResponse?.statusText}`,
     );
     return res.end();
   }
@@ -53,7 +53,7 @@ export async function unmonitorEpisode(
   // so cannot be used for series filtering.
   const seriesMatches = seriesList.filter(
     ({ title }) =>
-      typeof title === 'string' && cleanTitle(title) === cleanedTitle
+      typeof title === 'string' && cleanTitle(title) === cleanedTitle,
   );
   if (seriesMatches.length === 0) {
     console.warn(`Could not find ${seriesTitle} in sonarr library`);
@@ -70,7 +70,7 @@ export async function unmonitorEpisode(
       episodeListResponse = await fetch(
         api.getUrl('episode', {
           seriesId: series.id.toString(),
-        })
+        }),
       );
     } catch (error) {
       console.error(`Failed to get episode list for ${seriesTitle}:`);
@@ -79,7 +79,7 @@ export async function unmonitorEpisode(
     }
     if (!episodeListResponse.ok) {
       console.error(
-        `Error getting episode list for ${seriesTitle}: ${seriesResponse?.status} ${seriesResponse?.statusText}`
+        `Error getting episode list for ${seriesTitle}: ${seriesResponse?.status} ${seriesResponse?.statusText}`,
       );
       continue;
     }
@@ -87,7 +87,7 @@ export async function unmonitorEpisode(
       (await episodeListResponse.json()) as components['schemas']['EpisodeResource'][];
 
     episode = episodeList.find(
-      ({ tvdbId }) => tvdbId && episodeTvdbIds.includes(tvdbId.toString())
+      ({ tvdbId }) => tvdbId && episodeTvdbIds.includes(tvdbId.toString()),
     );
     if (episode) {
       break;
@@ -95,7 +95,7 @@ export async function unmonitorEpisode(
   }
   if (!episode) {
     console.warn(
-      `Could not find episode tvdbIds: ${episodeTvdbIds} for ${seriesTitle}`
+      `Could not find episode tvdbIds: ${episodeTvdbIds} for ${seriesTitle}`,
     );
     return res.end();
   }
@@ -125,7 +125,7 @@ export async function unmonitorEpisode(
     }
 
     console.error(
-      `Error unmonitoring ${episodeString}: ${response.status} ${response.statusText}`
+      `Error unmonitoring ${episodeString}: ${response.status} ${response.statusText}`,
     );
   }
   return res.end();

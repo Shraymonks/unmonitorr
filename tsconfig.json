@@ -1,5 +1,8 @@
 {
-  "extends": "@tsconfig/node18-strictest-esm/tsconfig.json",
+  "extends": [
+    "@tsconfig/node-lts/tsconfig.json",
+    "@tsconfig/strictest/tsconfig"
+  ],
   "include": ["src/**/*.ts"],
   "compilerOptions": {
     "outDir": "dist"

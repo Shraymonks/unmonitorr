@@ -3,64 +3,126 @@
  * Do not make direct changes to the file.
  */
 
-
-/** Type helpers */
-type Without<T, U> = { [P in Exclude<keyof T, keyof U>]?: never };
-type XOR<T, U> = (T | U) extends object ? (Without<T, U> & U) | (Without<U, T> & T) : T | U;
-type OneOf<T extends any[]> = T extends [infer Only] ? Only : T extends [infer A, infer B, ...infer Rest] ? OneOf<[XOR<A, B>, ...Rest]> : never;
-
 export interface paths {
-  "/login": {
+  '/api': {
     get: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/login': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
       };
     };
     post: {
-      parameters?: {
+      parameters: {
         query?: {
           returnUrl?: string;
         };
       };
       requestBody?: {
         content: {
-          "multipart/form-data": {
-            Username?: string;
-            Password?: string;
-            RememberMe?: string;
+          'multipart/form-data': {
+            username?: string;
+            password?: string;
+            rememberMe?: string;
           };
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/logout": {
+  '/logout': {
     get: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/system/backup": {
+  '/api/v3/autotagging': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["BackupResource"])[];
-            "application/json": (components["schemas"]["BackupResource"])[];
-            "text/json": (components["schemas"]["BackupResource"])[];
+            'application/json': components['schemas']['AutoTaggingResource'][];
+          };
+        };
+      };
+    };
+    post: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['AutoTaggingResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['AutoTaggingResource'];
+            'application/json': components['schemas']['AutoTaggingResource'];
+            'text/json': components['schemas']['AutoTaggingResource'];
           };
         };
       };
     };
   };
-  "/api/v3/system/backup/{id}": {
+  '/api/v3/autotagging/{id}': {
+    get: {
+      parameters: {
+        path: {
+          id: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['AutoTaggingResource'];
+          };
+        };
+      };
+    };
+    put: {
+      parameters: {
+        path: {
+          id: string;
+        };
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['AutoTaggingResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['AutoTaggingResource'];
+            'application/json': components['schemas']['AutoTaggingResource'];
+            'text/json': components['schemas']['AutoTaggingResource'];
+          };
+        };
+      };
+    };
     delete: {
       parameters: {
         path: {
@@ -69,44 +131,37 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/system/backup/restore/{id}": {
-    post: {
-      parameters: {
-        path: {
-          id: number;
+        200: {
+          content: never;
         };
       };
+    };
+  };
+  '/api/v3/autotagging/schema': {
+    get: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/system/backup/restore/upload": {
-    post: {
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/blocklist": {
+  '/api/v3/system/backup': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["BlocklistResourcePagingResource"];
+            'text/plain': components['schemas']['BackupResource'][];
+            'application/json': components['schemas']['BackupResource'][];
+            'text/json': components['schemas']['BackupResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/blocklist/{id}": {
+  '/api/v3/system/backup/{id}': {
     delete: {
       parameters: {
         path: {
@@ -115,28 +170,92 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/blocklist/bulk": {
+  '/api/v3/system/backup/restore/{id}': {
+    post: {
+      parameters: {
+        path: {
+          id: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/system/backup/restore/upload': {
+    post: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/blocklist': {
+    get: {
+      parameters: {
+        query?: {
+          page?: number;
+          pageSize?: number;
+          sortKey?: string;
+          sortDirection?: components['schemas']['SortDirection'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['BlocklistResourcePagingResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/blocklist/{id}': {
+    delete: {
+      parameters: {
+        path: {
+          id: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/blocklist/bulk': {
     delete: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["BlocklistBulkResource"];
-          "text/json": components["schemas"]["BlocklistBulkResource"];
-          "application/*+json": components["schemas"]["BlocklistBulkResource"];
+          'application/json': components['schemas']['BlocklistBulkResource'];
+          'text/json': components['schemas']['BlocklistBulkResource'];
+          'application/*+json': components['schemas']['BlocklistBulkResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/calendar": {
+  '/api/v3/calendar': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           start?: string;
           end?: string;
@@ -144,19 +263,20 @@ export interface paths {
           includeSeries?: boolean;
           includeEpisodeFile?: boolean;
           includeEpisodeImages?: boolean;
+          tags?: string;
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["EpisodeResource"])[];
+            'application/json': components['schemas']['EpisodeResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/calendar/{id}": {
+  '/api/v3/calendar/{id}': {
     get: {
       parameters: {
         path: {
@@ -167,19 +287,19 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["EpisodeResource"];
+            'application/json': components['schemas']['EpisodeResource'];
           };
         };
       };
     };
   };
-  "/feed/v3/calendar/sonarr.ics": {
+  '/feed/v3/calendar/sonarr.ics': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           pastDays?: number;
           futureDays?: number;
-          tagList?: string;
+          tags?: string;
           unmonitored?: boolean;
           premieresOnly?: boolean;
           asAllDay?: boolean;
@@ -187,17 +307,19 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/command": {
+  '/api/v3/command': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["CommandResource"])[];
+            'application/json': components['schemas']['CommandResource'][];
           };
         };
       };
@@ -205,20 +327,20 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["CommandResource"];
+          'application/json': components['schemas']['CommandResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["CommandResource"];
+            'application/json': components['schemas']['CommandResource'];
           };
         };
       };
     };
   };
-  "/api/v3/command/{id}": {
+  '/api/v3/command/{id}': {
     get: {
       parameters: {
         path: {
@@ -229,7 +351,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["CommandResource"];
+            'application/json': components['schemas']['CommandResource'];
           };
         };
       };
@@ -242,17 +364,19 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/customfilter": {
+  '/api/v3/customfilter': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["CustomFilterResource"])[];
+            'application/json': components['schemas']['CustomFilterResource'][];
           };
         };
       };
@@ -260,22 +384,22 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["CustomFilterResource"];
+          'application/json': components['schemas']['CustomFilterResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CustomFilterResource"];
-            "application/json": components["schemas"]["CustomFilterResource"];
-            "text/json": components["schemas"]["CustomFilterResource"];
+            'text/plain': components['schemas']['CustomFilterResource'];
+            'application/json': components['schemas']['CustomFilterResource'];
+            'text/json': components['schemas']['CustomFilterResource'];
           };
         };
       };
     };
   };
-  "/api/v3/customfilter/{id}": {
+  '/api/v3/customfilter/{id}': {
     get: {
       parameters: {
         path: {
@@ -286,7 +410,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["CustomFilterResource"];
+            'application/json': components['schemas']['CustomFilterResource'];
           };
         };
       };
@@ -299,16 +423,16 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["CustomFilterResource"];
+          'application/json': components['schemas']['CustomFilterResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CustomFilterResource"];
-            "application/json": components["schemas"]["CustomFilterResource"];
-            "text/json": components["schemas"]["CustomFilterResource"];
+            'text/plain': components['schemas']['CustomFilterResource'];
+            'application/json': components['schemas']['CustomFilterResource'];
+            'text/json': components['schemas']['CustomFilterResource'];
           };
         };
       };
@@ -321,17 +445,19 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/customformat": {
+  '/api/v3/customformat': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["CustomFormatResource"])[];
+            'application/json': components['schemas']['CustomFormatResource'][];
           };
         };
       };
@@ -339,22 +465,22 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["CustomFormatResource"];
+          'application/json': components['schemas']['CustomFormatResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CustomFormatResource"];
-            "application/json": components["schemas"]["CustomFormatResource"];
-            "text/json": components["schemas"]["CustomFormatResource"];
+            'text/plain': components['schemas']['CustomFormatResource'];
+            'application/json': components['schemas']['CustomFormatResource'];
+            'text/json': components['schemas']['CustomFormatResource'];
           };
         };
       };
     };
   };
-  "/api/v3/customformat/{id}": {
+  '/api/v3/customformat/{id}': {
     get: {
       parameters: {
         path: {
@@ -365,7 +491,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["CustomFormatResource"];
+            'application/json': components['schemas']['CustomFormatResource'];
           };
         };
       };
@@ -378,16 +504,16 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["CustomFormatResource"];
+          'application/json': components['schemas']['CustomFormatResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["CustomFormatResource"];
-            "application/json": components["schemas"]["CustomFormatResource"];
-            "text/json": components["schemas"]["CustomFormatResource"];
+            'text/plain': components['schemas']['CustomFormatResource'];
+            'application/json': components['schemas']['CustomFormatResource'];
+            'text/json': components['schemas']['CustomFormatResource'];
           };
         };
       };
@@ -400,38 +526,47 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/customformat/schema": {
+  '/api/v3/customformat/schema': {
     get: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/wanted/cutoff": {
+  '/api/v3/wanted/cutoff': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
+          page?: number;
+          pageSize?: number;
+          sortKey?: string;
+          sortDirection?: components['schemas']['SortDirection'];
           includeSeries?: boolean;
           includeEpisodeFile?: boolean;
           includeImages?: boolean;
+          monitored?: boolean;
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["EpisodeResourcePagingResource"];
+            'application/json': components['schemas']['EpisodeResourcePagingResource'];
           };
         };
       };
     };
   };
-  "/api/v3/wanted/cutoff/{id}": {
+  '/api/v3/wanted/cutoff/{id}': {
     get: {
       parameters: {
         path: {
@@ -442,19 +577,19 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["EpisodeResource"];
+            'application/json': components['schemas']['EpisodeResource'];
           };
         };
       };
     };
   };
-  "/api/v3/delayprofile": {
+  '/api/v3/delayprofile': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["DelayProfileResource"])[];
+            'application/json': components['schemas']['DelayProfileResource'][];
           };
         };
       };
@@ -462,22 +597,22 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DelayProfileResource"];
+          'application/json': components['schemas']['DelayProfileResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DelayProfileResource"];
-            "application/json": components["schemas"]["DelayProfileResource"];
-            "text/json": components["schemas"]["DelayProfileResource"];
+            'text/plain': components['schemas']['DelayProfileResource'];
+            'application/json': components['schemas']['DelayProfileResource'];
+            'text/json': components['schemas']['DelayProfileResource'];
           };
         };
       };
     };
   };
-  "/api/v3/delayprofile/{id}": {
+  '/api/v3/delayprofile/{id}': {
     get: {
       parameters: {
         path: {
@@ -488,7 +623,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["DelayProfileResource"];
+            'application/json': components['schemas']['DelayProfileResource'];
           };
         };
       };
@@ -501,16 +636,16 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DelayProfileResource"];
+          'application/json': components['schemas']['DelayProfileResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DelayProfileResource"];
-            "application/json": components["schemas"]["DelayProfileResource"];
-            "text/json": components["schemas"]["DelayProfileResource"];
+            'text/plain': components['schemas']['DelayProfileResource'];
+            'application/json': components['schemas']['DelayProfileResource'];
+            'text/json': components['schemas']['DelayProfileResource'];
           };
         };
       };
@@ -523,11 +658,13 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/delayprofile/reorder/{id}": {
+  '/api/v3/delayprofile/reorder/{id}': {
     put: {
       parameters: {
         query?: {
@@ -541,56 +678,59 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["DelayProfileResource"])[];
-            "application/json": (components["schemas"]["DelayProfileResource"])[];
-            "text/json": (components["schemas"]["DelayProfileResource"])[];
+            'text/plain': components['schemas']['DelayProfileResource'][];
+            'application/json': components['schemas']['DelayProfileResource'][];
+            'text/json': components['schemas']['DelayProfileResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/diskspace": {
+  '/api/v3/diskspace': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["DiskSpaceResource"])[];
+            'application/json': components['schemas']['DiskSpaceResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/downloadclient": {
+  '/api/v3/downloadclient': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["DownloadClientResource"])[];
+            'application/json': components['schemas']['DownloadClientResource'][];
           };
         };
       };
     };
     post: {
+      parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
+      };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DownloadClientResource"];
+          'application/json': components['schemas']['DownloadClientResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DownloadClientResource"];
-            "application/json": components["schemas"]["DownloadClientResource"];
-            "text/json": components["schemas"]["DownloadClientResource"];
+            'application/json': components['schemas']['DownloadClientResource'];
           };
         };
       };
     };
   };
-  "/api/v3/downloadclient/{id}": {
+  '/api/v3/downloadclient/{id}': {
     get: {
       parameters: {
         path: {
@@ -601,29 +741,30 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["DownloadClientResource"];
+            'application/json': components['schemas']['DownloadClientResource'];
           };
         };
       };
     };
     put: {
       parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
         path: {
           id: string;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DownloadClientResource"];
+          'application/json': components['schemas']['DownloadClientResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DownloadClientResource"];
-            "application/json": components["schemas"]["DownloadClientResource"];
-            "text/json": components["schemas"]["DownloadClientResource"];
+            'application/json': components['schemas']['DownloadClientResource'];
           };
         };
       };
@@ -636,44 +777,80 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/downloadclient/schema": {
+  '/api/v3/downloadclient/bulk': {
+    put: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['DownloadClientBulkResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['DownloadClientResource'];
+          };
+        };
+      };
+    };
+    delete: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['DownloadClientBulkResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/downloadclient/schema': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["DownloadClientResource"])[];
+            'application/json': components['schemas']['DownloadClientResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/downloadclient/test": {
+  '/api/v3/downloadclient/test': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DownloadClientResource"];
+          'application/json': components['schemas']['DownloadClientResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/downloadclient/testall": {
+  '/api/v3/downloadclient/testall': {
     post: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/downloadclient/action/{name}": {
+  '/api/v3/downloadclient/action/{name}': {
     post: {
       parameters: {
         path: {
@@ -682,28 +859,30 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DownloadClientResource"];
+          'application/json': components['schemas']['DownloadClientResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/config/downloadclient": {
+  '/api/v3/config/downloadclient': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["DownloadClientConfigResource"];
+            'application/json': components['schemas']['DownloadClientConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/downloadclient/{id}": {
+  '/api/v3/config/downloadclient/{id}': {
     get: {
       parameters: {
         path: {
@@ -714,7 +893,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["DownloadClientConfigResource"];
+            'application/json': components['schemas']['DownloadClientConfigResource'];
           };
         };
       };
@@ -727,28 +906,28 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["DownloadClientConfigResource"];
+          'application/json': components['schemas']['DownloadClientConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["DownloadClientConfigResource"];
-            "application/json": components["schemas"]["DownloadClientConfigResource"];
-            "text/json": components["schemas"]["DownloadClientConfigResource"];
+            'text/plain': components['schemas']['DownloadClientConfigResource'];
+            'application/json': components['schemas']['DownloadClientConfigResource'];
+            'text/json': components['schemas']['DownloadClientConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/episode": {
+  '/api/v3/episode': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           seriesId?: number;
           seasonNumber?: number;
-          episodeIds?: (number)[];
+          episodeIds?: number[];
           episodeFileId?: number;
           includeImages?: boolean;
         };
@@ -757,13 +936,13 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["EpisodeResource"])[];
+            'application/json': components['schemas']['EpisodeResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/episode/{id}": {
+  '/api/v3/episode/{id}': {
     get: {
       parameters: {
         path: {
@@ -774,7 +953,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["EpisodeResource"];
+            'application/json': components['schemas']['EpisodeResource'];
           };
         };
       };
@@ -787,47 +966,60 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["EpisodeResource"];
+          'application/json': components['schemas']['EpisodeResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: {
+            'text/plain': components['schemas']['EpisodeResource'];
+            'application/json': components['schemas']['EpisodeResource'];
+            'text/json': components['schemas']['EpisodeResource'];
+          };
+        };
       };
     };
   };
-  "/api/v3/episode/monitor": {
+  '/api/v3/episode/monitor': {
     put: {
+      parameters: {
+        query?: {
+          includeImages?: boolean;
+        };
+      };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["EpisodesMonitoredResource"];
+          'application/json': components['schemas']['EpisodesMonitoredResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/episodefile": {
+  '/api/v3/episodefile': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           seriesId?: number;
-          episodeFileIds?: (number)[];
+          episodeFileIds?: number[];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["EpisodeFileResource"])[];
+            'application/json': components['schemas']['EpisodeFileResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/episodefile/{id}": {
+  '/api/v3/episodefile/{id}': {
     get: {
       parameters: {
         path: {
@@ -838,7 +1030,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["EpisodeFileResource"];
+            'application/json': components['schemas']['EpisodeFileResource'];
           };
         };
       };
@@ -851,16 +1043,16 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["EpisodeFileResource"];
+          'application/json': components['schemas']['EpisodeFileResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["EpisodeFileResource"];
-            "application/json": components["schemas"]["EpisodeFileResource"];
-            "text/json": components["schemas"]["EpisodeFileResource"];
+            'text/plain': components['schemas']['EpisodeFileResource'];
+            'application/json': components['schemas']['EpisodeFileResource'];
+            'text/json': components['schemas']['EpisodeFileResource'];
           };
         };
       };
@@ -873,50 +1065,58 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/episodefile/editor": {
+  '/api/v3/episodefile/editor': {
     put: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["EpisodeFileListResource"];
+          'application/json': components['schemas']['EpisodeFileListResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/episodefile/bulk": {
+  '/api/v3/episodefile/bulk': {
     put: {
       requestBody?: {
         content: {
-          "application/json": (components["schemas"]["EpisodeFileResource"])[];
+          'application/json': components['schemas']['EpisodeFileResource'][];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
     delete: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["EpisodeFileListResource"];
+          'application/json': components['schemas']['EpisodeFileListResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/filesystem": {
+  '/api/v3/filesystem': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           path?: string;
           includeFiles?: boolean;
@@ -925,89 +1125,88 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/filesystem/type": {
-    get: {
-      parameters?: {
-        query?: {
-          path?: string;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/filesystem/mediafiles": {
-    get: {
-      parameters?: {
-        query?: {
-          path?: string;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/health": {
-    get: {
-      responses: {
-        /** @description Success */
         200: {
-          content: {
-            "application/json": (components["schemas"]["HealthResource"])[];
-          };
+          content: never;
         };
       };
     };
   };
-  "/api/v3/health/{id}": {
+  '/api/v3/filesystem/type': {
     get: {
       parameters: {
-        path: {
-          id: number;
+        query?: {
+          path?: string;
         };
       };
       responses: {
         /** @description Success */
         200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/filesystem/mediafiles': {
+    get: {
+      parameters: {
+        query?: {
+          path?: string;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/health': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
           content: {
-            "application/json": components["schemas"]["HealthResource"];
+            'application/json': components['schemas']['HealthResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/history": {
+  '/api/v3/history': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
+          page?: number;
+          pageSize?: number;
+          sortKey?: string;
+          sortDirection?: components['schemas']['SortDirection'];
           includeSeries?: boolean;
           includeEpisode?: boolean;
+          eventType?: number;
+          episodeId?: number;
+          downloadId?: string;
+          seriesIds?: number[];
+          languages?: number[];
+          quality?: number[];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["HistoryResourcePagingResource"];
+            'application/json': components['schemas']['HistoryResourcePagingResource'];
           };
         };
       };
     };
   };
-  "/api/v3/history/since": {
+  '/api/v3/history/since': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           date?: string;
-          eventType?: components["schemas"]["EpisodeHistoryEventType"];
+          eventType?: components['schemas']['EpisodeHistoryEventType'];
           includeSeries?: boolean;
           includeEpisode?: boolean;
         };
@@ -1016,19 +1215,19 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["HistoryResource"])[];
+            'application/json': components['schemas']['HistoryResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/history/series": {
+  '/api/v3/history/series': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           seriesId?: number;
           seasonNumber?: number;
-          eventType?: components["schemas"]["EpisodeHistoryEventType"];
+          eventType?: components['schemas']['EpisodeHistoryEventType'];
           includeSeries?: boolean;
           includeEpisode?: boolean;
         };
@@ -1037,13 +1236,13 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["HistoryResource"])[];
+            'application/json': components['schemas']['HistoryResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/history/failed/{id}": {
+  '/api/v3/history/failed/{id}': {
     post: {
       parameters: {
         path: {
@@ -1052,25 +1251,27 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/config/host": {
+  '/api/v3/config/host': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["HostConfigResource"];
-            "application/json": components["schemas"]["HostConfigResource"];
-            "text/json": components["schemas"]["HostConfigResource"];
+            'text/plain': components['schemas']['HostConfigResource'];
+            'application/json': components['schemas']['HostConfigResource'];
+            'text/json': components['schemas']['HostConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/host/{id}": {
+  '/api/v3/config/host/{id}': {
     get: {
       parameters: {
         path: {
@@ -1081,7 +1282,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["HostConfigResource"];
+            'application/json': components['schemas']['HostConfigResource'];
           };
         };
       };
@@ -1094,53 +1295,56 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["HostConfigResource"];
-          "text/json": components["schemas"]["HostConfigResource"];
-          "application/*+json": components["schemas"]["HostConfigResource"];
+          'application/json': components['schemas']['HostConfigResource'];
+          'text/json': components['schemas']['HostConfigResource'];
+          'application/*+json': components['schemas']['HostConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["HostConfigResource"];
-            "application/json": components["schemas"]["HostConfigResource"];
-            "text/json": components["schemas"]["HostConfigResource"];
+            'text/plain': components['schemas']['HostConfigResource'];
+            'application/json': components['schemas']['HostConfigResource'];
+            'text/json': components['schemas']['HostConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/importlist": {
+  '/api/v3/importlist': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["ImportListResource"])[];
+            'application/json': components['schemas']['ImportListResource'][];
           };
         };
       };
     };
     post: {
+      parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
+      };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ImportListResource"];
+          'application/json': components['schemas']['ImportListResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ImportListResource"];
-            "application/json": components["schemas"]["ImportListResource"];
-            "text/json": components["schemas"]["ImportListResource"];
+            'application/json': components['schemas']['ImportListResource'];
           };
         };
       };
     };
   };
-  "/api/v3/importlist/{id}": {
+  '/api/v3/importlist/{id}': {
     get: {
       parameters: {
         path: {
@@ -1151,29 +1355,30 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["ImportListResource"];
+            'application/json': components['schemas']['ImportListResource'];
           };
         };
       };
     };
     put: {
       parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
         path: {
           id: string;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ImportListResource"];
+          'application/json': components['schemas']['ImportListResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ImportListResource"];
-            "application/json": components["schemas"]["ImportListResource"];
-            "text/json": components["schemas"]["ImportListResource"];
+            'application/json': components['schemas']['ImportListResource'];
           };
         };
       };
@@ -1186,44 +1391,80 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/importlist/schema": {
+  '/api/v3/importlist/bulk': {
+    put: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['ImportListBulkResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['ImportListResource'];
+          };
+        };
+      };
+    };
+    delete: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['ImportListBulkResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/importlist/schema': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["ImportListResource"])[];
+            'application/json': components['schemas']['ImportListResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/importlist/test": {
+  '/api/v3/importlist/test': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ImportListResource"];
+          'application/json': components['schemas']['ImportListResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/importlist/testall": {
+  '/api/v3/importlist/testall': {
     post: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/importlist/action/{name}": {
+  '/api/v3/importlist/action/{name}': {
     post: {
       parameters: {
         path: {
@@ -1232,22 +1473,24 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ImportListResource"];
+          'application/json': components['schemas']['ImportListResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/importlistexclusion": {
+  '/api/v3/importlistexclusion': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["ImportListExclusionResource"])[];
+            'application/json': components['schemas']['ImportListExclusionResource'][];
           };
         };
       };
@@ -1255,22 +1498,22 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ImportListExclusionResource"];
+          'application/json': components['schemas']['ImportListExclusionResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ImportListExclusionResource"];
-            "application/json": components["schemas"]["ImportListExclusionResource"];
-            "text/json": components["schemas"]["ImportListExclusionResource"];
+            'text/plain': components['schemas']['ImportListExclusionResource'];
+            'application/json': components['schemas']['ImportListExclusionResource'];
+            'text/json': components['schemas']['ImportListExclusionResource'];
           };
         };
       };
     };
   };
-  "/api/v3/importlistexclusion/{id}": {
+  '/api/v3/importlistexclusion/{id}': {
     get: {
       parameters: {
         path: {
@@ -1281,7 +1524,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["ImportListExclusionResource"];
+            'application/json': components['schemas']['ImportListExclusionResource'];
           };
         };
       };
@@ -1294,16 +1537,16 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ImportListExclusionResource"];
+          'application/json': components['schemas']['ImportListExclusionResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ImportListExclusionResource"];
-            "application/json": components["schemas"]["ImportListExclusionResource"];
-            "text/json": components["schemas"]["ImportListExclusionResource"];
+            'text/plain': components['schemas']['ImportListExclusionResource'];
+            'application/json': components['schemas']['ImportListExclusionResource'];
+            'text/json': components['schemas']['ImportListExclusionResource'];
           };
         };
       };
@@ -1316,40 +1559,45 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/indexer": {
+  '/api/v3/indexer': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["IndexerResource"])[];
+            'application/json': components['schemas']['IndexerResource'][];
           };
         };
       };
     };
     post: {
+      parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
+      };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["IndexerResource"];
+          'application/json': components['schemas']['IndexerResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["IndexerResource"];
-            "application/json": components["schemas"]["IndexerResource"];
-            "text/json": components["schemas"]["IndexerResource"];
+            'application/json': components['schemas']['IndexerResource'];
           };
         };
       };
     };
   };
-  "/api/v3/indexer/{id}": {
+  '/api/v3/indexer/{id}': {
     get: {
       parameters: {
         path: {
@@ -1360,29 +1608,30 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["IndexerResource"];
+            'application/json': components['schemas']['IndexerResource'];
           };
         };
       };
     };
     put: {
       parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
         path: {
           id: string;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["IndexerResource"];
+          'application/json': components['schemas']['IndexerResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["IndexerResource"];
-            "application/json": components["schemas"]["IndexerResource"];
-            "text/json": components["schemas"]["IndexerResource"];
+            'application/json': components['schemas']['IndexerResource'];
           };
         };
       };
@@ -1395,44 +1644,80 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/indexer/schema": {
+  '/api/v3/indexer/bulk': {
+    put: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['IndexerBulkResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['IndexerResource'];
+          };
+        };
+      };
+    };
+    delete: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['IndexerBulkResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/indexer/schema': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["IndexerResource"])[];
+            'application/json': components['schemas']['IndexerResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/indexer/test": {
+  '/api/v3/indexer/test': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["IndexerResource"];
+          'application/json': components['schemas']['IndexerResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/indexer/testall": {
+  '/api/v3/indexer/testall': {
     post: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/indexer/action/{name}": {
+  '/api/v3/indexer/action/{name}': {
     post: {
       parameters: {
         path: {
@@ -1441,28 +1726,30 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["IndexerResource"];
+          'application/json': components['schemas']['IndexerResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/config/indexer": {
+  '/api/v3/config/indexer': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["IndexerConfigResource"];
+            'application/json': components['schemas']['IndexerConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/indexer/{id}": {
+  '/api/v3/config/indexer/{id}': {
     get: {
       parameters: {
         path: {
@@ -1473,7 +1760,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["IndexerConfigResource"];
+            'application/json': components['schemas']['IndexerConfigResource'];
           };
         };
       };
@@ -1486,44 +1773,36 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["IndexerConfigResource"];
+          'application/json': components['schemas']['IndexerConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["IndexerConfigResource"];
-            "application/json": components["schemas"]["IndexerConfigResource"];
-            "text/json": components["schemas"]["IndexerConfigResource"];
+            'text/plain': components['schemas']['IndexerConfigResource'];
+            'application/json': components['schemas']['IndexerConfigResource'];
+            'text/json': components['schemas']['IndexerConfigResource'];
           };
         };
       };
     };
   };
-  "/initialize.js": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/language": {
+  '/api/v3/language': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["LanguageResource"])[];
-            "application/json": (components["schemas"]["LanguageResource"])[];
-            "text/json": (components["schemas"]["LanguageResource"])[];
+            'text/plain': components['schemas']['LanguageResource'][];
+            'application/json': components['schemas']['LanguageResource'][];
+            'text/json': components['schemas']['LanguageResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/language/{id}": {
+  '/api/v3/language/{id}': {
     get: {
       parameters: {
         path: {
@@ -1534,25 +1813,42 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["LanguageResource"];
+            'application/json': components['schemas']['LanguageResource'];
           };
         };
       };
     };
   };
-  "/api/v3/localization": {
+  '/api/v3/languageprofile': {
+    /** @deprecated */
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["LocalizationResource"];
+            'application/json': components['schemas']['LanguageProfileResource'][];
+          };
+        };
+      };
+    };
+    /** @deprecated */
+    post: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['LanguageProfileResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['LanguageProfileResource'];
           };
         };
       };
     };
   };
-  "/api/v3/localization/{id}": {
+  '/api/v3/languageprofile/{id}': {
     get: {
       parameters: {
         path: {
@@ -1563,37 +1859,135 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["LocalizationResource"];
+            'application/json': components['schemas']['LanguageProfileResource'];
           };
         };
       };
     };
+    /** @deprecated */
+    put: {
+      parameters: {
+        path: {
+          id: string;
+        };
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['LanguageProfileResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['LanguageProfileResource'];
+          };
+        };
+      };
+    };
+    /** @deprecated */
+    delete: {
+      parameters: {
+        path: {
+          id: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
   };
-  "/api/v3/log": {
+  '/api/v3/languageprofile/schema': {
+    /** @deprecated */
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["LogResourcePagingResource"];
+            'application/json': components['schemas']['LanguageProfileResource'];
           };
         };
       };
     };
   };
-  "/api/v3/log/file": {
+  '/api/v3/localization': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["LogFileResource"])[];
+            'application/json': components['schemas']['LocalizationResource'];
           };
         };
       };
     };
   };
-  "/api/v3/log/file/{filename}": {
+  '/api/v3/localization/language': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['LocalizationLanguageResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/localization/{id}': {
+    get: {
+      parameters: {
+        path: {
+          id: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['LocalizationResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/log': {
+    get: {
+      parameters: {
+        query?: {
+          page?: number;
+          pageSize?: number;
+          sortKey?: string;
+          sortDirection?: components['schemas']['SortDirection'];
+          level?: string;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['LogResourcePagingResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/log/file': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['LogFileResource'][];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/log/file/{filename}': {
     get: {
       parameters: {
         path: {
@@ -1602,13 +1996,15 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/manualimport": {
+  '/api/v3/manualimport': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           folder?: string;
           downloadId?: string;
@@ -1621,7 +2017,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["ManualImportResource"])[];
+            'application/json': components['schemas']['ManualImportResource'][];
           };
         };
       };
@@ -1629,16 +2025,18 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": (components["schemas"]["ManualImportReprocessResource"])[];
+          'application/json': components['schemas']['ManualImportReprocessResource'][];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/mediacover/{seriesId}/{filename}": {
+  '/api/v3/mediacover/{seriesId}/{filename}': {
     get: {
       parameters: {
         path: {
@@ -1648,23 +2046,25 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/config/mediamanagement": {
+  '/api/v3/config/mediamanagement': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["MediaManagementConfigResource"];
+            'application/json': components['schemas']['MediaManagementConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/mediamanagement/{id}": {
+  '/api/v3/config/mediamanagement/{id}': {
     get: {
       parameters: {
         path: {
@@ -1675,7 +2075,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["MediaManagementConfigResource"];
+            'application/json': components['schemas']['MediaManagementConfigResource'];
           };
         };
       };
@@ -1688,51 +2088,54 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MediaManagementConfigResource"];
+          'application/json': components['schemas']['MediaManagementConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MediaManagementConfigResource"];
-            "application/json": components["schemas"]["MediaManagementConfigResource"];
-            "text/json": components["schemas"]["MediaManagementConfigResource"];
+            'text/plain': components['schemas']['MediaManagementConfigResource'];
+            'application/json': components['schemas']['MediaManagementConfigResource'];
+            'text/json': components['schemas']['MediaManagementConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/metadata": {
+  '/api/v3/metadata': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["MetadataResource"])[];
+            'application/json': components['schemas']['MetadataResource'][];
           };
         };
       };
     };
     post: {
+      parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
+      };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MetadataResource"];
+          'application/json': components['schemas']['MetadataResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MetadataResource"];
-            "application/json": components["schemas"]["MetadataResource"];
-            "text/json": components["schemas"]["MetadataResource"];
+            'application/json': components['schemas']['MetadataResource'];
           };
         };
       };
     };
   };
-  "/api/v3/metadata/{id}": {
+  '/api/v3/metadata/{id}': {
     get: {
       parameters: {
         path: {
@@ -1743,29 +2146,30 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["MetadataResource"];
+            'application/json': components['schemas']['MetadataResource'];
           };
         };
       };
     };
     put: {
       parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
         path: {
           id: string;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MetadataResource"];
+          'application/json': components['schemas']['MetadataResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["MetadataResource"];
-            "application/json": components["schemas"]["MetadataResource"];
-            "text/json": components["schemas"]["MetadataResource"];
+            'application/json': components['schemas']['MetadataResource'];
           };
         };
       };
@@ -1778,44 +2182,50 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/metadata/schema": {
+  '/api/v3/metadata/schema': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["MetadataResource"])[];
+            'application/json': components['schemas']['MetadataResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/metadata/test": {
+  '/api/v3/metadata/test': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MetadataResource"];
+          'application/json': components['schemas']['MetadataResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/metadata/testall": {
+  '/api/v3/metadata/testall': {
     post: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/metadata/action/{name}": {
+  '/api/v3/metadata/action/{name}': {
     post: {
       parameters: {
         path: {
@@ -1824,34 +2234,41 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["MetadataResource"];
+          'application/json': components['schemas']['MetadataResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/wanted/missing": {
+  '/api/v3/wanted/missing': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
+          page?: number;
+          pageSize?: number;
+          sortKey?: string;
+          sortDirection?: components['schemas']['SortDirection'];
           includeSeries?: boolean;
           includeImages?: boolean;
+          monitored?: boolean;
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["EpisodeResourcePagingResource"];
+            'application/json': components['schemas']['EpisodeResourcePagingResource'];
           };
         };
       };
     };
   };
-  "/api/v3/wanted/missing/{id}": {
+  '/api/v3/wanted/missing/{id}': {
     get: {
       parameters: {
         path: {
@@ -1862,27 +2279,27 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["EpisodeResource"];
+            'application/json': components['schemas']['EpisodeResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/naming": {
+  '/api/v3/config/naming': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["NamingConfigResource"];
-            "application/json": components["schemas"]["NamingConfigResource"];
-            "text/json": components["schemas"]["NamingConfigResource"];
+            'text/plain': components['schemas']['NamingConfigResource'];
+            'application/json': components['schemas']['NamingConfigResource'];
+            'text/json': components['schemas']['NamingConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/naming/{id}": {
+  '/api/v3/config/naming/{id}': {
     get: {
       parameters: {
         path: {
@@ -1893,7 +2310,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["NamingConfigResource"];
+            'application/json': components['schemas']['NamingConfigResource'];
           };
         };
       };
@@ -1906,82 +2323,88 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["NamingConfigResource"];
-          "text/json": components["schemas"]["NamingConfigResource"];
-          "application/*+json": components["schemas"]["NamingConfigResource"];
+          'application/json': components['schemas']['NamingConfigResource'];
+          'text/json': components['schemas']['NamingConfigResource'];
+          'application/*+json': components['schemas']['NamingConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["NamingConfigResource"];
-            "application/json": components["schemas"]["NamingConfigResource"];
-            "text/json": components["schemas"]["NamingConfigResource"];
+            'text/plain': components['schemas']['NamingConfigResource'];
+            'application/json': components['schemas']['NamingConfigResource'];
+            'text/json': components['schemas']['NamingConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/naming/examples": {
+  '/api/v3/config/naming/examples': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
-          RenameEpisodes?: boolean;
-          ReplaceIllegalCharacters?: boolean;
-          MultiEpisodeStyle?: number;
-          StandardEpisodeFormat?: string;
-          DailyEpisodeFormat?: string;
-          AnimeEpisodeFormat?: string;
-          SeriesFolderFormat?: string;
-          SeasonFolderFormat?: string;
-          SpecialsFolderFormat?: string;
-          IncludeSeriesTitle?: boolean;
-          IncludeEpisodeTitle?: boolean;
-          IncludeQuality?: boolean;
-          ReplaceSpaces?: boolean;
-          Separator?: string;
-          NumberStyle?: string;
-          Id?: number;
-          ResourceName?: string;
+          renameEpisodes?: boolean;
+          replaceIllegalCharacters?: boolean;
+          colonReplacementFormat?: number;
+          multiEpisodeStyle?: number;
+          standardEpisodeFormat?: string;
+          dailyEpisodeFormat?: string;
+          animeEpisodeFormat?: string;
+          seriesFolderFormat?: string;
+          seasonFolderFormat?: string;
+          specialsFolderFormat?: string;
+          includeSeriesTitle?: boolean;
+          includeEpisodeTitle?: boolean;
+          includeQuality?: boolean;
+          replaceSpaces?: boolean;
+          separator?: string;
+          numberStyle?: string;
+          id?: number;
+          resourceName?: string;
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/notification": {
+  '/api/v3/notification': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["NotificationResource"])[];
+            'application/json': components['schemas']['NotificationResource'][];
           };
         };
       };
     };
     post: {
+      parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
+      };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["NotificationResource"];
+          'application/json': components['schemas']['NotificationResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["NotificationResource"];
-            "application/json": components["schemas"]["NotificationResource"];
-            "text/json": components["schemas"]["NotificationResource"];
+            'application/json': components['schemas']['NotificationResource'];
           };
         };
       };
     };
   };
-  "/api/v3/notification/{id}": {
+  '/api/v3/notification/{id}': {
     get: {
       parameters: {
         path: {
@@ -1992,29 +2415,30 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["NotificationResource"];
+            'application/json': components['schemas']['NotificationResource'];
           };
         };
       };
     };
     put: {
       parameters: {
+        query?: {
+          forceSave?: boolean;
+        };
         path: {
           id: string;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["NotificationResource"];
+          'application/json': components['schemas']['NotificationResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["NotificationResource"];
-            "application/json": components["schemas"]["NotificationResource"];
-            "text/json": components["schemas"]["NotificationResource"];
+            'application/json': components['schemas']['NotificationResource'];
           };
         };
       };
@@ -2027,44 +2451,50 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/notification/schema": {
+  '/api/v3/notification/schema': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["NotificationResource"])[];
+            'application/json': components['schemas']['NotificationResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/notification/test": {
+  '/api/v3/notification/test': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["NotificationResource"];
+          'application/json': components['schemas']['NotificationResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/notification/testall": {
+  '/api/v3/notification/testall': {
     post: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/notification/action/{name}": {
+  '/api/v3/notification/action/{name}': {
     post: {
       parameters: {
         path: {
@@ -2073,18 +2503,20 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["NotificationResource"];
+          'application/json': components['schemas']['NotificationResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/parse": {
+  '/api/v3/parse': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           title?: string;
           path?: string;
@@ -2094,21 +2526,25 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["ParseResource"];
+            'application/json': components['schemas']['ParseResource'];
           };
         };
       };
     };
   };
-  "/ping": {
+  '/ping': {
     get: {
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: {
+            'application/json': components['schemas']['PingResource'];
+          };
+        };
       };
     };
   };
-  "/api/v3/qualitydefinition/{id}": {
+  '/api/v3/qualitydefinition/{id}': {
     get: {
       parameters: {
         path: {
@@ -2119,7 +2555,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["QualityDefinitionResource"];
+            'application/json': components['schemas']['QualityDefinitionResource'];
           };
         };
       };
@@ -2132,59 +2568,61 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["QualityDefinitionResource"];
-          "text/json": components["schemas"]["QualityDefinitionResource"];
-          "application/*+json": components["schemas"]["QualityDefinitionResource"];
+          'application/json': components['schemas']['QualityDefinitionResource'];
+          'text/json': components['schemas']['QualityDefinitionResource'];
+          'application/*+json': components['schemas']['QualityDefinitionResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QualityDefinitionResource"];
-            "application/json": components["schemas"]["QualityDefinitionResource"];
-            "text/json": components["schemas"]["QualityDefinitionResource"];
+            'text/plain': components['schemas']['QualityDefinitionResource'];
+            'application/json': components['schemas']['QualityDefinitionResource'];
+            'text/json': components['schemas']['QualityDefinitionResource'];
           };
         };
       };
     };
   };
-  "/api/v3/qualitydefinition": {
+  '/api/v3/qualitydefinition': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["QualityDefinitionResource"])[];
-            "application/json": (components["schemas"]["QualityDefinitionResource"])[];
-            "text/json": (components["schemas"]["QualityDefinitionResource"])[];
+            'text/plain': components['schemas']['QualityDefinitionResource'][];
+            'application/json': components['schemas']['QualityDefinitionResource'][];
+            'text/json': components['schemas']['QualityDefinitionResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/qualitydefinition/update": {
+  '/api/v3/qualitydefinition/update': {
     put: {
       requestBody?: {
         content: {
-          "application/json": (components["schemas"]["QualityDefinitionResource"])[];
-          "text/json": (components["schemas"]["QualityDefinitionResource"])[];
-          "application/*+json": (components["schemas"]["QualityDefinitionResource"])[];
+          'application/json': components['schemas']['QualityDefinitionResource'][];
+          'text/json': components['schemas']['QualityDefinitionResource'][];
+          'application/*+json': components['schemas']['QualityDefinitionResource'][];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/qualityprofile": {
+  '/api/v3/qualityprofile': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["QualityProfileResource"])[];
+            'application/json': components['schemas']['QualityProfileResource'][];
           };
         };
       };
@@ -2192,22 +2630,22 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["QualityProfileResource"];
+          'application/json': components['schemas']['QualityProfileResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QualityProfileResource"];
-            "application/json": components["schemas"]["QualityProfileResource"];
-            "text/json": components["schemas"]["QualityProfileResource"];
+            'text/plain': components['schemas']['QualityProfileResource'];
+            'application/json': components['schemas']['QualityProfileResource'];
+            'text/json': components['schemas']['QualityProfileResource'];
           };
         };
       };
     };
   };
-  "/api/v3/qualityprofile/{id}": {
+  '/api/v3/qualityprofile/{id}': {
     get: {
       parameters: {
         path: {
@@ -2218,7 +2656,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["QualityProfileResource"];
+            'application/json': components['schemas']['QualityProfileResource'];
           };
         };
       };
@@ -2231,16 +2669,16 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["QualityProfileResource"];
+          'application/json': components['schemas']['QualityProfileResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QualityProfileResource"];
-            "application/json": components["schemas"]["QualityProfileResource"];
-            "text/json": components["schemas"]["QualityProfileResource"];
+            'text/plain': components['schemas']['QualityProfileResource'];
+            'application/json': components['schemas']['QualityProfileResource'];
+            'text/json': components['schemas']['QualityProfileResource'];
           };
         };
       };
@@ -2253,27 +2691,34 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/qualityprofile/schema": {
+  '/api/v3/qualityprofile/schema': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["QualityProfileResource"];
-            "application/json": components["schemas"]["QualityProfileResource"];
-            "text/json": components["schemas"]["QualityProfileResource"];
+            'text/plain': components['schemas']['QualityProfileResource'];
+            'application/json': components['schemas']['QualityProfileResource'];
+            'text/json': components['schemas']['QualityProfileResource'];
           };
         };
       };
     };
   };
-  "/api/v3/queue/{id}": {
-    get: {
+  '/api/v3/queue/{id}': {
+    delete: {
       parameters: {
+        query?: {
+          removeFromClient?: boolean;
+          blocklist?: boolean;
+          skipRedownload?: boolean;
+        };
         path: {
           id: number;
         };
@@ -2281,69 +2726,63 @@ export interface paths {
       responses: {
         /** @description Success */
         200: {
-          content: {
-            "application/json": components["schemas"]["QueueResource"];
-          };
+          content: never;
         };
       };
     };
+  };
+  '/api/v3/queue/bulk': {
     delete: {
       parameters: {
         query?: {
           removeFromClient?: boolean;
           blocklist?: boolean;
-        };
-        path: {
-          id: number;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/queue/bulk": {
-    delete: {
-      parameters?: {
-        query?: {
-          removeFromClient?: boolean;
-          blocklist?: boolean;
+          skipRedownload?: boolean;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["QueueBulkResource"];
-          "text/json": components["schemas"]["QueueBulkResource"];
-          "application/*+json": components["schemas"]["QueueBulkResource"];
+          'application/json': components['schemas']['QueueBulkResource'];
+          'text/json': components['schemas']['QueueBulkResource'];
+          'application/*+json': components['schemas']['QueueBulkResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/queue": {
+  '/api/v3/queue': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
+          page?: number;
+          pageSize?: number;
+          sortKey?: string;
+          sortDirection?: components['schemas']['SortDirection'];
           includeUnknownSeriesItems?: boolean;
           includeSeries?: boolean;
           includeEpisode?: boolean;
+          seriesIds?: number[];
+          protocol?: components['schemas']['DownloadProtocol'];
+          languages?: number[];
+          quality?: number;
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["QueueResourcePagingResource"];
+            'application/json': components['schemas']['QueueResourcePagingResource'];
           };
         };
       };
     };
   };
-  "/api/v3/queue/grab/{id}": {
+  '/api/v3/queue/grab/{id}': {
     post: {
       parameters: {
         path: {
@@ -2352,29 +2791,33 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/queue/grab/bulk": {
+  '/api/v3/queue/grab/bulk': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["QueueBulkResource"];
+          'application/json': components['schemas']['QueueBulkResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/queue/details": {
+  '/api/v3/queue/details': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           seriesId?: number;
-          episodeIds?: (number)[];
+          episodeIds?: number[];
           includeSeries?: boolean;
           includeEpisode?: boolean;
         };
@@ -2383,61 +2826,27 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["QueueResource"])[];
+            'application/json': components['schemas']['QueueResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/queue/details/{id}": {
+  '/api/v3/queue/status': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['QueueStatusResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/release': {
     get: {
       parameters: {
-        path: {
-          id: number;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "application/json": components["schemas"]["QueueResource"];
-          };
-        };
-      };
-    };
-  };
-  "/api/v3/queue/status": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "application/json": components["schemas"]["QueueStatusResource"];
-          };
-        };
-      };
-    };
-  };
-  "/api/v3/queue/status/{id}": {
-    get: {
-      parameters: {
-        path: {
-          id: number;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "application/json": components["schemas"]["QueueStatusResource"];
-          };
-        };
-      };
-    };
-  };
-  "/api/v3/release": {
-    get: {
-      parameters?: {
         query?: {
           seriesId?: number;
           episodeId?: number;
@@ -2448,7 +2857,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["ReleaseResource"])[];
+            'application/json': components['schemas']['ReleaseResource'][];
           };
         };
       };
@@ -2456,16 +2865,51 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ReleaseResource"];
+          'application/json': components['schemas']['ReleaseResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/release/{id}": {
+  '/api/v3/releaseprofile': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['ReleaseProfileResource'][];
+            'application/json': components['schemas']['ReleaseProfileResource'][];
+            'text/json': components['schemas']['ReleaseProfileResource'][];
+          };
+        };
+      };
+    };
+    post: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['ReleaseProfileResource'];
+          'text/json': components['schemas']['ReleaseProfileResource'];
+          'application/*+json': components['schemas']['ReleaseProfileResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['ReleaseProfileResource'];
+            'application/json': components['schemas']['ReleaseProfileResource'];
+            'text/json': components['schemas']['ReleaseProfileResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/releaseprofile/{id}': {
     get: {
       parameters: {
         path: {
@@ -2476,57 +2920,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["ReleaseResource"];
-          };
-        };
-      };
-    };
-  };
-  "/api/v3/releaseprofile": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "text/plain": (components["schemas"]["ReleaseProfileResource"])[];
-            "application/json": (components["schemas"]["ReleaseProfileResource"])[];
-            "text/json": (components["schemas"]["ReleaseProfileResource"])[];
-          };
-        };
-      };
-    };
-    post: {
-      requestBody?: {
-        content: {
-          "application/json": components["schemas"]["ReleaseProfileResource"];
-          "text/json": components["schemas"]["ReleaseProfileResource"];
-          "application/*+json": components["schemas"]["ReleaseProfileResource"];
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "text/plain": components["schemas"]["ReleaseProfileResource"];
-            "application/json": components["schemas"]["ReleaseProfileResource"];
-            "text/json": components["schemas"]["ReleaseProfileResource"];
-          };
-        };
-      };
-    };
-  };
-  "/api/v3/releaseprofile/{id}": {
-    get: {
-      parameters: {
-        path: {
-          id: number;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "application/json": components["schemas"]["ReleaseProfileResource"];
+            'application/json': components['schemas']['ReleaseProfileResource'];
           };
         };
       };
@@ -2539,18 +2933,18 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ReleaseProfileResource"];
-          "text/json": components["schemas"]["ReleaseProfileResource"];
-          "application/*+json": components["schemas"]["ReleaseProfileResource"];
+          'application/json': components['schemas']['ReleaseProfileResource'];
+          'text/json': components['schemas']['ReleaseProfileResource'];
+          'application/*+json': components['schemas']['ReleaseProfileResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["ReleaseProfileResource"];
-            "application/json": components["schemas"]["ReleaseProfileResource"];
-            "text/json": components["schemas"]["ReleaseProfileResource"];
+            'text/plain': components['schemas']['ReleaseProfileResource'];
+            'application/json': components['schemas']['ReleaseProfileResource'];
+            'text/json': components['schemas']['ReleaseProfileResource'];
           };
         };
       };
@@ -2563,30 +2957,61 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/release/push": {
+  '/api/v3/release/push': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["ReleaseResource"];
+          'application/json': components['schemas']['ReleaseResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["ReleaseResource"])[];
-            "application/json": (components["schemas"]["ReleaseResource"])[];
-            "text/json": (components["schemas"]["ReleaseResource"])[];
+            'text/plain': components['schemas']['ReleaseResource'][];
+            'application/json': components['schemas']['ReleaseResource'][];
+            'text/json': components['schemas']['ReleaseResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/release/push/{id}": {
+  '/api/v3/remotepathmapping': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['RemotePathMappingResource'][];
+          };
+        };
+      };
+    };
+    post: {
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['RemotePathMappingResource'];
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'text/plain': components['schemas']['RemotePathMappingResource'];
+            'application/json': components['schemas']['RemotePathMappingResource'];
+            'text/json': components['schemas']['RemotePathMappingResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/remotepathmapping/{id}': {
     get: {
       parameters: {
         path: {
@@ -2597,53 +3022,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["ReleaseResource"];
-          };
-        };
-      };
-    };
-  };
-  "/api/v3/remotepathmapping": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "application/json": (components["schemas"]["RemotePathMappingResource"])[];
-          };
-        };
-      };
-    };
-    post: {
-      requestBody?: {
-        content: {
-          "application/json": components["schemas"]["RemotePathMappingResource"];
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "text/plain": components["schemas"]["RemotePathMappingResource"];
-            "application/json": components["schemas"]["RemotePathMappingResource"];
-            "text/json": components["schemas"]["RemotePathMappingResource"];
-          };
-        };
-      };
-    };
-  };
-  "/api/v3/remotepathmapping/{id}": {
-    get: {
-      parameters: {
-        path: {
-          id: number;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "application/json": components["schemas"]["RemotePathMappingResource"];
+            'application/json': components['schemas']['RemotePathMappingResource'];
           };
         };
       };
@@ -2656,18 +3035,18 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["RemotePathMappingResource"];
-          "text/json": components["schemas"]["RemotePathMappingResource"];
-          "application/*+json": components["schemas"]["RemotePathMappingResource"];
+          'application/json': components['schemas']['RemotePathMappingResource'];
+          'text/json': components['schemas']['RemotePathMappingResource'];
+          'application/*+json': components['schemas']['RemotePathMappingResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["RemotePathMappingResource"];
-            "application/json": components["schemas"]["RemotePathMappingResource"];
-            "text/json": components["schemas"]["RemotePathMappingResource"];
+            'text/plain': components['schemas']['RemotePathMappingResource'];
+            'application/json': components['schemas']['RemotePathMappingResource'];
+            'text/json': components['schemas']['RemotePathMappingResource'];
           };
         };
       };
@@ -2680,13 +3059,15 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/rename": {
+  '/api/v3/rename': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           seriesId?: number;
           seasonNumber?: number;
@@ -2696,19 +3077,19 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["RenameEpisodeResource"])[];
+            'application/json': components['schemas']['RenameEpisodeResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/rootfolder": {
+  '/api/v3/rootfolder': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["RootFolderResource"])[];
+            'application/json': components['schemas']['RootFolderResource'][];
           };
         };
       };
@@ -2716,22 +3097,22 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["RootFolderResource"];
+          'application/json': components['schemas']['RootFolderResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["RootFolderResource"];
-            "application/json": components["schemas"]["RootFolderResource"];
-            "text/json": components["schemas"]["RootFolderResource"];
+            'text/plain': components['schemas']['RootFolderResource'];
+            'application/json': components['schemas']['RootFolderResource'];
+            'text/json': components['schemas']['RootFolderResource'];
           };
         };
       };
     };
   };
-  "/api/v3/rootfolder/{id}": {
+  '/api/v3/rootfolder/{id}': {
     get: {
       parameters: {
         path: {
@@ -2742,7 +3123,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["RootFolderResource"];
+            'application/json': components['schemas']['RootFolderResource'];
           };
         };
       };
@@ -2755,26 +3136,30 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/seasonpass": {
+  '/api/v3/seasonpass': {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["SeasonPassResource"];
+          'application/json': components['schemas']['SeasonPassResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/series": {
+  '/api/v3/series': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           tvdbId?: number;
           includeSeasonImages?: boolean;
@@ -2784,7 +3169,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["SeriesResource"])[];
+            'application/json': components['schemas']['SeriesResource'][];
           };
         };
       };
@@ -2792,24 +3177,27 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["SeriesResource"];
+          'application/json': components['schemas']['SeriesResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["SeriesResource"];
-            "application/json": components["schemas"]["SeriesResource"];
-            "text/json": components["schemas"]["SeriesResource"];
+            'text/plain': components['schemas']['SeriesResource'];
+            'application/json': components['schemas']['SeriesResource'];
+            'text/json': components['schemas']['SeriesResource'];
           };
         };
       };
     };
   };
-  "/api/v3/series/{id}": {
+  '/api/v3/series/{id}': {
     get: {
       parameters: {
+        query?: {
+          includeSeasonImages?: boolean;
+        };
         path: {
           id: number;
         };
@@ -2818,102 +3206,119 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["SeriesResource"];
+            'application/json': components['schemas']['SeriesResource'];
           };
         };
       };
     };
     put: {
       parameters: {
+        query?: {
+          moveFiles?: boolean;
+        };
         path: {
           id: string;
         };
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["SeriesResource"];
+          'application/json': components['schemas']['SeriesResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["SeriesResource"];
-            "application/json": components["schemas"]["SeriesResource"];
-            "text/json": components["schemas"]["SeriesResource"];
+            'text/plain': components['schemas']['SeriesResource'];
+            'application/json': components['schemas']['SeriesResource'];
+            'text/json': components['schemas']['SeriesResource'];
           };
         };
       };
     };
     delete: {
       parameters: {
+        query?: {
+          deleteFiles?: boolean;
+          addImportListExclusion?: boolean;
+        };
         path: {
           id: number;
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/series/editor": {
+  '/api/v3/series/editor': {
     put: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["SeriesEditorResource"];
-          "text/json": components["schemas"]["SeriesEditorResource"];
-          "application/*+json": components["schemas"]["SeriesEditorResource"];
+          'application/json': components['schemas']['SeriesEditorResource'];
+          'text/json': components['schemas']['SeriesEditorResource'];
+          'application/*+json': components['schemas']['SeriesEditorResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
     delete: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["SeriesEditorResource"];
-          "text/json": components["schemas"]["SeriesEditorResource"];
-          "application/*+json": components["schemas"]["SeriesEditorResource"];
+          'application/json': components['schemas']['SeriesEditorResource'];
+          'text/json': components['schemas']['SeriesEditorResource'];
+          'application/*+json': components['schemas']['SeriesEditorResource'];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/series/import": {
+  '/api/v3/series/import': {
     post: {
       requestBody?: {
         content: {
-          "application/json": (components["schemas"]["SeriesResource"])[];
-          "text/json": (components["schemas"]["SeriesResource"])[];
-          "application/*+json": (components["schemas"]["SeriesResource"])[];
+          'application/json': components['schemas']['SeriesResource'][];
+          'text/json': components['schemas']['SeriesResource'][];
+          'application/*+json': components['schemas']['SeriesResource'][];
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/series/lookup": {
+  '/api/v3/series/lookup': {
     get: {
-      parameters?: {
+      parameters: {
         query?: {
           term?: string;
         };
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/content/{path}": {
+  '/content/{path}': {
     get: {
       parameters: {
         path: {
@@ -2922,11 +3327,13 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/": {
+  '/': {
     get: {
       parameters: {
         path: {
@@ -2935,11 +3342,13 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/{path}": {
+  '/{path}': {
     get: {
       parameters: {
         path: {
@@ -2948,57 +3357,71 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/system/status": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/system/routes": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/system/routes/duplicate": {
-    get: {
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/system/shutdown": {
-    post: {
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/system/restart": {
-    post: {
-      responses: {
-        /** @description Success */
-        200: never;
-      };
-    };
-  };
-  "/api/v3/tag": {
+  '/api/v3/system/status': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["TagResource"])[];
+            'application/json': components['schemas']['SystemResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/system/routes': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/system/routes/duplicate': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/system/shutdown': {
+    post: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/system/restart': {
+    post: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: never;
+        };
+      };
+    };
+  };
+  '/api/v3/tag': {
+    get: {
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['TagResource'][];
           };
         };
       };
@@ -3006,22 +3429,22 @@ export interface paths {
     post: {
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["TagResource"];
+          'application/json': components['schemas']['TagResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["TagResource"];
-            "application/json": components["schemas"]["TagResource"];
-            "text/json": components["schemas"]["TagResource"];
+            'text/plain': components['schemas']['TagResource'];
+            'application/json': components['schemas']['TagResource'];
+            'text/json': components['schemas']['TagResource'];
           };
         };
       };
     };
   };
-  "/api/v3/tag/{id}": {
+  '/api/v3/tag/{id}': {
     get: {
       parameters: {
         path: {
@@ -3032,7 +3455,7 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["TagResource"];
+            'application/json': components['schemas']['TagResource'];
           };
         };
       };
@@ -3045,16 +3468,16 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["TagResource"];
+          'application/json': components['schemas']['TagResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["TagResource"];
-            "application/json": components["schemas"]["TagResource"];
-            "text/json": components["schemas"]["TagResource"];
+            'text/plain': components['schemas']['TagResource'];
+            'application/json': components['schemas']['TagResource'];
+            'text/json': components['schemas']['TagResource'];
           };
         };
       };
@@ -3067,23 +3490,25 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
-  "/api/v3/tag/detail": {
+  '/api/v3/tag/detail': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["TagDetailsResource"])[];
+            'application/json': components['schemas']['TagDetailsResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/tag/detail/{id}": {
+  '/api/v3/tag/detail/{id}': {
     get: {
       parameters: {
         path: {
@@ -3094,44 +3519,27 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["TagDetailsResource"];
+            'application/json': components['schemas']['TagDetailsResource'];
           };
         };
       };
     };
   };
-  "/api/v3/system/task": {
+  '/api/v3/system/task': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": (components["schemas"]["TaskResource"])[];
-            "application/json": (components["schemas"]["TaskResource"])[];
-            "text/json": (components["schemas"]["TaskResource"])[];
+            'text/plain': components['schemas']['TaskResource'][];
+            'application/json': components['schemas']['TaskResource'][];
+            'text/json': components['schemas']['TaskResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/system/task/{id}": {
-    get: {
-      parameters: {
-        path: {
-          id: number;
-        };
-      };
-      responses: {
-        /** @description Success */
-        200: {
-          content: {
-            "application/json": components["schemas"]["TaskResource"];
-          };
-        };
-      };
-    };
-  };
-  "/api/v3/config/ui/{id}": {
+  '/api/v3/system/task/{id}': {
     get: {
       parameters: {
         path: {
@@ -3142,7 +3550,24 @@ export interface paths {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["UiConfigResource"];
+            'application/json': components['schemas']['TaskResource'];
+          };
+        };
+      };
+    };
+  };
+  '/api/v3/config/ui/{id}': {
+    get: {
+      parameters: {
+        path: {
+          id: number;
+        };
+      };
+      responses: {
+        /** @description Success */
+        200: {
+          content: {
+            'application/json': components['schemas']['UiConfigResource'];
           };
         };
       };
@@ -3155,58 +3580,58 @@ export interface paths {
       };
       requestBody?: {
         content: {
-          "application/json": components["schemas"]["UiConfigResource"];
+          'application/json': components['schemas']['UiConfigResource'];
         };
       };
       responses: {
         /** @description Success */
         200: {
           content: {
-            "text/plain": components["schemas"]["UiConfigResource"];
-            "application/json": components["schemas"]["UiConfigResource"];
-            "text/json": components["schemas"]["UiConfigResource"];
+            'text/plain': components['schemas']['UiConfigResource'];
+            'application/json': components['schemas']['UiConfigResource'];
+            'text/json': components['schemas']['UiConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/config/ui": {
+  '/api/v3/config/ui': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": components["schemas"]["UiConfigResource"];
+            'application/json': components['schemas']['UiConfigResource'];
           };
         };
       };
     };
   };
-  "/api/v3/update": {
+  '/api/v3/update': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["UpdateResource"])[];
+            'application/json': components['schemas']['UpdateResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/log/file/update": {
+  '/api/v3/log/file/update': {
     get: {
       responses: {
         /** @description Success */
         200: {
           content: {
-            "application/json": (components["schemas"]["LogFileResource"])[];
+            'application/json': components['schemas']['LogFileResource'][];
           };
         };
       };
     };
   };
-  "/api/v3/log/file/update/{filename}": {
+  '/api/v3/log/file/update/{filename}': {
     get: {
       parameters: {
         path: {
@@ -3215,18 +3640,22 @@ export interface paths {
       };
       responses: {
         /** @description Success */
-        200: never;
+        200: {
+          content: never;
+        };
       };
     };
   };
 }
+
+export type webhooks = Record<string, never>;
 
 export interface components {
   schemas: {
     AddSeriesOptions: {
       ignoreEpisodesWithFiles?: boolean;
       ignoreEpisodesWithoutFiles?: boolean;
-      monitor?: components["schemas"]["MonitorTypes"];
+      monitor?: components['schemas']['MonitorTypes'];
       searchForMissingEpisodes?: boolean;
       searchForCutoffUnmetEpisodes?: boolean;
     };
@@ -3240,43 +3669,63 @@ export interface components {
       comment?: string | null;
     };
     /** @enum {string} */
-    ApplyTags: "add" | "remove" | "replace";
+    ApplyTags: 'add' | 'remove' | 'replace';
     /** @enum {string} */
-    AuthenticationRequiredType: "enabled" | "disabledForLocalAddresses";
+    AuthenticationRequiredType: 'enabled' | 'disabledForLocalAddresses';
     /** @enum {string} */
-    AuthenticationType: "none" | "basic" | "forms" | "external";
+    AuthenticationType: 'none' | 'basic' | 'forms' | 'external';
+    AutoTaggingResource: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      removeTagsAutomatically?: boolean;
+      tags?: number[] | null;
+      specifications?:
+        | components['schemas']['AutoTaggingSpecificationSchema'][]
+        | null;
+    };
+    AutoTaggingSpecificationSchema: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      implementation?: string | null;
+      implementationName?: string | null;
+      negate?: boolean;
+      required?: boolean;
+      fields?: components['schemas']['Field'][] | null;
+    };
     BackupResource: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
       path?: string | null;
-      type?: components["schemas"]["BackupType"];
+      type?: components['schemas']['BackupType'];
       /** Format: int64 */
       size?: number;
       /** Format: date-time */
       time?: string;
     };
     /** @enum {string} */
-    BackupType: "scheduled" | "manual" | "update";
+    BackupType: 'scheduled' | 'manual' | 'update';
     BlocklistBulkResource: {
-      ids?: (number)[] | null;
+      ids?: number[] | null;
     };
     BlocklistResource: {
       /** Format: int32 */
       id?: number;
       /** Format: int32 */
       seriesId?: number;
-      episodeIds?: (number)[] | null;
+      episodeIds?: number[] | null;
       sourceTitle?: string | null;
-      languages?: (components["schemas"]["Language"])[] | null;
-      quality?: components["schemas"]["QualityModel"];
-      customFormats?: (components["schemas"]["CustomFormatResource"])[] | null;
+      languages?: components['schemas']['Language'][] | null;
+      quality?: components['schemas']['QualityModel'];
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
       /** Format: date-time */
       date?: string;
-      protocol?: components["schemas"]["DownloadProtocol"];
+      protocol?: components['schemas']['DownloadProtocol'];
       indexer?: string | null;
       message?: string | null;
-      series?: components["schemas"]["SeriesResource"];
+      series?: components['schemas']['SeriesResource'];
     };
     BlocklistResourcePagingResource: {
       /** Format: int32 */
@@ -3284,14 +3733,16 @@ export interface components {
       /** Format: int32 */
       pageSize?: number;
       sortKey?: string | null;
-      sortDirection?: components["schemas"]["SortDirection"];
-      filters?: (components["schemas"]["PagingResourceFilter"])[] | null;
+      sortDirection?: components['schemas']['SortDirection'];
       /** Format: int32 */
       totalRecords?: number;
-      records?: (components["schemas"]["BlocklistResource"])[] | null;
+      records?: components['schemas']['BlocklistResource'][] | null;
     };
     /** @enum {string} */
-    CertificateValidationType: "enabled" | "disabledForLocalAddresses" | "disabled";
+    CertificateValidationType:
+      | 'enabled'
+      | 'disabledForLocalAddresses'
+      | 'disabled';
     Command: {
       sendUpdatesToClient?: boolean;
       updateScheduledTask?: boolean;
@@ -3302,30 +3753,33 @@ export interface components {
       name?: string | null;
       /** Format: date-time */
       lastExecutionTime?: string | null;
-      trigger?: components["schemas"]["CommandTrigger"];
+      /** Format: date-time */
+      lastStartTime?: string | null;
+      trigger?: components['schemas']['CommandTrigger'];
       suppressMessages?: boolean;
       clientUserAgent?: string | null;
     };
     /** @enum {string} */
-    CommandPriority: "normal" | "high" | "low";
+    CommandPriority: 'normal' | 'high' | 'low';
     CommandResource: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
       commandName?: string | null;
       message?: string | null;
-      body?: components["schemas"]["Command"];
-      priority?: components["schemas"]["CommandPriority"];
-      status?: components["schemas"]["CommandStatus"];
+      body?: components['schemas']['Command'];
+      priority?: components['schemas']['CommandPriority'];
+      status?: components['schemas']['CommandStatus'];
+      result?: components['schemas']['CommandResult'];
       /** Format: date-time */
       queued?: string;
       /** Format: date-time */
       started?: string | null;
       /** Format: date-time */
       ended?: string | null;
-      duration?: components["schemas"]["TimeSpan"];
+      duration?: components['schemas']['TimeSpan'];
       exception?: string | null;
-      trigger?: components["schemas"]["CommandTrigger"];
+      trigger?: components['schemas']['CommandTrigger'];
       clientUserAgent?: string | null;
       /** Format: date-time */
       stateChangeTime?: string | null;
@@ -3335,24 +3789,37 @@ export interface components {
       lastExecutionTime?: string | null;
     };
     /** @enum {string} */
-    CommandStatus: "queued" | "started" | "completed" | "failed" | "aborted" | "cancelled" | "orphaned";
+    CommandResult: 'unknown' | 'successful' | 'unsuccessful';
     /** @enum {string} */
-    CommandTrigger: "unspecified" | "manual" | "scheduled";
+    CommandStatus:
+      | 'queued'
+      | 'started'
+      | 'completed'
+      | 'failed'
+      | 'aborted'
+      | 'cancelled'
+      | 'orphaned';
+    /** @enum {string} */
+    CommandTrigger: 'unspecified' | 'manual' | 'scheduled';
     CustomFilterResource: {
       /** Format: int32 */
       id?: number;
       type?: string | null;
       label?: string | null;
-      filters?: (({
-          [key: string]: unknown | undefined;
-        })[]) | null;
+      filters?:
+        | {
+            [key: string]: unknown;
+          }[]
+        | null;
     };
     CustomFormatResource: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      includeCustomFormatWhenRenaming?: boolean;
-      specifications?: (components["schemas"]["CustomFormatSpecificationSchema"])[] | null;
+      includeCustomFormatWhenRenaming?: boolean | null;
+      specifications?:
+        | components['schemas']['CustomFormatSpecificationSchema'][]
+        | null;
     };
     CustomFormatSpecificationSchema: {
       /** Format: int32 */
@@ -3363,23 +3830,30 @@ export interface components {
       infoLink?: string | null;
       negate?: boolean;
       required?: boolean;
-      fields?: (components["schemas"]["Field"])[] | null;
-      presets?: (components["schemas"]["CustomFormatSpecificationSchema"])[] | null;
+      fields?: components['schemas']['Field'][] | null;
+      presets?:
+        | components['schemas']['CustomFormatSpecificationSchema'][]
+        | null;
     };
+    /** @enum {string} */
+    DatabaseType: 'sqLite' | 'postgreSQL';
     DelayProfileResource: {
       /** Format: int32 */
       id?: number;
       enableUsenet?: boolean;
       enableTorrent?: boolean;
-      preferredProtocol?: components["schemas"]["DownloadProtocol"];
+      preferredProtocol?: components['schemas']['DownloadProtocol'];
       /** Format: int32 */
       usenetDelay?: number;
       /** Format: int32 */
       torrentDelay?: number;
       bypassIfHighestQuality?: boolean;
+      bypassIfAboveCustomFormatScore?: boolean;
+      /** Format: int32 */
+      minimumCustomFormatScore?: number;
       /** Format: int32 */
       order?: number;
-      tags?: (number)[] | null;
+      tags?: number[] | null;
     };
     DiskSpaceResource: {
       /** Format: int32 */
@@ -3391,38 +3865,49 @@ export interface components {
       /** Format: int64 */
       totalSpace?: number;
     };
+    DownloadClientBulkResource: {
+      ids?: number[] | null;
+      tags?: number[] | null;
+      applyTags?: components['schemas']['ApplyTags'];
+      enable?: boolean | null;
+      /** Format: int32 */
+      priority?: number | null;
+      removeCompletedDownloads?: boolean | null;
+      removeFailedDownloads?: boolean | null;
+    };
     DownloadClientConfigResource: {
       /** Format: int32 */
       id?: number;
       downloadClientWorkingFolders?: string | null;
       enableCompletedDownloadHandling?: boolean;
       autoRedownloadFailed?: boolean;
+      autoRedownloadFailedFromInteractiveSearch?: boolean;
     };
     DownloadClientResource: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      fields?: (components["schemas"]["Field"])[] | null;
+      fields?: components['schemas']['Field'][] | null;
       implementationName?: string | null;
       implementation?: string | null;
       configContract?: string | null;
       infoLink?: string | null;
-      message?: components["schemas"]["ProviderMessage"];
-      tags?: (number)[] | null;
-      presets?: (components["schemas"]["DownloadClientResource"])[] | null;
+      message?: components['schemas']['ProviderMessage'];
+      tags?: number[] | null;
+      presets?: components['schemas']['DownloadClientResource'][] | null;
       enable?: boolean;
-      protocol?: components["schemas"]["DownloadProtocol"];
+      protocol?: components['schemas']['DownloadProtocol'];
       /** Format: int32 */
       priority?: number;
       removeCompletedDownloads?: boolean;
       removeFailedDownloads?: boolean;
     };
     /** @enum {string} */
-    DownloadProtocol: "unknown" | "usenet" | "torrent";
+    DownloadProtocol: 'unknown' | 'usenet' | 'torrent';
     EpisodeFileListResource: {
-      episodeFileIds?: (number)[] | null;
-      languages?: (components["schemas"]["Language"])[] | null;
-      quality?: components["schemas"]["QualityModel"];
+      episodeFileIds?: number[] | null;
+      languages?: components['schemas']['Language'][] | null;
+      quality?: components['schemas']['QualityModel'];
       sceneName?: string | null;
       releaseGroup?: string | null;
     };
@@ -3441,14 +3926,24 @@ export interface components {
       dateAdded?: string;
       sceneName?: string | null;
       releaseGroup?: string | null;
-      languages?: (components["schemas"]["Language"])[] | null;
-      quality?: components["schemas"]["QualityModel"];
-      customFormats?: (components["schemas"]["CustomFormatResource"])[] | null;
-      mediaInfo?: components["schemas"]["MediaInfoResource"];
+      languages?: components['schemas']['Language'][] | null;
+      quality?: components['schemas']['QualityModel'];
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
+      /** Format: int32 */
+      customFormatScore?: number;
+      mediaInfo?: components['schemas']['MediaInfoResource'];
       qualityCutoffNotMet?: boolean;
     };
     /** @enum {string} */
-    EpisodeHistoryEventType: "unknown" | "grabbed" | "seriesFolderImported" | "downloadFolderImported" | "downloadFailed" | "episodeFileDeleted" | "episodeFileRenamed" | "downloadIgnored";
+    EpisodeHistoryEventType:
+      | 'unknown'
+      | 'grabbed'
+      | 'seriesFolderImported'
+      | 'downloadFolderImported'
+      | 'downloadFailed'
+      | 'episodeFileDeleted'
+      | 'episodeFileRenamed'
+      | 'downloadIgnored';
     EpisodeResource: {
       /** Format: int32 */
       id?: number;
@@ -3466,8 +3961,11 @@ export interface components {
       airDate?: string | null;
       /** Format: date-time */
       airDateUtc?: string | null;
+      /** Format: int32 */
+      runtime?: number;
+      finaleType?: string | null;
       overview?: string | null;
-      episodeFile?: components["schemas"]["EpisodeFileResource"];
+      episodeFile?: components['schemas']['EpisodeFileResource'];
       hasFile?: boolean;
       monitored?: boolean;
       /** Format: int32 */
@@ -3484,8 +3982,8 @@ export interface components {
       /** Format: date-time */
       grabDate?: string | null;
       seriesTitle?: string | null;
-      series?: components["schemas"]["SeriesResource"];
-      images?: (components["schemas"]["MediaCover"])[] | null;
+      series?: components['schemas']['SeriesResource'];
+      images?: components['schemas']['MediaCover'][] | null;
       grabbed?: boolean;
     };
     EpisodeResourcePagingResource: {
@@ -3494,16 +3992,15 @@ export interface components {
       /** Format: int32 */
       pageSize?: number;
       sortKey?: string | null;
-      sortDirection?: components["schemas"]["SortDirection"];
-      filters?: (components["schemas"]["PagingResourceFilter"])[] | null;
+      sortDirection?: components['schemas']['SortDirection'];
       /** Format: int32 */
       totalRecords?: number;
-      records?: (components["schemas"]["EpisodeResource"])[] | null;
+      records?: components['schemas']['EpisodeResource'][] | null;
     };
     /** @enum {string} */
-    EpisodeTitleRequiredType: "always" | "bulkSeasonReleases" | "never";
+    EpisodeTitleRequiredType: 'always' | 'bulkSeasonReleases' | 'never';
     EpisodesMonitoredResource: {
-      episodeIds?: (number)[] | null;
+      episodeIds?: number[] | null;
       monitored?: boolean;
     };
     Field: {
@@ -3513,27 +4010,30 @@ export interface components {
       label?: string | null;
       unit?: string | null;
       helpText?: string | null;
+      helpTextWarning?: string | null;
       helpLink?: string | null;
       value?: Record<string, unknown> | null;
       type?: string | null;
       advanced?: boolean;
-      selectOptions?: (components["schemas"]["SelectOption"])[] | null;
+      selectOptions?: components['schemas']['SelectOption'][] | null;
       selectOptionsProviderAction?: string | null;
       section?: string | null;
       hidden?: string | null;
-      privacy?: components["schemas"]["PrivacyLevel"];
+      privacy?: components['schemas']['PrivacyLevel'];
+      placeholder?: string | null;
+      isFloat?: boolean;
     };
     /** @enum {string} */
-    FileDateType: "none" | "localAirDate" | "utcAirDate";
+    FileDateType: 'none' | 'localAirDate' | 'utcAirDate';
     /** @enum {string} */
-    HealthCheckResult: "ok" | "notice" | "warning" | "error";
+    HealthCheckResult: 'ok' | 'notice' | 'warning' | 'error';
     HealthResource: {
       /** Format: int32 */
       id?: number;
       source?: string | null;
-      type?: components["schemas"]["HealthCheckResult"];
+      type?: components['schemas']['HealthCheckResult'];
       message?: string | null;
-      wikiUrl?: components["schemas"]["HttpUri"];
+      wikiUrl?: components['schemas']['HttpUri'];
     };
     HistoryResource: {
       /** Format: int32 */
@@ -3543,19 +4043,21 @@ export interface components {
       /** Format: int32 */
       seriesId?: number;
       sourceTitle?: string | null;
-      languages?: (components["schemas"]["Language"])[] | null;
-      quality?: components["schemas"]["QualityModel"];
-      customFormats?: (components["schemas"]["CustomFormatResource"])[] | null;
+      languages?: components['schemas']['Language'][] | null;
+      quality?: components['schemas']['QualityModel'];
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
+      /** Format: int32 */
+      customFormatScore?: number;
       qualityCutoffNotMet?: boolean;
       /** Format: date-time */
       date?: string;
       downloadId?: string | null;
-      eventType?: components["schemas"]["EpisodeHistoryEventType"];
-      data?: ({
-        [key: string]: (string | null) | undefined;
-      }) | null;
-      episode?: components["schemas"]["EpisodeResource"];
-      series?: components["schemas"]["SeriesResource"];
+      eventType?: components['schemas']['EpisodeHistoryEventType'];
+      data?: {
+        [key: string]: string | null;
+      } | null;
+      episode?: components['schemas']['EpisodeResource'];
+      series?: components['schemas']['SeriesResource'];
     };
     HistoryResourcePagingResource: {
       /** Format: int32 */
@@ -3563,11 +4065,10 @@ export interface components {
       /** Format: int32 */
       pageSize?: number;
       sortKey?: string | null;
-      sortDirection?: components["schemas"]["SortDirection"];
-      filters?: (components["schemas"]["PagingResourceFilter"])[] | null;
+      sortDirection?: components['schemas']['SortDirection'];
       /** Format: int32 */
       totalRecords?: number;
-      records?: (components["schemas"]["HistoryResource"])[] | null;
+      records?: components['schemas']['HistoryResource'][] | null;
     };
     HostConfigResource: {
       /** Format: int32 */
@@ -3579,8 +4080,8 @@ export interface components {
       sslPort?: number;
       enableSsl?: boolean;
       launchBrowser?: boolean;
-      authenticationMethod?: components["schemas"]["AuthenticationType"];
-      authenticationRequired?: components["schemas"]["AuthenticationRequiredType"];
+      authenticationMethod?: components['schemas']['AuthenticationType'];
+      authenticationRequired?: components['schemas']['AuthenticationRequiredType'];
       analyticsEnabled?: boolean;
       username?: string | null;
       password?: string | null;
@@ -3594,10 +4095,10 @@ export interface components {
       instanceName?: string | null;
       applicationUrl?: string | null;
       updateAutomatically?: boolean;
-      updateMechanism?: components["schemas"]["UpdateMechanism"];
+      updateMechanism?: components['schemas']['UpdateMechanism'];
       updateScriptPath?: string | null;
       proxyEnabled?: boolean;
-      proxyType?: components["schemas"]["ProxyType"];
+      proxyType?: components['schemas']['ProxyType'];
       proxyHostname?: string | null;
       /** Format: int32 */
       proxyPort?: number;
@@ -3605,7 +4106,7 @@ export interface components {
       proxyPassword?: string | null;
       proxyBypassFilter?: string | null;
       proxyBypassLocalAddresses?: boolean;
-      certificateValidation?: components["schemas"]["CertificateValidationType"];
+      certificateValidation?: components['schemas']['CertificateValidationType'];
       backupFolder?: string | null;
       /** Format: int32 */
       backupInterval?: number;
@@ -3622,6 +4123,15 @@ export interface components {
       query?: string | null;
       fragment?: string | null;
     };
+    ImportListBulkResource: {
+      ids?: number[] | null;
+      tags?: number[] | null;
+      applyTags?: components['schemas']['ApplyTags'];
+      enableAutomaticAdd?: boolean | null;
+      rootFolderPath?: string | null;
+      /** Format: int32 */
+      qualityProfileId?: number | null;
+    };
     ImportListExclusionResource: {
       /** Format: int32 */
       id?: number;
@@ -3633,27 +4143,45 @@ export interface components {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      fields?: (components["schemas"]["Field"])[] | null;
+      fields?: components['schemas']['Field'][] | null;
       implementationName?: string | null;
       implementation?: string | null;
       configContract?: string | null;
       infoLink?: string | null;
-      message?: components["schemas"]["ProviderMessage"];
-      tags?: (number)[] | null;
-      presets?: (components["schemas"]["ImportListResource"])[] | null;
+      message?: components['schemas']['ProviderMessage'];
+      tags?: number[] | null;
+      presets?: components['schemas']['ImportListResource'][] | null;
       enableAutomaticAdd?: boolean;
-      shouldMonitor?: components["schemas"]["MonitorTypes"];
+      searchForMissingEpisodes?: boolean;
+      shouldMonitor?: components['schemas']['MonitorTypes'];
       rootFolderPath?: string | null;
       /** Format: int32 */
       qualityProfileId?: number;
-      seriesType?: components["schemas"]["SeriesTypes"];
+      seriesType?: components['schemas']['SeriesTypes'];
       seasonFolder?: boolean;
-      listType?: components["schemas"]["ImportListType"];
+      listType?: components['schemas']['ImportListType'];
       /** Format: int32 */
       listOrder?: number;
+      minRefreshInterval?: components['schemas']['TimeSpan'];
     };
     /** @enum {string} */
-    ImportListType: "program" | "plex" | "trakt" | "other" | "advanced";
+    ImportListType:
+      | 'program'
+      | 'plex'
+      | 'trakt'
+      | 'simkl'
+      | 'other'
+      | 'advanced';
+    IndexerBulkResource: {
+      ids?: number[] | null;
+      tags?: number[] | null;
+      applyTags?: components['schemas']['ApplyTags'];
+      enableRss?: boolean | null;
+      enableAutomaticSearch?: boolean | null;
+      enableInteractiveSearch?: boolean | null;
+      /** Format: int32 */
+      priority?: number | null;
+    };
     IndexerConfigResource: {
       /** Format: int32 */
       id?: number;
@@ -3670,20 +4198,20 @@ export interface components {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      fields?: (components["schemas"]["Field"])[] | null;
+      fields?: components['schemas']['Field'][] | null;
       implementationName?: string | null;
       implementation?: string | null;
       configContract?: string | null;
       infoLink?: string | null;
-      message?: components["schemas"]["ProviderMessage"];
-      tags?: (number)[] | null;
-      presets?: (components["schemas"]["IndexerResource"])[] | null;
+      message?: components['schemas']['ProviderMessage'];
+      tags?: number[] | null;
+      presets?: components['schemas']['IndexerResource'][] | null;
       enableRss?: boolean;
       enableAutomaticSearch?: boolean;
       enableInteractiveSearch?: boolean;
       supportsRss?: boolean;
       supportsSearch?: boolean;
-      protocol?: components["schemas"]["DownloadProtocol"];
+      protocol?: components['schemas']['DownloadProtocol'];
       /** Format: int32 */
       priority?: number;
       /** Format: int32 */
@@ -3696,18 +4224,35 @@ export interface components {
       id?: number;
       name?: string | null;
     };
+    LanguageProfileItemResource: {
+      /** Format: int32 */
+      id?: number;
+      language?: components['schemas']['Language'];
+      allowed?: boolean;
+    };
+    LanguageProfileResource: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      upgradeAllowed?: boolean;
+      cutoff?: components['schemas']['Language'];
+      languages?: components['schemas']['LanguageProfileItemResource'][] | null;
+    };
     LanguageResource: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
       nameLower?: string | null;
     };
+    LocalizationLanguageResource: {
+      identifier?: string | null;
+    };
     LocalizationResource: {
       /** Format: int32 */
       id?: number;
-      strings?: ({
-        [key: string]: (string | null) | undefined;
-      }) | null;
+      strings?: {
+        [key: string]: string | null;
+      } | null;
     };
     LogFileResource: {
       /** Format: int32 */
@@ -3736,11 +4281,10 @@ export interface components {
       /** Format: int32 */
       pageSize?: number;
       sortKey?: string | null;
-      sortDirection?: components["schemas"]["SortDirection"];
-      filters?: (components["schemas"]["PagingResourceFilter"])[] | null;
+      sortDirection?: components['schemas']['SortDirection'];
       /** Format: int32 */
       totalRecords?: number;
-      records?: (components["schemas"]["LogResource"])[] | null;
+      records?: components['schemas']['LogResource'][] | null;
     };
     ManualImportReprocessResource: {
       /** Format: int32 */
@@ -3750,13 +4294,16 @@ export interface components {
       seriesId?: number;
       /** Format: int32 */
       seasonNumber?: number | null;
-      episodes?: (components["schemas"]["EpisodeResource"])[] | null;
-      episodeIds?: (number)[] | null;
-      quality?: components["schemas"]["QualityModel"];
-      languages?: (components["schemas"]["Language"])[] | null;
+      episodes?: components['schemas']['EpisodeResource'][] | null;
+      episodeIds?: number[] | null;
+      quality?: components['schemas']['QualityModel'];
+      languages?: components['schemas']['Language'][] | null;
       releaseGroup?: string | null;
       downloadId?: string | null;
-      rejections?: (components["schemas"]["Rejection"])[] | null;
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
+      /** Format: int32 */
+      customFormatScore?: number;
+      rejections?: components['schemas']['Rejection'][] | null;
     };
     ManualImportResource: {
       /** Format: int32 */
@@ -3767,27 +4314,37 @@ export interface components {
       name?: string | null;
       /** Format: int64 */
       size?: number;
-      series?: components["schemas"]["SeriesResource"];
+      series?: components['schemas']['SeriesResource'];
       /** Format: int32 */
       seasonNumber?: number | null;
-      episodes?: (components["schemas"]["EpisodeResource"])[] | null;
+      episodes?: components['schemas']['EpisodeResource'][] | null;
       /** Format: int32 */
       episodeFileId?: number | null;
       releaseGroup?: string | null;
-      quality?: components["schemas"]["QualityModel"];
-      languages?: (components["schemas"]["Language"])[] | null;
+      quality?: components['schemas']['QualityModel'];
+      languages?: components['schemas']['Language'][] | null;
       /** Format: int32 */
       qualityWeight?: number;
       downloadId?: string | null;
-      rejections?: (components["schemas"]["Rejection"])[] | null;
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
+      /** Format: int32 */
+      customFormatScore?: number;
+      rejections?: components['schemas']['Rejection'][] | null;
     };
     MediaCover: {
-      coverType?: components["schemas"]["MediaCoverTypes"];
+      coverType?: components['schemas']['MediaCoverTypes'];
       url?: string | null;
       remoteUrl?: string | null;
     };
     /** @enum {string} */
-    MediaCoverTypes: "unknown" | "poster" | "banner" | "fanart" | "screenshot" | "headshot";
+    MediaCoverTypes:
+      | 'unknown'
+      | 'poster'
+      | 'banner'
+      | 'fanart'
+      | 'screenshot'
+      | 'headshot'
+      | 'clearlogo';
     MediaInfoResource: {
       /** Format: int32 */
       id?: number;
@@ -3820,19 +4377,21 @@ export interface components {
       recycleBin?: string | null;
       /** Format: int32 */
       recycleBinCleanupDays?: number;
-      downloadPropersAndRepacks?: components["schemas"]["ProperDownloadTypes"];
+      downloadPropersAndRepacks?: components['schemas']['ProperDownloadTypes'];
       createEmptySeriesFolders?: boolean;
       deleteEmptyFolders?: boolean;
-      fileDate?: components["schemas"]["FileDateType"];
-      rescanAfterRefresh?: components["schemas"]["RescanAfterRefreshType"];
+      fileDate?: components['schemas']['FileDateType'];
+      rescanAfterRefresh?: components['schemas']['RescanAfterRefreshType'];
       setPermissionsLinux?: boolean;
       chmodFolder?: string | null;
       chownGroup?: string | null;
-      episodeTitleRequired?: components["schemas"]["EpisodeTitleRequiredType"];
+      episodeTitleRequired?: components['schemas']['EpisodeTitleRequiredType'];
       skipFreeSpaceCheckWhenImporting?: boolean;
       /** Format: int32 */
       minimumFreeSpaceWhenImporting?: number;
       copyUsingHardlinks?: boolean;
+      useScriptImport?: boolean;
+      scriptImportPath?: string | null;
       importExtraFiles?: boolean;
       extraFileExtensions?: string | null;
       enableMediaInfo?: boolean;
@@ -3841,28 +4400,41 @@ export interface components {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      fields?: (components["schemas"]["Field"])[] | null;
+      fields?: components['schemas']['Field'][] | null;
       implementationName?: string | null;
       implementation?: string | null;
       configContract?: string | null;
       infoLink?: string | null;
-      message?: components["schemas"]["ProviderMessage"];
-      tags?: (number)[] | null;
-      presets?: (components["schemas"]["MetadataResource"])[] | null;
+      message?: components['schemas']['ProviderMessage'];
+      tags?: number[] | null;
+      presets?: components['schemas']['MetadataResource'][] | null;
       enable?: boolean;
     };
     /** @enum {string} */
-    MonitorTypes: "unknown" | "all" | "future" | "missing" | "existing" | "firstSeason" | "latestSeason" | "pilot" | "none";
+    MonitorTypes:
+      | 'unknown'
+      | 'all'
+      | 'future'
+      | 'missing'
+      | 'existing'
+      | 'firstSeason'
+      | 'latestSeason'
+      | 'pilot'
+      | 'monitorSpecials'
+      | 'unmonitorSpecials'
+      | 'none';
     MonitoringOptions: {
       ignoreEpisodesWithFiles?: boolean;
       ignoreEpisodesWithoutFiles?: boolean;
-      monitor?: components["schemas"]["MonitorTypes"];
+      monitor?: components['schemas']['MonitorTypes'];
     };
     NamingConfigResource: {
       /** Format: int32 */
       id?: number;
       renameEpisodes?: boolean;
       replaceIllegalCharacters?: boolean;
+      /** Format: int32 */
+      colonReplacementFormat?: number;
       /** Format: int32 */
       multiEpisodeStyle?: number;
       standardEpisodeFormat?: string | null;
@@ -3882,60 +4454,66 @@ export interface components {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      fields?: (components["schemas"]["Field"])[] | null;
+      fields?: components['schemas']['Field'][] | null;
       implementationName?: string | null;
       implementation?: string | null;
       configContract?: string | null;
       infoLink?: string | null;
-      message?: components["schemas"]["ProviderMessage"];
-      tags?: (number)[] | null;
-      presets?: (components["schemas"]["NotificationResource"])[] | null;
+      message?: components['schemas']['ProviderMessage'];
+      tags?: number[] | null;
+      presets?: components['schemas']['NotificationResource'][] | null;
       link?: string | null;
       onGrab?: boolean;
       onDownload?: boolean;
       onUpgrade?: boolean;
       onRename?: boolean;
+      onSeriesAdd?: boolean;
       onSeriesDelete?: boolean;
       onEpisodeFileDelete?: boolean;
       onEpisodeFileDeleteForUpgrade?: boolean;
       onHealthIssue?: boolean;
+      onHealthRestored?: boolean;
       onApplicationUpdate?: boolean;
+      onManualInteractionRequired?: boolean;
       supportsOnGrab?: boolean;
       supportsOnDownload?: boolean;
       supportsOnUpgrade?: boolean;
       supportsOnRename?: boolean;
+      supportsOnSeriesAdd?: boolean;
       supportsOnSeriesDelete?: boolean;
       supportsOnEpisodeFileDelete?: boolean;
       supportsOnEpisodeFileDeleteForUpgrade?: boolean;
       supportsOnHealthIssue?: boolean;
+      supportsOnHealthRestored?: boolean;
       supportsOnApplicationUpdate?: boolean;
+      supportsOnManualInteractionRequired?: boolean;
       includeHealthWarnings?: boolean;
       testCommand?: string | null;
-    };
-    PagingResourceFilter: {
-      key?: string | null;
-      value?: string | null;
     };
     ParseResource: {
       /** Format: int32 */
       id?: number;
       title?: string | null;
-      parsedEpisodeInfo?: components["schemas"]["ParsedEpisodeInfo"];
-      series?: components["schemas"]["SeriesResource"];
-      episodes?: (components["schemas"]["EpisodeResource"])[] | null;
+      parsedEpisodeInfo?: components['schemas']['ParsedEpisodeInfo'];
+      series?: components['schemas']['SeriesResource'];
+      episodes?: components['schemas']['EpisodeResource'][] | null;
+      languages?: components['schemas']['Language'][] | null;
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
+      /** Format: int32 */
+      customFormatScore?: number;
     };
     ParsedEpisodeInfo: {
       releaseTitle?: string | null;
       seriesTitle?: string | null;
-      seriesTitleInfo?: components["schemas"]["SeriesTitleInfo"];
-      quality?: components["schemas"]["QualityModel"];
+      seriesTitleInfo?: components['schemas']['SeriesTitleInfo'];
+      quality?: components['schemas']['QualityModel'];
       /** Format: int32 */
       seasonNumber?: number;
-      episodeNumbers?: (number)[] | null;
-      absoluteEpisodeNumbers?: (number)[] | null;
-      specialAbsoluteEpisodeNumbers?: (number)[] | null;
+      episodeNumbers?: number[] | null;
+      absoluteEpisodeNumbers?: number[] | null;
+      specialAbsoluteEpisodeNumbers?: number[] | null;
       airDate?: string | null;
-      languages?: (components["schemas"]["Language"])[] | null;
+      languages?: components['schemas']['Language'][] | null;
       fullSeason?: boolean;
       isPartialSeason?: boolean;
       isMultiSeason?: boolean;
@@ -3953,8 +4531,11 @@ export interface components {
       isPossibleSpecialEpisode?: boolean;
       isPossibleSceneSeasonSpecial?: boolean;
     };
+    PingResource: {
+      status?: string | null;
+    };
     /** @enum {string} */
-    PrivacyLevel: "normal" | "password" | "apiKey" | "userName";
+    PrivacyLevel: 'normal' | 'password' | 'apiKey' | 'userName';
     ProfileFormatItemResource: {
       /** Format: int32 */
       id?: number;
@@ -3965,27 +4546,27 @@ export interface components {
       score?: number;
     };
     /** @enum {string} */
-    ProperDownloadTypes: "preferAndUpgrade" | "doNotUpgrade" | "doNotPrefer";
+    ProperDownloadTypes: 'preferAndUpgrade' | 'doNotUpgrade' | 'doNotPrefer';
     ProviderMessage: {
       message?: string | null;
-      type?: components["schemas"]["ProviderMessageType"];
+      type?: components['schemas']['ProviderMessageType'];
     };
     /** @enum {string} */
-    ProviderMessageType: "info" | "warning" | "error";
+    ProviderMessageType: 'info' | 'warning' | 'error';
     /** @enum {string} */
-    ProxyType: "http" | "socks4" | "socks5";
+    ProxyType: 'http' | 'socks4' | 'socks5';
     Quality: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      source?: components["schemas"]["QualitySource"];
+      source?: components['schemas']['QualitySource'];
       /** Format: int32 */
       resolution?: number;
     };
     QualityDefinitionResource: {
       /** Format: int32 */
       id?: number;
-      quality?: components["schemas"]["Quality"];
+      quality?: components['schemas']['Quality'];
       title?: string | null;
       /** Format: int32 */
       weight?: number;
@@ -3993,17 +4574,21 @@ export interface components {
       minSize?: number | null;
       /** Format: double */
       maxSize?: number | null;
+      /** Format: double */
+      preferredSize?: number | null;
     };
     QualityModel: {
-      quality?: components["schemas"]["Quality"];
-      revision?: components["schemas"]["Revision"];
+      quality?: components['schemas']['Quality'];
+      revision?: components['schemas']['Revision'];
     };
     QualityProfileQualityItemResource: {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      quality?: components["schemas"]["Quality"];
-      items?: (components["schemas"]["QualityProfileQualityItemResource"])[] | null;
+      quality?: components['schemas']['Quality'];
+      items?:
+        | components['schemas']['QualityProfileQualityItemResource'][]
+        | null;
       allowed?: boolean;
     };
     QualityProfileResource: {
@@ -4013,17 +4598,27 @@ export interface components {
       upgradeAllowed?: boolean;
       /** Format: int32 */
       cutoff?: number;
-      items?: (components["schemas"]["QualityProfileQualityItemResource"])[] | null;
+      items?:
+        | components['schemas']['QualityProfileQualityItemResource'][]
+        | null;
       /** Format: int32 */
       minFormatScore?: number;
       /** Format: int32 */
       cutoffFormatScore?: number;
-      formatItems?: (components["schemas"]["ProfileFormatItemResource"])[] | null;
+      formatItems?: components['schemas']['ProfileFormatItemResource'][] | null;
     };
     /** @enum {string} */
-    QualitySource: "unknown" | "television" | "televisionRaw" | "web" | "webRip" | "dvd" | "bluray" | "blurayRaw";
+    QualitySource:
+      | 'unknown'
+      | 'television'
+      | 'televisionRaw'
+      | 'web'
+      | 'webRip'
+      | 'dvd'
+      | 'bluray'
+      | 'blurayRaw';
     QueueBulkResource: {
-      ids?: (number)[] | null;
+      ids?: number[] | null;
     };
     QueueResource: {
       /** Format: int32 */
@@ -4032,29 +4627,36 @@ export interface components {
       seriesId?: number | null;
       /** Format: int32 */
       episodeId?: number | null;
-      series?: components["schemas"]["SeriesResource"];
-      episode?: components["schemas"]["EpisodeResource"];
-      languages?: (components["schemas"]["Language"])[] | null;
-      quality?: components["schemas"]["QualityModel"];
-      customFormats?: (components["schemas"]["CustomFormatResource"])[] | null;
+      /** Format: int32 */
+      seasonNumber?: number | null;
+      series?: components['schemas']['SeriesResource'];
+      episode?: components['schemas']['EpisodeResource'];
+      languages?: components['schemas']['Language'][] | null;
+      quality?: components['schemas']['QualityModel'];
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
+      /** Format: int32 */
+      customFormatScore?: number;
       /** Format: double */
       size?: number;
       title?: string | null;
       /** Format: double */
       sizeleft?: number;
-      timeleft?: components["schemas"]["TimeSpan"];
+      timeleft?: components['schemas']['TimeSpan'];
       /** Format: date-time */
       estimatedCompletionTime?: string | null;
       status?: string | null;
-      trackedDownloadStatus?: components["schemas"]["TrackedDownloadStatus"];
-      trackedDownloadState?: components["schemas"]["TrackedDownloadState"];
-      statusMessages?: (components["schemas"]["TrackedDownloadStatusMessage"])[] | null;
+      trackedDownloadStatus?: components['schemas']['TrackedDownloadStatus'];
+      trackedDownloadState?: components['schemas']['TrackedDownloadState'];
+      statusMessages?:
+        | components['schemas']['TrackedDownloadStatusMessage'][]
+        | null;
       errorMessage?: string | null;
       downloadId?: string | null;
-      protocol?: components["schemas"]["DownloadProtocol"];
+      protocol?: components['schemas']['DownloadProtocol'];
       downloadClient?: string | null;
       indexer?: string | null;
       outputPath?: string | null;
+      episodeHasFile?: boolean;
     };
     QueueResourcePagingResource: {
       /** Format: int32 */
@@ -4062,11 +4664,10 @@ export interface components {
       /** Format: int32 */
       pageSize?: number;
       sortKey?: string | null;
-      sortDirection?: components["schemas"]["SortDirection"];
-      filters?: (components["schemas"]["PagingResourceFilter"])[] | null;
+      sortDirection?: components['schemas']['SortDirection'];
       /** Format: int32 */
       totalRecords?: number;
-      records?: (components["schemas"]["QueueResource"])[] | null;
+      records?: components['schemas']['QueueResource'][] | null;
     };
     QueueStatusResource: {
       /** Format: int32 */
@@ -4090,10 +4691,21 @@ export interface components {
     };
     Rejection: {
       reason?: string | null;
-      type?: components["schemas"]["RejectionType"];
+      type?: components['schemas']['RejectionType'];
     };
     /** @enum {string} */
-    RejectionType: "permanent" | "temporary";
+    RejectionType: 'permanent' | 'temporary';
+    ReleaseEpisodeResource: {
+      /** Format: int32 */
+      id?: number;
+      /** Format: int32 */
+      seasonNumber?: number;
+      /** Format: int32 */
+      episodeNumber?: number;
+      /** Format: int32 */
+      absoluteEpisodeNumber?: number | null;
+      title?: string | null;
+    };
     ReleaseProfileResource: {
       /** Format: int32 */
       id?: number;
@@ -4103,13 +4715,13 @@ export interface components {
       ignored?: Record<string, unknown> | null;
       /** Format: int32 */
       indexerId?: number;
-      tags?: (number)[] | null;
+      tags?: number[] | null;
     };
     ReleaseResource: {
       /** Format: int32 */
       id?: number;
       guid?: string | null;
-      quality?: components["schemas"]["QualityModel"];
+      quality?: components['schemas']['QualityModel'];
       /** Format: int32 */
       qualityWeight?: number;
       /** Format: int32 */
@@ -4131,17 +4743,22 @@ export interface components {
       sceneSource?: boolean;
       /** Format: int32 */
       seasonNumber?: number;
-      languages?: (components["schemas"]["Language"])[] | null;
+      languages?: components['schemas']['Language'][] | null;
       /** Format: int32 */
       languageWeight?: number;
       airDate?: string | null;
       seriesTitle?: string | null;
-      episodeNumbers?: (number)[] | null;
-      absoluteEpisodeNumbers?: (number)[] | null;
+      episodeNumbers?: number[] | null;
+      absoluteEpisodeNumbers?: number[] | null;
       /** Format: int32 */
       mappedSeasonNumber?: number | null;
-      mappedEpisodeNumbers?: (number)[] | null;
-      mappedAbsoluteEpisodeNumbers?: (number)[] | null;
+      mappedEpisodeNumbers?: number[] | null;
+      mappedAbsoluteEpisodeNumbers?: number[] | null;
+      /** Format: int32 */
+      mappedSeriesId?: number | null;
+      mappedEpisodeInfo?:
+        | components['schemas']['ReleaseEpisodeResource'][]
+        | null;
       approved?: boolean;
       temporarilyRejected?: boolean;
       rejected?: boolean;
@@ -4149,7 +4766,7 @@ export interface components {
       tvdbId?: number;
       /** Format: int32 */
       tvRageId?: number;
-      rejections?: (string)[] | null;
+      rejections?: string[] | null;
       /** Format: date-time */
       publishDate?: string;
       commentUrl?: string | null;
@@ -4159,17 +4776,17 @@ export interface components {
       downloadAllowed?: boolean;
       /** Format: int32 */
       releaseWeight?: number;
-      customFormats?: (components["schemas"]["CustomFormatResource"])[] | null;
+      customFormats?: components['schemas']['CustomFormatResource'][] | null;
       /** Format: int32 */
       customFormatScore?: number;
-      sceneMapping?: components["schemas"]["AlternateTitleResource"];
+      sceneMapping?: components['schemas']['AlternateTitleResource'];
       magnetUrl?: string | null;
       infoHash?: string | null;
       /** Format: int32 */
       seeders?: number | null;
       /** Format: int32 */
       leechers?: number | null;
-      protocol?: components["schemas"]["DownloadProtocol"];
+      protocol?: components['schemas']['DownloadProtocol'];
       isDaily?: boolean;
       isAbsoluteNumbering?: boolean;
       isPossibleSpecialEpisode?: boolean;
@@ -4178,6 +4795,10 @@ export interface components {
       seriesId?: number | null;
       /** Format: int32 */
       episodeId?: number | null;
+      episodeIds?: number[] | null;
+      /** Format: int32 */
+      downloadClientId?: number | null;
+      shouldOverride?: boolean | null;
     };
     RemotePathMappingResource: {
       /** Format: int32 */
@@ -4193,14 +4814,14 @@ export interface components {
       seriesId?: number;
       /** Format: int32 */
       seasonNumber?: number;
-      episodeNumbers?: (number)[] | null;
+      episodeNumbers?: number[] | null;
       /** Format: int32 */
       episodeFileId?: number;
       existingPath?: string | null;
       newPath?: string | null;
     };
     /** @enum {string} */
-    RescanAfterRefreshType: "always" | "afterManual" | "never";
+    RescanAfterRefreshType: 'always' | 'afterManual' | 'never';
     Revision: {
       /** Format: int32 */
       version?: number;
@@ -4215,24 +4836,26 @@ export interface components {
       accessible?: boolean;
       /** Format: int64 */
       freeSpace?: number | null;
-      unmappedFolders?: (components["schemas"]["UnmappedFolder"])[] | null;
+      unmappedFolders?: components['schemas']['UnmappedFolder'][] | null;
     };
+    /** @enum {string} */
+    RuntimeMode: 'console' | 'service' | 'tray';
     SeasonPassResource: {
-      series?: (components["schemas"]["SeasonPassSeriesResource"])[] | null;
-      monitoringOptions?: components["schemas"]["MonitoringOptions"];
+      series?: components['schemas']['SeasonPassSeriesResource'][] | null;
+      monitoringOptions?: components['schemas']['MonitoringOptions'];
     };
     SeasonPassSeriesResource: {
       /** Format: int32 */
       id?: number;
       monitored?: boolean | null;
-      seasons?: (components["schemas"]["SeasonResource"])[] | null;
+      seasons?: components['schemas']['SeasonResource'][] | null;
     };
     SeasonResource: {
       /** Format: int32 */
       seasonNumber?: number;
       monitored?: boolean;
-      statistics?: components["schemas"]["SeasonStatisticsResource"];
-      images?: (components["schemas"]["MediaCover"])[] | null;
+      statistics?: components['schemas']['SeasonStatisticsResource'];
+      images?: components['schemas']['MediaCover'][] | null;
     };
     SeasonStatisticsResource: {
       /** Format: date-time */
@@ -4247,7 +4870,7 @@ export interface components {
       totalEpisodeCount?: number;
       /** Format: int64 */
       sizeOnDisk?: number;
-      releaseGroups?: (string)[] | null;
+      releaseGroups?: string[] | null;
       /** Format: double */
       percentOfEpisodes?: number;
     };
@@ -4260,15 +4883,15 @@ export interface components {
       hint?: string | null;
     };
     SeriesEditorResource: {
-      seriesIds?: (number)[] | null;
+      seriesIds?: number[] | null;
       monitored?: boolean | null;
       /** Format: int32 */
       qualityProfileId?: number | null;
-      seriesType?: components["schemas"]["SeriesTypes"];
+      seriesType?: components['schemas']['SeriesTypes'];
       seasonFolder?: boolean | null;
       rootFolderPath?: string | null;
-      tags?: (number)[] | null;
-      applyTags?: components["schemas"]["ApplyTags"];
+      tags?: number[] | null;
+      applyTags?: components['schemas']['ApplyTags'];
       moveFiles?: boolean;
       deleteFiles?: boolean;
       addImportListExclusion?: boolean;
@@ -4277,9 +4900,11 @@ export interface components {
       /** Format: int32 */
       id?: number;
       title?: string | null;
-      alternateTitles?: (components["schemas"]["AlternateTitleResource"])[] | null;
+      alternateTitles?:
+        | components['schemas']['AlternateTitleResource'][]
+        | null;
       sortTitle?: string | null;
-      status?: components["schemas"]["SeriesStatusType"];
+      status?: components['schemas']['SeriesStatusType'];
       ended?: boolean;
       profileName?: string | null;
       overview?: string | null;
@@ -4289,9 +4914,10 @@ export interface components {
       previousAiring?: string | null;
       network?: string | null;
       airTime?: string | null;
-      images?: (components["schemas"]["MediaCover"])[] | null;
+      images?: components['schemas']['MediaCover'][] | null;
+      originalLanguage?: components['schemas']['Language'];
       remotePoster?: string | null;
-      seasons?: (components["schemas"]["SeasonResource"])[] | null;
+      seasons?: components['schemas']['SeasonResource'][] | null;
       /** Format: int32 */
       year?: number;
       path?: string | null;
@@ -4310,21 +4936,28 @@ export interface components {
       tvMazeId?: number;
       /** Format: date-time */
       firstAired?: string | null;
-      seriesType?: components["schemas"]["SeriesTypes"];
+      /** Format: date-time */
+      lastAired?: string | null;
+      seriesType?: components['schemas']['SeriesTypes'];
       cleanTitle?: string | null;
       imdbId?: string | null;
       titleSlug?: string | null;
       rootFolderPath?: string | null;
       folder?: string | null;
       certification?: string | null;
-      genres?: (string)[] | null;
-      tags?: (number)[] | null;
+      genres?: string[] | null;
+      tags?: number[] | null;
       /** Format: date-time */
       added?: string;
-      addOptions?: components["schemas"]["AddSeriesOptions"];
-      ratings?: components["schemas"]["Ratings"];
-      statistics?: components["schemas"]["SeriesStatisticsResource"];
+      addOptions?: components['schemas']['AddSeriesOptions'];
+      ratings?: components['schemas']['Ratings'];
+      statistics?: components['schemas']['SeriesStatisticsResource'];
       episodesChanged?: boolean | null;
+      /**
+       * Format: int32
+       * @deprecated
+       */
+      languageProfileId?: number;
     };
     SeriesStatisticsResource: {
       /** Format: int32 */
@@ -4337,33 +4970,72 @@ export interface components {
       totalEpisodeCount?: number;
       /** Format: int64 */
       sizeOnDisk?: number;
-      releaseGroups?: (string)[] | null;
+      releaseGroups?: string[] | null;
       /** Format: double */
       percentOfEpisodes?: number;
     };
     /** @enum {string} */
-    SeriesStatusType: "continuing" | "ended" | "upcoming" | "deleted";
+    SeriesStatusType: 'continuing' | 'ended' | 'upcoming' | 'deleted';
     SeriesTitleInfo: {
       title?: string | null;
       titleWithoutYear?: string | null;
       /** Format: int32 */
       year?: number;
-      allTitles?: (string)[] | null;
+      allTitles?: string[] | null;
     };
     /** @enum {string} */
-    SeriesTypes: "standard" | "daily" | "anime";
+    SeriesTypes: 'standard' | 'daily' | 'anime';
     /** @enum {string} */
-    SortDirection: "default" | "ascending" | "descending";
+    SortDirection: 'default' | 'ascending' | 'descending';
+    SystemResource: {
+      appName?: string | null;
+      instanceName?: string | null;
+      version?: string | null;
+      /** Format: date-time */
+      buildTime?: string;
+      isDebug?: boolean;
+      isProduction?: boolean;
+      isAdmin?: boolean;
+      isUserInteractive?: boolean;
+      startupPath?: string | null;
+      appData?: string | null;
+      osName?: string | null;
+      osVersion?: string | null;
+      isNetCore?: boolean;
+      isLinux?: boolean;
+      isOsx?: boolean;
+      isWindows?: boolean;
+      isDocker?: boolean;
+      mode?: components['schemas']['RuntimeMode'];
+      branch?: string | null;
+      authentication?: components['schemas']['AuthenticationType'];
+      sqliteVersion?: components['schemas']['Version'];
+      /** Format: int32 */
+      migrationVersion?: number;
+      urlBase?: string | null;
+      runtimeVersion?: components['schemas']['Version'];
+      runtimeName?: string | null;
+      /** Format: date-time */
+      startTime?: string;
+      packageVersion?: string | null;
+      packageAuthor?: string | null;
+      packageUpdateMechanism?: components['schemas']['UpdateMechanism'];
+      packageUpdateMechanismMessage?: string | null;
+      databaseVersion?: components['schemas']['Version'];
+      databaseType?: components['schemas']['DatabaseType'];
+    };
     TagDetailsResource: {
       /** Format: int32 */
       id?: number;
       label?: string | null;
-      delayProfileIds?: (number)[] | null;
-      importListIds?: (number)[] | null;
-      notificationIds?: (number)[] | null;
-      restrictionIds?: (number)[] | null;
-      indexerIds?: (number)[] | null;
-      seriesIds?: (number)[] | null;
+      delayProfileIds?: number[] | null;
+      importListIds?: number[] | null;
+      notificationIds?: number[] | null;
+      restrictionIds?: number[] | null;
+      indexerIds?: number[] | null;
+      downloadClientIds?: number[] | null;
+      autoTagIds?: number[] | null;
+      seriesIds?: number[] | null;
     };
     TagResource: {
       /** Format: int32 */
@@ -4380,7 +5052,10 @@ export interface components {
       /** Format: date-time */
       lastExecution?: string;
       /** Format: date-time */
+      lastStartTime?: string;
+      /** Format: date-time */
       nextExecution?: string;
+      lastDuration?: components['schemas']['TimeSpan'];
     };
     TimeSpan: {
       /** Format: int64 */
@@ -4407,12 +5082,19 @@ export interface components {
       totalSeconds?: number;
     };
     /** @enum {string} */
-    TrackedDownloadState: "downloading" | "importPending" | "importing" | "imported" | "failedPending" | "failed" | "ignored";
+    TrackedDownloadState:
+      | 'downloading'
+      | 'importPending'
+      | 'importing'
+      | 'imported'
+      | 'failedPending'
+      | 'failed'
+      | 'ignored';
     /** @enum {string} */
-    TrackedDownloadStatus: "ok" | "warning" | "error";
+    TrackedDownloadStatus: 'ok' | 'warning' | 'error';
     TrackedDownloadStatusMessage: {
       title?: string | null;
-      messages?: (string)[] | null;
+      messages?: string[] | null;
     };
     UiConfigResource: {
       /** Format: int32 */
@@ -4432,17 +5114,18 @@ export interface components {
     UnmappedFolder: {
       name?: string | null;
       path?: string | null;
+      relativePath?: string | null;
     };
     UpdateChanges: {
-      new?: (string)[] | null;
-      fixed?: (string)[] | null;
+      new?: string[] | null;
+      fixed?: string[] | null;
     };
     /** @enum {string} */
-    UpdateMechanism: "builtIn" | "script" | "external" | "apt" | "docker";
+    UpdateMechanism: 'builtIn' | 'script' | 'external' | 'apt' | 'docker';
     UpdateResource: {
       /** Format: int32 */
       id?: number;
-      version?: components["schemas"]["Version"];
+      version?: components['schemas']['Version'];
       branch?: string | null;
       /** Format: date-time */
       releaseDate?: string;
@@ -4453,7 +5136,7 @@ export interface components {
       installedOn?: string | null;
       installable?: boolean;
       latest?: boolean;
-      changes?: components["schemas"]["UpdateChanges"];
+      changes?: components['schemas']['UpdateChanges'];
       hash?: string | null;
     };
     Version: {
@@ -4477,6 +5160,8 @@ export interface components {
   headers: never;
   pathItems: never;
 }
+
+export type $defs = Record<string, never>;
 
 export type external = Record<string, never>;
 

@@ -5,7 +5,7 @@ import { DEFAULT_SONARR_HOST, unmonitorEpisode } from './sonarr.js';
 import { DEFAULT_RADARR_HOST, unmonitorMovie } from './radarr.js';
 import { parseList } from './utils.js';
 
-import type { PlexPayload } from './types/plex';
+import type { PlexPayload } from './types/plex.js';
 
 const {
   PLEX_ACCOUNTS,
@@ -31,7 +31,7 @@ if (PLEX_EVENTS == null) {
       plexAccounts.size > 0
         ? ` by account${plexAccounts.size > 1 ? 's' : ''}(${[...plexAccounts]})`
         : ''
-    } on port: ${PORT}`
+    } on port: ${PORT}`,
   );
   if (RADARR_API_KEY) {
     console.log(`Radarr: ${RADARR_HOST}`);
@@ -45,7 +45,7 @@ if (PLEX_EVENTS == null) {
 
   app.post('/', upload.single('thumb'), (req, res) => {
     const { Account, Metadata, event }: PlexPayload = JSON.parse(
-      req.body.payload
+      req.body.payload,
     );
 
     if (!triggerEvents.has(event)) {
