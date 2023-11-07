@@ -65,3 +65,6 @@ export interface PlexPayload {
     Guid?: { id: string }[];
   };
 }
+export interface PlexBody {
+  payload: string;
+}
