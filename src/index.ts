@@ -5,7 +5,9 @@ import { DEFAULT_SONARR_HOST, unmonitorEpisode } from './sonarr.js';
 import { DEFAULT_RADARR_HOST, unmonitorMovie } from './radarr.js';
 import { parseList } from './utils.js';
 
-import type { PlexPayload } from './types/plex.js';
+import type { Request, Response } from 'express';
+import type { ParamsDictionary } from 'express-serve-static-core';
+import type { PlexBody, PlexPayload } from './types/plex.js';
 
 const {
   PLEX_ACCOUNTS,
@@ -17,19 +19,18 @@ const {
   SONARR_HOST = DEFAULT_SONARR_HOST,
 } = process.env;
 
-if (PLEX_EVENTS == null) {
-  console.error('Set PLEX_EVENTS to trigger unmonitoring');
-  process.exitCode = 1;
-} else if (RADARR_API_KEY == null && SONARR_API_KEY == null) {
+if (RADARR_API_KEY == null && SONARR_API_KEY == null) {
   console.error('Set RADARR_API_KEY and/or SONARR_API_KEY to unmonitor');
   process.exitCode = 1;
 } else {
   const triggerEvents = new Set(parseList(PLEX_EVENTS));
   const plexAccounts = new Set(PLEX_ACCOUNTS ? parseList(PLEX_ACCOUNTS) : []);
   console.log(
-    `unmonitoring for ${[...triggerEvents]}${
+    `unmonitoring for ${[...triggerEvents].toString()}${
       plexAccounts.size > 0
-        ? ` by account${plexAccounts.size > 1 ? 's' : ''}(${[...plexAccounts]})`
+        ? ` by account${plexAccounts.size > 1 ? 's' : ''}(${[
+            ...plexAccounts,
+          ].toString()})`
         : ''
     } on port: ${PORT}`,
   );
@@ -43,31 +44,39 @@ if (PLEX_EVENTS == null) {
   const upload = multer({ dest: '/tmp/' });
   const app = express();
 
-  app.post('/', upload.single('thumb'), (req, res) => {
-    const { Account, Metadata, event }: PlexPayload = JSON.parse(
-      req.body.payload,
-    );
+  app.post(
+    '/',
+    upload.single('thumb'),
+    (req: Request<ParamsDictionary, unknown, PlexBody>, res: Response) => {
+      const { Account, Metadata, event } = JSON.parse(
+        req.body.payload,
+      ) as PlexPayload;
 
-    if (!triggerEvents.has(event)) {
-      return res.end();
-    }
+      if (!triggerEvents.has(event)) {
+        res.end();
+        return;
+      }
 
-    if (
-      plexAccounts.size > 0 &&
-      !plexAccounts.has(Account.id.toString()) &&
-      !plexAccounts.has(Account.title)
-    ) {
-      return res.end();
-    }
+      if (
+        plexAccounts.size > 0 &&
+        !plexAccounts.has(Account.id.toString()) &&
+        !plexAccounts.has(Account.title)
+      ) {
+        res.end();
+        return;
+      }
 
-    switch (Metadata.type) {
-      case 'episode':
-        return unmonitorEpisode(Metadata, res);
-      case 'movie':
-        return unmonitorMovie(Metadata, res);
-    }
-    return res.end();
-  });
+      switch (Metadata.type) {
+        case 'episode':
+          void unmonitorEpisode(Metadata, res);
+          return;
+        case 'movie':
+          void unmonitorMovie(Metadata, res);
+          return;
+      }
+      res.end();
+    },
+  );
 
   app.listen(parseInt(PORT, 10));
 }

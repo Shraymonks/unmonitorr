@@ -41,7 +41,7 @@ export async function unmonitorEpisode(
   }
   if (!seriesResponse.ok) {
     console.error(
-      `Error getting series information: ${seriesResponse?.status} ${seriesResponse?.statusText}`,
+      `Error getting series information: ${seriesResponse.status} ${seriesResponse.statusText}`,
     );
     return res.end();
   }
@@ -79,7 +79,7 @@ export async function unmonitorEpisode(
     }
     if (!episodeListResponse.ok) {
       console.error(
-        `Error getting episode list for ${seriesTitle}: ${seriesResponse?.status} ${seriesResponse?.statusText}`,
+        `Error getting episode list for ${seriesTitle}: ${seriesResponse.status} ${seriesResponse.statusText}`,
       );
       continue;
     }
@@ -95,7 +95,7 @@ export async function unmonitorEpisode(
   }
   if (!episode) {
     console.warn(
-      `Could not find episode tvdbIds: ${episodeTvdbIds} for ${seriesTitle}`,
+      `Could not find episode tvdbIds: ${episodeTvdbIds.toString()} for ${seriesTitle}`,
     );
     return res.end();
   }
