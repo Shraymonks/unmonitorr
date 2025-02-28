@@ -1,8 +1,7 @@
 import type { Response } from 'express';
-import type { PlexPayload } from './types/plex.js';
 import type { components } from './types/radarr.js';
 
-import { Api, getIds } from './utils.js';
+import { Api } from './utils.js';
 
 export const DEFAULT_RADARR_HOST = 'http://127.0.0.1:7878';
 
@@ -10,22 +9,11 @@ const { RADARR_API_KEY, RADARR_HOST = DEFAULT_RADARR_HOST } = process.env;
 const api = new Api(`${RADARR_HOST}/api/v3/`, RADARR_API_KEY);
 
 export async function unmonitorMovie(
-  { Guid, title, year }: PlexPayload['Metadata'],
+  { movieTmdbIds, titleYear }: { movieTmdbIds: string[]; titleYear: string },
   res: Response,
 ): Promise<Response> {
-  if (!RADARR_API_KEY) {
-    return res.end();
-  }
-
-  const titleYear = `${title} (${year})`;
-  const tmdbIds = getIds(Guid, 'tmdb');
-  if (tmdbIds.length === 0) {
-    console.warn(`No tmdbId for ${titleYear}`);
-    return res.end();
-  }
-
   let movies;
-  for (const tmdbId of tmdbIds) {
+  for (const tmdbId of movieTmdbIds) {
     let moviesResponse;
     try {
       moviesResponse = await fetch(api.getUrl('movie', { tmdbId }));
