@@ -53,8 +53,10 @@ Unmonitorr also supports Jellyfin alongside Plex. Here's how to set it up:
 ### Jellyfin-specific behavior
 
 - In Jellyfin, media is unmonitored only if it is fully played
+- The server is listening on /jellyfin route
 - The default port for Jellyfin webhooks is 9898 (configurable via `JELLYFIN_PORT`)
 - `JELLYFIN_ACCOUNTS` works similarly to `PLEX_ACCOUNTS`, allowing you to specify which users' events should trigger unmonitoring
+- example of endpoint to use in jellyfin webhook http://unmonitorr:9898/jellyfin
 
 ### Supported Jellyfin Events
 
