@@ -203,7 +203,7 @@ interface JellyfinApiResponse {
     Name: string;
     Version: string;
   };
-  Series?: {
+  Series: {
     Name: string;
     OriginalTitle: string;
     ServerId: string;
