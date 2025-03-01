@@ -36,7 +36,7 @@ export function startJellyfinUnmonitor() {
       req: Request<ParamsDictionary, unknown, JellyfinApiResponse>,
       res: Response,
     ) => {
-      const { Event, Item, User } = req.body;
+      const { Event, Item, User, Series } = req.body;
 
       if (!triggerEvents.has(Event)) {
         res.end();
@@ -54,7 +54,7 @@ export function startJellyfinUnmonitor() {
 
       if (Item.Type === 'Episode' && Item.UserData.Played) {
         const episodeTvdbIds = [Item.ProviderIds.Tvdb];
-        const seriesTitle = Item.SeriesName;
+        const seriesTitle = Series.OriginalTitle;
 
         // tvdbId is of the episode not the series.
         if (episodeTvdbIds.length === 0) {
