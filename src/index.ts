@@ -5,8 +5,7 @@ import { startPlexUnmonitor } from './plex.js';
 import { startJellyfinUnmonitor } from './jellyfin.js';
 
 const {
-  PLEX_EVENTS,
-  JELLYFIN_EVENTS,
+  SERVICES = 'plex',
   RADARR_API_KEY,
   RADARR_HOST = DEFAULT_RADARR_HOST,
   SONARR_API_KEY,
@@ -20,15 +19,14 @@ if (RADARR_API_KEY == null && SONARR_API_KEY == null) {
 console.log(`Radarr: ${RADARR_HOST}`);
 console.log(`Sonarr: ${SONARR_HOST}`);
 
-if (PLEX_EVENTS == null && JELLYFIN_EVENTS == null) {
-  console.error('Set PLEX_EVENTS and/or JELLYFIN_EVENTS to unmonitor');
-  process.exitCode = 1;
-}
+const services = SERVICES.toLowerCase()
+  .split(',')
+  .map((item) => item.trim());
 
-if (PLEX_EVENTS) {
+if (services.includes('plex')) {
   startPlexUnmonitor();
 }
 
-if (JELLYFIN_EVENTS) {
+if (services.includes('jellyfin')) {
   startJellyfinUnmonitor();
 }

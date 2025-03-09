@@ -11,10 +11,14 @@ import { unmonitorEpisode } from './sonarr.js';
 import type { Request, Response } from 'express';
 import type { PlexPayload } from './types/plex.js';
 
-const { PLEX_ACCOUNTS, PLEX_EVENTS, PLEX_PORT = '9797' } = process.env;
+const {
+  PLEX_ACCOUNTS,
+  PLEX_EVENTS = 'media.play',
+  PLEX_PORT = '9797',
+} = process.env;
 
 export function startPlexUnmonitor() {
-  const triggerEvents = new Set(parseList(PLEX_EVENTS ?? ''));
+  const triggerEvents = new Set(parseList(PLEX_EVENTS));
   const plexAccounts = new Set(PLEX_ACCOUNTS ? parseList(PLEX_ACCOUNTS) : []);
   console.log(
     `unmonitoring for ${[...triggerEvents].toString()}${
