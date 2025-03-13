@@ -3,6 +3,7 @@ import { DEFAULT_SONARR_HOST } from './sonarr.js';
 
 import { startPlexUnmonitor } from './plex.js';
 import { startJellyfinUnmonitor } from './jellyfin.js';
+import { parseList } from './utils.js';
 
 const {
   SERVICES = 'plex',
@@ -19,14 +20,12 @@ if (RADARR_API_KEY == null && SONARR_API_KEY == null) {
 console.log(`Radarr: ${RADARR_HOST}`);
 console.log(`Sonarr: ${SONARR_HOST}`);
 
-const services = SERVICES.toLowerCase()
-  .split(',')
-  .map((item) => item.trim());
+const services = new Set(parseList(SERVICES));
 
-if (services.includes('plex')) {
+if (services.has('plex')) {
   startPlexUnmonitor();
 }
 
-if (services.includes('jellyfin')) {
+if (services.has('jellyfin')) {
   startJellyfinUnmonitor();
 }

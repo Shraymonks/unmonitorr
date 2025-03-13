@@ -23,34 +23,29 @@ export function startJellyfinUnmonitor() {
     ) => {
       const { Item, Series } = req.body;
 
-      if (Item.Type === 'Episode' && Item.UserData.Played) {
-        const episodeTvdbIds = [Item.ProviderIds.Tvdb];
-        const seriesTitle = Series.OriginalTitle;
-
-        // tvdbId is of the episode not the series.
-        if (episodeTvdbIds.length === 0) {
-          console.warn(`No tvdbId for ${seriesTitle}`);
-          res.end();
-          return;
-        }
-
-        void unmonitorEpisode({ episodeTvdbIds, seriesTitle }, res);
+      if (!Item.UserData.Played) {
+        res.end();
+        return;
       }
 
-      if (Item.Type === 'Movie' && Item.UserData.Played) {
-        const title = Item.OriginalTitle;
-        const year = Item.ProductionYear;
-        const titleYear = `${title} (${year})`;
-        const movieTmdbIds = [Item.ProviderIds.Tmdb];
+      switch (Item.Type) {
+        case 'Episode': {
+          const episodeTvdbIds = [Item.ProviderIds.Tvdb];
+          const seriesTitle = Series.OriginalTitle;
 
-        if (movieTmdbIds.length === 0) {
-          console.warn(`No tmdbId for ${titleYear}`);
-          res.end();
+          void unmonitorEpisode({ episodeTvdbIds, seriesTitle }, res);
           return;
         }
+        case 'Movie': {
+          const title = Item.OriginalTitle;
+          const year = Item.ProductionYear;
+          const movieTmdbIds = [Item.ProviderIds.Tmdb];
 
-        void unmonitorMovie({ movieTmdbIds, titleYear }, res);
+          void unmonitorMovie({ movieTmdbIds, title, year }, res);
+          return;
+        }
       }
+      res.end();
     },
   );
 

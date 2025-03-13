@@ -9,14 +9,26 @@ const { RADARR_API_KEY, RADARR_HOST = DEFAULT_RADARR_HOST } = process.env;
 const api = new Api(`${RADARR_HOST}/api/v3/`, RADARR_API_KEY);
 
 export async function unmonitorMovie(
-  { movieTmdbIds, titleYear }: { movieTmdbIds: string[]; titleYear: string },
+  {
+    movieTmdbIds,
+    title,
+    year,
+  }: { movieTmdbIds: string[]; title: string; year: number | undefined },
   res: Response,
 ): Promise<Response> {
   if (!RADARR_API_KEY) {
     return res.end();
   }
 
+  const titleYear = `${title} (${year})`;
+
+  if (movieTmdbIds.length === 0) {
+    console.warn(`No tmdbId for ${titleYear}`);
+    return res.end();
+  }
+
   let movies;
+
   for (const tmdbId of movieTmdbIds) {
     let moviesResponse;
     try {

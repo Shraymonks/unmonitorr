@@ -41,9 +41,6 @@ export function startPlexUnmonitor() {
         req.body.payload,
       ) as PlexPayload;
 
-      console.log(event);
-      console.log(Metadata);
-
       if (!triggerEvents.has(event)) {
         res.end();
         return;
@@ -58,33 +55,22 @@ export function startPlexUnmonitor() {
         return;
       }
 
-      if (Metadata.type === 'episode') {
-        const { Guid, grandparentTitle: seriesTitle } = Metadata;
+      switch (Metadata.type) {
+        case 'episode': {
+          const { Guid, grandparentTitle: seriesTitle } = Metadata;
+          const episodeTvdbIds = getIds(Guid, 'tvdb');
 
-        const episodeTvdbIds = getIds(Guid, 'tvdb');
+          void unmonitorEpisode({ episodeTvdbIds, seriesTitle }, res);
 
-        // tvdbId is of the episode not the series.
-        if (episodeTvdbIds.length === 0) {
-          console.warn(`No tvdbId for ${seriesTitle}`);
-          res.end();
           return;
         }
+        case 'movie': {
+          const { Guid, title, year } = Metadata;
+          const movieTmdbIds = getIds(Guid, 'tmdb');
 
-        void unmonitorEpisode({ episodeTvdbIds, seriesTitle }, res);
-      }
-
-      if (Metadata.type === 'movie') {
-        const { Guid, title, year } = Metadata;
-        const titleYear = `${title} (${year})`;
-        const movieTmdbIds = getIds(Guid, 'tmdb');
-
-        if (movieTmdbIds.length === 0) {
-          console.warn(`No tmdbId for ${titleYear}`);
-          res.end();
+          void unmonitorMovie({ movieTmdbIds, title, year }, res);
           return;
         }
-
-        void unmonitorMovie({ movieTmdbIds, titleYear }, res);
       }
       res.end();
     },

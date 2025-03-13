@@ -19,6 +19,12 @@ export async function unmonitorEpisode(
     return res.end();
   }
 
+  // tvdbId is of the episode not the series.
+  if (episodeTvdbIds.length === 0) {
+    console.warn(`No tvdbId for ${seriesTitle}`);
+    return res.end();
+  }
+
   let seriesResponse;
 
   // Sonarr has no api for getting an episode by episode tvdbId
