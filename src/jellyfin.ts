@@ -45,7 +45,6 @@ export function startJellyfinUnmonitor() {
           return;
         }
       }
-      res.end();
     },
   );
 

@@ -13,14 +13,14 @@ export async function unmonitorMovie(
     movieTmdbIds,
     title,
     year,
-  }: { movieTmdbIds: string[]; title: string; year: number | undefined },
+  }: { movieTmdbIds: string[]; title: string; year: number },
   res: Response,
 ): Promise<Response> {
   if (!RADARR_API_KEY) {
     return res.end();
   }
 
-  const titleYear = `${title} (${year})`;
+  const titleYear = `${title} (${year.toString()})`;
 
   if (movieTmdbIds.length === 0) {
     console.warn(`No tmdbId for ${titleYear}`);
@@ -38,14 +38,15 @@ export async function unmonitorMovie(
         `Failed to get movie information from radarr for tmdbId: ${tmdbId} ${titleYear}`,
       );
       console.error(error);
+      continue;
     }
-    if (moviesResponse?.ok) {
+    if (moviesResponse.ok) {
       movies =
         (await moviesResponse.json()) as components['schemas']['MovieResource'][];
       break;
     }
     console.error(
-      `Error getting movie information: ${moviesResponse?.status} ${moviesResponse?.statusText}`,
+      `Error getting movie information: ${moviesResponse.status.toString()} ${moviesResponse.statusText}`,
     );
   }
   if (!movies) {
@@ -53,7 +54,7 @@ export async function unmonitorMovie(
     return res.end();
   }
   const [movie] = movies;
-  if (movie == null) {
+  if (movie?.id == null) {
     console.warn(`${titleYear} not found in radarr library`);
     return res.end();
   }
@@ -61,7 +62,7 @@ export async function unmonitorMovie(
     movie.monitored = false;
     let response;
     try {
-      response = await fetch(api.getUrl(`movie/${movie.id}`), {
+      response = await fetch(api.getUrl(`movie/${movie.id.toString()}`), {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(movie),
@@ -78,7 +79,7 @@ export async function unmonitorMovie(
     }
 
     console.error(
-      `Error unmonitoring ${titleYear}: ${response.status} ${response.statusText}`,
+      `Error unmonitoring ${titleYear}: ${response.status.toString()} ${response.statusText}`,
     );
   }
   return res.end();

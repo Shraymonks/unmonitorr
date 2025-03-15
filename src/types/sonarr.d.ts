@@ -5,29 +5,68 @@
 
 export interface paths {
   '/api': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/login': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
     post: {
       parameters: {
         query?: {
           returnUrl?: string;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -39,43 +78,92 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/logout': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/autotagging': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['AutoTaggingResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['AutoTaggingResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['AutoTaggingResource'];
             'application/json': components['schemas']['AutoTaggingResource'];
@@ -84,17 +172,33 @@ export interface paths {
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/autotagging/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['AutoTaggingResource'];
           };
@@ -103,9 +207,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -113,8 +220,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['AutoTaggingResource'];
             'application/json': components['schemas']['AutoTaggingResource'];
@@ -123,35 +231,80 @@ export interface paths {
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/autotagging/schema': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/system/backup': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['BackupResource'][];
             'application/json': components['schemas']['BackupResource'][];
@@ -160,48 +313,118 @@ export interface paths {
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/system/backup/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/system/backup/restore/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/system/backup/restore/upload': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/blocklist': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -209,35 +432,82 @@ export interface paths {
           pageSize?: number;
           sortKey?: string;
           sortDirection?: components['schemas']['SortDirection'];
+          seriesIds?: number[];
+          protocols?: components['schemas']['DownloadProtocol'][];
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['BlocklistResourcePagingResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/blocklist/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/blocklist/bulk': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
     delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['BlocklistBulkResource'];
@@ -246,14 +516,25 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/calendar': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -265,35 +546,71 @@ export interface paths {
           includeEpisodeImages?: boolean;
           tags?: string;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['EpisodeResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/calendar/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['EpisodeResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/feed/v3/calendar/sonarr.ics': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -304,92 +621,175 @@ export interface paths {
           premieresOnly?: boolean;
           asAllDay?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/command': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['CommandResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['CommandResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['CommandResource'];
           };
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/command/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['CommandResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/customfilter': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['CustomFilterResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['CustomFilterResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['CustomFilterResource'];
             'application/json': components['schemas']['CustomFilterResource'];
@@ -398,17 +798,33 @@ export interface paths {
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/customfilter/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['CustomFilterResource'];
           };
@@ -417,9 +833,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -427,8 +846,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['CustomFilterResource'];
             'application/json': components['schemas']['CustomFilterResource'];
@@ -437,40 +857,72 @@ export interface paths {
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/customformat': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['CustomFormatResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['CustomFormatResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['CustomFormatResource'];
             'application/json': components['schemas']['CustomFormatResource'];
@@ -479,17 +931,33 @@ export interface paths {
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/customformat/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['CustomFormatResource'];
           };
@@ -498,9 +966,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -508,8 +979,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['CustomFormatResource'];
             'application/json': components['schemas']['CustomFormatResource'];
@@ -518,31 +990,124 @@ export interface paths {
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v3/customformat/bulk': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['CustomFormatBulkResource'];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: Record<string, unknown>;
+          content: {
+            'application/json': components['schemas']['CustomFormatResource'];
+          };
+        };
+      };
+    };
+    post?: never;
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['CustomFormatBulkResource'];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: Record<string, unknown>;
+          content?: never;
+        };
+      };
+    };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/customformat/schema': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/wanted/cutoff': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -555,54 +1120,106 @@ export interface paths {
           includeImages?: boolean;
           monitored?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['EpisodeResourcePagingResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/wanted/cutoff/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['EpisodeResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/delayprofile': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['DelayProfileResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['DelayProfileResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['DelayProfileResource'];
             'application/json': components['schemas']['DelayProfileResource'];
@@ -611,17 +1228,33 @@ export interface paths {
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/delayprofile/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['DelayProfileResource'];
           };
@@ -630,9 +1263,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -640,8 +1276,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['DelayProfileResource'];
             'application/json': components['schemas']['DelayProfileResource'];
@@ -650,33 +1287,54 @@ export interface paths {
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/delayprofile/reorder/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
     put: {
       parameters: {
         query?: {
           after?: number;
         };
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['DelayProfileResource'][];
             'application/json': components['schemas']['DelayProfileResource'][];
@@ -685,35 +1343,80 @@ export interface paths {
         };
       };
     };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/diskspace': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['DiskSpaceResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/downloadclient': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['DownloadClientResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
       parameters: {
         query?: {
           forceSave?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -721,25 +1424,42 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['DownloadClientResource'];
           };
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/downloadclient/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['DownloadClientResource'];
           };
@@ -751,9 +1471,11 @@ export interface paths {
         query?: {
           forceSave?: boolean;
         };
+        header?: never;
         path: {
-          id: string;
+          id: number;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -761,101 +1483,213 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['DownloadClientResource'];
           };
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/downloadclient/bulk': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
     put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['DownloadClientBulkResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['DownloadClientResource'];
           };
         };
       };
     };
+    post?: never;
     delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['DownloadClientBulkResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/downloadclient/schema': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['DownloadClientResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/downloadclient/test': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: {
+          forceTest?: boolean;
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['DownloadClientResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/downloadclient/testall': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/downloadclient/action/{name}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           name: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -863,35 +1697,73 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/config/downloadclient': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['DownloadClientConfigResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/config/downloadclient/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['DownloadClientConfigResource'];
           };
@@ -900,9 +1772,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -910,8 +1785,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['DownloadClientConfigResource'];
             'application/json': components['schemas']['DownloadClientConfigResource'];
@@ -920,8 +1796,20 @@ export interface paths {
         };
       };
     };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/episode': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -929,29 +1817,54 @@ export interface paths {
           seasonNumber?: number;
           episodeIds?: number[];
           episodeFileId?: number;
+          includeSeries?: boolean;
+          includeEpisodeFile?: boolean;
           includeImages?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['EpisodeResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/episode/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['EpisodeResource'];
           };
@@ -960,9 +1873,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -970,8 +1886,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['EpisodeResource'];
             'application/json': components['schemas']['EpisodeResource'];
@@ -980,13 +1897,29 @@ export interface paths {
         };
       };
     };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/episode/monitor': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
     put: {
       parameters: {
         query?: {
           includeImages?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -994,41 +1927,77 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/episodefile': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
           seriesId?: number;
           episodeFileIds?: number[];
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['EpisodeFileResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/episodefile/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['EpisodeFileResource'];
           };
@@ -1037,9 +2006,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -1047,8 +2019,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['EpisodeFileResource'];
             'application/json': components['schemas']['EpisodeFileResource'];
@@ -1057,64 +2030,126 @@ export interface paths {
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/episodefile/editor': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
     put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['EpisodeFileListResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/episodefile/bulk': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
     put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['EpisodeFileResource'][];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    post?: never;
     delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['EpisodeFileListResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/filesystem': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -1122,58 +2157,133 @@ export interface paths {
           includeFiles?: boolean;
           allowFoldersWithoutTrailingSlashes?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/filesystem/type': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
           path?: string;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/filesystem/mediafiles': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
           path?: string;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/health': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['HealthResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/history': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -1183,25 +2293,43 @@ export interface paths {
           sortDirection?: components['schemas']['SortDirection'];
           includeSeries?: boolean;
           includeEpisode?: boolean;
-          eventType?: number;
+          eventType?: number[];
           episodeId?: number;
           downloadId?: string;
           seriesIds?: number[];
           languages?: number[];
           quality?: number[];
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['HistoryResourcePagingResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/history/since': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -1210,18 +2338,36 @@ export interface paths {
           includeSeries?: boolean;
           includeEpisode?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['HistoryResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/history/series': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -1231,37 +2377,81 @@ export interface paths {
           includeSeries?: boolean;
           includeEpisode?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['HistoryResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/history/failed/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/config/host': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['HostConfigResource'];
             'application/json': components['schemas']['HostConfigResource'];
@@ -1270,17 +2460,35 @@ export interface paths {
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/config/host/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['HostConfigResource'];
           };
@@ -1289,9 +2497,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -1301,8 +2512,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['HostConfigResource'];
             'application/json': components['schemas']['HostConfigResource'];
@@ -1311,23 +2523,47 @@ export interface paths {
         };
       };
     };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/importlist': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['ImportListResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
       parameters: {
         query?: {
           forceSave?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -1335,25 +2571,42 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['ImportListResource'];
           };
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/importlist/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['ImportListResource'];
           };
@@ -1365,9 +2618,11 @@ export interface paths {
         query?: {
           forceSave?: boolean;
         };
+        header?: never;
         path: {
-          id: string;
+          id: number;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -1375,101 +2630,213 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['ImportListResource'];
           };
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/importlist/bulk': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
     put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['ImportListBulkResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['ImportListResource'];
           };
         };
       };
     };
+    post?: never;
     delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['ImportListBulkResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/importlist/schema': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['ImportListResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/importlist/test': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: {
+          forceTest?: boolean;
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['ImportListResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/importlist/testall': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/importlist/action/{name}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           name: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -1477,33 +2844,155 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v3/config/importlist': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: Record<string, unknown>;
+          content: {
+            'application/json': components['schemas']['ImportListConfigResource'];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v3/config/importlist/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          id: number;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: Record<string, unknown>;
+          content: {
+            'application/json': components['schemas']['ImportListConfigResource'];
+          };
+        };
+      };
+    };
+    put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          id: string;
+        };
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['ImportListConfigResource'];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: Record<string, unknown>;
+          content: {
+            'text/plain': components['schemas']['ImportListConfigResource'];
+            'application/json': components['schemas']['ImportListConfigResource'];
+            'text/json': components['schemas']['ImportListConfigResource'];
+          };
+        };
+      };
+    };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/importlistexclusion': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    /** @deprecated */
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['ImportListExclusionResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['ImportListExclusionResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['ImportListExclusionResource'];
             'application/json': components['schemas']['ImportListExclusionResource'];
@@ -1512,17 +3001,71 @@ export interface paths {
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v3/importlistexclusion/paged': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: {
+          page?: number;
+          pageSize?: number;
+          sortKey?: string;
+          sortDirection?: components['schemas']['SortDirection'];
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: Record<string, unknown>;
+          content: {
+            'application/json': components['schemas']['ImportListExclusionResourcePagingResource'];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/importlistexclusion/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['ImportListExclusionResource'];
           };
@@ -1531,9 +3074,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -1541,8 +3087,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['ImportListExclusionResource'];
             'application/json': components['schemas']['ImportListExclusionResource'];
@@ -1551,36 +3098,101 @@ export interface paths {
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v3/importlistexclusion/bulk': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
+    delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['ImportListExclusionBulkResource'];
+          'text/json': components['schemas']['ImportListExclusionBulkResource'];
+          'application/*+json': components['schemas']['ImportListExclusionBulkResource'];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: Record<string, unknown>;
+          content?: never;
+        };
+      };
+    };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/indexer': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['IndexerResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
       parameters: {
         query?: {
           forceSave?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -1588,25 +3200,42 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['IndexerResource'];
           };
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/indexer/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['IndexerResource'];
           };
@@ -1618,9 +3247,11 @@ export interface paths {
         query?: {
           forceSave?: boolean;
         };
+        header?: never;
         path: {
-          id: string;
+          id: number;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -1628,101 +3259,213 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['IndexerResource'];
           };
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/indexer/bulk': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
     put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['IndexerBulkResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['IndexerResource'];
           };
         };
       };
     };
+    post?: never;
     delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['IndexerBulkResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/indexer/schema': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['IndexerResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/indexer/test': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: {
+          forceTest?: boolean;
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['IndexerResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/indexer/testall': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/indexer/action/{name}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           name: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -1730,35 +3473,73 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/config/indexer': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['IndexerConfigResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/config/indexer/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['IndexerConfigResource'];
           };
@@ -1767,9 +3548,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -1777,8 +3561,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['IndexerConfigResource'];
             'application/json': components['schemas']['IndexerConfigResource'];
@@ -1787,12 +3572,67 @@ export interface paths {
         };
       };
     };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v3/indexerflag': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: Record<string, unknown>;
+          content: {
+            'text/plain': components['schemas']['IndexerFlagResource'][];
+            'application/json': components['schemas']['IndexerFlagResource'][];
+            'text/json': components['schemas']['IndexerFlagResource'][];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/language': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['LanguageResource'][];
             'application/json': components['schemas']['LanguageResource'][];
@@ -1801,63 +3641,126 @@ export interface paths {
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/language/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['LanguageResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/languageprofile': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     /** @deprecated */
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['LanguageProfileResource'][];
           };
         };
       };
     };
+    put?: never;
     /** @deprecated */
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['LanguageProfileResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['LanguageProfileResource'];
           };
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/languageprofile/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['LanguageProfileResource'];
           };
@@ -1867,9 +3770,12 @@ export interface paths {
     /** @deprecated */
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -1877,84 +3783,182 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['LanguageProfileResource'];
           };
         };
       };
     };
+    post?: never;
     /** @deprecated */
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/languageprofile/schema': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     /** @deprecated */
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['LanguageProfileResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/localization': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['LocalizationResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/localization/language': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['LocalizationLanguageResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/localization/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['LocalizationResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/log': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -1964,45 +3968,102 @@ export interface paths {
           sortDirection?: components['schemas']['SortDirection'];
           level?: string;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['LogResourcePagingResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/log/file': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['LogFileResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/log/file/{filename}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           filename: string;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/manualimport': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -2012,68 +4073,136 @@ export interface paths {
           seasonNumber?: number;
           filterExistingFiles?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['ManualImportResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['ManualImportReprocessResource'][];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/mediacover/{seriesId}/{filename}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           seriesId: number;
           filename: string;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/config/mediamanagement': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['MediaManagementConfigResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/config/mediamanagement/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['MediaManagementConfigResource'];
           };
@@ -2082,9 +4211,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -2092,8 +4224,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['MediaManagementConfigResource'];
             'application/json': components['schemas']['MediaManagementConfigResource'];
@@ -2102,23 +4235,47 @@ export interface paths {
         };
       };
     };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/metadata': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['MetadataResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
       parameters: {
         query?: {
           forceSave?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -2126,25 +4283,42 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['MetadataResource'];
           };
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/metadata/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['MetadataResource'];
           };
@@ -2156,9 +4330,11 @@ export interface paths {
         query?: {
           forceSave?: boolean;
         };
+        header?: never;
         path: {
-          id: string;
+          id: number;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -2166,71 +4342,157 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['MetadataResource'];
           };
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/metadata/schema': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['MetadataResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/metadata/test': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: {
+          forceTest?: boolean;
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['MetadataResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/metadata/testall': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/metadata/action/{name}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           name: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -2238,14 +4500,26 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/wanted/missing': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -2257,39 +4531,83 @@ export interface paths {
           includeImages?: boolean;
           monitored?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['EpisodeResourcePagingResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/wanted/missing/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['EpisodeResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/config/naming': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['NamingConfigResource'];
             'application/json': components['schemas']['NamingConfigResource'];
@@ -2298,17 +4616,35 @@ export interface paths {
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/config/naming/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['NamingConfigResource'];
           };
@@ -2317,9 +4653,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -2329,8 +4668,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['NamingConfigResource'];
             'application/json': components['schemas']['NamingConfigResource'];
@@ -2339,14 +4679,27 @@ export interface paths {
         };
       };
     };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/config/naming/examples': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
           renameEpisodes?: boolean;
           replaceIllegalCharacters?: boolean;
           colonReplacementFormat?: number;
+          customColonReplacementFormat?: string;
           multiEpisodeStyle?: number;
           standardEpisodeFormat?: string;
           dailyEpisodeFormat?: string;
@@ -2354,40 +4707,64 @@ export interface paths {
           seriesFolderFormat?: string;
           seasonFolderFormat?: string;
           specialsFolderFormat?: string;
-          includeSeriesTitle?: boolean;
-          includeEpisodeTitle?: boolean;
-          includeQuality?: boolean;
-          replaceSpaces?: boolean;
-          separator?: string;
-          numberStyle?: string;
           id?: number;
           resourceName?: string;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/notification': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['NotificationResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
       parameters: {
         query?: {
           forceSave?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -2395,25 +4772,42 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['NotificationResource'];
           };
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/notification/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['NotificationResource'];
           };
@@ -2425,9 +4819,11 @@ export interface paths {
         query?: {
           forceSave?: boolean;
         };
+        header?: never;
         path: {
-          id: string;
+          id: number;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -2435,71 +4831,157 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['NotificationResource'];
           };
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/notification/schema': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['NotificationResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/notification/test': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: {
+          forceTest?: boolean;
+        };
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['NotificationResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/notification/testall': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/notification/action/{name}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           name: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -2507,53 +4989,126 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/parse': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
           title?: string;
           path?: string;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['ParseResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/ping': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['PingResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: Record<string, unknown>;
+          content: {
+            'application/json': components['schemas']['PingResource'];
+          };
+        };
+      };
+    };
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/qualitydefinition/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['QualityDefinitionResource'];
           };
@@ -2562,9 +5117,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -2574,8 +5132,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['QualityDefinitionResource'];
             'application/json': components['schemas']['QualityDefinitionResource'];
@@ -2584,12 +5143,32 @@ export interface paths {
         };
       };
     };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/qualitydefinition': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['QualityDefinitionResource'][];
             'application/json': components['schemas']['QualityDefinitionResource'][];
@@ -2598,9 +5177,29 @@ export interface paths {
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/qualitydefinition/update': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
     put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['QualityDefinitionResource'][];
@@ -2609,33 +5208,97 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v3/qualitydefinition/limits': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: Record<string, unknown>;
+          content: {
+            'text/plain': components['schemas']['QualityDefinitionLimitsResource'];
+            'application/json': components['schemas']['QualityDefinitionLimitsResource'];
+            'text/json': components['schemas']['QualityDefinitionLimitsResource'];
+          };
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/qualityprofile': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['QualityProfileResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['QualityProfileResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['QualityProfileResource'];
             'application/json': components['schemas']['QualityProfileResource'];
@@ -2644,17 +5307,33 @@ export interface paths {
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/qualityprofile/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['QualityProfileResource'];
           };
@@ -2663,9 +5342,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -2673,8 +5355,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['QualityProfileResource'];
             'application/json': components['schemas']['QualityProfileResource'];
@@ -2683,25 +5366,49 @@ export interface paths {
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/qualityprofile/schema': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['QualityProfileResource'];
             'application/json': components['schemas']['QualityProfileResource'];
@@ -2710,35 +5417,73 @@ export interface paths {
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/queue/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
     delete: {
       parameters: {
         query?: {
           removeFromClient?: boolean;
           blocklist?: boolean;
           skipRedownload?: boolean;
+          changeCategory?: boolean;
         };
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/queue/bulk': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    post?: never;
     delete: {
       parameters: {
         query?: {
           removeFromClient?: boolean;
           blocklist?: boolean;
           skipRedownload?: boolean;
+          changeCategory?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -2748,14 +5493,25 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/queue': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -2769,50 +5525,107 @@ export interface paths {
           seriesIds?: number[];
           protocol?: components['schemas']['DownloadProtocol'];
           languages?: number[];
-          quality?: number;
+          quality?: number[];
+          status?: components['schemas']['QueueStatus'][];
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['QueueResourcePagingResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/queue/grab/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/queue/grab/bulk': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['QueueBulkResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/queue/details': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -2821,30 +5634,69 @@ export interface paths {
           includeSeries?: boolean;
           includeEpisode?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['QueueResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/queue/status': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['QueueStatusResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/release': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
@@ -2852,35 +5704,67 @@ export interface paths {
           episodeId?: number;
           seasonNumber?: number;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['ReleaseResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['ReleaseResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/releaseprofile': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['ReleaseProfileResource'][];
             'application/json': components['schemas']['ReleaseProfileResource'][];
@@ -2889,7 +5773,14 @@ export interface paths {
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['ReleaseProfileResource'];
@@ -2898,8 +5789,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['ReleaseProfileResource'];
             'application/json': components['schemas']['ReleaseProfileResource'];
@@ -2908,17 +5800,33 @@ export interface paths {
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/releaseprofile/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['ReleaseProfileResource'];
           };
@@ -2927,9 +5835,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -2939,8 +5850,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['ReleaseProfileResource'];
             'application/json': components['schemas']['ReleaseProfileResource'];
@@ -2949,30 +5861,55 @@ export interface paths {
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/release/push': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['ReleaseResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['ReleaseResource'][];
             'application/json': components['schemas']['ReleaseResource'][];
@@ -2981,27 +5918,54 @@ export interface paths {
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/remotepathmapping': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['RemotePathMappingResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['RemotePathMappingResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['RemotePathMappingResource'];
             'application/json': components['schemas']['RemotePathMappingResource'];
@@ -3010,17 +5974,33 @@ export interface paths {
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/remotepathmapping/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['RemotePathMappingResource'];
           };
@@ -3029,9 +6009,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -3041,8 +6024,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['RemotePathMappingResource'];
             'application/json': components['schemas']['RemotePathMappingResource'];
@@ -3051,58 +6035,108 @@ export interface paths {
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/rename': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
           seriesId?: number;
           seasonNumber?: number;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['RenameEpisodeResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/rootfolder': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['RootFolderResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['RootFolderResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['RootFolderResource'];
             'application/json': components['schemas']['RootFolderResource'];
@@ -3111,100 +6145,179 @@ export interface paths {
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/rootfolder/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['RootFolderResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/seasonpass': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['SeasonPassResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/series': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
           tvdbId?: number;
           includeSeasonImages?: boolean;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['SeriesResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['SeriesResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
-            'text/plain': components['schemas']['SeriesResource'];
             'application/json': components['schemas']['SeriesResource'];
-            'text/json': components['schemas']['SeriesResource'];
           };
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/series/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
           includeSeasonImages?: boolean;
         };
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['SeriesResource'];
           };
@@ -3216,9 +6329,11 @@ export interface paths {
         query?: {
           moveFiles?: boolean;
         };
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -3226,36 +6341,57 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
-            'text/plain': components['schemas']['SeriesResource'];
             'application/json': components['schemas']['SeriesResource'];
-            'text/json': components['schemas']['SeriesResource'];
           };
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
         query?: {
           deleteFiles?: boolean;
           addImportListExclusion?: boolean;
         };
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/series/editor': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
     put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['SeriesEditorResource'];
@@ -3264,13 +6400,21 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    post?: never;
     delete: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['SeriesEditorResource'];
@@ -3279,15 +6423,67 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v3/series/{id}/folder': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          id: number;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: Record<string, unknown>;
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/series/import': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['SeriesResource'][];
@@ -3296,145 +6492,354 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/series/lookup': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
         query?: {
           term?: string;
         };
+        header?: never;
+        path?: never;
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content: {
+            'text/plain': components['schemas']['SeriesResource'][];
+            'application/json': components['schemas']['SeriesResource'][];
+            'text/json': components['schemas']['SeriesResource'][];
+          };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/content/{path}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           path: string;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           path: string;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/{path}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           path: string;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/system/status': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['SystemResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/system/routes': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/system/routes/duplicate': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/system/shutdown': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/system/restart': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/tag': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['TagResource'][];
           };
         };
       };
     };
+    put?: never;
     post: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
       requestBody?: {
         content: {
           'application/json': components['schemas']['TagResource'];
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['TagResource'];
             'application/json': components['schemas']['TagResource'];
@@ -3443,17 +6848,33 @@ export interface paths {
         };
       };
     };
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/tag/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['TagResource'];
           };
@@ -3462,9 +6883,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -3472,8 +6896,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['TagResource'];
             'application/json': components['schemas']['TagResource'];
@@ -3482,54 +6907,117 @@ export interface paths {
         };
       };
     };
+    post?: never;
     delete: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/tag/detail': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['TagDetailsResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/tag/detail/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['TagDetailsResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/system/task': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['TaskResource'][];
             'application/json': components['schemas']['TaskResource'][];
@@ -3538,34 +7026,70 @@ export interface paths {
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/system/task/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['TaskResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/config/ui/{id}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: number;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['UiConfigResource'];
           };
@@ -3574,9 +7098,12 @@ export interface paths {
     };
     put: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           id: string;
         };
+        cookie?: never;
       };
       requestBody?: {
         content: {
@@ -3584,8 +7111,9 @@ export interface paths {
         };
       };
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'text/plain': components['schemas']['UiConfigResource'];
             'application/json': components['schemas']['UiConfigResource'];
@@ -3594,62 +7122,147 @@ export interface paths {
         };
       };
     };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/config/ui': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['UiConfigResource'];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/update': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['UpdateResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/log/file/update': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
+          headers: Record<string, unknown>;
           content: {
             'application/json': components['schemas']['LogFileResource'][];
           };
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
   '/api/v3/log/file/update/{filename}': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
     get: {
       parameters: {
+        query?: never;
+        header?: never;
         path: {
           filename: string;
         };
+        cookie?: never;
       };
+      requestBody?: never;
       responses: {
-        /** @description Success */
+        /** @description OK */
         200: {
-          content: never;
+          headers: Record<string, unknown>;
+          content?: never;
         };
       };
     };
+    put?: never;
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
   };
 }
-
 export type webhooks = Record<string, never>;
-
 export interface components {
   schemas: {
     AddSeriesOptions: {
@@ -3745,12 +7358,12 @@ export interface components {
       | 'disabled';
     Command: {
       sendUpdatesToClient?: boolean;
-      updateScheduledTask?: boolean;
-      completionMessage?: string | null;
-      requiresDiskAccess?: boolean;
-      isExclusive?: boolean;
-      isLongRunning?: boolean;
-      name?: string | null;
+      readonly updateScheduledTask?: boolean;
+      readonly completionMessage?: string | null;
+      readonly requiresDiskAccess?: boolean;
+      readonly isExclusive?: boolean;
+      readonly isLongRunning?: boolean;
+      readonly name?: string | null;
       /** Format: date-time */
       lastExecutionTime?: string | null;
       /** Format: date-time */
@@ -3777,7 +7390,8 @@ export interface components {
       started?: string | null;
       /** Format: date-time */
       ended?: string | null;
-      duration?: components['schemas']['TimeSpan'];
+      /** Format: date-span */
+      duration?: string | null;
       exception?: string | null;
       trigger?: components['schemas']['CommandTrigger'];
       clientUserAgent?: string | null;
@@ -3806,11 +7420,11 @@ export interface components {
       id?: number;
       type?: string | null;
       label?: string | null;
-      filters?:
-        | {
-            [key: string]: unknown;
-          }[]
-        | null;
+      filters?: Record<string, unknown>[] | null;
+    };
+    CustomFormatBulkResource: {
+      ids?: number[] | null;
+      includeCustomFormatWhenRenaming?: boolean | null;
     };
     CustomFormatResource: {
       /** Format: int32 */
@@ -3931,6 +7545,9 @@ export interface components {
       customFormats?: components['schemas']['CustomFormatResource'][] | null;
       /** Format: int32 */
       customFormatScore?: number;
+      /** Format: int32 */
+      indexerFlags?: number | null;
+      releaseType?: components['schemas']['ReleaseType'];
       mediaInfo?: components['schemas']['MediaInfoResource'];
       qualityCutoffNotMet?: boolean;
     };
@@ -3961,6 +7578,8 @@ export interface components {
       airDate?: string | null;
       /** Format: date-time */
       airDateUtc?: string | null;
+      /** Format: date-time */
+      lastSearchTime?: string | null;
       /** Format: int32 */
       runtime?: number;
       finaleType?: string | null;
@@ -3981,10 +7600,8 @@ export interface components {
       endTime?: string | null;
       /** Format: date-time */
       grabDate?: string | null;
-      seriesTitle?: string | null;
       series?: components['schemas']['SeriesResource'];
       images?: components['schemas']['MediaCover'][] | null;
-      grabbed?: boolean;
     };
     EpisodeResourcePagingResource: {
       /** Format: int32 */
@@ -4012,7 +7629,7 @@ export interface components {
       helpText?: string | null;
       helpTextWarning?: string | null;
       helpLink?: string | null;
-      value?: Record<string, unknown> | null;
+      value?: unknown;
       type?: string | null;
       advanced?: boolean;
       selectOptions?: components['schemas']['SelectOption'][] | null;
@@ -4053,9 +7670,7 @@ export interface components {
       date?: string;
       downloadId?: string | null;
       eventType?: components['schemas']['EpisodeHistoryEventType'];
-      data?: {
-        [key: string]: string | null;
-      } | null;
+      data?: Record<string, string | null> | null;
       episode?: components['schemas']['EpisodeResource'];
       series?: components['schemas']['SeriesResource'];
     };
@@ -4085,7 +7700,10 @@ export interface components {
       analyticsEnabled?: boolean;
       username?: string | null;
       password?: string | null;
+      passwordConfirmation?: string | null;
       logLevel?: string | null;
+      /** Format: int32 */
+      logSizeLimit?: number;
       consoleLogLevel?: string | null;
       branch?: string | null;
       apiKey?: string | null;
@@ -4112,16 +7730,17 @@ export interface components {
       backupInterval?: number;
       /** Format: int32 */
       backupRetention?: number;
+      trustCgnatIpAddresses?: boolean;
     };
     HttpUri: {
-      fullUri?: string | null;
-      scheme?: string | null;
-      host?: string | null;
+      readonly fullUri?: string | null;
+      readonly scheme?: string | null;
+      readonly host?: string | null;
       /** Format: int32 */
-      port?: number | null;
-      path?: string | null;
-      query?: string | null;
-      fragment?: string | null;
+      readonly port?: number | null;
+      readonly path?: string | null;
+      readonly query?: string | null;
+      readonly fragment?: string | null;
     };
     ImportListBulkResource: {
       ids?: number[] | null;
@@ -4132,12 +7751,33 @@ export interface components {
       /** Format: int32 */
       qualityProfileId?: number | null;
     };
+    ImportListConfigResource: {
+      /** Format: int32 */
+      id?: number;
+      listSyncLevel?: components['schemas']['ListSyncLevelType'];
+      /** Format: int32 */
+      listSyncTag?: number;
+    };
+    ImportListExclusionBulkResource: {
+      ids?: number[] | null;
+    };
     ImportListExclusionResource: {
       /** Format: int32 */
       id?: number;
       /** Format: int32 */
       tvdbId?: number;
       title?: string | null;
+    };
+    ImportListExclusionResourcePagingResource: {
+      /** Format: int32 */
+      page?: number;
+      /** Format: int32 */
+      pageSize?: number;
+      sortKey?: string | null;
+      sortDirection?: components['schemas']['SortDirection'];
+      /** Format: int32 */
+      totalRecords?: number;
+      records?: components['schemas']['ImportListExclusionResource'][] | null;
     };
     ImportListResource: {
       /** Format: int32 */
@@ -4154,6 +7794,7 @@ export interface components {
       enableAutomaticAdd?: boolean;
       searchForMissingEpisodes?: boolean;
       shouldMonitor?: components['schemas']['MonitorTypes'];
+      monitorNewItems?: components['schemas']['NewItemMonitorTypes'];
       rootFolderPath?: string | null;
       /** Format: int32 */
       qualityProfileId?: number;
@@ -4162,7 +7803,8 @@ export interface components {
       listType?: components['schemas']['ImportListType'];
       /** Format: int32 */
       listOrder?: number;
-      minRefreshInterval?: components['schemas']['TimeSpan'];
+      /** Format: date-span */
+      minRefreshInterval?: string;
     };
     /** @enum {string} */
     ImportListType:
@@ -4172,6 +7814,10 @@ export interface components {
       | 'simkl'
       | 'other'
       | 'advanced';
+    ImportRejectionResource: {
+      reason?: string | null;
+      type?: components['schemas']['RejectionType'];
+    };
     IndexerBulkResource: {
       ids?: number[] | null;
       tags?: number[] | null;
@@ -4193,6 +7839,12 @@ export interface components {
       maximumSize?: number;
       /** Format: int32 */
       rssSyncInterval?: number;
+    };
+    IndexerFlagResource: {
+      /** Format: int32 */
+      id?: number;
+      name?: string | null;
+      readonly nameLower?: string | null;
     };
     IndexerResource: {
       /** Format: int32 */
@@ -4242,17 +7894,21 @@ export interface components {
       /** Format: int32 */
       id?: number;
       name?: string | null;
-      nameLower?: string | null;
+      readonly nameLower?: string | null;
     };
+    /** @enum {string} */
+    ListSyncLevelType:
+      | 'disabled'
+      | 'logOnly'
+      | 'keepAndUnmonitor'
+      | 'keepAndTag';
     LocalizationLanguageResource: {
       identifier?: string | null;
     };
     LocalizationResource: {
       /** Format: int32 */
       id?: number;
-      strings?: {
-        [key: string]: string | null;
-      } | null;
+      strings?: Record<string, string | null> | null;
     };
     LogFileResource: {
       /** Format: int32 */
@@ -4303,7 +7959,10 @@ export interface components {
       customFormats?: components['schemas']['CustomFormatResource'][] | null;
       /** Format: int32 */
       customFormatScore?: number;
-      rejections?: components['schemas']['Rejection'][] | null;
+      /** Format: int32 */
+      indexerFlags?: number;
+      releaseType?: components['schemas']['ReleaseType'];
+      rejections?: components['schemas']['ImportRejectionResource'][] | null;
     };
     ManualImportResource: {
       /** Format: int32 */
@@ -4329,7 +7988,10 @@ export interface components {
       customFormats?: components['schemas']['CustomFormatResource'][] | null;
       /** Format: int32 */
       customFormatScore?: number;
-      rejections?: components['schemas']['Rejection'][] | null;
+      /** Format: int32 */
+      indexerFlags?: number;
+      releaseType?: components['schemas']['ReleaseType'];
+      rejections?: components['schemas']['ImportRejectionResource'][] | null;
     };
     MediaCover: {
       coverType?: components['schemas']['MediaCoverTypes'];
@@ -4418,11 +8080,14 @@ export interface components {
       | 'missing'
       | 'existing'
       | 'firstSeason'
+      | 'lastSeason'
       | 'latestSeason'
       | 'pilot'
+      | 'recent'
       | 'monitorSpecials'
       | 'unmonitorSpecials'
-      | 'none';
+      | 'none'
+      | 'skip';
     MonitoringOptions: {
       ignoreEpisodesWithFiles?: boolean;
       ignoreEpisodesWithoutFiles?: boolean;
@@ -4435,6 +8100,7 @@ export interface components {
       replaceIllegalCharacters?: boolean;
       /** Format: int32 */
       colonReplacementFormat?: number;
+      customColonReplacementFormat?: string | null;
       /** Format: int32 */
       multiEpisodeStyle?: number;
       standardEpisodeFormat?: string | null;
@@ -4443,13 +8109,9 @@ export interface components {
       seriesFolderFormat?: string | null;
       seasonFolderFormat?: string | null;
       specialsFolderFormat?: string | null;
-      includeSeriesTitle?: boolean;
-      includeEpisodeTitle?: boolean;
-      includeQuality?: boolean;
-      replaceSpaces?: boolean;
-      separator?: string | null;
-      numberStyle?: string | null;
     };
+    /** @enum {string} */
+    NewItemMonitorTypes: 'all' | 'none';
     NotificationResource: {
       /** Format: int32 */
       id?: number;
@@ -4466,18 +8128,21 @@ export interface components {
       onGrab?: boolean;
       onDownload?: boolean;
       onUpgrade?: boolean;
+      onImportComplete?: boolean;
       onRename?: boolean;
       onSeriesAdd?: boolean;
       onSeriesDelete?: boolean;
       onEpisodeFileDelete?: boolean;
       onEpisodeFileDeleteForUpgrade?: boolean;
       onHealthIssue?: boolean;
+      includeHealthWarnings?: boolean;
       onHealthRestored?: boolean;
       onApplicationUpdate?: boolean;
       onManualInteractionRequired?: boolean;
       supportsOnGrab?: boolean;
       supportsOnDownload?: boolean;
       supportsOnUpgrade?: boolean;
+      supportsOnImportComplete?: boolean;
       supportsOnRename?: boolean;
       supportsOnSeriesAdd?: boolean;
       supportsOnSeriesDelete?: boolean;
@@ -4487,7 +8152,6 @@ export interface components {
       supportsOnHealthRestored?: boolean;
       supportsOnApplicationUpdate?: boolean;
       supportsOnManualInteractionRequired?: boolean;
-      includeHealthWarnings?: boolean;
       testCommand?: string | null;
     };
     ParseResource: {
@@ -4518,6 +8182,8 @@ export interface components {
       isPartialSeason?: boolean;
       isMultiSeason?: boolean;
       isSeasonExtra?: boolean;
+      isSplitEpisode?: boolean;
+      isMiniSeries?: boolean;
       special?: boolean;
       releaseGroup?: string | null;
       releaseHash?: string | null;
@@ -4526,10 +8192,11 @@ export interface components {
       releaseTokens?: string | null;
       /** Format: int32 */
       dailyPart?: number | null;
-      isDaily?: boolean;
-      isAbsoluteNumbering?: boolean;
-      isPossibleSpecialEpisode?: boolean;
-      isPossibleSceneSeasonSpecial?: boolean;
+      readonly isDaily?: boolean;
+      readonly isAbsoluteNumbering?: boolean;
+      readonly isPossibleSpecialEpisode?: boolean;
+      readonly isPossibleSceneSeasonSpecial?: boolean;
+      releaseType?: components['schemas']['ReleaseType'];
     };
     PingResource: {
       status?: string | null;
@@ -4562,6 +8229,12 @@ export interface components {
       source?: components['schemas']['QualitySource'];
       /** Format: int32 */
       resolution?: number;
+    };
+    QualityDefinitionLimitsResource: {
+      /** Format: int32 */
+      min?: number;
+      /** Format: int32 */
+      max?: number;
     };
     QualityDefinitionResource: {
       /** Format: int32 */
@@ -4605,6 +8278,8 @@ export interface components {
       minFormatScore?: number;
       /** Format: int32 */
       cutoffFormatScore?: number;
+      /** Format: int32 */
+      minUpgradeFormatScore?: number;
       formatItems?: components['schemas']['ProfileFormatItemResource'][] | null;
     };
     /** @enum {string} */
@@ -4639,12 +8314,11 @@ export interface components {
       /** Format: double */
       size?: number;
       title?: string | null;
-      /** Format: double */
-      sizeleft?: number;
-      timeleft?: components['schemas']['TimeSpan'];
       /** Format: date-time */
       estimatedCompletionTime?: string | null;
-      status?: string | null;
+      /** Format: date-time */
+      added?: string | null;
+      status?: components['schemas']['QueueStatus'];
       trackedDownloadStatus?: components['schemas']['TrackedDownloadStatus'];
       trackedDownloadState?: components['schemas']['TrackedDownloadState'];
       statusMessages?:
@@ -4654,9 +8328,20 @@ export interface components {
       downloadId?: string | null;
       protocol?: components['schemas']['DownloadProtocol'];
       downloadClient?: string | null;
+      downloadClientHasPostImportCategory?: boolean;
       indexer?: string | null;
       outputPath?: string | null;
       episodeHasFile?: boolean;
+      /**
+       * Format: double
+       * @deprecated
+       */
+      sizeleft?: number;
+      /**
+       * Format: date-span
+       * @deprecated
+       */
+      timeleft?: string | null;
     };
     QueueResourcePagingResource: {
       /** Format: int32 */
@@ -4669,6 +8354,18 @@ export interface components {
       totalRecords?: number;
       records?: components['schemas']['QueueResource'][] | null;
     };
+    /** @enum {string} */
+    QueueStatus:
+      | 'unknown'
+      | 'queued'
+      | 'paused'
+      | 'downloading'
+      | 'completed'
+      | 'failed'
+      | 'warning'
+      | 'delay'
+      | 'downloadClientUnavailable'
+      | 'fallback';
     QueueStatusResource: {
       /** Format: int32 */
       id?: number;
@@ -4689,10 +8386,6 @@ export interface components {
       /** Format: double */
       value?: number;
     };
-    Rejection: {
-      reason?: string | null;
-      type?: components['schemas']['RejectionType'];
-    };
     /** @enum {string} */
     RejectionType: 'permanent' | 'temporary';
     ReleaseEpisodeResource: {
@@ -4711,8 +8404,8 @@ export interface components {
       id?: number;
       name?: string | null;
       enabled?: boolean;
-      required?: Record<string, unknown> | null;
-      ignored?: Record<string, unknown> | null;
+      required?: unknown;
+      ignored?: unknown;
       /** Format: int32 */
       indexerId?: number;
       tags?: number[] | null;
@@ -4766,6 +8459,7 @@ export interface components {
       tvdbId?: number;
       /** Format: int32 */
       tvRageId?: number;
+      imdbId?: string | null;
       rejections?: string[] | null;
       /** Format: date-time */
       publishDate?: string;
@@ -4787,6 +8481,8 @@ export interface components {
       /** Format: int32 */
       leechers?: number | null;
       protocol?: components['schemas']['DownloadProtocol'];
+      /** Format: int32 */
+      indexerFlags?: number;
       isDaily?: boolean;
       isAbsoluteNumbering?: boolean;
       isPossibleSpecialEpisode?: boolean;
@@ -4798,8 +8494,11 @@ export interface components {
       episodeIds?: number[] | null;
       /** Format: int32 */
       downloadClientId?: number | null;
+      downloadClient?: string | null;
       shouldOverride?: boolean | null;
     };
+    /** @enum {string} */
+    ReleaseType: 'unknown' | 'singleEpisode' | 'multiEpisode' | 'seasonPack';
     RemotePathMappingResource: {
       /** Format: int32 */
       id?: number;
@@ -4872,7 +8571,7 @@ export interface components {
       sizeOnDisk?: number;
       releaseGroups?: string[] | null;
       /** Format: double */
-      percentOfEpisodes?: number;
+      readonly percentOfEpisodes?: number;
     };
     SelectOption: {
       /** Format: int32 */
@@ -4885,6 +8584,7 @@ export interface components {
     SeriesEditorResource: {
       seriesIds?: number[] | null;
       monitored?: boolean | null;
+      monitorNewItems?: components['schemas']['NewItemMonitorTypes'];
       /** Format: int32 */
       qualityProfileId?: number | null;
       seriesType?: components['schemas']['SeriesTypes'];
@@ -4905,7 +8605,7 @@ export interface components {
         | null;
       sortTitle?: string | null;
       status?: components['schemas']['SeriesStatusType'];
-      ended?: boolean;
+      readonly ended?: boolean;
       profileName?: string | null;
       overview?: string | null;
       /** Format: date-time */
@@ -4925,6 +8625,7 @@ export interface components {
       qualityProfileId?: number;
       seasonFolder?: boolean;
       monitored?: boolean;
+      monitorNewItems?: components['schemas']['NewItemMonitorTypes'];
       useSceneNumbering?: boolean;
       /** Format: int32 */
       runtime?: number;
@@ -4934,6 +8635,8 @@ export interface components {
       tvRageId?: number;
       /** Format: int32 */
       tvMazeId?: number;
+      /** Format: int32 */
+      tmdbId?: number;
       /** Format: date-time */
       firstAired?: string | null;
       /** Format: date-time */
@@ -4957,7 +8660,7 @@ export interface components {
        * Format: int32
        * @deprecated
        */
-      languageProfileId?: number;
+      readonly languageProfileId?: number;
     };
     SeriesStatisticsResource: {
       /** Format: int32 */
@@ -4972,7 +8675,7 @@ export interface components {
       sizeOnDisk?: number;
       releaseGroups?: string[] | null;
       /** Format: double */
-      percentOfEpisodes?: number;
+      readonly percentOfEpisodes?: number;
     };
     /** @enum {string} */
     SeriesStatusType: 'continuing' | 'ended' | 'upcoming' | 'deleted';
@@ -5009,11 +8712,11 @@ export interface components {
       mode?: components['schemas']['RuntimeMode'];
       branch?: string | null;
       authentication?: components['schemas']['AuthenticationType'];
-      sqliteVersion?: components['schemas']['Version'];
+      sqliteVersion?: string | null;
       /** Format: int32 */
       migrationVersion?: number;
       urlBase?: string | null;
-      runtimeVersion?: components['schemas']['Version'];
+      runtimeVersion?: string | null;
       runtimeName?: string | null;
       /** Format: date-time */
       startTime?: string;
@@ -5021,7 +8724,7 @@ export interface components {
       packageAuthor?: string | null;
       packageUpdateMechanism?: components['schemas']['UpdateMechanism'];
       packageUpdateMechanismMessage?: string | null;
-      databaseVersion?: components['schemas']['Version'];
+      databaseVersion?: string | null;
       databaseType?: components['schemas']['DatabaseType'];
     };
     TagDetailsResource: {
@@ -5055,35 +8758,13 @@ export interface components {
       lastStartTime?: string;
       /** Format: date-time */
       nextExecution?: string;
-      lastDuration?: components['schemas']['TimeSpan'];
-    };
-    TimeSpan: {
-      /** Format: int64 */
-      ticks?: number;
-      /** Format: int32 */
-      days?: number;
-      /** Format: int32 */
-      hours?: number;
-      /** Format: int32 */
-      milliseconds?: number;
-      /** Format: int32 */
-      minutes?: number;
-      /** Format: int32 */
-      seconds?: number;
-      /** Format: double */
-      totalDays?: number;
-      /** Format: double */
-      totalHours?: number;
-      /** Format: double */
-      totalMilliseconds?: number;
-      /** Format: double */
-      totalMinutes?: number;
-      /** Format: double */
-      totalSeconds?: number;
+      /** Format: date-span */
+      readonly lastDuration?: string;
     };
     /** @enum {string} */
     TrackedDownloadState:
       | 'downloading'
+      | 'importBlocked'
       | 'importPending'
       | 'importing'
       | 'imported'
@@ -5125,7 +8806,7 @@ export interface components {
     UpdateResource: {
       /** Format: int32 */
       id?: number;
-      version?: components['schemas']['Version'];
+      version?: string | null;
       branch?: string | null;
       /** Format: date-time */
       releaseDate?: string;
@@ -5139,20 +8820,6 @@ export interface components {
       changes?: components['schemas']['UpdateChanges'];
       hash?: string | null;
     };
-    Version: {
-      /** Format: int32 */
-      major?: number;
-      /** Format: int32 */
-      minor?: number;
-      /** Format: int32 */
-      build?: number;
-      /** Format: int32 */
-      revision?: number;
-      /** Format: int32 */
-      majorRevision?: number;
-      /** Format: int32 */
-      minorRevision?: number;
-    };
   };
   responses: never;
   parameters: never;
@@ -5160,9 +8827,5 @@ export interface components {
   headers: never;
   pathItems: never;
 }
-
 export type $defs = Record<string, never>;
-
-export type external = Record<string, never>;
-
 export type operations = Record<string, never>;
