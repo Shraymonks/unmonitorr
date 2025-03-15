@@ -1,5 +1,11 @@
 # unmonitorr
 
+## 1.0.0
+
+### Major Changes
+
+- 8ec6c7f: Add jellyfin support
+
 ## 0.3.2
 
 ### Patch Changes
