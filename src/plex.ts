@@ -61,7 +61,6 @@ export function startPlexUnmonitor() {
           const episodeTvdbIds = getIds(Guid, 'tvdb');
 
           void unmonitorEpisode({ episodeTvdbIds, seriesTitle }, res);
-
           return;
         }
         case 'movie': {
@@ -72,7 +71,6 @@ export function startPlexUnmonitor() {
           return;
         }
       }
-      res.end();
     },
   );
 
