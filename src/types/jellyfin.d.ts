@@ -58,7 +58,7 @@ interface JellyfinApiResponse {
     IsHD: boolean;
     IsFolder: boolean;
     ParentId: string;
-    Type: string;
+    Type: 'Episode' | 'Movie';
     People: object[];
     Studios: object[];
     GenreItems: object[];

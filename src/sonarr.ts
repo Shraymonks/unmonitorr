@@ -42,7 +42,7 @@ export async function unmonitorEpisode(
   }
   if (!seriesResponse.ok) {
     console.error(
-      `Error getting series information: ${seriesResponse.status} ${seriesResponse.statusText}`,
+      `Error getting series information: ${seriesResponse.status.toString()} ${seriesResponse.statusText}`,
     );
     return res.end();
   }
@@ -80,7 +80,7 @@ export async function unmonitorEpisode(
     }
     if (!episodeListResponse.ok) {
       console.error(
-        `Error getting episode list for ${seriesTitle}: ${seriesResponse.status} ${seriesResponse.statusText}`,
+        `Error getting episode list for ${seriesTitle}: ${seriesResponse.status.toString()} ${seriesResponse.statusText}`,
       );
       continue;
     }
@@ -94,14 +94,14 @@ export async function unmonitorEpisode(
       break;
     }
   }
-  if (!episode) {
+  if (episode?.seasonNumber == null || episode.episodeNumber == null) {
     console.warn(
       `Could not find episode tvdbIds: ${episodeTvdbIds.toString()} for ${seriesTitle}`,
     );
     return res.end();
   }
 
-  const episodeString = `${seriesTitle} - S${episode.seasonNumber}E${episode.episodeNumber}`;
+  const episodeString = `${seriesTitle} - S${episode.seasonNumber.toString()}E${episode.episodeNumber.toString()}`;
 
   if (episode.monitored) {
     let response;
@@ -126,7 +126,7 @@ export async function unmonitorEpisode(
     }
 
     console.error(
-      `Error unmonitoring ${episodeString}: ${response.status} ${response.statusText}`,
+      `Error unmonitoring ${episodeString}: ${response.status.toString()} ${response.statusText}`,
     );
   }
   return res.end();
