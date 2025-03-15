@@ -1,8 +1,7 @@
 import type { Response } from 'express';
-import type { PlexPayload } from './types/plex.js';
 import type { components } from './types/sonarr.js';
 
-import { Api, cleanTitle, getIds } from './utils.js';
+import { Api, cleanTitle } from './utils.js';
 
 export const DEFAULT_SONARR_HOST = 'http://127.0.0.1:8989';
 
@@ -10,7 +9,10 @@ const { SONARR_API_KEY, SONARR_HOST = DEFAULT_SONARR_HOST } = process.env;
 const api = new Api(`${SONARR_HOST}/api/v3/`, SONARR_API_KEY);
 
 export async function unmonitorEpisode(
-  { Guid, grandparentTitle: seriesTitle }: PlexPayload['Metadata'],
+  {
+    episodeTvdbIds,
+    seriesTitle,
+  }: { episodeTvdbIds: string[]; seriesTitle: string },
   res: Response,
 ): Promise<Response> {
   if (!SONARR_API_KEY) {
@@ -18,7 +20,6 @@ export async function unmonitorEpisode(
   }
 
   // tvdbId is of the episode not the series.
-  const episodeTvdbIds = getIds(Guid, 'tvdb');
   if (episodeTvdbIds.length === 0) {
     console.warn(`No tvdbId for ${seriesTitle}`);
     return res.end();
