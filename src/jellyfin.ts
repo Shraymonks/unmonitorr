@@ -16,7 +16,7 @@ export function startJellyfinUnmonitor() {
 
   app.post(
     '/jellyfin',
-    express.json(),
+    express.json({ limit: '10mb' }),
     (
       req: Request<ParamsDictionary, unknown, JellyfinApiResponse>,
       res: Response,
