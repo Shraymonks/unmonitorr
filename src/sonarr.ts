@@ -8,6 +8,8 @@ export const DEFAULT_SONARR_HOST = 'http://127.0.0.1:8989';
 const { SONARR_API_KEY, SONARR_HOST = DEFAULT_SONARR_HOST } = process.env;
 const api = new Api(`${SONARR_HOST}/api/v3/`, SONARR_API_KEY);
 
+const { EXCLUSION_TAG = 'unmonitorr-exclude' } = process.env;
+
 export async function unmonitorEpisode(
   {
     episodeTvdbIds,
@@ -62,6 +64,8 @@ export async function unmonitorEpisode(
   }
 
   let episode;
+  let serie;
+
   for (const series of seriesMatches) {
     if (!series.id) {
       continue;
@@ -91,6 +95,7 @@ export async function unmonitorEpisode(
       ({ tvdbId }) => tvdbId && episodeTvdbIds.includes(tvdbId.toString()),
     );
     if (episode) {
+      serie = series;
       break;
     }
   }
@@ -103,31 +108,51 @@ export async function unmonitorEpisode(
 
   const episodeString = `${seriesTitle} - S${episode.seasonNumber.toString()}E${episode.episodeNumber.toString()}`;
 
-  if (episode.monitored) {
-    let response;
-    try {
-      response = await fetch(api.getUrl('episode/monitor'), {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          episodeIds: [episode.id],
-          monitored: false,
-        }),
-      });
-    } catch (error) {
-      console.error(`Failed to unmonitor ${episodeString}:`);
-      console.error(error);
-      return res.end();
-    }
-
-    if (response.ok) {
-      console.log(`${episodeString} unmonitored!`);
-      return res.end();
-    }
-
-    console.error(
-      `Error unmonitoring ${episodeString}: ${response.status.toString()} ${response.statusText}`,
-    );
+  if (!episode.monitored) {
+    console.warn(`${episodeString} is already unmonitored`);
+    return res.end();
   }
+
+  for (const id of serie.tags) {
+    try {
+      const apiTag = await fetch(api.getUrl(`tag/${id}`));
+      const data = await apiTag.json();
+      if (data.label.toLowerCase() === EXCLUSION_TAG.toLowerCase()) {
+        console.warn(`${episodeString} has exclusion tag ${EXCLUSION_TAG}`);
+        return res.end();
+
+      }
+    } catch (error) {
+      console.error(`Failed to get tag ${id} information from radarr for ${episodeString}`);
+      console.error(error);
+      continue;
+    }
+  }
+
+  let response;
+  try {
+    response = await fetch(api.getUrl('episode/monitor'), {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        episodeIds: [episode.id],
+        monitored: false,
+      }),
+    });
+  } catch (error) {
+    console.error(`Failed to unmonitor ${episodeString}:`);
+    console.error(error);
+    return res.end();
+  }
+
+  if (response.ok) {
+    console.log(`${episodeString} unmonitored!`);
+    return res.end();
+  }
+
+  console.error(
+    `Error unmonitoring ${episodeString}: ${response.status.toString()} ${response.statusText}`,
+  );
+
   return res.end();
 }

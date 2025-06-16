@@ -8,6 +8,8 @@ export const DEFAULT_RADARR_HOST = 'http://127.0.0.1:7878';
 const { RADARR_API_KEY, RADARR_HOST = DEFAULT_RADARR_HOST } = process.env;
 const api = new Api(`${RADARR_HOST}/api/v3/`, RADARR_API_KEY);
 
+const { EXCLUSION_TAG = 'unmonitorr-exclude' } = process.env;
+
 export async function unmonitorMovie(
   {
     movieTmdbIds,
@@ -58,29 +60,50 @@ export async function unmonitorMovie(
     console.warn(`${titleYear} not found in radarr library`);
     return res.end();
   }
-  if (movie.monitored) {
-    movie.monitored = false;
-    let response;
-    try {
-      response = await fetch(api.getUrl(`movie/${movie.id.toString()}`), {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(movie),
-      });
-    } catch (error) {
-      console.error(`Failed to unmonitor ${titleYear}`);
-      console.error(error);
-      return res.end();
-    }
 
-    if (response.ok) {
-      console.log(`${titleYear} unmonitored!`);
-      return res.end();
-    }
-
-    console.error(
-      `Error unmonitoring ${titleYear}: ${response.status.toString()} ${response.statusText}`,
-    );
+  if (!movie.monitored) {
+    console.warn(`${titleYear} is already unmonitored`);
+    return res.end();
   }
+
+  for (const id of movie.tags) {
+    try {
+      const apiTag = await fetch(api.getUrl(`tag/${id}`));
+      const data = await apiTag.json();
+      if (data.label.toLowerCase() === EXCLUSION_TAG.toLowerCase()) {
+        console.warn(`${titleYear} has exclusion tag ${EXCLUSION_TAG}`);
+        return res.end();
+
+      }
+    } catch (error) {
+      console.error(`Failed to get tag ${id} information from radarr for ${titleYear}`);
+      console.error(error);
+      continue;
+    }
+  }
+
+  movie.monitored = false;
+  let response;
+  try {
+    response = await fetch(api.getUrl(`movie/${movie.id.toString()}`), {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(movie),
+    });
+  } catch (error) {
+    console.error(`Failed to unmonitor ${titleYear}`);
+    console.error(error);
+    return res.end();
+  }
+
+  if (response.ok) {
+    console.log(`${titleYear} unmonitored!`);
+    return res.end();
+  }
+
+  console.error(
+    `Error unmonitoring ${titleYear}: ${response.status.toString()} ${response.statusText}`,
+  );
+
   return res.end();
 }
