@@ -7,6 +7,18 @@ Unmonitor media in Radarr and Sonarr from Plex webhook events.
 - Use the `media.play` event to unmonitor whenever media is played in Plex. Useful for upgrading until media is played for the first time.
 - Use the `library.new` event to unmonitor whenever media is added to Plex. Useful for preventing upgrades if you have preferred words set as they always upgrade a release in V3 even if cutoffs have been met and upgrades are disabled. See [Preferred Words FAQs](https://wiki.servarr.com/en/sonarr/faq#preferred-words-faqs) for more information.
 
+## Exclude Media from Being Unmonitored
+
+You can prevent specific movies or series from being unmonitored by assigning them a special tag in Radarr or Sonarr.
+
+- In **Radarr**, apply the tag to the movie you want to exclude.
+- In **Sonarr**, apply the tag to the series you want to exclude.
+- The default tag to exclude media is: `unmonitorr-exclude`.
+
+This value can be customized using the `EXCLUSION_TAG` environment variable. When set, unmonitorr will use the value of this variable instead of the default.
+
+When this tag is present on a movie or series, unmonitorr will skip unmonitoring that media, even if it matches the configured events or conditions.
+
 ## Installation
 
 ### Docker
@@ -24,6 +36,7 @@ services:
       RADARR_API_KEY: $RADARR_API_KEY
       SONARR_HOST: http://127.0.0.1:8989
       SONARR_API_KEY: $SONARR_API_KEY
+      EXCLUSION_TAG: unmonitorr-exclude
     ports:
       - 9797:9797
     restart: unless-stopped
@@ -50,7 +63,7 @@ Unmonitorr also supports Jellyfin alongside Plex. Here's how to set it up:
    - Unmonitorr supports the "Default - native Jellyfin payload" type of webhook
    - the events and accounts for jellyfin are managed directly in the webhook plugin
 
-3. Configure the webhook in Jellyfin to point to your unmonitorr instance on /jellyfin path(default port 9898 for Jellyfin webhooks) eg `unmonitorr_base_url:9898/jellyfin`
+3. Configure the webhook in Jellyfin to point to your unmonitorr instance on /jellyfin path (default port 9898 for Jellyfin webhooks) eg `unmonitorr_base_url:9898/jellyfin`
 
 ### Jellyfin-specific behavior
 
@@ -62,7 +75,7 @@ Unmonitorr also supports Jellyfin alongside Plex. Here's how to set it up:
 
 | variable | description | default |
 | --- | --- | --- |
-| `SERVICES` | Comma separated list of the service for which unmonitorr needs to be enable. Supports both jellyfin and plex separated by comma | `plex` |
+| `SERVICES` | Comma separated list of the service for which unmonitorr needs to be enabled. Supports both jellyfin and plex separated by comma | `plex` |
 | `PLEX_ACCOUNTS` | Comma separated list of Plex account IDs or usernames for events in `PLEX_EVENTS` to unmonitor for. Will unmonitor for `PLEX_EVENTS` triggered by any account if not set. | `undefined` |
 | `PLEX_EVENTS` | Comma separated list of Plex webhook events to unmonitor on: <ul><li>`library.on.deck`</li><li>`library.new`</li><li>`media.pause`</li><li>`media.play`</li><li>`media.rate`</li><li>`media.resume`</li><li>`media.scrobble`</li><li>`media.stop`</li><li>`playback.started`</li></ul> Must only use events that provide movie or episode metadata. See [Plex Webhooks](https://support.plex.tv/articles/115002267687-webhooks/#toc-1) for more info. | `media.play` |
 | `PLEX_PORT` | Internal port to listen for Plex webhooks | `9797` |
@@ -71,3 +84,4 @@ Unmonitorr also supports Jellyfin alongside Plex. Here's how to set it up:
 | `RADARR_HOST` | Host for Radarr | `http://127.0.0.1:7878` |
 | `SONARR_API_KEY` | API key for Sonarr | `undefined` |
 | `SONARR_HOST` | Host for Sonarr | `http://127.0.0.1:8989` |
+| `EXCLUSION_TAG` | Tag name used to exclude media from being unmonitored. If present on a movie or series, unmonitorr will skip unmonitoring it. | `unmonitorr-exclude` |

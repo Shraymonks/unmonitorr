@@ -1,7 +1,7 @@
 import type { Response } from 'express';
 import type { components } from './types/sonarr.js';
 
-import { Api, cleanTitle } from './utils.js';
+import { Api, cleanTitle, hasExclusionTag } from './utils.js';
 
 export const DEFAULT_SONARR_HOST = 'http://127.0.0.1:8989';
 
@@ -62,15 +62,17 @@ export async function unmonitorEpisode(
   }
 
   let episode;
-  for (const series of seriesMatches) {
-    if (!series.id) {
+  let series;
+
+  for (const seriesMatch of seriesMatches) {
+    if (!seriesMatch.id) {
       continue;
     }
     let episodeListResponse;
     try {
       episodeListResponse = await fetch(
         api.getUrl('episode', {
-          seriesId: series.id.toString(),
+          seriesId: seriesMatch.id.toString(),
         }),
       );
     } catch (error) {
@@ -91,6 +93,7 @@ export async function unmonitorEpisode(
       ({ tvdbId }) => tvdbId && episodeTvdbIds.includes(tvdbId.toString()),
     );
     if (episode) {
+      series = seriesMatch;
       break;
     }
   }
@@ -103,31 +106,40 @@ export async function unmonitorEpisode(
 
   const episodeString = `${seriesTitle} - S${episode.seasonNumber.toString()}E${episode.episodeNumber.toString()}`;
 
-  if (episode.monitored) {
-    let response;
-    try {
-      response = await fetch(api.getUrl('episode/monitor'), {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          episodeIds: [episode.id],
-          monitored: false,
-        }),
-      });
-    } catch (error) {
-      console.error(`Failed to unmonitor ${episodeString}:`);
-      console.error(error);
-      return res.end();
-    }
-
-    if (response.ok) {
-      console.log(`${episodeString} unmonitored!`);
-      return res.end();
-    }
-
-    console.error(
-      `Error unmonitoring ${episodeString}: ${response.status.toString()} ${response.statusText}`,
-    );
+  if (!episode.monitored) {
+    console.warn(`${episodeString} is already unmonitored`);
+    return res.end();
   }
+
+  if (await hasExclusionTag(api.getUrl('tag'), series.tags)) {
+    console.warn(`${episodeString} has exclusion tag`);
+    return res.end();
+  }
+
+  let response;
+  try {
+    response = await fetch(api.getUrl('episode/monitor'), {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        episodeIds: [episode.id],
+        monitored: false,
+      }),
+    });
+  } catch (error) {
+    console.error(`Failed to unmonitor ${episodeString}:`);
+    console.error(error);
+    return res.end();
+  }
+
+  if (response.ok) {
+    console.log(`${episodeString} unmonitored!`);
+    return res.end();
+  }
+
+  console.error(
+    `Error unmonitoring ${episodeString}: ${response.status.toString()} ${response.statusText}`,
+  );
+
   return res.end();
 }
