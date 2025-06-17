@@ -1,14 +1,12 @@
 import type { Response } from 'express';
 import type { components } from './types/radarr.js';
 
-import { Api } from './utils.js';
+import { Api, hasExclusionTag } from './utils.js';
 
 export const DEFAULT_RADARR_HOST = 'http://127.0.0.1:7878';
 
 const { RADARR_API_KEY, RADARR_HOST = DEFAULT_RADARR_HOST } = process.env;
 const api = new Api(`${RADARR_HOST}/api/v3/`, RADARR_API_KEY);
-
-const { EXCLUSION_TAG = 'unmonitorr-exclude' } = process.env;
 
 export async function unmonitorMovie(
   {
@@ -66,20 +64,9 @@ export async function unmonitorMovie(
     return res.end();
   }
 
-  for (const id of movie.tags) {
-    try {
-      const apiTag = await fetch(api.getUrl(`tag/${id}`));
-      const data = await apiTag.json();
-      if (data.label.toLowerCase() === EXCLUSION_TAG.toLowerCase()) {
-        console.warn(`${titleYear} has exclusion tag ${EXCLUSION_TAG}`);
-        return res.end();
-
-      }
-    } catch (error) {
-      console.error(`Failed to get tag ${id} information from radarr for ${titleYear}`);
-      console.error(error);
-      continue;
-    }
+  if (await hasExclusionTag(api.getUrl('tag'), movie.tags)) {
+    console.warn(`${titleYear} has exclusion tag`);
+    return res.end();
   }
 
   movie.monitored = false;

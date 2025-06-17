@@ -1,14 +1,12 @@
 import type { Response } from 'express';
 import type { components } from './types/sonarr.js';
 
-import { Api, cleanTitle } from './utils.js';
+import { Api, cleanTitle, hasExclusionTag } from './utils.js';
 
 export const DEFAULT_SONARR_HOST = 'http://127.0.0.1:8989';
 
 const { SONARR_API_KEY, SONARR_HOST = DEFAULT_SONARR_HOST } = process.env;
 const api = new Api(`${SONARR_HOST}/api/v3/`, SONARR_API_KEY);
-
-const { EXCLUSION_TAG = 'unmonitorr-exclude' } = process.env;
 
 export async function unmonitorEpisode(
   {
@@ -64,17 +62,17 @@ export async function unmonitorEpisode(
   }
 
   let episode;
-  let serie;
+  let series;
 
-  for (const series of seriesMatches) {
-    if (!series.id) {
+  for (const seriesMatch of seriesMatches) {
+    if (!seriesMatch.id) {
       continue;
     }
     let episodeListResponse;
     try {
       episodeListResponse = await fetch(
         api.getUrl('episode', {
-          seriesId: series.id.toString(),
+          seriesId: seriesMatch.id.toString(),
         }),
       );
     } catch (error) {
@@ -95,7 +93,7 @@ export async function unmonitorEpisode(
       ({ tvdbId }) => tvdbId && episodeTvdbIds.includes(tvdbId.toString()),
     );
     if (episode) {
-      serie = series;
+      series = seriesMatch;
       break;
     }
   }
@@ -113,20 +111,9 @@ export async function unmonitorEpisode(
     return res.end();
   }
 
-  for (const id of serie.tags) {
-    try {
-      const apiTag = await fetch(api.getUrl(`tag/${id}`));
-      const data = await apiTag.json();
-      if (data.label.toLowerCase() === EXCLUSION_TAG.toLowerCase()) {
-        console.warn(`${episodeString} has exclusion tag ${EXCLUSION_TAG}`);
-        return res.end();
-
-      }
-    } catch (error) {
-      console.error(`Failed to get tag ${id} information from radarr for ${episodeString}`);
-      console.error(error);
-      continue;
-    }
+  if (await hasExclusionTag(api.getUrl('tag'), series.tags)) {
+    console.warn(`${episodeString} has exclusion tag`);
+    return res.end();
   }
 
   let response;
