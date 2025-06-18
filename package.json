@@ -10,9 +10,12 @@
     "build:radarr-types": "openapi-typescript https://raw.githubusercontent.com/Radarr/Radarr/develop/src/Radarr.Api.V3/openapi.json --output src/types/radarr.d.ts",
     "build:sonarr-types": "openapi-typescript https://raw.githubusercontent.com/Sonarr/Sonarr/develop/src/Sonarr.Api.V3/openapi.json --output src/types/sonarr.d.ts",
     "deploy": "docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t shraymonks/unmonitorr:latest -t shraymonks/unmonitorr:v$npm_package_version . --push",
+    "lint": "eslint . && prettier --check .",
+    "lint:fix": "eslint . --fix && prettier --write .",
     "prepare": "husky install",
     "release": "changeset publish",
-    "start": "pnpm build && node dist/index.js"
+    "start": "pnpm build && node dist/index.js",
+    "typecheck": "tsc --noEmit"
   },
   "keywords": [
     "plex",

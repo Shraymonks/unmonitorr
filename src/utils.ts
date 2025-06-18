@@ -1,7 +1,6 @@
 import type { PlexPayload } from './types/plex.js';
 const { EXCLUSION_TAG = 'unmonitorr-exclude' } = process.env;
 
-
 export class Api {
   #apiKey: string;
   base: string;
@@ -42,17 +41,24 @@ export function parseList(list: string): string[] {
   return list.split(/\s*,\s*/);
 }
 
-export async function hasExclusionTag(url: string, ids: number[]): boolean {
+interface Tag {
+  id: number;
+  label: string;
+}
+
+export async function hasExclusionTag(
+  url: string,
+  ids?: number[] | null,
+): Promise<boolean> {
   try {
     const response = await fetch(url);
-    const tags = await response.json();
+    const tags = (await response.json()) as Tag[];
 
     const idsSet = new Set(ids);
 
-    return tags.some(tag =>
-      idsSet.has(tag.id) && tag.label === EXCLUSION_TAG
+    return tags.some(
+      (tag) => idsSet.has(tag.id) && tag.label === EXCLUSION_TAG,
     );
-
   } catch (error) {
     console.error(`Failed to get tags information from ${url}`);
     console.error(error);

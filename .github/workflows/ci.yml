@@ -1,0 +1,42 @@
+# This workflow runs checks on pushes to main and on pull requests.
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+# Ensures that only one workflow run is triggered for a given branch or PR,
+# cancelling any previous runs in progress.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-typecheck:
+    name: Lint & Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          cache: pnpm
+          node-version: 22
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run linter
+        run: pnpm lint
+
+      - name: Run type checker
+        run: pnpm typecheck
