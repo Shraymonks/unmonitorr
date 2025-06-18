@@ -1,5 +1,11 @@
 # unmonitorr
 
+## 1.1.2
+
+### Patch Changes
+
+- 10767b1: Update node
+
 ## 1.1.1
 
 ### Patch Changes
