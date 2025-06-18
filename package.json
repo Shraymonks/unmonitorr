@@ -30,25 +30,25 @@
   "bugs": "https://github.com/Shraymonks/unmonitorr/issues",
   "license": "ISC",
   "dependencies": {
-    "@types/express-serve-static-core": "^4.19.6",
-    "express": "^4.21.2",
+    "@types/express-serve-static-core": "^5.0.6",
+    "express": "^5.1.0",
     "multer": "2.0.1"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.28.1",
+    "@changesets/cli": "^2.29.4",
     "@shraymonks/eslint-config": "^3.0.1",
     "@tsconfig/node-lts": "^22.0.1",
     "@tsconfig/strictest": "^2.0.5",
-    "@types/express": "^4.17.21",
-    "@types/multer": "^1.4.5",
-    "@types/node": "^22.13.10",
-    "@typescript-eslint/eslint-plugin": "^8.26.1",
-    "eslint": "^9.22.0",
+    "@types/express": "^5.0.3",
+    "@types/multer": "^1.4.13",
+    "@types/node": "^22.15.32",
+    "@typescript-eslint/eslint-plugin": "^8.34.1",
+    "eslint": "^9.29.0",
     "husky": "^9.1.7",
-    "lint-staged": "^15.5.0",
-    "openapi-typescript": "^7.6.1",
+    "lint-staged": "^16.1.2",
+    "openapi-typescript": "^7.8.0",
     "prettier": "^3.5.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.3"
   },
   "engines": {
     "node": ">=20.9.0"
