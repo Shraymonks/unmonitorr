@@ -97,7 +97,11 @@ export async function unmonitorEpisode(
       break;
     }
   }
-  if (episode?.seasonNumber == null || episode.episodeNumber == null) {
+  if (
+    !series ||
+    episode?.seasonNumber == null ||
+    episode.episodeNumber == null
+  ) {
     console.warn(
       `Could not find episode tvdbIds: ${episodeTvdbIds.toString()} for ${seriesTitle}`,
     );

@@ -1,0 +1,58 @@
+# This workflow runs the linter with --fix and commits any changes.
+name: Lint and Commit
+
+on:
+  pull_request:
+
+# Ensures that only one workflow run is triggered for a given branch or PR,
+# cancelling any previous runs in progress.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-commit:
+    name: Lint and Commit
+    runs-on: ubuntu-latest
+    # Add this condition to prevent the workflow from running on its own commits
+    if: github.actor != 'github-actions[bot]'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          # We need to fetch the history to be able to push to the PR
+          fetch-depth: 0
+          # This is the token that will be used to push the commit
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # This is the ref that will be checked out
+          ref: ${{ github.head_ref }}
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          cache: pnpm
+          node-version: 22
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Run linter and fix issues
+        run: pnpm lint:fix
+
+      - name: Commit changes
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          # Check if there are any changes to commit
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "style: apply automatic linting fixes"
+            git push
+          fi
