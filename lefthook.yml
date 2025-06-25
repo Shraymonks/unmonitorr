@@ -2,3 +2,4 @@ pre-commit:
   commands:
     lint:
       run: pnpm lint:fix {staged_files}
+      stage_fixed: true
