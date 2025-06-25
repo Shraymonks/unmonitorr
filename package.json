@@ -10,9 +10,8 @@
     "build:radarr-types": "openapi-typescript https://raw.githubusercontent.com/Radarr/Radarr/develop/src/Radarr.Api.V3/openapi.json --output src/types/radarr.d.ts",
     "build:sonarr-types": "openapi-typescript https://raw.githubusercontent.com/Sonarr/Sonarr/develop/src/Sonarr.Api.V3/openapi.json --output src/types/sonarr.d.ts",
     "deploy": "docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t shraymonks/unmonitorr:latest -t shraymonks/unmonitorr:v$npm_package_version . --push",
-    "lint": "eslint . && prettier --check .",
-    "lint:fix": "eslint . --fix && prettier --write .",
-    "prepare": "husky install",
+    "lint": "biome check --no-errors-on-unmatched",
+    "lint:fix": "biome check --write --no-errors-on-unmatched",
     "release": "changeset publish",
     "start": "pnpm build && node dist/index.js",
     "typecheck": "tsc --noEmit"
@@ -35,22 +34,20 @@
     "multer": "2.0.1"
   },
   "devDependencies": {
-    "@changesets/cli": "^2.29.4",
-    "@shraymonks/eslint-config": "^3.0.1",
-    "@tsconfig/node-lts": "^22.0.1",
+    "@biomejs/biome": "2.0.5",
+    "@changesets/cli": "^2.29.5",
+    "@shraymonks/biome-config": "^1.0.0",
+    "@tsconfig/node-lts": "^22.0.2",
     "@tsconfig/strictest": "^2.0.5",
     "@types/express": "^5.0.3",
     "@types/multer": "^1.4.13",
-    "@types/node": "^22.15.32",
-    "@typescript-eslint/eslint-plugin": "^8.34.1",
-    "eslint": "^9.29.0",
-    "husky": "^9.1.7",
-    "lint-staged": "^16.1.2",
+    "@types/node": "^22.15.33",
+    "lefthook": "^1.11.14",
     "openapi-typescript": "^7.8.0",
-    "prettier": "^3.5.3",
     "typescript": "^5.8.3"
   },
   "engines": {
     "node": ">=20.9.0"
-  }
+  },
+  "packageManager": "pnpm@10.12.3+sha512.467df2c586056165580ad6dfb54ceaad94c5a30f80893ebdec5a44c5aa73c205ae4a5bb9d5ed6bb84ea7c249ece786642bbb49d06a307df218d03da41c317417"
 }

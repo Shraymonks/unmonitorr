@@ -8,6 +8,8 @@ export const DEFAULT_RADARR_HOST = 'http://127.0.0.1:7878';
 const { RADARR_API_KEY, RADARR_HOST = DEFAULT_RADARR_HOST } = process.env;
 const api = new Api(`${RADARR_HOST}/api/v3/`, RADARR_API_KEY);
 
+type Movie = components['schemas']['MovieResource'];
+
 export async function unmonitorMovie(
   {
     movieTmdbIds,
@@ -27,10 +29,10 @@ export async function unmonitorMovie(
     return res.end();
   }
 
-  let movies;
+  let movies: Movie[] | undefined;
 
   for (const tmdbId of movieTmdbIds) {
-    let moviesResponse;
+    let moviesResponse: globalThis.Response;
     try {
       moviesResponse = await fetch(api.getUrl('movie', { tmdbId }));
     } catch (error) {
@@ -41,8 +43,7 @@ export async function unmonitorMovie(
       continue;
     }
     if (moviesResponse.ok) {
-      movies =
-        (await moviesResponse.json()) as components['schemas']['MovieResource'][];
+      movies = (await moviesResponse.json()) as Movie[];
       break;
     }
     console.error(
@@ -70,7 +71,7 @@ export async function unmonitorMovie(
   }
 
   movie.monitored = false;
-  let response;
+  let response: globalThis.Response;
   try {
     response = await fetch(api.getUrl(`movie/${movie.id.toString()}`), {
       method: 'PUT',

@@ -1,7 +1,6 @@
-import express from 'express';
-import { ParamsDictionary } from 'express-serve-static-core';
-
 import type { Request, Response } from 'express';
+import express from 'express';
+import type { ParamsDictionary } from 'express-serve-static-core';
 import { unmonitorMovie } from './radarr.js';
 import { unmonitorEpisode } from './sonarr.js';
 

@@ -8,6 +8,9 @@ export const DEFAULT_SONARR_HOST = 'http://127.0.0.1:8989';
 const { SONARR_API_KEY, SONARR_HOST = DEFAULT_SONARR_HOST } = process.env;
 const api = new Api(`${SONARR_HOST}/api/v3/`, SONARR_API_KEY);
 
+type Episode = components['schemas']['EpisodeResource'];
+type Series = components['schemas']['SeriesResource'];
+
 export async function unmonitorEpisode(
   {
     episodeTvdbIds,
@@ -25,7 +28,7 @@ export async function unmonitorEpisode(
     return res.end();
   }
 
-  let seriesResponse;
+  let seriesResponse: globalThis.Response;
 
   // Sonarr has no api for getting an episode by episode tvdbId
   // Go through the following steps to get the matching episode:
@@ -46,8 +49,7 @@ export async function unmonitorEpisode(
     );
     return res.end();
   }
-  const seriesList =
-    (await seriesResponse.json()) as components['schemas']['SeriesResource'][];
+  const seriesList = (await seriesResponse.json()) as Series[];
 
   const cleanedTitle = cleanTitle(seriesTitle);
   // Match potential series on title. Year metadata from Plex is for the episode
@@ -61,14 +63,14 @@ export async function unmonitorEpisode(
     return res.end();
   }
 
-  let episode;
-  let series;
+  let episode: Episode | undefined;
+  let series: Series | undefined;
 
   for (const seriesMatch of seriesMatches) {
     if (!seriesMatch.id) {
       continue;
     }
-    let episodeListResponse;
+    let episodeListResponse: globalThis.Response;
     try {
       episodeListResponse = await fetch(
         api.getUrl('episode', {
@@ -86,8 +88,7 @@ export async function unmonitorEpisode(
       );
       continue;
     }
-    const episodeList =
-      (await episodeListResponse.json()) as components['schemas']['EpisodeResource'][];
+    const episodeList = (await episodeListResponse.json()) as Episode[];
 
     episode = episodeList.find(
       ({ tvdbId }) => tvdbId && episodeTvdbIds.includes(tvdbId.toString()),
@@ -120,7 +121,7 @@ export async function unmonitorEpisode(
     return res.end();
   }
 
-  let response;
+  let response: globalThis.Response;
   try {
     response = await fetch(api.getUrl('episode/monitor'), {
       method: 'PUT',

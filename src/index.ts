@@ -1,8 +1,7 @@
+import { startJellyfinUnmonitor } from './jellyfin.js';
+import { startPlexUnmonitor } from './plex.js';
 import { DEFAULT_RADARR_HOST } from './radarr.js';
 import { DEFAULT_SONARR_HOST } from './sonarr.js';
-
-import { startPlexUnmonitor } from './plex.js';
-import { startJellyfinUnmonitor } from './jellyfin.js';
 import { parseList } from './utils.js';
 
 const {
