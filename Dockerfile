@@ -1,4 +1,4 @@
-FROM node:22-alpine AS build
+FROM node:22.16.0-alpine AS build
 RUN npm install -g pnpm
 USER node
 WORKDIR /usr/src/app/
@@ -8,7 +8,7 @@ RUN pnpm install
 COPY --chown=node:node src/ src/
 RUN pnpm build
 
-FROM node:22-alpine AS deps
+FROM node:22.16.0-alpine AS deps
 ENV NODE_ENV=production
 RUN npm install -g pnpm
 USER node
@@ -16,7 +16,7 @@ WORKDIR /usr/src/app/
 COPY --chown=node:node package.json pnpm-lock.yaml .
 RUN pnpm install --ignore-scripts
 
-FROM node:22-alpine
+FROM node:22.16.0-alpine
 ENV NODE_ENV=production
 RUN apk add --update dumb-init
 USER node
