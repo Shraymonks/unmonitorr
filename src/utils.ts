@@ -1,4 +1,5 @@
 import type { PlexPayload } from './types/plex.js';
+
 const { EXCLUSION_TAG = 'unmonitorr-exclude' } = process.env;
 
 export class Api {

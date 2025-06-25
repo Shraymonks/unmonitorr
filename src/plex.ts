@@ -1,15 +1,11 @@
-import { ParamsDictionary } from 'express-serve-static-core';
-import multer from 'multer';
-import { PlexBody } from './types/plex.js';
-import { getIds, parseList } from './utils.js';
-
+import type { Request, Response } from 'express';
 import express from 'express';
-
+import type { ParamsDictionary } from 'express-serve-static-core';
+import multer from 'multer';
 import { unmonitorMovie } from './radarr.js';
 import { unmonitorEpisode } from './sonarr.js';
-
-import type { Request, Response } from 'express';
-import type { PlexPayload } from './types/plex.js';
+import type { PlexBody, PlexPayload } from './types/plex.js';
+import { getIds, parseList } from './utils.js';
 
 const {
   PLEX_ACCOUNTS,
