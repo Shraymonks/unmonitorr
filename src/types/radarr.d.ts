@@ -25,7 +25,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['AlternativeTitleResource'][];
             'application/json': components['schemas']['AlternativeTitleResource'][];
@@ -62,7 +64,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['AlternativeTitleResource'];
             'application/json': components['schemas']['AlternativeTitleResource'];
@@ -97,7 +101,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['ApiInfoResource'];
           };
@@ -130,7 +136,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -157,7 +165,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -186,7 +196,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -217,7 +229,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['AutoTaggingResource'][];
           };
@@ -240,7 +254,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['AutoTaggingResource'];
             'application/json': components['schemas']['AutoTaggingResource'];
@@ -275,7 +291,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['AutoTaggingResource'];
             'application/json': components['schemas']['AutoTaggingResource'];
@@ -301,7 +319,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['AutoTaggingResource'];
             'application/json': components['schemas']['AutoTaggingResource'];
@@ -324,7 +344,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -352,7 +374,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -383,7 +407,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['BackupResource'][];
             'application/json': components['schemas']['BackupResource'][];
@@ -423,7 +449,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -455,7 +483,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -486,7 +516,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -522,7 +554,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['BlocklistResourcePagingResource'];
           };
@@ -557,7 +591,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['BlocklistResource'][];
             'application/json': components['schemas']['BlocklistResource'][];
@@ -597,7 +633,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -634,7 +672,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -667,7 +707,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MovieResource'][];
           };
@@ -696,6 +738,7 @@ export interface paths {
           futureDays?: number;
           tags?: string;
           unmonitored?: boolean;
+          releaseTypes?: components['schemas']['CalendarReleaseType'][];
         };
         header?: never;
         path?: never;
@@ -705,7 +748,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -738,7 +783,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['CollectionResource'][];
           };
@@ -760,7 +807,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -792,7 +841,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['CollectionResource'];
             'application/json': components['schemas']['CollectionResource'];
@@ -818,7 +869,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['CollectionResource'];
             'application/json': components['schemas']['CollectionResource'];
@@ -852,7 +905,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['CommandResource'][];
             'application/json': components['schemas']['CommandResource'][];
@@ -877,7 +932,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['CommandResource'];
           };
@@ -910,7 +967,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['CommandResource'];
             'application/json': components['schemas']['CommandResource'];
@@ -934,7 +993,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -965,7 +1026,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -998,7 +1061,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['CreditResource'];
             'application/json': components['schemas']['CreditResource'];
@@ -1033,7 +1098,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['CustomFilterResource'][];
             'application/json': components['schemas']['CustomFilterResource'][];
@@ -1058,7 +1125,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['CustomFilterResource'];
             'application/json': components['schemas']['CustomFilterResource'];
@@ -1093,7 +1162,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['CustomFilterResource'];
             'application/json': components['schemas']['CustomFilterResource'];
@@ -1119,7 +1190,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['CustomFilterResource'];
             'application/json': components['schemas']['CustomFilterResource'];
@@ -1142,7 +1215,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -1170,7 +1245,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['CustomFormatResource'][];
           };
@@ -1193,7 +1270,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['CustomFormatResource'];
             'application/json': components['schemas']['CustomFormatResource'];
@@ -1228,7 +1307,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['CustomFormatResource'];
             'application/json': components['schemas']['CustomFormatResource'];
@@ -1254,7 +1335,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['CustomFormatResource'];
             'application/json': components['schemas']['CustomFormatResource'];
@@ -1277,7 +1360,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -1310,7 +1395,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['CustomFormatResource'];
           };
@@ -1333,7 +1420,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -1361,7 +1450,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -1398,7 +1489,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MovieResourcePagingResource'];
           };
@@ -1431,7 +1524,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['DelayProfileResource'][];
             'application/json': components['schemas']['DelayProfileResource'][];
@@ -1456,7 +1551,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['DelayProfileResource'];
             'application/json': components['schemas']['DelayProfileResource'];
@@ -1491,7 +1588,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['DelayProfileResource'];
             'application/json': components['schemas']['DelayProfileResource'];
@@ -1517,7 +1616,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['DelayProfileResource'];
             'application/json': components['schemas']['DelayProfileResource'];
@@ -1540,7 +1641,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -1573,7 +1676,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['DelayProfileResource'][];
             'application/json': components['schemas']['DelayProfileResource'][];
@@ -1607,7 +1712,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['DiskSpaceResource'][];
             'application/json': components['schemas']['DiskSpaceResource'][];
@@ -1642,7 +1749,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['DownloadClientResource'][];
           };
@@ -1667,7 +1776,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['DownloadClientResource'];
           };
@@ -1700,7 +1811,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['DownloadClientResource'];
             'application/json': components['schemas']['DownloadClientResource'];
@@ -1728,7 +1841,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['DownloadClientResource'];
           };
@@ -1749,7 +1864,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -1782,7 +1899,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['DownloadClientResource'];
           };
@@ -1805,7 +1924,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -1833,7 +1954,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['DownloadClientResource'][];
           };
@@ -1874,7 +1997,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -1905,7 +2030,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -1942,7 +2069,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -1971,7 +2100,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['DownloadClientConfigResource'];
           };
@@ -2006,7 +2137,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['DownloadClientConfigResource'];
             'application/json': components['schemas']['DownloadClientConfigResource'];
@@ -2032,7 +2165,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['DownloadClientConfigResource'];
             'application/json': components['schemas']['DownloadClientConfigResource'];
@@ -2068,7 +2203,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['ExtraFileResource'][];
             'application/json': components['schemas']['ExtraFileResource'][];
@@ -2107,7 +2244,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -2140,7 +2279,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -2173,7 +2314,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -2204,7 +2347,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['HealthResource'][];
             'application/json': components['schemas']['HealthResource'][];
@@ -2250,7 +2395,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['HistoryResourcePagingResource'];
           };
@@ -2287,7 +2434,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['HistoryResource'][];
           };
@@ -2324,7 +2473,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['HistoryResource'][];
           };
@@ -2361,7 +2512,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -2390,7 +2543,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['HostConfigResource'];
             'application/json': components['schemas']['HostConfigResource'];
@@ -2427,7 +2582,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['HostConfigResource'];
             'application/json': components['schemas']['HostConfigResource'];
@@ -2455,7 +2612,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['HostConfigResource'];
             'application/json': components['schemas']['HostConfigResource'];
@@ -2489,7 +2648,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['ImportListResource'][];
           };
@@ -2514,7 +2675,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['ImportListResource'];
           };
@@ -2547,7 +2710,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['ImportListResource'];
             'application/json': components['schemas']['ImportListResource'];
@@ -2575,7 +2740,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['ImportListResource'];
           };
@@ -2596,7 +2763,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -2629,7 +2798,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['ImportListResource'];
           };
@@ -2652,7 +2823,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -2680,7 +2853,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['ImportListResource'][];
           };
@@ -2721,7 +2896,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -2752,7 +2929,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -2789,7 +2968,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -2818,7 +2999,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['ImportListConfigResource'];
           };
@@ -2853,7 +3036,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['ImportListConfigResource'];
             'application/json': components['schemas']['ImportListConfigResource'];
@@ -2879,7 +3064,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['ImportListConfigResource'];
             'application/json': components['schemas']['ImportListConfigResource'];
@@ -2914,7 +3101,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['ImportListExclusionResource'][];
           };
@@ -2937,7 +3126,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['ImportListExclusionResource'];
             'application/json': components['schemas']['ImportListExclusionResource'];
@@ -2975,7 +3166,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['ImportListExclusionResourcePagingResource'];
           };
@@ -3010,7 +3203,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['ImportListExclusionResource'];
             'application/json': components['schemas']['ImportListExclusionResource'];
@@ -3036,7 +3231,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['ImportListExclusionResource'];
             'application/json': components['schemas']['ImportListExclusionResource'];
@@ -3059,7 +3256,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -3095,7 +3294,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -3117,7 +3318,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -3149,7 +3352,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -3172,7 +3377,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -3201,7 +3408,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['IndexerResource'][];
           };
@@ -3226,7 +3435,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['IndexerResource'];
           };
@@ -3259,7 +3470,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['IndexerResource'];
             'application/json': components['schemas']['IndexerResource'];
@@ -3287,7 +3500,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['IndexerResource'];
           };
@@ -3308,7 +3523,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -3341,7 +3558,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['IndexerResource'];
           };
@@ -3364,7 +3583,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -3392,7 +3613,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['IndexerResource'][];
           };
@@ -3433,7 +3656,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -3464,7 +3689,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -3501,7 +3728,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -3530,7 +3759,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['IndexerConfigResource'];
           };
@@ -3565,7 +3796,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['IndexerConfigResource'];
             'application/json': components['schemas']['IndexerConfigResource'];
@@ -3591,7 +3824,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['IndexerConfigResource'];
             'application/json': components['schemas']['IndexerConfigResource'];
@@ -3625,7 +3860,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['IndexerFlagResource'][];
             'application/json': components['schemas']['IndexerFlagResource'][];
@@ -3660,7 +3897,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['LanguageResource'][];
             'application/json': components['schemas']['LanguageResource'][];
@@ -3697,7 +3936,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['LanguageResource'];
             'application/json': components['schemas']['LanguageResource'];
@@ -3732,7 +3973,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': string;
             'application/json': string;
@@ -3767,7 +4010,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['LocalizationLanguageResource'];
           };
@@ -3806,7 +4051,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['LogResourcePagingResource'];
           };
@@ -3839,7 +4086,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['LogFileResource'][];
             'application/json': components['schemas']['LogFileResource'][];
@@ -3876,7 +4125,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -3912,7 +4163,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['ManualImportResource'][];
           };
@@ -3935,7 +4188,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -3967,7 +4222,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -3998,7 +4255,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MediaManagementConfigResource'];
           };
@@ -4033,7 +4292,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['MediaManagementConfigResource'];
             'application/json': components['schemas']['MediaManagementConfigResource'];
@@ -4059,7 +4320,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['MediaManagementConfigResource'];
             'application/json': components['schemas']['MediaManagementConfigResource'];
@@ -4093,7 +4356,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MetadataResource'][];
           };
@@ -4118,7 +4383,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MetadataResource'];
           };
@@ -4151,7 +4418,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['MetadataResource'];
             'application/json': components['schemas']['MetadataResource'];
@@ -4179,7 +4448,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MetadataResource'];
           };
@@ -4200,7 +4471,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -4228,7 +4501,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MetadataResource'][];
           };
@@ -4269,7 +4544,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -4300,7 +4577,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -4337,7 +4616,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -4366,7 +4647,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MetadataConfigResource'];
           };
@@ -4401,7 +4684,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['MetadataConfigResource'];
             'application/json': components['schemas']['MetadataConfigResource'];
@@ -4427,7 +4712,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['MetadataConfigResource'];
             'application/json': components['schemas']['MetadataConfigResource'];
@@ -4467,7 +4754,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MovieResourcePagingResource'];
           };
@@ -4504,7 +4793,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['MovieResource'][];
             'application/json': components['schemas']['MovieResource'][];
@@ -4529,7 +4820,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MovieResource'];
           };
@@ -4562,7 +4855,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['MovieResource'];
             'application/json': components['schemas']['MovieResource'];
@@ -4590,7 +4885,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MovieResource'];
           };
@@ -4614,7 +4911,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -4649,7 +4948,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -4672,7 +4973,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -4703,7 +5006,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MovieFileResource'][];
           };
@@ -4738,7 +5043,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['MovieFileResource'];
             'application/json': components['schemas']['MovieFileResource'];
@@ -4764,7 +5071,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['MovieFileResource'];
             'application/json': components['schemas']['MovieFileResource'];
@@ -4787,7 +5096,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -4805,6 +5116,7 @@ export interface paths {
       cookie?: never;
     };
     get?: never;
+    /** @deprecated */
     put: {
       parameters: {
         query?: never;
@@ -4820,7 +5132,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -4840,7 +5154,28 @@ export interface paths {
       cookie?: never;
     };
     get?: never;
-    put?: never;
+    put: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: {
+        content: {
+          'application/json': components['schemas']['MovieFileResource'][];
+        };
+      };
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
     post?: never;
     delete: {
       parameters: {
@@ -4857,11 +5192,48 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
     };
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v3/movie/{id}/folder': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path: {
+          id: number;
+        };
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content?: never;
+        };
+      };
+    };
+    put?: never;
+    post?: never;
+    delete?: never;
     options?: never;
     head?: never;
     patch?: never;
@@ -4891,7 +5263,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MovieResource'][];
           };
@@ -4924,7 +5298,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MovieResource'];
           };
@@ -4959,7 +5335,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MovieResource'];
           };
@@ -4994,7 +5372,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['MovieResource'][];
           };
@@ -5027,7 +5407,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['NamingConfigResource'];
             'application/json': components['schemas']['NamingConfigResource'];
@@ -5064,7 +5446,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['NamingConfigResource'];
             'application/json': components['schemas']['NamingConfigResource'];
@@ -5092,7 +5476,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['NamingConfigResource'];
             'application/json': components['schemas']['NamingConfigResource'];
@@ -5134,7 +5520,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -5165,7 +5553,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['NotificationResource'][];
           };
@@ -5190,7 +5580,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['NotificationResource'];
           };
@@ -5223,7 +5615,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['NotificationResource'];
             'application/json': components['schemas']['NotificationResource'];
@@ -5251,7 +5645,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['NotificationResource'];
           };
@@ -5272,7 +5668,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -5300,7 +5698,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['NotificationResource'][];
           };
@@ -5341,7 +5741,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -5372,7 +5774,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -5409,7 +5813,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -5440,7 +5846,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['ParseResource'];
             'application/json': components['schemas']['ParseResource'];
@@ -5475,7 +5883,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['PingResource'];
           };
@@ -5497,7 +5907,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['PingResource'];
           };
@@ -5527,7 +5939,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['QualityDefinitionResource'];
             'application/json': components['schemas']['QualityDefinitionResource'];
@@ -5555,7 +5969,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['QualityDefinitionResource'];
             'application/json': components['schemas']['QualityDefinitionResource'];
@@ -5589,7 +6005,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['QualityDefinitionResource'][];
             'application/json': components['schemas']['QualityDefinitionResource'][];
@@ -5631,11 +6049,50 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
     };
+    post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/api/v3/qualitydefinition/limits': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get: {
+      parameters: {
+        query?: never;
+        header?: never;
+        path?: never;
+        cookie?: never;
+      };
+      requestBody?: never;
+      responses: {
+        /** @description OK */
+        200: {
+          headers: {
+            [name: string]: unknown;
+          };
+          content: {
+            'text/plain': components['schemas']['QualityDefinitionLimitsResource'];
+            'application/json': components['schemas']['QualityDefinitionLimitsResource'];
+            'text/json': components['schemas']['QualityDefinitionLimitsResource'];
+          };
+        };
+      };
+    };
+    put?: never;
     post?: never;
     delete?: never;
     options?: never;
@@ -5661,7 +6118,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['QualityProfileResource'][];
             'application/json': components['schemas']['QualityProfileResource'][];
@@ -5686,7 +6145,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['QualityProfileResource'];
             'application/json': components['schemas']['QualityProfileResource'];
@@ -5721,7 +6182,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['QualityProfileResource'];
             'application/json': components['schemas']['QualityProfileResource'];
@@ -5747,7 +6210,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['QualityProfileResource'];
             'application/json': components['schemas']['QualityProfileResource'];
@@ -5770,7 +6235,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -5798,7 +6265,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['QualityProfileResource'];
             'application/json': components['schemas']['QualityProfileResource'];
@@ -5843,7 +6312,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -5885,7 +6356,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -5925,7 +6398,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['QueueResourcePagingResource'];
           };
@@ -5962,7 +6437,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -5997,7 +6474,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -6029,7 +6508,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['QueueResource'][];
             'application/json': components['schemas']['QueueResource'][];
@@ -6064,7 +6545,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['QueueStatusResource'];
             'application/json': components['schemas']['QueueStatusResource'];
@@ -6101,7 +6584,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['ReleaseResource'][];
           };
@@ -6124,7 +6609,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -6153,7 +6640,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['ReleaseProfileResource'][];
             'application/json': components['schemas']['ReleaseProfileResource'][];
@@ -6180,7 +6669,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['ReleaseProfileResource'];
             'application/json': components['schemas']['ReleaseProfileResource'];
@@ -6215,7 +6706,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['ReleaseProfileResource'];
             'application/json': components['schemas']['ReleaseProfileResource'];
@@ -6243,7 +6736,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['ReleaseProfileResource'];
             'application/json': components['schemas']['ReleaseProfileResource'];
@@ -6266,7 +6761,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -6300,7 +6797,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['ReleaseResource'][];
             'application/json': components['schemas']['ReleaseResource'][];
@@ -6333,7 +6832,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['RemotePathMappingResource'][];
             'application/json': components['schemas']['RemotePathMappingResource'][];
@@ -6358,7 +6859,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['RemotePathMappingResource'];
             'application/json': components['schemas']['RemotePathMappingResource'];
@@ -6393,7 +6896,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['RemotePathMappingResource'];
             'application/json': components['schemas']['RemotePathMappingResource'];
@@ -6421,7 +6926,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['RemotePathMappingResource'];
             'application/json': components['schemas']['RemotePathMappingResource'];
@@ -6444,7 +6951,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -6464,7 +6973,7 @@ export interface paths {
     get: {
       parameters: {
         query?: {
-          movieId?: number;
+          movieId?: number[];
         };
         header?: never;
         path?: never;
@@ -6474,7 +6983,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['RenameMovieResource'][];
             'application/json': components['schemas']['RenameMovieResource'][];
@@ -6509,7 +7020,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['RootFolderResource'][];
             'application/json': components['schemas']['RootFolderResource'][];
@@ -6534,7 +7047,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['RootFolderResource'];
             'application/json': components['schemas']['RootFolderResource'];
@@ -6569,7 +7084,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['RootFolderResource'];
             'application/json': components['schemas']['RootFolderResource'];
@@ -6593,7 +7110,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -6623,7 +7142,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -6656,7 +7177,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -6689,7 +7212,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -6720,7 +7245,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['SystemResource'];
             'application/json': components['schemas']['SystemResource'];
@@ -6755,7 +7282,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -6786,7 +7315,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -6819,7 +7350,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -6850,7 +7383,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -6879,7 +7414,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['TagResource'][];
             'application/json': components['schemas']['TagResource'][];
@@ -6904,7 +7441,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['TagResource'];
             'application/json': components['schemas']['TagResource'];
@@ -6939,7 +7478,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['TagResource'];
             'application/json': components['schemas']['TagResource'];
@@ -6965,7 +7506,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['TagResource'];
             'application/json': components['schemas']['TagResource'];
@@ -6988,7 +7531,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -7016,7 +7561,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['TagDetailsResource'][];
             'application/json': components['schemas']['TagDetailsResource'][];
@@ -7053,7 +7600,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['TagDetailsResource'];
             'application/json': components['schemas']['TagDetailsResource'];
@@ -7088,7 +7637,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['TaskResource'][];
             'application/json': components['schemas']['TaskResource'][];
@@ -7125,7 +7676,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['TaskResource'];
             'application/json': components['schemas']['TaskResource'];
@@ -7162,7 +7715,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['UiConfigResource'];
             'application/json': components['schemas']['UiConfigResource'];
@@ -7188,7 +7743,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['UiConfigResource'];
             'application/json': components['schemas']['UiConfigResource'];
@@ -7222,7 +7779,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'application/json': components['schemas']['UiConfigResource'];
           };
@@ -7255,7 +7814,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['UpdateResource'][];
             'application/json': components['schemas']['UpdateResource'][];
@@ -7290,7 +7851,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content: {
             'text/plain': components['schemas']['LogFileResource'][];
             'application/json': components['schemas']['LogFileResource'][];
@@ -7327,7 +7890,9 @@ export interface paths {
       responses: {
         /** @description OK */
         200: {
-          headers: Record<string, unknown>;
+          headers: {
+            [name: string]: unknown;
+          };
           content?: never;
         };
       };
@@ -7435,6 +8000,8 @@ export interface components {
       totalRecords?: number;
       records?: components['schemas']['BlocklistResource'][] | null;
     };
+    /** @enum {string} */
+    CalendarReleaseType: 'cinemaRelease' | 'digitalRelease' | 'physicalRelease';
     /** @enum {string} */
     CertificateValidationType:
       | 'enabled'
@@ -7581,7 +8148,11 @@ export interface components {
       id?: number;
       type?: string | null;
       label?: string | null;
-      filters?: Record<string, unknown>[] | null;
+      filters?:
+        | {
+            [key: string]: unknown;
+          }[]
+        | null;
     };
     CustomFormatBulkResource: {
       ids?: number[] | null;
@@ -7726,7 +8297,7 @@ export interface components {
       source?: string | null;
       type?: components['schemas']['HealthCheckResult'];
       message?: string | null;
-      wikiUrl?: components['schemas']['HttpUri'];
+      wikiUrl?: string | null;
     };
     HistoryResource: {
       /** Format: int32 */
@@ -7744,7 +8315,9 @@ export interface components {
       date?: string;
       downloadId?: string | null;
       eventType?: components['schemas']['MovieHistoryEventType'];
-      data?: Record<string, string | null> | null;
+      data?: {
+        [key: string]: string | null;
+      } | null;
       movie?: components['schemas']['MovieResource'];
     };
     HistoryResourcePagingResource: {
@@ -7804,16 +8377,6 @@ export interface components {
       /** Format: int32 */
       backupRetention?: number;
       trustCgnatIpAddresses?: boolean;
-    };
-    HttpUri: {
-      readonly fullUri?: string | null;
-      readonly scheme?: string | null;
-      readonly host?: string | null;
-      /** Format: int32 */
-      readonly port?: number | null;
-      readonly path?: string | null;
-      readonly query?: string | null;
-      readonly fragment?: string | null;
     };
     ImportListBulkResource: {
       ids?: number[] | null;
@@ -8182,7 +8745,7 @@ export interface components {
       quality?: components['schemas']['QualityModel'];
       customFormats?: components['schemas']['CustomFormatResource'][] | null;
       /** Format: int32 */
-      customFormatScore?: number;
+      customFormatScore?: number | null;
       /** Format: int32 */
       indexerFlags?: number | null;
       mediaInfo?: components['schemas']['MediaInfoResource'];
@@ -8254,6 +8817,7 @@ export interface components {
       folder?: string | null;
       certification?: string | null;
       genres?: string[] | null;
+      keywords?: string[] | null;
       tags?: number[] | null;
       /** Format: date-time */
       added?: string;
@@ -8400,6 +8964,12 @@ export interface components {
       /** Format: int32 */
       resolution?: number;
       modifier?: components['schemas']['Modifier'];
+    };
+    QualityDefinitionLimitsResource: {
+      /** Format: int32 */
+      min?: number;
+      /** Format: int32 */
+      max?: number;
     };
     QualityDefinitionResource: {
       /** Format: int32 */
