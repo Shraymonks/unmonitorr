@@ -1,7 +1,7 @@
 {
   "name": "unmonitorr",
   "version": "1.1.2",
-  "description": "Unmonitor media in Radarr and Sonarr from Plex webhook events",
+  "description": "Unmonitor media in Radarr and Sonarr from Plex and Jellyfin webhook events",
   "private": true,
   "type": "module",
   "scripts": {
@@ -17,6 +17,7 @@
     "typecheck": "tsc --noEmit"
   },
   "keywords": [
+    "jellyfin",
     "plex",
     "radarr",
     "sonarr",
