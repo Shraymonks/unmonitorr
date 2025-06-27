@@ -1,10 +1,9 @@
 import type { Request, Response } from 'express';
 import express from 'express';
 import type { ParamsDictionary } from 'express-serve-static-core';
+import { JELLYFIN_PORT } from './constants.js';
 import { unmonitorMovie } from './radarr.js';
 import { unmonitorEpisode } from './sonarr.js';
-
-const { JELLYFIN_PORT = '9898' } = process.env;
 
 export function startJellyfinUnmonitor() {
   console.log(

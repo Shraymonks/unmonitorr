@@ -2,16 +2,11 @@ import type { Request, Response } from 'express';
 import express from 'express';
 import type { ParamsDictionary } from 'express-serve-static-core';
 import multer from 'multer';
+import { PLEX_ACCOUNTS, PLEX_EVENTS, PLEX_PORT } from './constants.js';
 import { unmonitorMovie } from './radarr.js';
 import { unmonitorEpisode } from './sonarr.js';
 import type { PlexBody, PlexPayload } from './types/plex.js';
 import { getIds, parseList } from './utils.js';
-
-const {
-  PLEX_ACCOUNTS,
-  PLEX_EVENTS = 'media.play',
-  PLEX_PORT = '9797',
-} = process.env;
 
 export function startPlexUnmonitor() {
   const triggerEvents = new Set(parseList(PLEX_EVENTS));

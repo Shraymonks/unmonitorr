@@ -1,15 +1,6 @@
 import type { Response } from 'express';
-import type { components } from './types/sonarr.js';
-
-import { Api, cleanTitle, hasExclusionTag } from './utils.js';
-
-export const DEFAULT_SONARR_HOST = 'http://127.0.0.1:8989';
-
-const { SONARR_API_KEY, SONARR_HOST = DEFAULT_SONARR_HOST } = process.env;
-const api = new Api(`${SONARR_HOST}/api/v3/`, SONARR_API_KEY);
-
-type Episode = components['schemas']['EpisodeResource'];
-type Series = components['schemas']['SeriesResource'];
+import { sonarrApi } from './fetch.js';
+import { cleanTitle, hasExclusionTag } from './utils.js';
 
 export async function unmonitorEpisode(
   {
@@ -18,7 +9,7 @@ export async function unmonitorEpisode(
   }: { episodeTvdbIds: string[]; seriesTitle: string },
   res: Response,
 ): Promise<Response> {
-  if (!SONARR_API_KEY) {
+  if (!sonarrApi) {
     return res.end();
   }
 
@@ -28,28 +19,24 @@ export async function unmonitorEpisode(
     return res.end();
   }
 
-  let seriesResponse: globalThis.Response;
-
   // Sonarr has no api for getting an episode by episode tvdbId
   // Go through the following steps to get the matching episode:
   // 1. Get series list
   // 2. Match potential series on title
   // 3. Get episode lists
   // 4. Match episode on tvdbId
-  try {
-    seriesResponse = await fetch(api.getUrl('series'));
-  } catch (error) {
+  const { data: seriesList, error: seriesError } =
+    await sonarrApi.GET('/api/v3/series');
+
+  if (seriesError) {
     console.error('Failed to get series lists from sonarr:');
-    console.error(error);
+    console.error(seriesError);
     return res.end();
   }
-  if (!seriesResponse.ok) {
-    console.error(
-      `Error getting series information: ${seriesResponse.status.toString()} ${seriesResponse.statusText}`,
-    );
+
+  if (!seriesList) {
     return res.end();
   }
-  const seriesList = (await seriesResponse.json()) as Series[];
 
   const cleanedTitle = cleanTitle(seriesTitle);
   // Match potential series on title. Year metadata from Plex is for the episode
@@ -63,32 +50,33 @@ export async function unmonitorEpisode(
     return res.end();
   }
 
-  let episode: Episode | undefined;
-  let series: Series | undefined;
+  let episode = null;
+  let series = null;
 
   for (const seriesMatch of seriesMatches) {
     if (!seriesMatch.id) {
       continue;
     }
-    let episodeListResponse: globalThis.Response;
-    try {
-      episodeListResponse = await fetch(
-        api.getUrl('episode', {
-          seriesId: seriesMatch.id.toString(),
-        }),
-      );
-    } catch (error) {
+    const { data: episodeList, error: episodeError } = await sonarrApi.GET(
+      '/api/v3/episode',
+      {
+        params: {
+          query: {
+            seriesId: seriesMatch.id,
+          },
+        },
+      },
+    );
+
+    if (episodeError) {
       console.error(`Failed to get episode list for ${seriesTitle}:`);
-      console.error(error);
+      console.error(episodeError);
       continue;
     }
-    if (!episodeListResponse.ok) {
-      console.error(
-        `Error getting episode list for ${seriesTitle}: ${seriesResponse.status.toString()} ${seriesResponse.statusText}`,
-      );
+
+    if (!episodeList) {
       continue;
     }
-    const episodeList = (await episodeListResponse.json()) as Episode[];
 
     episode = episodeList.find(
       ({ tvdbId }) => tvdbId && episodeTvdbIds.includes(tvdbId.toString()),
@@ -116,35 +104,37 @@ export async function unmonitorEpisode(
     return res.end();
   }
 
-  if (await hasExclusionTag(api.getUrl('tag'), series.tags)) {
+  if (episode.id == null) {
+    console.warn(`${episodeString} has no id`);
+    return res.end();
+  }
+
+  const { data: tags, error: tagsError } = await sonarrApi.GET('/api/v3/tag');
+
+  if (tagsError) {
+    console.error(`Failed to get tags information from sonarr`);
+    console.error(tagsError);
+    return res.end();
+  }
+
+  if (hasExclusionTag(tags, series.tags)) {
     console.warn(`${episodeString} has exclusion tag`);
     return res.end();
   }
 
-  let response: globalThis.Response;
-  try {
-    response = await fetch(api.getUrl('episode/monitor'), {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        episodeIds: [episode.id],
-        monitored: false,
-      }),
-    });
-  } catch (error) {
+  const { error } = await sonarrApi.PUT('/api/v3/episode/monitor', {
+    body: {
+      episodeIds: [episode.id],
+      monitored: false,
+    },
+  });
+
+  if (error) {
     console.error(`Failed to unmonitor ${episodeString}:`);
     console.error(error);
     return res.end();
   }
 
-  if (response.ok) {
-    console.log(`${episodeString} unmonitored!`);
-    return res.end();
-  }
-
-  console.error(
-    `Error unmonitoring ${episodeString}: ${response.status.toString()} ${response.statusText}`,
-  );
-
+  console.log(`${episodeString} unmonitored!`);
   return res.end();
 }
