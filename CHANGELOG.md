@@ -1,5 +1,11 @@
 # unmonitorr
 
+## 1.1.3
+
+### Patch Changes
+
+- 90cb4c0: Fix unmonitorr not exiting if API key is unset
+
 ## 1.1.2
 
 ### Patch Changes
