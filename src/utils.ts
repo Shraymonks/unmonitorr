@@ -1,23 +1,8 @@
+import { EXCLUSION_TAG } from './constants.js';
 import type { PlexPayload } from './types/plex.js';
+import type { components } from './types/radarr.js';
 
-const { EXCLUSION_TAG = 'unmonitorr-exclude' } = process.env;
-
-export class Api {
-  #apiKey: string;
-  base: string;
-  constructor(base: string, apiKey = '') {
-    this.#apiKey = apiKey;
-    this.base = base;
-  }
-  getUrl(endpoint: string, options?: Record<string, string>): string {
-    const url = new URL(endpoint, this.base);
-    url.search = new URLSearchParams({
-      ...options,
-      apikey: this.#apiKey,
-    }).toString();
-    return url.toString();
-  }
-}
+type Tag = components['schemas']['TagResource'];
 
 // Removes year from title. Media with duplicate titles may sometimes have the
 // year appended to the end of the title.
@@ -42,28 +27,13 @@ export function parseList(list: string): string[] {
   return list.split(/\s*,\s*/);
 }
 
-interface Tag {
-  id: number;
-  label: string;
-}
-
-export async function hasExclusionTag(
-  url: string,
-  ids?: number[] | null,
-): Promise<boolean> {
-  try {
-    const response = await fetch(url);
-    const tags = (await response.json()) as Tag[];
-
-    const idsSet = new Set(ids);
-
-    return tags.some(
-      (tag) => idsSet.has(tag.id) && tag.label === EXCLUSION_TAG,
-    );
-  } catch (error) {
-    console.error(`Failed to get tags information from ${url}`);
-    console.error(error);
-    // fallback to true to avoid unmonitoring excluded items
-    return true;
+export function hasExclusionTag(
+  tags: Tag[],
+  mediaTagIds?: number[] | null,
+): boolean {
+  if (!mediaTagIds || mediaTagIds.length === 0) {
+    return false;
   }
+  const exclusionTagId = tags.find((tag) => tag.label === EXCLUSION_TAG)?.id;
+  return exclusionTagId != null && mediaTagIds.includes(exclusionTagId);
 }

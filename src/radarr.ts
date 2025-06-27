@@ -1,14 +1,6 @@
 import type { Response } from 'express';
-import type { components } from './types/radarr.js';
-
-import { Api, hasExclusionTag } from './utils.js';
-
-export const DEFAULT_RADARR_HOST = 'http://127.0.0.1:7878';
-
-const { RADARR_API_KEY, RADARR_HOST = DEFAULT_RADARR_HOST } = process.env;
-const api = new Api(`${RADARR_HOST}/api/v3/`, RADARR_API_KEY);
-
-type Movie = components['schemas']['MovieResource'];
+import { radarrApi } from './fetch.js';
+import { hasExclusionTag } from './utils.js';
 
 export async function unmonitorMovie(
   {
@@ -18,7 +10,7 @@ export async function unmonitorMovie(
   }: { movieTmdbIds: string[]; title: string; year: number },
   res: Response,
 ): Promise<Response> {
-  if (!RADARR_API_KEY) {
+  if (!radarrApi) {
     return res.end();
   }
 
@@ -29,31 +21,36 @@ export async function unmonitorMovie(
     return res.end();
   }
 
-  let movies: Movie[] | undefined;
+  let movies = null;
 
   for (const tmdbId of movieTmdbIds) {
-    let moviesResponse: globalThis.Response;
-    try {
-      moviesResponse = await fetch(api.getUrl('movie', { tmdbId }));
-    } catch (error) {
+    const { data, error } = await radarrApi.GET('/api/v3/movie', {
+      params: {
+        query: {
+          tmdbId: Number(tmdbId),
+        },
+      },
+    });
+
+    if (error) {
       console.error(
         `Failed to get movie information from radarr for tmdbId: ${tmdbId} ${titleYear}`,
       );
       console.error(error);
       continue;
     }
-    if (moviesResponse.ok) {
-      movies = (await moviesResponse.json()) as Movie[];
+
+    if (data) {
+      movies = data;
       break;
     }
-    console.error(
-      `Error getting movie information: ${moviesResponse.status.toString()} ${moviesResponse.statusText}`,
-    );
   }
+
   if (!movies) {
     console.warn(`Failed to find ${titleYear} in radarr library`);
     return res.end();
   }
+
   const [movie] = movies;
   if (movie?.id == null) {
     console.warn(`${titleYear} not found in radarr library`);
@@ -65,33 +62,34 @@ export async function unmonitorMovie(
     return res.end();
   }
 
-  if (await hasExclusionTag(api.getUrl('tag'), movie.tags)) {
+  const { data: tags, error: tagsError } = await radarrApi.GET('/api/v3/tag');
+
+  if (tagsError) {
+    console.error(`Failed to get tags information from radarr`);
+    console.error(tagsError);
+    return res.end();
+  }
+
+  if (hasExclusionTag(tags, movie.tags)) {
     console.warn(`${titleYear} has exclusion tag`);
     return res.end();
   }
 
-  movie.monitored = false;
-  let response: globalThis.Response;
-  try {
-    response = await fetch(api.getUrl(`movie/${movie.id.toString()}`), {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(movie),
-    });
-  } catch (error) {
+  const { error } = await radarrApi.PUT('/api/v3/movie/{id}', {
+    params: {
+      path: {
+        id: movie.id.toString(),
+      },
+    },
+    body: { ...movie, monitored: false },
+  });
+
+  if (error) {
     console.error(`Failed to unmonitor ${titleYear}`);
     console.error(error);
     return res.end();
   }
 
-  if (response.ok) {
-    console.log(`${titleYear} unmonitored!`);
-    return res.end();
-  }
-
-  console.error(
-    `Error unmonitoring ${titleYear}: ${response.status.toString()} ${response.statusText}`,
-  );
-
+  console.log(`${titleYear} unmonitored!`);
   return res.end();
 }
