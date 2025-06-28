@@ -1,5 +1,11 @@
 # unmonitorr
 
+## 1.2.0
+
+### Minor Changes
+
+- edb939a: Add health check and optimize build
+
 ## 1.1.3
 
 ### Patch Changes
