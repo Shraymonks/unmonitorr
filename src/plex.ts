@@ -24,6 +24,10 @@ export function startPlexUnmonitor() {
   const upload = multer({ dest: '/tmp/' });
   const app = express();
 
+  app.get('/healthz', (_req, res) => {
+    res.sendStatus(200);
+  });
+
   app.post(
     '/',
     upload.single('thumb'),
