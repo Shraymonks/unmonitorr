@@ -1,0 +1,16 @@
+.changeset
+.dockerignore
+.git
+.github
+.gitignore
+.node-version
+.pnpm-store
+CHANGELOG.md
+Dockerfile
+README.md
+biome.json
+dist
+lefthook.yml
+node_modules
+npm-debug.log
+pnpm-workspace.yaml
