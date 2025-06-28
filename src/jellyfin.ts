@@ -26,7 +26,7 @@ export function startJellyfinUnmonitor() {
       const { Item, Series } = req.body;
 
       if (!Item.UserData.Played) {
-        res.end();
+        res.sendStatus(204);
         return;
       }
 
@@ -35,7 +35,7 @@ export function startJellyfinUnmonitor() {
           const episodeTvdbIds = [Item.ProviderIds.Tvdb];
           const seriesTitle = Series.OriginalTitle;
 
-          void unmonitorEpisode({ episodeTvdbIds, seriesTitle }, res);
+          unmonitorEpisode({ episodeTvdbIds, seriesTitle }, res);
           return;
         }
         case 'Movie': {
@@ -43,7 +43,7 @@ export function startJellyfinUnmonitor() {
           const year = Item.ProductionYear;
           const movieTmdbIds = [Item.ProviderIds.Tmdb];
 
-          void unmonitorMovie({ movieTmdbIds, title, year }, res);
+          unmonitorMovie({ movieTmdbIds, title, year }, res);
           return;
         }
       }
