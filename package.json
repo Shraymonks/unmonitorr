@@ -36,7 +36,7 @@
     "openapi-fetch": "^0.14.0"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.0.5",
+    "@biomejs/biome": "2.0.6",
     "@changesets/cli": "^2.29.5",
     "@shraymonks/biome-config": "^1.0.0",
     "@tsconfig/node-lts": "^22.0.2",

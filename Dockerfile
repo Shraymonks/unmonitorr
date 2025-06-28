@@ -1,4 +1,4 @@
-FROM node:22.16.0-alpine AS build
+FROM node:22.17.0-alpine AS build
 RUN corepack enable
 USER node
 WORKDIR /usr/src/app/
@@ -9,7 +9,7 @@ COPY --chown=node:node src/ src/
 RUN pnpm build
 RUN pnpm prune --production
 
-FROM node:22.16.0-alpine
+FROM node:22.17.0-alpine
 ENV NODE_ENV=production
 RUN apk add --no-cache dumb-init curl
 USER node
