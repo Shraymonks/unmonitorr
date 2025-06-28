@@ -69,5 +69,5 @@ export function startPlexUnmonitor() {
     },
   );
 
-  app.listen(parseInt(PLEX_PORT, 10));
+  app.listen(Number(PLEX_PORT));
 }
