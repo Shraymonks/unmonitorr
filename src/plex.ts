@@ -37,7 +37,7 @@ export function startPlexUnmonitor() {
       ) as PlexPayload;
 
       if (!triggerEvents.has(event)) {
-        res.end();
+        res.sendStatus(204);
         return;
       }
 
@@ -46,7 +46,7 @@ export function startPlexUnmonitor() {
         !plexAccounts.has(Account.id.toString()) &&
         !plexAccounts.has(Account.title)
       ) {
-        res.end();
+        res.sendStatus(204);
         return;
       }
 
@@ -55,14 +55,14 @@ export function startPlexUnmonitor() {
           const { Guid, grandparentTitle: seriesTitle } = Metadata;
           const episodeTvdbIds = getIds(Guid, 'tvdb');
 
-          void unmonitorEpisode({ episodeTvdbIds, seriesTitle }, res);
+          unmonitorEpisode({ episodeTvdbIds, seriesTitle }, res);
           return;
         }
         case 'movie': {
           const { Guid, title, year } = Metadata;
           const movieTmdbIds = getIds(Guid, 'tmdb');
 
-          void unmonitorMovie({ movieTmdbIds, title, year }, res);
+          unmonitorMovie({ movieTmdbIds, title, year }, res);
           return;
         }
       }

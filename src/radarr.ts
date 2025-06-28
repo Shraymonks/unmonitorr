@@ -11,14 +11,14 @@ export async function unmonitorMovie(
   res: Response,
 ): Promise<Response> {
   if (!radarrApi) {
-    return res.end();
+    return res.sendStatus(204);
   }
 
   const titleYear = `${title} (${year.toString()})`;
 
   if (movieTmdbIds.length === 0) {
     console.warn(`No tmdbId for ${titleYear}`);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   let movies = null;
@@ -48,18 +48,18 @@ export async function unmonitorMovie(
 
   if (!movies) {
     console.warn(`Failed to find ${titleYear} in radarr library`);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   const [movie] = movies;
   if (movie?.id == null) {
     console.warn(`${titleYear} not found in radarr library`);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   if (!movie.monitored) {
     console.warn(`${titleYear} is already unmonitored`);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   const { data: tags, error: tagsError } = await radarrApi.GET('/api/v3/tag');
@@ -67,12 +67,12 @@ export async function unmonitorMovie(
   if (tagsError) {
     console.error(`Failed to get tags information from radarr`);
     console.error(tagsError);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   if (hasExclusionTag(tags, movie.tags)) {
     console.warn(`${titleYear} has exclusion tag`);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   const { error } = await radarrApi.PUT('/api/v3/movie/{id}', {
@@ -87,9 +87,9 @@ export async function unmonitorMovie(
   if (error) {
     console.error(`Failed to unmonitor ${titleYear}`);
     console.error(error);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   console.log(`${titleYear} unmonitored!`);
-  return res.end();
+  return res.sendStatus(204);
 }

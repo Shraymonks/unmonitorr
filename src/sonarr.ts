@@ -10,13 +10,13 @@ export async function unmonitorEpisode(
   res: Response,
 ): Promise<Response> {
   if (!sonarrApi) {
-    return res.end();
+    return res.sendStatus(204);
   }
 
   // tvdbId is of the episode not the series.
   if (episodeTvdbIds.length === 0) {
     console.warn(`No tvdbId for ${seriesTitle}`);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   // Sonarr has no api for getting an episode by episode tvdbId
@@ -31,11 +31,11 @@ export async function unmonitorEpisode(
   if (seriesError) {
     console.error('Failed to get series lists from sonarr:');
     console.error(seriesError);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   if (!seriesList) {
-    return res.end();
+    return res.sendStatus(204);
   }
 
   const cleanedTitle = cleanTitle(seriesTitle);
@@ -47,7 +47,7 @@ export async function unmonitorEpisode(
   );
   if (seriesMatches.length === 0) {
     console.warn(`Could not find ${seriesTitle} in sonarr library`);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   let episode = null;
@@ -94,19 +94,19 @@ export async function unmonitorEpisode(
     console.warn(
       `Could not find episode tvdbIds: ${episodeTvdbIds.toString()} for ${seriesTitle}`,
     );
-    return res.end();
+    return res.sendStatus(204);
   }
 
   const episodeString = `${seriesTitle} - S${episode.seasonNumber.toString()}E${episode.episodeNumber.toString()}`;
 
   if (!episode.monitored) {
     console.warn(`${episodeString} is already unmonitored`);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   if (episode.id == null) {
     console.warn(`${episodeString} has no id`);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   const { data: tags, error: tagsError } = await sonarrApi.GET('/api/v3/tag');
@@ -114,12 +114,12 @@ export async function unmonitorEpisode(
   if (tagsError) {
     console.error(`Failed to get tags information from sonarr`);
     console.error(tagsError);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   if (hasExclusionTag(tags, series.tags)) {
     console.warn(`${episodeString} has exclusion tag`);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   const { error } = await sonarrApi.PUT('/api/v3/episode/monitor', {
@@ -132,9 +132,9 @@ export async function unmonitorEpisode(
   if (error) {
     console.error(`Failed to unmonitor ${episodeString}:`);
     console.error(error);
-    return res.end();
+    return res.sendStatus(204);
   }
 
   console.log(`${episodeString} unmonitored!`);
-  return res.end();
+  return res.sendStatus(204);
 }
