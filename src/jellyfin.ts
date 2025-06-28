@@ -50,5 +50,5 @@ export function startJellyfinUnmonitor() {
     },
   );
 
-  app.listen(parseInt(JELLYFIN_PORT, 10));
+  app.listen(Number(JELLYFIN_PORT));
 }
