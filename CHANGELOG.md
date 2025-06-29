@@ -1,5 +1,11 @@
 # unmonitorr
 
+## 1.2.1
+
+### Patch Changes
+
+- b45fdb9: Only log Radarr and Sonarr hosts if their respective API key is configured
+
 ## 1.2.0
 
 ### Minor Changes
