@@ -13,8 +13,12 @@ if (RADARR_API_KEY == null && SONARR_API_KEY == null) {
   console.error('Set RADARR_API_KEY and/or SONARR_API_KEY to unmonitor');
   process.exitCode = 1;
 } else {
-  console.log(`Radarr: ${RADARR_HOST}`);
-  console.log(`Sonarr: ${SONARR_HOST}`);
+  if (RADARR_API_KEY) {
+    console.log(`Radarr: ${RADARR_HOST}`);
+  }
+  if (SONARR_API_KEY) {
+    console.log(`Sonarr: ${SONARR_HOST}`);
+  }
 
   const services = new Set(parseList(SERVICES));
 
