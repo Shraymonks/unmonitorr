@@ -1,24 +1,24 @@
-import type { Response } from 'express';
 import { radarrApi } from './fetch.js';
 import { hasExclusionTag } from './utils.js';
 
-export async function unmonitorMovie(
-  {
-    movieTmdbIds,
-    title,
-    year,
-  }: { movieTmdbIds: string[]; title: string; year: number },
-  res: Response,
-): Promise<Response> {
+export async function unmonitorMovie({
+  movieTmdbIds,
+  title,
+  year,
+}: {
+  movieTmdbIds: string[];
+  title: string;
+  year: number;
+}): Promise<void> {
   if (!radarrApi) {
-    return res.sendStatus(204);
+    return;
   }
 
   const titleYear = `${title} (${year.toString()})`;
 
   if (movieTmdbIds.length === 0) {
     console.warn(`No tmdbId for ${titleYear}`);
-    return res.sendStatus(204);
+    return;
   }
 
   let movies = null;
@@ -48,18 +48,18 @@ export async function unmonitorMovie(
 
   if (!movies) {
     console.warn(`Failed to find ${titleYear} in radarr library`);
-    return res.sendStatus(204);
+    return;
   }
 
   const [movie] = movies;
   if (movie?.id == null) {
     console.warn(`${titleYear} not found in radarr library`);
-    return res.sendStatus(204);
+    return;
   }
 
   if (!movie.monitored) {
     console.warn(`${titleYear} is already unmonitored`);
-    return res.sendStatus(204);
+    return;
   }
 
   const { data: tags, error: tagsError } = await radarrApi.GET('/api/v3/tag');
@@ -67,12 +67,12 @@ export async function unmonitorMovie(
   if (tagsError) {
     console.error(`Failed to get tags information from radarr`);
     console.error(tagsError);
-    return res.sendStatus(204);
+    return;
   }
 
   if (hasExclusionTag(tags, movie.tags)) {
     console.warn(`${titleYear} has exclusion tag`);
-    return res.sendStatus(204);
+    return;
   }
 
   const { error } = await radarrApi.PUT('/api/v3/movie/{id}', {
@@ -87,9 +87,8 @@ export async function unmonitorMovie(
   if (error) {
     console.error(`Failed to unmonitor ${titleYear}`);
     console.error(error);
-    return res.sendStatus(204);
+    return;
   }
 
   console.log(`${titleYear} unmonitored!`);
-  return res.sendStatus(204);
 }
