@@ -31,7 +31,10 @@ export function startPlexUnmonitor() {
   app.post(
     '/',
     upload.single('thumb'),
-    (req: Request<ParamsDictionary, unknown, PlexBody>, res: Response) => {
+    async (
+      req: Request<ParamsDictionary, unknown, PlexBody>,
+      res: Response,
+    ) => {
       const { Account, Metadata, event } = JSON.parse(
         req.body.payload,
       ) as PlexPayload;
@@ -55,17 +58,18 @@ export function startPlexUnmonitor() {
           const { Guid, grandparentTitle: seriesTitle } = Metadata;
           const episodeTvdbIds = getIds(Guid, 'tvdb');
 
-          unmonitorEpisode({ episodeTvdbIds, seriesTitle }, res);
-          return;
+          await unmonitorEpisode({ episodeTvdbIds, seriesTitle });
+          break;
         }
         case 'movie': {
           const { Guid, title, year } = Metadata;
           const movieTmdbIds = getIds(Guid, 'tmdb');
 
-          unmonitorMovie({ movieTmdbIds, title, year }, res);
-          return;
+          await unmonitorMovie({ movieTmdbIds, title, year });
+          break;
         }
       }
+      res.sendStatus(204);
     },
   );
 

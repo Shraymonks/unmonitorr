@@ -19,7 +19,7 @@ export function startJellyfinUnmonitor() {
   app.post(
     '/jellyfin',
     express.json({ limit: '10mb' }),
-    (
+    async (
       req: Request<ParamsDictionary, unknown, JellyfinApiResponse>,
       res: Response,
     ) => {
@@ -35,18 +35,19 @@ export function startJellyfinUnmonitor() {
           const episodeTvdbIds = [Item.ProviderIds.Tvdb];
           const seriesTitle = Series.OriginalTitle;
 
-          unmonitorEpisode({ episodeTvdbIds, seriesTitle }, res);
-          return;
+          await unmonitorEpisode({ episodeTvdbIds, seriesTitle });
+          break;
         }
         case 'Movie': {
           const title = Item.OriginalTitle;
           const year = Item.ProductionYear;
           const movieTmdbIds = [Item.ProviderIds.Tmdb];
 
-          unmonitorMovie({ movieTmdbIds, title, year }, res);
-          return;
+          await unmonitorMovie({ movieTmdbIds, title, year });
+          break;
         }
       }
+      res.sendStatus(204);
     },
   );
 
