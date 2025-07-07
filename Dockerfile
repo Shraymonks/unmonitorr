@@ -17,6 +17,6 @@ WORKDIR /usr/src/app/
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/package.json ./package.json
-EXPOSE 9797 9898
-HEALTHCHECK --timeout=3s --start-period=5s CMD curl --fail http://localhost:9797/healthz || curl --fail http://localhost:9898/healthz || exit 1
+EXPOSE 9797
+HEALTHCHECK --timeout=3s --start-period=5s CMD curl --fail http://localhost:9797/healthz || exit 1
 ENTRYPOINT [ "dumb-init", "node", "dist/index.js" ]

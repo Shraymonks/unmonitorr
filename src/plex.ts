@@ -1,14 +1,13 @@
-import type { Request, Response } from 'express';
-import express from 'express';
+import type { Express, Request, Response } from 'express';
 import type { ParamsDictionary } from 'express-serve-static-core';
 import multer from 'multer';
-import { PLEX_ACCOUNTS, PLEX_EVENTS, PLEX_PORT } from './constants.js';
+import { PLEX_ACCOUNTS, PLEX_EVENTS } from './constants.js';
 import { unmonitorMovie } from './radarr.js';
 import { unmonitorEpisode } from './sonarr.js';
 import type { PlexBody, PlexPayload } from './types/plex.js';
 import { getIds, parseList } from './utils.js';
 
-export function startPlexUnmonitor() {
+export function startPlexUnmonitor(app: Express) {
   const triggerEvents = new Set(parseList(PLEX_EVENTS));
   const plexAccounts = new Set(PLEX_ACCOUNTS ? parseList(PLEX_ACCOUNTS) : []);
   console.log(
@@ -18,18 +17,13 @@ export function startPlexUnmonitor() {
             ...plexAccounts,
           ].toString()})`
         : ''
-    } on port: ${PLEX_PORT}`,
+    } on /plex`,
   );
 
   const upload = multer({ dest: '/tmp/' });
-  const app = express();
-
-  app.get('/healthz', (_req, res) => {
-    res.sendStatus(200);
-  });
 
   app.post(
-    '/',
+    '/plex',
     upload.single('thumb'),
     async (
       req: Request<ParamsDictionary, unknown, PlexBody>,
@@ -72,6 +66,4 @@ export function startPlexUnmonitor() {
       res.sendStatus(204);
     },
   );
-
-  app.listen(Number(PLEX_PORT));
 }
