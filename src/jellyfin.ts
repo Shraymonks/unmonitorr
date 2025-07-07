@@ -1,20 +1,11 @@
-import type { Request, Response } from 'express';
+import type { Express, Request, Response } from 'express';
 import express from 'express';
 import type { ParamsDictionary } from 'express-serve-static-core';
-import { JELLYFIN_PORT } from './constants.js';
 import { unmonitorMovie } from './radarr.js';
 import { unmonitorEpisode } from './sonarr.js';
 
-export function startJellyfinUnmonitor() {
-  console.log(
-    `Unmonitoring for jellyfin on /jellyfin with port: ${JELLYFIN_PORT}`,
-  );
-
-  const app = express();
-
-  app.get('/healthz', (_req, res) => {
-    res.sendStatus(200);
-  });
+export function startJellyfinUnmonitor(app: Express) {
+  console.log(`Unmonitoring for jellyfin on /jellyfin`);
 
   app.post(
     '/jellyfin',
@@ -50,6 +41,4 @@ export function startJellyfinUnmonitor() {
       res.sendStatus(204);
     },
   );
-
-  app.listen(Number(JELLYFIN_PORT));
 }
