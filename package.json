@@ -32,7 +32,7 @@
   "dependencies": {
     "@types/express-serve-static-core": "^5.0.6",
     "express": "^5.1.0",
-    "multer": "2.0.1",
+    "multer": "2.0.2",
     "openapi-fetch": "^0.14.0"
   },
   "devDependencies": {
