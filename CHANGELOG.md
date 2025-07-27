@@ -1,5 +1,20 @@
 # unmonitorr
 
+## 2.0.0
+
+### Major Changes
+
+- 474db06: Use single port for Plex and Jellyfin
+
+  BREAKING CHANGES
+
+  - Plex and Jellyfin now listen from a single port configured via the `PORT` env variable.
+  - The Plex webhook endpoint is now served from `/plex` instead of `/`.
+
+### Patch Changes
+
+- b45fdb9: Only log Radarr and Sonarr hosts if their respective API key is configured
+
 ## 1.2.0
 
 ### Minor Changes
