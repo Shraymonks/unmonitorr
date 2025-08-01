@@ -1,7 +1,7 @@
 .DS_Store
 .env
 .envrc
+.jj/
 .mise.local.toml
 mise.local.toml
-dist
-node_modules
+node_modules/

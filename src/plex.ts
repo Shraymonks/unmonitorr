@@ -1,11 +1,11 @@
 import type { Express, Request, Response } from 'express';
 import type { ParamsDictionary } from 'express-serve-static-core';
 import multer from 'multer';
-import { PLEX_ACCOUNTS, PLEX_EVENTS } from './constants.js';
-import { unmonitorMovie } from './radarr.js';
-import { unmonitorEpisode } from './sonarr.js';
-import type { PlexBody, PlexPayload } from './types/plex.js';
-import { getIds, parseList } from './utils.js';
+import { PLEX_ACCOUNTS, PLEX_EVENTS } from './constants.ts';
+import { unmonitorMovie } from './radarr.ts';
+import { unmonitorEpisode } from './sonarr.ts';
+import type { PlexBody, PlexPayload } from './types/plex.ts';
+import { getIds, parseList } from './utils.ts';
 
 export function startPlexUnmonitor(app: Express) {
   const triggerEvents = new Set(parseList(PLEX_EVENTS));

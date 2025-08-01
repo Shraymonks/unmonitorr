@@ -1,6 +1,6 @@
-import { EXCLUSION_TAG } from './constants.js';
-import type { PlexPayload } from './types/plex.js';
-import type { components } from './types/radarr.js';
+import { EXCLUSION_TAG } from './constants.ts';
+import type { PlexPayload } from './types/plex.ts';
+import type { components } from './types/radarr.ts';
 
 type Tag = components['schemas']['TagResource'];
 

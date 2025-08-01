@@ -4,9 +4,9 @@ import {
   RADARR_HOST,
   SONARR_API_KEY,
   SONARR_HOST,
-} from './constants.js';
-import type { paths as radarrPaths } from './types/radarr.js';
-import type { paths as sonarrPaths } from './types/sonarr.js';
+} from './constants.ts';
+import type { paths as radarrPaths } from './types/radarr.ts';
+import type { paths as sonarrPaths } from './types/sonarr.ts';
 
 export const radarrApi = RADARR_API_KEY
   ? createClient<radarrPaths>({

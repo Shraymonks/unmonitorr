@@ -6,10 +6,10 @@ import {
   SERVICES,
   SONARR_API_KEY,
   SONARR_HOST,
-} from './constants.js';
-import { startJellyfinUnmonitor } from './jellyfin.js';
-import { startPlexUnmonitor } from './plex.js';
-import { parseList } from './utils.js';
+} from './constants.ts';
+import { startJellyfinUnmonitor } from './jellyfin.ts';
+import { startPlexUnmonitor } from './plex.ts';
+import { parseList } from './utils.ts';
 
 const services = new Set(parseList(SERVICES));
 

@@ -1,5 +1,5 @@
-import { radarrApi } from './fetch.js';
-import { hasExclusionTag } from './utils.js';
+import { radarrApi } from './fetch.ts';
+import { hasExclusionTag } from './utils.ts';
 
 export async function unmonitorMovie({
   movieTmdbIds,

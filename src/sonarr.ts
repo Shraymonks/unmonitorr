@@ -1,5 +1,5 @@
-import { sonarrApi } from './fetch.js';
-import { cleanTitle, hasExclusionTag } from './utils.js';
+import { sonarrApi } from './fetch.ts';
+import { cleanTitle, hasExclusionTag } from './utils.ts';
 
 export async function unmonitorEpisode({
   episodeTvdbIds,
