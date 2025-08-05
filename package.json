@@ -30,7 +30,6 @@
   "bugs": "https://github.com/Shraymonks/unmonitorr/issues",
   "license": "ISC",
   "dependencies": {
-    "@types/express-serve-static-core": "^5.0.6",
     "express": "^5.1.0",
     "multer": "2.0.2",
     "openapi-fetch": "^0.14.0"
@@ -42,6 +41,7 @@
     "@tsconfig/node-lts": "^22.0.2",
     "@tsconfig/strictest": "^2.0.5",
     "@types/express": "^5.0.3",
+    "@types/express-serve-static-core": "^5.0.7",
     "@types/multer": "^1.4.13",
     "@types/node": "^22.15.33",
     "lefthook": "^1.11.14",
