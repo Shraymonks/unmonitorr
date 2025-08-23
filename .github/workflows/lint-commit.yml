@@ -44,9 +44,7 @@ jobs:
           ref: ${{ github.head_ref }}
           path: ./.pr-code-to-lint
           # Use sparse checkout to ignore the config file from the PR
-          sparse-checkout: |
-            *
-            !biome.json
+          sparse-checkout: src
 
       # Step 4: Run the trusted linter script on the untrusted code from the PR.
       - name: Run linter and fix issues
