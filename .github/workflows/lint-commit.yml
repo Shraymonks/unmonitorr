@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.actor != 'github-actions[bot]'
     steps:
-      # Step 1: Checkout the BASE repository to use its trusted code and scripts.
+      # Step 1: Checkout the BASE repository to use its trusted tools and scripts.
       - name: Checkout base repository
         uses: actions/checkout@v4
         with:
@@ -36,25 +36,28 @@ jobs:
       - name: Install dependencies from the trusted lockfile
         run: pnpm install --frozen-lockfile
 
-      # Step 3: Checkout the PR code into a subdirectory to be linted as data.
-      # This code is NOT executed.
-      - name: Checkout PR code for linting
+      # Step 3: Checkout the PR code into a subdirectory, but explicitly ignore biome.json.
+      - name: Checkout PR code for linting (excluding config)
         uses: actions/checkout@v4
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.head_ref }}
           path: ./.pr-code-to-lint
+          # Use sparse checkout to ignore the config file from the PR
+          sparse-checkout: |
+            *
+            !biome.json
 
-      # Step 4: Run the trusted linter on the untrusted code from the PR.
+      # Step 4: Run the trusted linter script on the untrusted code from the PR.
       - name: Run linter and fix issues
-        run: pnpm lint:fix --config-path ./biome.json ./.pr-code-to-lint/src
+        run: pnpm lint:fix ./.pr-code-to-lint/src
 
       # Step 5: Commit and push the changes back to the fork.
       - name: Commit changes
+        working-directory: ./.pr-code-to-lint
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          cd ./.pr-code-to-lint
           git add .
           if git diff --staged --quiet; then
             echo "No changes to commit"
