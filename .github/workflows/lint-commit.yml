@@ -36,27 +36,31 @@ jobs:
       - name: Install dependencies from the trusted lockfile
         run: pnpm install --frozen-lockfile
 
-      # Step 3: Checkout the PR code into a subdirectory, but explicitly ignore biome.json.
-      - name: Checkout PR code for linting (excluding config)
+      # Step 3: Checkout the PR code into a subdirectory.
+      - name: Checkout PR code for linting
         uses: actions/checkout@v4
         with:
           repository: ${{ github.event.pull_request.head.repo.full_name }}
           ref: ${{ github.head_ref }}
           path: ./.pr-code-to-lint
-          # Use sparse checkout to ignore the config file from the PR
-          sparse-checkout: src
 
-      # Step 4: Run the trusted linter script on the untrusted code from the PR.
+      # Step 4: Remove the PR's config file to prevent the nested configuration error.
+      - name: Remove PR biome.json
+        run: rm -f ./.pr-code-to-lint/biome.json
+
+      # Step 5: Run the trusted linter script on the PR's source code.
       - name: Run linter and fix issues
         run: pnpm lint:fix ./.pr-code-to-lint/src
 
-      # Step 5: Commit and push the changes back to the fork.
+      # Step 6: Commit and push ONLY the src directory changes back to the fork.
       - name: Commit changes
         working-directory: ./.pr-code-to-lint
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add .
+
+          git add src
+
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
