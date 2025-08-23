@@ -23,6 +23,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
           # We need to fetch the history to be able to push to the PR
           fetch-depth: 0
           # This is the token that will be used to push the commit
