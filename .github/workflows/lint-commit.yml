@@ -2,7 +2,7 @@
 name: Lint and Commit
 
 on:
-  pull_request:
+  pull_request_target:
 
 # Ensures that only one workflow run is triggered for a given branch or PR,
 # cancelling any previous runs in progress.
@@ -17,44 +17,49 @@ jobs:
   lint-and-commit:
     name: Lint and Commit
     runs-on: ubuntu-latest
-    # Add this condition to prevent the workflow from running on its own commits
     if: github.actor != 'github-actions[bot]'
     steps:
-      - name: Checkout repository
+      # Step 1: Checkout the BASE repository to use its trusted code and scripts.
+      - name: Checkout base repository
         uses: actions/checkout@v4
         with:
-          repository: ${{ github.event.pull_request.head.repo.full_name }}
-          # We need to fetch the history to be able to push to the PR
-          fetch-depth: 0
-          # This is the token that will be used to push the commit
-          token: ${{ secrets.AUTO_LINT_TOKEN }}
-          # This is the ref that will be checked out
-          ref: ${{ github.head_ref }}
+          ref: ${{ github.event.pull_request.base.sha }}
 
+      # Step 2: Setup the environment using trusted configuration.
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
-
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
           cache: pnpm
           node-version-file: .node-version
-
-      - name: Install dependencies
+      - name: Install dependencies from the trusted lockfile
         run: pnpm install --frozen-lockfile
 
-      - name: Run linter and fix issues
-        run: pnpm lint:fix
+      # Step 3: Checkout the PR code into a subdirectory to be linted as data.
+      # This code is NOT executed.
+      - name: Checkout PR code for linting
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.pull_request.head.repo.full_name }}
+          ref: ${{ github.head_ref }}
+          path: ./.pr-code-to-lint
 
+      # Step 4: Run the trusted linter on the untrusted code from the PR.
+      - name: Run linter and fix issues
+        run: pnpm lint:fix ./.pr-code-to-lint/src
+
+      # Step 5: Commit and push the changes back to the fork.
       - name: Commit changes
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          cd ./.pr-code-to-lint
           git add .
-          # Check if there are any changes to commit
           if git diff --staged --quiet; then
             echo "No changes to commit"
           else
             git commit -m "style: apply automatic linting fixes"
-            git push
+            git remote set-url origin https://x-access-token:${{ secrets.AUTO_LINT_TOKEN }}@github.com/${{ github.event.pull_request.head.repo.full_name }}.git
+            git push origin HEAD:${{ github.head_ref }}
           fi
