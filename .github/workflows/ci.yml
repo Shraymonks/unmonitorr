@@ -5,7 +5,10 @@ on:
   push:
     branches:
       - main
-  pull_request:
+  workflow_run:
+    workflows: ['Lint and Commit']
+    types:
+      - completed
 
 # Ensures that only one workflow run is triggered for a given branch or PR,
 # cancelling any previous runs in progress.
@@ -20,7 +23,6 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
-    if: github.head_ref != 'changeset-release/main'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -43,7 +45,6 @@ jobs:
   typecheck:
     name: Typecheck
     runs-on: ubuntu-latest
-    if: github.head_ref != 'changeset-release/main'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -66,7 +67,6 @@ jobs:
   build-and-test-docker:
     name: Build and Test Docker Image
     runs-on: ubuntu-latest
-    if: github.head_ref != 'changeset-release/main'
     steps:
       - name: Login to Docker Hub
         if: github.event_name == 'push'

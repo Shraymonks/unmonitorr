@@ -17,7 +17,7 @@ jobs:
   lint-and-commit:
     name: Lint and Commit
     runs-on: ubuntu-latest
-    if: github.actor != 'github-actions[bot]'
+    if: github.head_ref != 'changeset-release/main' && github.actor != 'github-actions[bot]'
     steps:
       # Step 1: Checkout the BASE repository to use its trusted tools and scripts.
       - name: Checkout base repository
