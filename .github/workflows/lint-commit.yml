@@ -47,7 +47,7 @@ jobs:
 
       # Step 4: Run the trusted linter on the untrusted code from the PR.
       - name: Run linter and fix issues
-        run: pnpm lint:fix ./.pr-code-to-lint/src
+        run: pnpm lint:fix --config-path ./biome.json ./.pr-code-to-lint/src
 
       # Step 5: Commit and push the changes back to the fork.
       - name: Commit changes
