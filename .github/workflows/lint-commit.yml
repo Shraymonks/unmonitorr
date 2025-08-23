@@ -27,7 +27,7 @@ jobs:
           # We need to fetch the history to be able to push to the PR
           fetch-depth: 0
           # This is the token that will be used to push the commit
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.AUTO_LINT_TOKEN }}
           # This is the ref that will be checked out
           ref: ${{ github.head_ref }}
 
