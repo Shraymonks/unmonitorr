@@ -55,6 +55,8 @@ jobs:
       # Step 6: Commit and push ONLY the src directory changes back to the fork.
       - name: Commit changes
         working-directory: ./.pr-code-to-lint
+        env:
+          TARGET_REF: ${{ github.event.pull_request.head.ref }}
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
@@ -65,5 +67,5 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "style: apply automatic linting fixes"
-            git push origin HEAD:${{ github.event.pull_request.head.ref }}
+            git push origin HEAD:$TARGET_REF
           fi
