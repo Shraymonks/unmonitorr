@@ -23,7 +23,7 @@ jobs:
       - name: Checkout base repository
         uses: actions/checkout@v4
         with:
-          ref: ${{ github.event.pull_request.base.sha }}
+          ref: ${{ github.event.pull_request.base.ref }}
 
       # Step 2: Setup the environment using trusted configuration.
       - name: Setup pnpm
@@ -65,6 +65,5 @@ jobs:
             echo "No changes to commit"
           else
             git commit -m "style: apply automatic linting fixes"
-            git remote set-url origin https://x-access-token:${{ secrets.AUTO_LINT_TOKEN }}@github.com/${{ github.event.pull_request.head.repo.full_name }}.git
-            git push origin HEAD:${{ github.head_ref }}
+            git push origin HEAD:${{ github.event.pull_request.head.ref }}
           fi

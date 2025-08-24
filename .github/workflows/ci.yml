@@ -5,10 +5,7 @@ on:
   push:
     branches:
       - main
-  workflow_run:
-    workflows: ['Lint and Commit']
-    types:
-      - completed
+  pull_request:
 
 # Ensures that only one workflow run is triggered for a given branch or PR,
 # cancelling any previous runs in progress.
