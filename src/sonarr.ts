@@ -5,6 +5,18 @@ import { cleanTitle, hasExclusionTag } from './utils.ts';
 type Series = components['schemas']['SeriesResource'];
 type Episode = components['schemas']['EpisodeResource'];
 
+async function checkSonarrConnection() {
+  const response = await sonarrApi.GET('/api/v3/system/status');
+
+  if (response.response.status !== 200) {
+    throw {
+      message: `Failed to connect to Sonarr. Check your Sonarr configuration and verify that it is running.
+Status code: ${response.response.status} ${response.response.statusText}`,
+      level: 'error',
+    };
+  }
+}
+
 async function getSeriesList(): Promise<Series[]> {
   const { data: seriesList, error: seriesError } =
     await sonarrApi.GET('/api/v3/series');
@@ -166,11 +178,9 @@ export async function unmonitorEpisode({
   seriesTitle: string;
   seriesTvdbId?: string | undefined;
 }): Promise<void> {
-  if (!sonarrApi) {
-    return;
-  }
-
   try {
+    await checkSonarrConnection();
+
     const seriesList = await getSeriesList();
 
     const foundSeries = findSeries(seriesList, seriesTitle, seriesTvdbId);
@@ -197,7 +207,7 @@ export async function unmonitorEpisode({
         break;
       default:
         console.error(
-          'An unexpected error occurred while unmonitoring episode.',
+          'An unexpected error occurred while unmonitoring episode. Check Sonarr configuration and verify that it is running.',
         );
         break;
     }
