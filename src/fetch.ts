@@ -17,11 +17,9 @@ export const radarrApi = RADARR_API_KEY
     })
   : undefined;
 
-export const sonarrApi = SONARR_API_KEY
-  ? createClient<sonarrPaths>({
-      baseUrl: SONARR_HOST,
-      headers: {
-        'X-Api-Key': SONARR_API_KEY,
-      },
-    })
-  : undefined;
+export const sonarrApi = createClient<sonarrPaths>({
+  baseUrl: SONARR_HOST,
+  headers: {
+    'X-Api-Key': SONARR_API_KEY,
+  },
+});

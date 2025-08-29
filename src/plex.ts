@@ -2,7 +2,6 @@ import type { Express, Request, Response } from 'express';
 import type { ParamsDictionary } from 'express-serve-static-core';
 import multer from 'multer';
 import { PLEX_ACCOUNTS, PLEX_EVENTS } from './constants.ts';
-import { sonarrApi } from './fetch.ts';
 import { unmonitorMovie } from './radarr.ts';
 import { unmonitorEpisode } from './sonarr.ts';
 import type { PlexBody, PlexPayload } from './types/plex.ts';
@@ -50,10 +49,6 @@ export function startPlexUnmonitor(app: Express) {
 
       switch (Metadata.type) {
         case 'episode': {
-          if (!sonarrApi) {
-            return;
-          }
-
           const { Guid, grandparentTitle: seriesTitle } = Metadata;
           const episodeTvdbIds = getIds(Guid, 'tvdb');
 

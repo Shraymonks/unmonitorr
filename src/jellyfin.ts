@@ -1,7 +1,6 @@
 import type { Express, Request, Response } from 'express';
 import express from 'express';
 import type { ParamsDictionary } from 'express-serve-static-core';
-import { sonarrApi } from './fetch.ts';
 import { unmonitorMovie } from './radarr.ts';
 import { unmonitorEpisode } from './sonarr.ts';
 
@@ -24,10 +23,6 @@ export function startJellyfinUnmonitor(app: Express) {
 
       switch (Item.Type) {
         case 'Episode': {
-          if (!sonarrApi) {
-            return;
-          }
-
           const episodeTvdbIds = [Item.ProviderIds.Tvdb];
           const seriesTitle = Series.OriginalTitle;
           const seriesTvdbId = Series.ProviderIds['Tvdb'];

@@ -112,7 +112,7 @@ async function checkExclusionTag(
   }
 }
 
-async function unmonitorEpisodeStatus(
+async function setEpisodeUnmonitored(
   episode: Episode,
   episodeString: string,
 ): Promise<void> {
@@ -166,6 +166,10 @@ export async function unmonitorEpisode({
   seriesTitle: string;
   seriesTvdbId?: string | undefined;
 }): Promise<void> {
+  if (!sonarrApi) {
+    return;
+  }
+
   try {
     const seriesList = await getSeriesList();
 
@@ -180,7 +184,7 @@ export async function unmonitorEpisode({
 
     await checkExclusionTag(series, episodeString);
 
-    await unmonitorEpisodeStatus(episode, episodeString);
+    await setEpisodeUnmonitored(episode, episodeString);
   } catch (e) {
     const error = e as { message: string; level: string };
 
