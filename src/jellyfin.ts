@@ -25,8 +25,13 @@ export function startJellyfinUnmonitor(app: Express) {
         case 'Episode': {
           const episodeTvdbIds = [Item.ProviderIds.Tvdb];
           const seriesTitle = Series.OriginalTitle;
+          const seriesTvdbId = Series.ProviderIds['Tvdb'];
 
-          await unmonitorEpisode({ episodeTvdbIds, seriesTitle });
+          await unmonitorEpisode({
+            episodeTvdbIds,
+            seriesTitle,
+            seriesTvdbId,
+          });
           break;
         }
         case 'Movie': {
