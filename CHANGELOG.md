@@ -1,5 +1,11 @@
 # unmonitorr
 
+## 2.1.0
+
+### Minor Changes
+
+- 8fb5a20: Improve Sonarr series detection in Jellyfin by using the series' TVDB ID
+
 ## 2.0.0
 
 ### Major Changes
