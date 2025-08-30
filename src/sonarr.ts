@@ -164,6 +164,138 @@ async function checkExclusionTag(
   }
 }
 
+async function checkSeasonsWatched(series: Series): Promise<void> {
+  if (!series.seasons) {
+    throw {
+      message: `Seasons are not defined for ${series.title}.`,
+      level: 'warn',
+    };
+  }
+
+  const unwatchedSeasons = series.seasons.filter((season) => season.monitored);
+
+  if (unwatchedSeasons.length !== 0) {
+    throw {
+      message: `${series.title} has ${unwatchedSeasons.length} monitored season(s) remaining, skipping series unmonitor.`,
+      level: 'warn',
+    };
+  }
+}
+
+async function checkEpisodesWatched(
+  series: Series,
+  episode: Episode,
+  seasonString: string,
+): Promise<Season> {
+  const foundSeason = findSeason(series, episode, seasonString);
+
+  const episodeList = await getEpisodesList(series);
+
+  const seasonEpisodes = episodeList.filter(
+    (ep) => ep.seasonNumber === foundSeason.seasonNumber,
+  );
+
+  if (seasonEpisodes.length === 0) {
+    throw {
+      message: `No episodes found for ${seasonString}.`,
+      level: 'warn',
+    };
+  }
+
+  const unwatchedEpisodes = seasonEpisodes.filter((ep) => ep.monitored);
+
+  if (unwatchedEpisodes.length !== 0) {
+    throw {
+      message: `${seasonString} has ${unwatchedEpisodes.length} monitored episode(s) remaining, skipping season unmonitor.`,
+      level: 'warn',
+    };
+  }
+
+  return foundSeason;
+}
+
+async function setSeriesUnmonitored(series: Series): Promise<void> {
+  if (!series.id) {
+    throw {
+      message: `Series ID is not defined for ${series.title}.`,
+    };
+  }
+
+  if (!series.monitored) {
+    throw {
+      message: `${series.title} is already unmonitored.`,
+      level: 'warn',
+    };
+  }
+
+  const { error: unmonitorError } = await sonarrApi.PUT('/api/v3/series/{id}', {
+    params: {
+      path: {
+        id: `${series.id}`,
+      },
+    },
+    body: {
+      ...series,
+      monitored: false,
+    },
+  });
+
+  if (unmonitorError) {
+    throw {
+      message: `Failed to unmonitor ${series.title}\n${unmonitorError}.`,
+      level: 'error',
+    };
+  }
+
+  console.log(`${series.title} unmonitored!`);
+}
+
+async function setSeasonUnmonitored(
+  series: Series,
+  foundSeason: Season,
+  seasonString: string,
+): Promise<void> {
+  if (!series.seasons) {
+    throw {
+      message: `Seasons are not defined for ${series.title}.`,
+      level: 'warn',
+    };
+  }
+
+  if (!foundSeason.monitored) {
+    console.warn(`${seasonString} is already unmonitored.`);
+    return;
+  }
+
+  const updatedSeasons = series.seasons.map((season) => {
+    if (season.seasonNumber === foundSeason.seasonNumber) {
+      return { ...season, monitored: false };
+    }
+    return season;
+  });
+
+  const { error: unmonitorError } = await sonarrApi.PUT('/api/v3/series/{id}', {
+    params: {
+      path: {
+        id: `${series.id}`,
+      },
+    },
+    body: {
+      ...series,
+      seasons: updatedSeasons,
+    },
+  });
+
+  if (unmonitorError) {
+    throw {
+      message: `Failed to unmonitor ${seasonString}.\n${unmonitorError}`,
+      level: 'error',
+    };
+  }
+
+  console.log(`${seasonString} unmonitored!`);
+}
+
 async function setEpisodeUnmonitored(
   episode: Episode,
   episodeString: string,
@@ -198,6 +330,32 @@ async function setEpisodeUnmonitored(
   }
 
   console.log(`${episodeString} unmonitored!`);
+}
+
+async function unmonitorSeries(series: Series): Promise<void> {
+  if (!series.ended) {
+    throw {
+      message: `${series.title} has not ended, skipping series unmonitor.`,
+      level: 'warn',
+    };
+  }
+
+  await checkSeasonsWatched(series);
+
+  await setSeriesUnmonitored(series);
+}
+
+async function unmonitorSeason(
+  series: Series,
+  episode: Episode,
+): Promise<void> {
+  const seasonString = `${series.title} - Season ${episode.seasonNumber}`;
+
+  const foundSeason = await checkEpisodesWatched(series, episode, seasonString);
+
+  await setSeasonUnmonitored(series, foundSeason, seasonString);
+
+  await unmonitorSeries(series);
 }
 
 // Sonarr has no api for getting an episode by episode tvdbId
@@ -252,162 +410,4 @@ export async function unmonitorEpisode({
         break;
     }
   }
-}
-
-async function checkEpisodesWatched(
-  series: Series,
-  episode: Episode,
-  seasonString: string,
-): Promise<Season> {
-  const foundSeason = findSeason(series, episode, seasonString);
-
-  const episodeList = await getEpisodesList(series);
-
-  const seasonEpisodes = episodeList.filter(
-    (ep) => ep.seasonNumber === foundSeason.seasonNumber,
-  );
-
-  if (seasonEpisodes.length === 0) {
-    throw {
-      message: `No episodes found for ${seasonString}.`,
-      level: 'warn',
-    };
-  }
-
-  const unwatchedEpisodes = seasonEpisodes.filter((ep) => ep.monitored);
-
-  if (unwatchedEpisodes.length !== 0) {
-    throw {
-      message: `${seasonString} has ${unwatchedEpisodes.length} monitored episode(s) remaining, skipping season unmonitor.`,
-      level: 'warn',
-    };
-  }
-
-  return foundSeason;
-}
-
-async function setSeasonUnmonitored(
-  series: Series,
-  foundSeason: Season,
-  seasonString: string,
-): Promise<void> {
-  if (!series.seasons) {
-    throw {
-      message: `Seasons are not defined for ${series.title}.`,
-      level: 'warn',
-    };
-  }
-
-  if (!foundSeason.monitored) {
-    console.warn(`${seasonString} is already unmonitored.`);
-    return;
-  }
-
-  const updatedSeasons = series.seasons.map((season) => {
-    if (season.seasonNumber === foundSeason.seasonNumber) {
-      return { ...season, monitored: false };
-    }
-    return season;
-  });
-
-  const { error: unmonitorError } = await sonarrApi.PUT('/api/v3/series/{id}', {
-    params: {
-      path: {
-        id: `${series.id}`,
-      },
-    },
-    body: {
-      ...series,
-      seasons: updatedSeasons,
-    },
-  });
-
-  if (unmonitorError) {
-    throw {
-      message: `Failed to unmonitor ${seasonString}.\n${unmonitorError}`,
-      level: 'error',
-    };
-  }
-
-  console.log(`${seasonString} unmonitored!`);
-}
-
-async function unmonitorSeason(
-  series: Series,
-  episode: Episode,
-): Promise<void> {
-  const seasonString = `${series.title} - Season ${episode.seasonNumber}`;
-
-  const foundSeason = await checkEpisodesWatched(series, episode, seasonString);
-
-  await setSeasonUnmonitored(series, foundSeason, seasonString);
-
-  await unmonitorSeries(series);
-}
-
-async function checkSeasonsWatched(series: Series): Promise<void> {
-  if (!series.seasons) {
-    throw {
-      message: `Seasons are not defined for ${series.title}.`,
-      level: 'warn',
-    };
-  }
-
-  const unwatchedSeasons = series.seasons.filter((season) => season.monitored);
-
-  if (unwatchedSeasons.length !== 0) {
-    throw {
-      message: `${series.title} has ${unwatchedSeasons.length} monitored season(s) remaining, skipping series unmonitor.`,
-      level: 'warn',
-    };
-  }
-}
-
-async function setSeriesUnmonitored(series: Series): Promise<void> {
-  if (!series.id) {
-    throw {
-      message: `Series ID is not defined for ${series.title}.`,
-    };
-  }
-
-  if (!series.monitored) {
-    throw {
-      message: `${series.title} is already unmonitored.`,
-      level: 'warn',
-    };
-  }
-
-  const { error: unmonitorError } = await sonarrApi.PUT('/api/v3/series/{id}', {
-    params: {
-      path: {
-        id: `${series.id}`,
-      },
-    },
-    body: {
-      ...series,
-      monitored: false,
-    },
-  });
-
-  if (unmonitorError) {
-    throw {
-      message: `Failed to unmonitor ${series.title}\n${unmonitorError}.`,
-      level: 'error',
-    };
-  }
-
-  console.log(`${series.title} unmonitored!`);
-}
-
-async function unmonitorSeries(series: Series): Promise<void> {
-  if (!series.ended) {
-    throw {
-      message: `${series.title} has not ended, skipping series unmonitor.`,
-      level: 'warn',
-    };
-  }
-
-  await checkSeasonsWatched(series);
-
-  await setSeriesUnmonitored(series);
 }
