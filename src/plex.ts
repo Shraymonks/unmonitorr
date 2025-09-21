@@ -3,7 +3,7 @@ import type { ParamsDictionary } from 'express-serve-static-core';
 import multer from 'multer';
 import { PLEX_ACCOUNTS, PLEX_EVENTS } from './constants.ts';
 import { unmonitorMovie } from './radarr.ts';
-import { unmonitorEpisode } from './sonarr.ts';
+import { unmonitorShow } from './sonarr.ts';
 import type { PlexBody, PlexPayload } from './types/plex.ts';
 import { getIds, parseList } from './utils.ts';
 
@@ -52,7 +52,7 @@ export function startPlexUnmonitor(app: Express) {
           const { Guid, grandparentTitle: seriesTitle } = Metadata;
           const episodeTvdbIds = getIds(Guid, 'tvdb');
 
-          await unmonitorEpisode({ episodeTvdbIds, seriesTitle });
+          await unmonitorShow({ episodeTvdbIds, seriesTitle });
           break;
         }
         case 'movie': {
