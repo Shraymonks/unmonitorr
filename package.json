@@ -30,7 +30,7 @@
   "bugs": "https://github.com/Shraymonks/unmonitorr/issues",
   "license": "ISC",
   "dependencies": {
-    "express": "^5.1.0",
+    "express": "^5.2.0",
     "multer": "2.0.2",
     "openapi-fetch": "^0.14.0"
   },
